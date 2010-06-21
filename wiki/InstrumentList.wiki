@@ -2,8 +2,6 @@
 
 = Introduction =
 
-Add your content here.
-
 Contains Instrument classes which store their own status. Can reference and search among the Instruments to find desired specific objects.
 
 = Details =
