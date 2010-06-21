@@ -1,0 +1,10 @@
+#summary This is the master class which guides the function of the application.
+
+= Introduction =
+
+This is the master class which guides the function of the application.
+
+
+= Details =
+
+This class is responsible for holding the Instrument List, Display, KeyReader, and MouseReader classes, and ensuring that the classes can communicate with each other (establishing necessary pointers). Master currently has no other necessary methods.
