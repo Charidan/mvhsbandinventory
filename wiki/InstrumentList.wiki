@@ -1,0 +1,17 @@
+#summary A list of all the instruments and their current status.
+
+= Introduction =
+
+Add your content here.
+
+Contains Instrument classes which store their own status. Can reference and search among the Instruments to find desired specific objects.
+
+= Details =
+
+This class is responsible for creating, sorting, and maintaining the list of instruments in the application. The constructor finds all the .txt files of the instruments and uses them to create the instrument objects viewed in the application. Instrument List’s methods include:
+
+    * the add([all instrument attributes]) method, which creates a new instrument file and object.
+    * the sort([attribute name]) method, which sorts the list of instruments in accordance to each instrument’s [attribute name].
+    * the delete(instrument) method, which removes instrument from database (warnings preventing accidental deletion of inventory are prudent).
+    * the selectList([attribute name], attribute) method, which returns a list of the
+    * the exportToExcel([list]) method, which exports the list to Excel
