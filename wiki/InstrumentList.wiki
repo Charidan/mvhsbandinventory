@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Contains Instrument classes which store their own status. Can reference and search among the Instruments to find desired specific objects.
+Contains Instrument classes which store their own status. Can reference and search among the Instruments to find desired specific objects. Can use instrument objects to save and load to disk.
 
 = Details =
 
