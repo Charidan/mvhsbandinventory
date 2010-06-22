@@ -9,9 +9,10 @@ import java.util.ArrayList;
 public class InstrumentList
 {
     private ArrayList list = new ArrayList();
+    private InstrumentFileStore store;
 
-    public InstrumentList (String path) {
-        // TODO: load all items in folder at path into `list`
+    public InstrumentList () {
+        folder = path;
     }
 
     public void add (Instrument instrument)
@@ -19,14 +20,16 @@ public class InstrumentList
         list.add(instrument);
     }
 
-    public void sort (String key)
-    {
-
-    }
-
     public void delete (Instrument instrument)
     {
         list.remove(instrument);
+
+        // TODO: Add code to commit the data to the database.
+    }
+
+    public void sort (String key)
+    {
+
     }
 
     public Instrument[] selectList (String key, Object value)
