@@ -1,4 +1,4 @@
-#summary A list of all the instruments and their current status.
+#summary A list of all the instruments and their most basic characteristics.
 
 = Introduction =
 
@@ -11,5 +11,5 @@ This class is responsible for creating, sorting, and maintaining the list of ins
     * the add({[Instrument] attribute}) method, which creates a new instrument file and object.
     * the sort({attribute name}) method, which sorts the list of instruments in accordance to each instrument’s {attribute name}.
     * the delete([Instrument]) method, which removes instrument from database (warnings preventing accidental deletion of inventory are prudent).
-    * the selectList({attribute name}, attribute) method, which returns a list of the
+    * the selectList({attribute name}, attribute) method, which searches through all the instruments with {attribute name} returns a list of instruments that have attribute.
     * the exportToExcel({list}) method, which exports the list to Excel
