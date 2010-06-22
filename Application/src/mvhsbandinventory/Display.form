@@ -64,7 +64,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="searchButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="advSearchButton" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -84,7 +84,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="advSearchButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane4" pref="420" max="32767" attributes="0"/>
@@ -130,7 +130,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="instrumentTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="3" rowCount="4">
@@ -175,14 +175,14 @@
                 <Property name="text" type="java.lang.String" value="Add New Instrument"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="advSearchButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ADVANCED SEARCH"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+        <Container class="javax.swing.JTabbedPane" name="infoTabs">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>
@@ -191,7 +191,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel9">
+            <Container class="javax.swing.JPanel" name="detailPanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Details">
@@ -209,37 +209,37 @@
                               <Component id="jScrollPane5" alignment="0" pref="182" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="1"/>
-                                      <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="brandLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="serialLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rankLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="statusLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ligatureLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="mpieceLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="capLabel" alignment="0" min="-2" max="-2" attributes="1"/>
+                                      <Component id="bowLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="typeBox1" alignment="0" pref="78" max="32767" attributes="1"/>
-                                      <Component id="brandBox1" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="serialBox1" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="rankBox1" alignment="0" min="-2" pref="21" max="-2" attributes="1"/>
-                                      <Component id="valueBox1" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="statusCombo1" alignment="0" min="-2" pref="97" max="-2" attributes="1"/>
-                                      <Component id="ligCombo1" alignment="0" min="-2" max="-2" attributes="1"/>
-                                      <Component id="mpieceCombo1" alignment="0" min="-2" max="-2" attributes="1"/>
-                                      <Component id="capCombo1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="bowCombo1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="typeBox" alignment="0" pref="78" max="32767" attributes="1"/>
+                                      <Component id="brandBox" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="serialBox" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="rankBox" alignment="0" min="-2" pref="21" max="-2" attributes="1"/>
+                                      <Component id="valueBox" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="statusCombo" alignment="0" min="-2" pref="97" max="-2" attributes="1"/>
+                                      <Component id="ligCombo" alignment="0" min="-2" max="-2" attributes="1"/>
+                                      <Component id="mpieceCombo" alignment="0" min="-2" max="-2" attributes="1"/>
+                                      <Component id="capCombo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="bowCombo" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="instrumentLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="valueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="saveButton1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="52" max="32767" attributes="0"/>
                                   <Component id="deleteButton1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="noteLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -250,56 +250,56 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="typeBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="instrumentLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="typeBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="brandBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="brandBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="brandLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="serialBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="serialBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="serialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="rankBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rankBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rankLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="valueBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="valueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="valueBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="statusCombo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="statusCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="statusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="ligCombo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ligCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ligatureLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="mpieceCombo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="mpieceCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="mpieceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="capCombo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="capCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="capLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="bowCombo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bowCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bowLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                          <Component id="noteLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane5" pref="134" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -313,34 +313,34 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel12">
+                <Component class="javax.swing.JLabel" name="rankLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Rank:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="rankBox1">
+                <Component class="javax.swing.JTextField" name="rankBox">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="3"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel13">
+                <Component class="javax.swing.JLabel" name="valueLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Value: $"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="valueBox1">
+                <Component class="javax.swing.JTextField" name="valueBox">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel14">
+                <Component class="javax.swing.JLabel" name="statusLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Status:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="statusCombo1">
+                <Component class="javax.swing.JComboBox" name="statusCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="3">
@@ -352,22 +352,22 @@
                     <Property name="selectedIndex" type="int" value="1"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel15">
+                <Component class="javax.swing.JLabel" name="ligatureLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ligature:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel16">
+                <Component class="javax.swing.JLabel" name="mpieceLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Mouthpiece:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel17">
+                <Component class="javax.swing.JLabel" name="capLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Mouthpiece Cap:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="ligCombo1">
+                <Component class="javax.swing.JComboBox" name="ligCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
@@ -379,10 +379,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ligCombo1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ligComboActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="mpieceCombo1">
+                <Component class="javax.swing.JComboBox" name="mpieceCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
@@ -394,7 +394,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="capCombo1">
+                <Component class="javax.swing.JComboBox" name="capCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
@@ -406,34 +406,34 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel18">
+                <Component class="javax.swing.JLabel" name="noteLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Notes:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel19">
+                <Component class="javax.swing.JLabel" name="instrumentLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Instrument:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel20">
+                <Component class="javax.swing.JLabel" name="brandLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Brand:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel21">
+                <Component class="javax.swing.JLabel" name="serialLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Serial Number:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="typeBox1">
+                <Component class="javax.swing.JTextField" name="typeBox">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="typeBox1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="typeBoxActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="brandBox1">
+                <Component class="javax.swing.JTextField" name="brandBox">
                 </Component>
-                <Component class="javax.swing.JTextField" name="serialBox1">
+                <Component class="javax.swing.JTextField" name="serialBox">
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane5">
                   <AuxValues>
@@ -442,7 +442,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="notesTPane1">
+                    <Component class="javax.swing.JTextPane" name="notesTPane">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -456,7 +456,7 @@
                     <Property name="text" type="java.lang.String" value="DELETE"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="bowCombo1">
+                <Component class="javax.swing.JComboBox" name="bowCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
@@ -468,14 +468,14 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel22">
+                <Component class="javax.swing.JLabel" name="bowLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Bow:"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel10">
+            <Container class="javax.swing.JPanel" name="historyPanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="History">
@@ -497,7 +497,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel11">
+            <Container class="javax.swing.JPanel" name="contractPanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Contract">

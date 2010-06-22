@@ -37,39 +37,39 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         searchCombo = new javax.swing.JComboBox();
         searchBar = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        instrumentTable = new javax.swing.JTable();
         searchButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        rankBox1 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        valueBox1 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        statusCombo1 = new javax.swing.JComboBox();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        ligCombo1 = new javax.swing.JComboBox();
-        mpieceCombo1 = new javax.swing.JComboBox();
-        capCombo1 = new javax.swing.JComboBox();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        typeBox1 = new javax.swing.JTextField();
-        brandBox1 = new javax.swing.JTextField();
-        serialBox1 = new javax.swing.JTextField();
+        advSearchButton = new javax.swing.JButton();
+        infoTabs = new javax.swing.JTabbedPane();
+        detailPanel = new javax.swing.JPanel();
+        rankLabel = new javax.swing.JLabel();
+        rankBox = new javax.swing.JTextField();
+        valueLabel = new javax.swing.JLabel();
+        valueBox = new javax.swing.JTextField();
+        statusLabel = new javax.swing.JLabel();
+        statusCombo = new javax.swing.JComboBox();
+        ligatureLabel = new javax.swing.JLabel();
+        mpieceLabel = new javax.swing.JLabel();
+        capLabel = new javax.swing.JLabel();
+        ligCombo = new javax.swing.JComboBox();
+        mpieceCombo = new javax.swing.JComboBox();
+        capCombo = new javax.swing.JComboBox();
+        noteLabel = new javax.swing.JLabel();
+        instrumentLabel = new javax.swing.JLabel();
+        brandLabel = new javax.swing.JLabel();
+        serialLabel = new javax.swing.JLabel();
+        typeBox = new javax.swing.JTextField();
+        brandBox = new javax.swing.JTextField();
+        serialBox = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
-        notesTPane1 = new javax.swing.JTextPane();
+        notesTPane = new javax.swing.JTextPane();
         saveButton1 = new javax.swing.JButton();
         deleteButton1 = new javax.swing.JButton();
-        bowCombo1 = new javax.swing.JComboBox();
-        jLabel22 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
+        bowCombo = new javax.swing.JComboBox();
+        bowLabel = new javax.swing.JLabel();
+        historyPanel = new javax.swing.JPanel();
+        contractPanel = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -94,7 +94,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        instrumentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -120,13 +120,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(instrumentTable);
 
         searchButton.setText("Search");
 
         addButton.setText("Add New Instrument");
 
-        jButton1.setText("ADVANCED SEARCH");
+        advSearchButton.setText("ADVANCED SEARCH");
 
         org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -146,7 +146,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                                 .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 72, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(searchButton))
-                            .add(jButton1))))
+                            .add(advSearchButton))))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -160,7 +160,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(addButton)
-                    .add(jButton1))
+                    .add(advSearchButton))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addContainerGap())
@@ -168,184 +168,184 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         jSplitPane1.setLeftComponent(jPanel8);
 
-        jLabel12.setText("Rank:");
+        rankLabel.setText("Rank:");
 
-        rankBox1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        rankBox1.setText("3");
+        rankBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rankBox.setText("3");
 
-        jLabel13.setText("Value: $");
+        valueLabel.setText("Value: $");
 
-        valueBox1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        valueBox1.setText("0");
+        valueBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        valueBox.setText("0");
 
-        jLabel14.setText("Status:");
+        statusLabel.setText("Status:");
 
-        statusCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "On Loan", "In Storage", "Missing" }));
-        statusCombo1.setSelectedIndex(1);
+        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "On Loan", "In Storage", "Missing" }));
+        statusCombo.setSelectedIndex(1);
 
-        jLabel15.setText("Ligature:");
+        ligatureLabel.setText("Ligature:");
 
-        jLabel16.setText("Mouthpiece:");
+        mpieceLabel.setText("Mouthpiece:");
 
-        jLabel17.setText("Mouthpiece Cap:");
+        capLabel.setText("Mouthpiece Cap:");
 
-        ligCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
-        ligCombo1.addActionListener(new java.awt.event.ActionListener() {
+        ligCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        ligCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ligCombo1ActionPerformed(evt);
+                ligComboActionPerformed(evt);
             }
         });
 
-        mpieceCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        mpieceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
 
-        capCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        capCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
 
-        jLabel18.setText("Notes:");
+        noteLabel.setText("Notes:");
 
-        jLabel19.setText("Instrument:");
+        instrumentLabel.setText("Instrument:");
 
-        jLabel20.setText("Brand:");
+        brandLabel.setText("Brand:");
 
-        jLabel21.setText("Serial Number:");
+        serialLabel.setText("Serial Number:");
 
-        typeBox1.addActionListener(new java.awt.event.ActionListener() {
+        typeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeBox1ActionPerformed(evt);
+                typeBoxActionPerformed(evt);
             }
         });
 
-        jScrollPane5.setViewportView(notesTPane1);
+        jScrollPane5.setViewportView(notesTPane);
 
         saveButton1.setText("SAVE");
 
         deleteButton1.setText("DELETE");
 
-        bowCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        bowCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
 
-        jLabel22.setText("Bow:");
+        bowLabel.setText("Bow:");
 
-        org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel9Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout detailPanelLayout = new org.jdesktop.layout.GroupLayout(detailPanel);
+        detailPanel.setLayout(detailPanelLayout);
+        detailPanelLayout.setHorizontalGroup(
+            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel9Layout.createSequentialGroup()
-                        .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel20)
-                            .add(jLabel21)
-                            .add(jLabel12)
-                            .add(jLabel14)
-                            .add(jLabel15)
-                            .add(jLabel16)
-                            .add(jLabel17)
-                            .add(jLabel22))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, detailPanelLayout.createSequentialGroup()
+                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(brandLabel)
+                            .add(serialLabel)
+                            .add(rankLabel)
+                            .add(statusLabel)
+                            .add(ligatureLabel)
+                            .add(mpieceLabel)
+                            .add(capLabel)
+                            .add(bowLabel))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, typeBox1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, brandBox1)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, serialBox1)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, rankBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, valueBox1)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, statusCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, ligCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, mpieceCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, capCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, bowCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel19)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel13)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel9Layout.createSequentialGroup()
+                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, typeBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, brandBox)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, serialBox)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, valueBox)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, instrumentLabel)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, valueLabel)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, detailPanelLayout.createSequentialGroup()
                         .add(saveButton1)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 52, Short.MAX_VALUE)
                         .add(deleteButton1))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel18))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, noteLabel))
                 .addContainerGap())
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel9Layout.createSequentialGroup()
+        detailPanelLayout.setVerticalGroup(
+            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel19)
-                    .add(typeBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(instrumentLabel)
+                    .add(typeBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(brandBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel20))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(brandBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(brandLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(serialBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel21))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(serialBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(serialLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rankBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel12))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(rankLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel13)
-                    .add(valueBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(valueLabel)
+                    .add(valueBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(statusCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel14))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(statusLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(ligCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel15))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(ligatureLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(mpieceCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel16))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(mpieceLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(capCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel17))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(capLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(bowCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel22))
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(bowLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel18)
+                .add(noteLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(saveButton1)
                     .add(deleteButton1))
                 .addContainerGap())
         );
 
-        jTabbedPane2.addTab("Details", jPanel9);
+        infoTabs.addTab("Details", detailPanel);
 
-        org.jdesktop.layout.GroupLayout jPanel10Layout = new org.jdesktop.layout.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout historyPanelLayout = new org.jdesktop.layout.GroupLayout(historyPanel);
+        historyPanel.setLayout(historyPanelLayout);
+        historyPanelLayout.setHorizontalGroup(
+            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 202, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        historyPanelLayout.setVerticalGroup(
+            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 475, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("History", jPanel10);
+        infoTabs.addTab("History", historyPanel);
 
-        org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout contractPanelLayout = new org.jdesktop.layout.GroupLayout(contractPanel);
+        contractPanel.setLayout(contractPanelLayout);
+        contractPanelLayout.setHorizontalGroup(
+            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 202, Short.MAX_VALUE)
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        contractPanelLayout.setVerticalGroup(
+            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 475, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Contract", jPanel11);
+        infoTabs.addTab("Contract", contractPanel);
 
-        jSplitPane1.setRightComponent(jTabbedPane2);
+        jSplitPane1.setRightComponent(infoTabs);
 
         add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -360,54 +360,54 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
 }//GEN-LAST:event_searchBarActionPerformed
 
-    private void typeBox1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_typeBox1ActionPerformed
-    {//GEN-HEADEREND:event_typeBox1ActionPerformed
+    private void typeBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_typeBoxActionPerformed
+    {//GEN-HEADEREND:event_typeBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_typeBox1ActionPerformed
+}//GEN-LAST:event_typeBoxActionPerformed
 
-    private void ligCombo1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ligCombo1ActionPerformed
-    {//GEN-HEADEREND:event_ligCombo1ActionPerformed
+    private void ligComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ligComboActionPerformed
+    {//GEN-HEADEREND:event_ligComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ligCombo1ActionPerformed
+}//GEN-LAST:event_ligComboActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    private javax.swing.JComboBox bowCombo1;
-    private javax.swing.JTextField brandBox1;
-    private javax.swing.JComboBox capCombo1;
+    private javax.swing.JButton advSearchButton;
+    private javax.swing.JComboBox bowCombo;
+    private javax.swing.JLabel bowLabel;
+    private javax.swing.JTextField brandBox;
+    private javax.swing.JLabel brandLabel;
+    private javax.swing.JComboBox capCombo;
+    private javax.swing.JLabel capLabel;
+    private javax.swing.JPanel contractPanel;
     private javax.swing.JButton deleteButton1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel detailPanel;
+    private javax.swing.JPanel historyPanel;
+    private javax.swing.JTabbedPane infoTabs;
+    private javax.swing.JLabel instrumentLabel;
+    private javax.swing.JTable instrumentTable;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox ligCombo1;
-    private javax.swing.JComboBox mpieceCombo1;
-    private javax.swing.JTextPane notesTPane1;
-    private javax.swing.JTextField rankBox1;
+    private javax.swing.JComboBox ligCombo;
+    private javax.swing.JLabel ligatureLabel;
+    private javax.swing.JComboBox mpieceCombo;
+    private javax.swing.JLabel mpieceLabel;
+    private javax.swing.JLabel noteLabel;
+    private javax.swing.JTextPane notesTPane;
+    private javax.swing.JTextField rankBox;
+    private javax.swing.JLabel rankLabel;
     private javax.swing.JButton saveButton1;
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox searchCombo;
-    private javax.swing.JTextField serialBox1;
-    private javax.swing.JComboBox statusCombo1;
-    private javax.swing.JTextField typeBox1;
-    private javax.swing.JTextField valueBox1;
+    private javax.swing.JTextField serialBox;
+    private javax.swing.JLabel serialLabel;
+    private javax.swing.JComboBox statusCombo;
+    private javax.swing.JLabel statusLabel;
+    private javax.swing.JTextField typeBox;
+    private javax.swing.JTextField valueBox;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }
