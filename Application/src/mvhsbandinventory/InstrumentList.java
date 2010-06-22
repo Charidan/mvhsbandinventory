@@ -31,8 +31,24 @@ public class InstrumentList
 
     public Instrument[] selectList (String key, Object value)
     {
-        // Netbeans, please stop whining about my code.
-        return null;
+        Instrument[] selection = {};
+        int length = list.size();
+
+        Instrument current = null;
+        int next = 0;
+        
+        for (int i = 0; i < length; i++) 
+        {
+            current = (Instrument) list.get(i);
+            
+            if (current.get(key) == value)
+            {
+                selection[next] = current;
+                next++;
+            }
+        }
+        
+        return selection;
     }
 
     public String exportToExcel (Instrument[] instruments) {
