@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Defines the data related to an instrument stored in the database.
+ * Defines the data related to an instrument stored in the flat-file database.
  *
  * @author nicholson
  * @author jonathan
@@ -74,6 +74,12 @@ public class Instrument
         return properties.get(attribute);
     }
 
+    /**
+     * Formats the data in the HashMap into a comma-separated list of values,
+     * perfect for exporting into a CSV file.
+     *
+     * @return serialized representation of this instrument's properties.
+     */
     @Override
     public String toString()
     {
