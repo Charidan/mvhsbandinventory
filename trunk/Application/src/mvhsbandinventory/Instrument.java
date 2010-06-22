@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  *
  * @author nicholson
+ * @author jonathan
  */
 public class Instrument
 {
