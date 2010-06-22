@@ -20,13 +20,7 @@ public class Instrument
     public static List attributeList = Arrays.asList(attributes);
     public static int attributesLength = attributes.length;
 
-    public Instrument(String name, String brand, String serial, int rank,
-            int value, String status, String notes, String history,
-            String ligature, String mouthpiece, String cap, String bow)
-    {
-        // TODO: implement this; for now, this method of instantiation is
-        // not going to be implemented
-    }
+    public Instrument () {}
 
     public Instrument (Object[] properties) throws Exception {
         for (int i = 0; i < attributesLength; i++) {
