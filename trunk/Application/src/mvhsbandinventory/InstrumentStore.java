@@ -26,6 +26,16 @@ public abstract class InstrumentStore
      */
     public abstract void delete (Instrument instrument);
 
+	/**
+	 * Determines whether the specified instrument is already stored in the 
+	 * data store.
+	 * @param instrument
+	 * @return a boolean value determining whether the instrument is in the 
+	 * data store; true indicates that the instrument is in the store and false
+	 * indicates that it doesn't exist in the data store
+	 */
+	public abstract boolean exists (Instrument instrument);
+
     /**
      * Loads all of the instruments from the store.
      * @return an array of all of the parsed instruments in the store
