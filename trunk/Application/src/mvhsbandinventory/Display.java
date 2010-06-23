@@ -343,10 +343,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         );
         historyPanelLayout.setVerticalGroup(
             historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, historyPanelLayout.createSequentialGroup()
+            .add(historyPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                .add(342, 342, 342))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         infoTabs.addTab("History", historyPanel);
