@@ -95,6 +95,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel.add(instrumentLabel, gridBagConstraints);
 
         instruBox.setEditable(false);
+        instruBox.setAutoscrolls(false);
+        instruBox.setMinimumSize(new java.awt.Dimension(200, 20));
         instruBox.setPreferredSize(null);
         instruBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +105,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(instruBox, gridBagConstraints);
@@ -114,9 +117,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel.add(brandLabel, gridBagConstraints);
 
         brandBox.setEditable(false);
+        brandBox.setAutoscrolls(false);
+        brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
         brandBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(brandBox, gridBagConstraints);
@@ -128,9 +134,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel.add(serialLabel, gridBagConstraints);
 
         serialBox.setEditable(false);
+        serialBox.setAutoscrolls(false);
+        serialBox.setMinimumSize(new java.awt.Dimension(200, 20));
         serialBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(serialBox, gridBagConstraints);
@@ -146,6 +155,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         rankBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(rankBox, gridBagConstraints);
@@ -158,9 +168,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         valueBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         valueBox.setText("0");
+        valueBox.setAutoscrolls(false);
+        valueBox.setMinimumSize(new java.awt.Dimension(200, 20));
         valueBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 95;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(valueBox, gridBagConstraints);
