@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class InstrumentList
 {
     private ArrayList list = new ArrayList();
-    private InstrumentFileStore store;
+    private InstrumentStore store;
 
-    public InstrumentList () {
-        folder = path;
+    public InstrumentList (InstrumentStore model) {
+        store = model;
     }
 
     public void add (Instrument instrument)
