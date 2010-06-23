@@ -69,6 +69,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         bowCombo = new javax.swing.JComboBox();
         bowLabel = new javax.swing.JLabel();
         historyPanel = new javax.swing.JPanel();
+        saveButton2 = new javax.swing.JButton();
+        deleteButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         contractPanel = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -76,7 +80,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         jSplitPane1.setAutoscrolls(true);
         jSplitPane1.setContinuousLayout(true);
         jSplitPane1.setName(""); // NOI18N
-        jSplitPane1.setPreferredSize(new java.awt.Dimension(400, 400));
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(200, 200));
 
         jPanel8.setPreferredSize(new java.awt.Dimension(400, 400));
 
@@ -135,11 +139,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .add(jPanel8Layout.createSequentialGroup()
                         .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(addButton)
-                            .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                            .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                             .add(jPanel8Layout.createSequentialGroup()
@@ -167,6 +171,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         );
 
         jSplitPane1.setLeftComponent(jPanel8);
+
+        infoTabs.setPreferredSize(new java.awt.Dimension(300, 500));
 
         rankLabel.setText("Rank:");
 
@@ -231,7 +237,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, detailPanelLayout.createSequentialGroup()
                         .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(brandLabel)
@@ -258,7 +264,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     .add(org.jdesktop.layout.GroupLayout.LEADING, valueLabel)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, detailPanelLayout.createSequentialGroup()
                         .add(saveButton1)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 324, Short.MAX_VALUE)
                         .add(deleteButton1))
                     .add(org.jdesktop.layout.GroupLayout.LEADING, noteLabel))
                 .addContainerGap())
@@ -319,15 +325,61 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         infoTabs.addTab("Details", detailPanel);
 
+        saveButton2.setText("SAVE");
+        saveButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButton2ActionPerformed(evt);
+            }
+        });
+
+        deleteButton2.setText("DELETE");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Date", "Event"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setPreferredSize(new java.awt.Dimension(100, 64));
+        jScrollPane1.setViewportView(jTable1);
+
         org.jdesktop.layout.GroupLayout historyPanelLayout = new org.jdesktop.layout.GroupLayout(historyPanel);
         historyPanel.setLayout(historyPanelLayout);
         historyPanelLayout.setHorizontalGroup(
             historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 202, Short.MAX_VALUE)
+            .add(historyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                    .add(historyPanelLayout.createSequentialGroup()
+                        .add(saveButton2)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 324, Short.MAX_VALUE)
+                        .add(deleteButton2)))
+                .addContainerGap())
         );
         historyPanelLayout.setVerticalGroup(
             historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 475, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, historyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(saveButton2)
+                    .add(deleteButton2))
+                .addContainerGap())
         );
 
         infoTabs.addTab("History", historyPanel);
@@ -336,7 +388,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         contractPanel.setLayout(contractPanelLayout);
         contractPanelLayout.setHorizontalGroup(
             contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 202, Short.MAX_VALUE)
+            .add(0, 474, Short.MAX_VALUE)
         );
         contractPanelLayout.setVerticalGroup(
             contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -370,6 +422,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
 }//GEN-LAST:event_ligComboActionPerformed
 
+    private void saveButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButton2ActionPerformed
+    {//GEN-HEADEREND:event_saveButton2ActionPerformed
+        // TODO add your handling code here:
+}//GEN-LAST:event_saveButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton advSearchButton;
@@ -381,15 +438,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel capLabel;
     private javax.swing.JPanel contractPanel;
     private javax.swing.JButton deleteButton1;
+    private javax.swing.JButton deleteButton2;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JPanel historyPanel;
     private javax.swing.JTabbedPane infoTabs;
     private javax.swing.JLabel instrumentLabel;
     private javax.swing.JTable instrumentTable;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox ligCombo;
     private javax.swing.JLabel ligatureLabel;
     private javax.swing.JComboBox mpieceCombo;
@@ -399,6 +459,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton saveButton1;
+    private javax.swing.JButton saveButton2;
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox searchCombo;
