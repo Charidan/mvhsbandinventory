@@ -31,16 +31,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel8 = new javax.swing.JPanel();
-        searchCombo = new javax.swing.JComboBox();
-        searchBar = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        instrumentTable = new javax.swing.JTable();
-        searchButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
-        advSearchButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
         detailPanel = new javax.swing.JPanel();
         rankLabel = new javax.swing.JLabel();
@@ -64,16 +58,22 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         serialBox = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         notesTPane = new javax.swing.JTextPane();
-        saveButton1 = new javax.swing.JButton();
-        deleteButton1 = new javax.swing.JButton();
         bowCombo = new javax.swing.JComboBox();
         bowLabel = new javax.swing.JLabel();
         historyPanel = new javax.swing.JPanel();
-        saveButton2 = new javax.swing.JButton();
-        deleteButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         contractPanel = new javax.swing.JPanel();
+        saveButton1 = new javax.swing.JButton();
+        deleteButton1 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        searchCombo = new javax.swing.JComboBox();
+        searchBar = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        instrumentTable = new javax.swing.JTable();
+        searchButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        advSearchButton = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -81,6 +81,232 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         jSplitPane1.setContinuousLayout(true);
         jSplitPane1.setName(""); // NOI18N
         jSplitPane1.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        infoTabs.setPreferredSize(new java.awt.Dimension(9999, 9999));
+
+        rankLabel.setText("Rank:");
+
+        rankBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rankBox.setText("3");
+
+        valueLabel.setText("Value: $");
+
+        valueBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        valueBox.setText("0");
+
+        statusLabel.setText("Status:");
+
+        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "On Loan", "In Storage", "Missing" }));
+        statusCombo.setSelectedIndex(1);
+
+        ligatureLabel.setText("Ligature:");
+
+        mpieceLabel.setText("Mouthpiece:");
+
+        capLabel.setText("Mouthpiece Cap:");
+
+        ligCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        ligCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ligComboActionPerformed(evt);
+            }
+        });
+
+        mpieceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+
+        capCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+
+        noteLabel.setText("Notes:");
+
+        instrumentLabel.setText("Instrument:");
+
+        brandLabel.setText("Brand:");
+
+        serialLabel.setText("Serial Number:");
+
+        typeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeBoxActionPerformed(evt);
+            }
+        });
+
+        jScrollPane5.setViewportView(notesTPane);
+
+        bowCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+
+        bowLabel.setText("Bow:");
+
+        org.jdesktop.layout.GroupLayout detailPanelLayout = new org.jdesktop.layout.GroupLayout(detailPanel);
+        detailPanel.setLayout(detailPanelLayout);
+        detailPanelLayout.setHorizontalGroup(
+            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
+                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, instrumentLabel)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, valueLabel)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, noteLabel))
+                        .addContainerGap())
+                    .add(detailPanelLayout.createSequentialGroup()
+                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(brandLabel)
+                            .add(serialLabel)
+                            .add(rankLabel)
+                            .add(statusLabel)
+                            .add(ligatureLabel)
+                            .add(mpieceLabel)
+                            .add(capLabel)
+                            .add(bowLabel))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, typeBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, brandBox)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, serialBox)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, valueBox)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+        );
+        detailPanelLayout.setVerticalGroup(
+            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(detailPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(instrumentLabel)
+                    .add(typeBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(brandBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(brandLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(serialBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(serialLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(rankLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(valueLabel)
+                    .add(valueBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(statusLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(ligatureLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(mpieceLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(capLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(bowLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(noteLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .add(222, 222, 222))
+        );
+
+        infoTabs.addTab("Details", detailPanel);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Date", "Event"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setPreferredSize(new java.awt.Dimension(100, 64));
+        jScrollPane1.setViewportView(jTable1);
+
+        org.jdesktop.layout.GroupLayout historyPanelLayout = new org.jdesktop.layout.GroupLayout(historyPanel);
+        historyPanel.setLayout(historyPanelLayout);
+        historyPanelLayout.setHorizontalGroup(
+            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(historyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane1)
+                .addContainerGap())
+        );
+        historyPanelLayout.setVerticalGroup(
+            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, historyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                .add(222, 222, 222))
+        );
+
+        infoTabs.addTab("History", historyPanel);
+
+        org.jdesktop.layout.GroupLayout contractPanelLayout = new org.jdesktop.layout.GroupLayout(contractPanel);
+        contractPanel.setLayout(contractPanelLayout);
+        contractPanelLayout.setHorizontalGroup(
+            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 474, Short.MAX_VALUE)
+        );
+        contractPanelLayout.setVerticalGroup(
+            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 657, Short.MAX_VALUE)
+        );
+
+        infoTabs.addTab("Contract", contractPanel);
+
+        saveButton1.setText("SAVE INSTRUMENT");
+
+        deleteButton1.setText("DELETE INSTRUMENT");
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(saveButton1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 195, Short.MAX_VALUE)
+                .add(deleteButton1)
+                .addContainerGap())
+            .add(infoTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                .add(infoTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(saveButton1)
+                    .add(deleteButton1))
+                .addContainerGap())
+        );
+
+        jSplitPane1.setRightComponent(jPanel1);
 
         jPanel8.setPreferredSize(new java.awt.Dimension(400, 400));
 
@@ -166,238 +392,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     .add(addButton)
                     .add(advSearchButton))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jSplitPane1.setLeftComponent(jPanel8);
-
-        infoTabs.setPreferredSize(new java.awt.Dimension(300, 500));
-
-        rankLabel.setText("Rank:");
-
-        rankBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        rankBox.setText("3");
-
-        valueLabel.setText("Value: $");
-
-        valueBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        valueBox.setText("0");
-
-        statusLabel.setText("Status:");
-
-        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "On Loan", "In Storage", "Missing" }));
-        statusCombo.setSelectedIndex(1);
-
-        ligatureLabel.setText("Ligature:");
-
-        mpieceLabel.setText("Mouthpiece:");
-
-        capLabel.setText("Mouthpiece Cap:");
-
-        ligCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
-        ligCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ligComboActionPerformed(evt);
-            }
-        });
-
-        mpieceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
-
-        capCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
-
-        noteLabel.setText("Notes:");
-
-        instrumentLabel.setText("Instrument:");
-
-        brandLabel.setText("Brand:");
-
-        serialLabel.setText("Serial Number:");
-
-        typeBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeBoxActionPerformed(evt);
-            }
-        });
-
-        jScrollPane5.setViewportView(notesTPane);
-
-        saveButton1.setText("SAVE");
-
-        deleteButton1.setText("DELETE");
-
-        bowCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
-
-        bowLabel.setText("Bow:");
-
-        org.jdesktop.layout.GroupLayout detailPanelLayout = new org.jdesktop.layout.GroupLayout(detailPanel);
-        detailPanel.setLayout(detailPanelLayout);
-        detailPanelLayout.setHorizontalGroup(
-            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, detailPanelLayout.createSequentialGroup()
-                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(brandLabel)
-                            .add(serialLabel)
-                            .add(rankLabel)
-                            .add(statusLabel)
-                            .add(ligatureLabel)
-                            .add(mpieceLabel)
-                            .add(capLabel)
-                            .add(bowLabel))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, typeBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, brandBox)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, serialBox)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, valueBox)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, instrumentLabel)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, valueLabel)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, detailPanelLayout.createSequentialGroup()
-                        .add(saveButton1)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 324, Short.MAX_VALUE)
-                        .add(deleteButton1))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, noteLabel))
-                .addContainerGap())
-        );
-        detailPanelLayout.setVerticalGroup(
-            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(detailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(instrumentLabel)
-                    .add(typeBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(brandBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(brandLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(serialBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(serialLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(rankLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(valueLabel)
-                    .add(valueBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(statusLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(ligatureLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(mpieceLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(capLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(bowLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(noteLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton1)
-                    .add(deleteButton1))
-                .addContainerGap())
-        );
-
-        infoTabs.addTab("Details", detailPanel);
-
-        saveButton2.setText("SAVE");
-        saveButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButton2ActionPerformed(evt);
-            }
-        });
-
-        deleteButton2.setText("DELETE");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Date", "Event"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setPreferredSize(new java.awt.Dimension(100, 64));
-        jScrollPane1.setViewportView(jTable1);
-
-        org.jdesktop.layout.GroupLayout historyPanelLayout = new org.jdesktop.layout.GroupLayout(historyPanel);
-        historyPanel.setLayout(historyPanelLayout);
-        historyPanelLayout.setHorizontalGroup(
-            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(historyPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                    .add(historyPanelLayout.createSequentialGroup()
-                        .add(saveButton2)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 324, Short.MAX_VALUE)
-                        .add(deleteButton2)))
-                .addContainerGap())
-        );
-        historyPanelLayout.setVerticalGroup(
-            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, historyPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton2)
-                    .add(deleteButton2))
-                .addContainerGap())
-        );
-
-        infoTabs.addTab("History", historyPanel);
-
-        org.jdesktop.layout.GroupLayout contractPanelLayout = new org.jdesktop.layout.GroupLayout(contractPanel);
-        contractPanel.setLayout(contractPanelLayout);
-        contractPanelLayout.setHorizontalGroup(
-            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 474, Short.MAX_VALUE)
-        );
-        contractPanelLayout.setVerticalGroup(
-            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 475, Short.MAX_VALUE)
-        );
-
-        infoTabs.addTab("Contract", contractPanel);
-
-        jSplitPane1.setRightComponent(infoTabs);
 
         add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -422,11 +421,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
 }//GEN-LAST:event_ligComboActionPerformed
 
-    private void saveButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButton2ActionPerformed
-    {//GEN-HEADEREND:event_saveButton2ActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_saveButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton advSearchButton;
@@ -438,12 +432,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel capLabel;
     private javax.swing.JPanel contractPanel;
     private javax.swing.JButton deleteButton1;
-    private javax.swing.JButton deleteButton2;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JPanel historyPanel;
     private javax.swing.JTabbedPane infoTabs;
     private javax.swing.JLabel instrumentLabel;
     private javax.swing.JTable instrumentTable;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
@@ -459,7 +453,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton saveButton1;
-    private javax.swing.JButton saveButton2;
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox searchCombo;
