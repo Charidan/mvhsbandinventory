@@ -40,9 +40,9 @@ public class InstrumentFileStore extends InstrumentStore
 	 */
 	private File file (Instrument instrument)
 	{
-		String name = instrument.get("name");
-		String brand = instrument.get("brand");
-		String serial = instrument.get("serial");
+		String name = (String) instrument.get("name");
+		String brand = (String) instrument.get("brand");
+		String serial = (String) instrument.get("serial");
 		
 		// Generate the CSV file name
 		String fileName = name + "-" + brand + "-" + serial + ".csv";
@@ -61,5 +61,25 @@ public class InstrumentFileStore extends InstrumentStore
 	public boolean exists (Instrument instrument)
 	{
 		return file(instrument).exists();
+	}
+	
+	public void add (Instrument instrument)
+	{
+		
+	}
+	
+	public void update (Instrument instrument)
+	{
+		
+	}
+	
+	public void delete (Instrument instrument)
+	{
+		
+	}
+	
+	public Instrument[] load ()
+	{
+		
 	}
 }
