@@ -33,8 +33,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
+        overlord = new javax.swing.JSplitPane();
+        rightsplitPanel = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
         detailPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
@@ -60,59 +60,62 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         bowLabel = new javax.swing.JLabel();
         bowCombo = new javax.swing.JComboBox();
         noteLabel = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        detailNotePanel = new javax.swing.JScrollPane();
         notesTPane = new javax.swing.JTextPane();
         historyPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        historySplit = new javax.swing.JSplitPane();
+        historyTablePanel = new javax.swing.JScrollPane();
+        historyTable = new javax.swing.JTable();
         checkoutPanel = new javax.swing.JPanel();
-        instrumentLabel1 = new javax.swing.JLabel();
-        instruBox1 = new javax.swing.JTextField();
-        brandLabel1 = new javax.swing.JLabel();
-        brandBox1 = new javax.swing.JTextField();
-        serialLabel1 = new javax.swing.JLabel();
-        serialBox1 = new javax.swing.JTextField();
-        strapLabel1 = new javax.swing.JLabel();
-        strapCombo1 = new javax.swing.JComboBox();
-        ligatureLabel1 = new javax.swing.JLabel();
-        ligCombo1 = new javax.swing.JComboBox();
-        noteLabel1 = new javax.swing.JLabel();
+        renterLabel = new javax.swing.JLabel();
+        renterBox = new javax.swing.JTextField();
+        schoolyearLabel = new javax.swing.JLabel();
+        schoolyearBox = new javax.swing.JTextField();
+        dateoutLabel = new javax.swing.JLabel();
+        dateoutBox = new javax.swing.JTextField();
+        feeLabel = new javax.swing.JLabel();
+        feeCombo = new javax.swing.JComboBox();
+        periodLabel = new javax.swing.JLabel();
+        periodCombo = new javax.swing.JComboBox();
+        otherLabel = new javax.swing.JLabel();
         otherBox = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        checkoutButtonPanel = new javax.swing.JPanel();
         formButton = new javax.swing.JButton();
         outButton = new javax.swing.JButton();
         inButton = new javax.swing.JButton();
         lostButton = new javax.swing.JButton();
-        buffer = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        rightsplitButtonPanel = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
+        leftsplitPanel = new javax.swing.JPanel();
         searchCombo = new javax.swing.JComboBox();
         searchBar = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        instrumentTable = new javax.swing.JTable();
+        leftsplitInstruTablePanel = new javax.swing.JScrollPane();
+        instruTable = new javax.swing.JTable();
         searchButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         advSearchButton = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
-        jSplitPane1.setAutoscrolls(true);
-        jSplitPane1.setContinuousLayout(true);
-        jSplitPane1.setName(""); // NOI18N
+        overlord.setAutoscrolls(true);
+        overlord.setContinuousLayout(true);
+        overlord.setName(""); // NOI18N
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
+        detailPanel.setPreferredSize(null);
         detailPanel.setLayout(new java.awt.GridBagLayout());
 
         statusLabel.setText("Status:");
+        statusLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(statusLabel, gridBagConstraints);
 
         statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "In Storage", "At Shop", "On Loan", "Missing" }));
+        statusCombo.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipadx = 18;
@@ -291,12 +294,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         detailPanel.add(noteLabel, gridBagConstraints);
 
-        jScrollPane5.setMinimumSize(new java.awt.Dimension(25, 25));
-        jScrollPane5.setPreferredSize(null);
+        detailNotePanel.setMinimumSize(new java.awt.Dimension(25, 25));
+        detailNotePanel.setPreferredSize(null);
 
         notesTPane.setMinimumSize(new java.awt.Dimension(25, 25));
         notesTPane.setPreferredSize(null);
-        jScrollPane5.setViewportView(notesTPane);
+        detailNotePanel.setViewportView(notesTPane);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -306,11 +309,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        detailPanel.add(jScrollPane5, gridBagConstraints);
+        detailPanel.add(detailNotePanel, gridBagConstraints);
 
         infoTabs.addTab("Details", detailPanel);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        historyPanel.setLayout(new java.awt.BorderLayout());
+
+        historySplit.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        historyTablePanel.setPreferredSize(null);
+
+        historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -329,187 +338,172 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 return types [columnIndex];
             }
         });
-        jTable1.setPreferredSize(new java.awt.Dimension(100, 64));
-        jScrollPane1.setViewportView(jTable1);
+        historyTable.setPreferredSize(null);
+        historyTable.getTableHeader().setReorderingAllowed(false);
+        historyTablePanel.setViewportView(historyTable);
 
-        org.jdesktop.layout.GroupLayout historyPanelLayout = new org.jdesktop.layout.GroupLayout(historyPanel);
-        historyPanel.setLayout(historyPanelLayout);
-        historyPanelLayout.setHorizontalGroup(
-            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(historyPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        historyPanelLayout.setVerticalGroup(
-            historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(historyPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        infoTabs.addTab("History", historyPanel);
+        historySplit.setLeftComponent(historyTablePanel);
 
         checkoutPanel.setLayout(new java.awt.GridBagLayout());
 
-        instrumentLabel1.setText("Owner:");
+        renterLabel.setText("Renter:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(instrumentLabel1, gridBagConstraints);
+        checkoutPanel.add(renterLabel, gridBagConstraints);
 
-        instruBox1.setAutoscrolls(false);
-        instruBox1.setMinimumSize(new java.awt.Dimension(200, 20));
-        instruBox1.setPreferredSize(null);
-        instruBox1.addActionListener(new java.awt.event.ActionListener() {
+        renterBox.setAutoscrolls(false);
+        renterBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        renterBox.setPreferredSize(null);
+        renterBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                instruBox1ActionPerformed(evt);
+                renterBoxActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(instruBox1, gridBagConstraints);
+        checkoutPanel.add(renterBox, gridBagConstraints);
 
-        brandLabel1.setText("School Year:");
+        schoolyearLabel.setText("School Year:");
+        schoolyearLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(brandLabel1, gridBagConstraints);
+        checkoutPanel.add(schoolyearLabel, gridBagConstraints);
 
-        brandBox1.setAutoscrolls(false);
-        brandBox1.setMinimumSize(new java.awt.Dimension(200, 20));
-        brandBox1.setPreferredSize(null);
+        schoolyearBox.setAutoscrolls(false);
+        schoolyearBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        schoolyearBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(brandBox1, gridBagConstraints);
+        checkoutPanel.add(schoolyearBox, gridBagConstraints);
 
-        serialLabel1.setText("Date Out:");
+        dateoutLabel.setText("Date Out:");
+        dateoutLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(serialLabel1, gridBagConstraints);
+        checkoutPanel.add(dateoutLabel, gridBagConstraints);
 
-        serialBox1.setAutoscrolls(false);
-        serialBox1.setMinimumSize(new java.awt.Dimension(200, 20));
-        serialBox1.setPreferredSize(null);
+        dateoutBox.setAutoscrolls(false);
+        dateoutBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        dateoutBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(serialBox1, gridBagConstraints);
+        checkoutPanel.add(dateoutBox, gridBagConstraints);
 
-        strapLabel1.setText("Fee Paid:");
+        feeLabel.setText("Fee Paid:");
+        feeLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(strapLabel1, gridBagConstraints);
+        checkoutPanel.add(feeLabel, gridBagConstraints);
 
-        strapCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived", " " }));
-        strapCombo1.setSelectedIndex(1);
+        feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived", " " }));
+        feeCombo.setSelectedIndex(1);
+        feeCombo.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(strapCombo1, gridBagConstraints);
+        checkoutPanel.add(feeCombo, gridBagConstraints);
 
-        ligatureLabel1.setText("For Use In:");
+        periodLabel.setText("For Use In:");
+        periodLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(ligatureLabel1, gridBagConstraints);
+        checkoutPanel.add(periodLabel, gridBagConstraints);
 
-        ligCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
-        ligCombo1.addActionListener(new java.awt.event.ActionListener() {
+        periodCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
+        periodCombo.setPreferredSize(null);
+        periodCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ligCombo1ActionPerformed(evt);
+                periodComboActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(ligCombo1, gridBagConstraints);
+        checkoutPanel.add(periodCombo, gridBagConstraints);
 
-        noteLabel1.setText("Other:");
-        noteLabel1.setPreferredSize(null);
+        otherLabel.setText("Other:");
+        otherLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(noteLabel1, gridBagConstraints);
+        checkoutPanel.add(otherLabel, gridBagConstraints);
+
+        otherBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 300;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(otherBox, gridBagConstraints);
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(107, 23));
+        checkoutButtonPanel.setPreferredSize(null);
+        checkoutButtonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         formButton.setText("Generate Form");
-        jPanel3.add(formButton);
+        formButton.setPreferredSize(null);
+        checkoutButtonPanel.add(formButton);
 
         outButton.setText("Check Out");
-        jPanel3.add(outButton);
+        outButton.setPreferredSize(null);
+        checkoutButtonPanel.add(outButton);
 
         inButton.setText("Check In");
-        jPanel3.add(inButton);
+        inButton.setPreferredSize(null);
+        checkoutButtonPanel.add(inButton);
 
         lostButton.setText("Lost");
-        jPanel3.add(lostButton);
+        lostButton.setPreferredSize(null);
+        checkoutButtonPanel.add(lostButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 300;
         gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
-        checkoutPanel.add(jPanel3, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        checkoutPanel.add(checkoutButtonPanel, gridBagConstraints);
 
-        org.jdesktop.layout.GroupLayout bufferLayout = new org.jdesktop.layout.GroupLayout(buffer);
-        buffer.setLayout(bufferLayout);
-        bufferLayout.setHorizontalGroup(
-            bufferLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 100, Short.MAX_VALUE)
-        );
-        bufferLayout.setVerticalGroup(
-            bufferLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 100, Short.MAX_VALUE)
-        );
+        historySplit.setRightComponent(checkoutPanel);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        gridBagConstraints.weighty = 2.0;
-        checkoutPanel.add(buffer, gridBagConstraints);
+        historyPanel.add(historySplit, java.awt.BorderLayout.CENTER);
 
-        infoTabs.addTab("Check In/Out", checkoutPanel);
+        infoTabs.addTab("History", historyPanel);
 
-        jPanel1.add(infoTabs, java.awt.BorderLayout.CENTER);
-
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        rightsplitPanel.add(infoTabs, java.awt.BorderLayout.CENTER);
 
         saveButton.setText("SAVE CHANGES");
         saveButton.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        jPanel2.add(saveButton, gridBagConstraints);
+        rightsplitButtonPanel.add(saveButton);
 
         cancelButton.setText("CANCEL CHANGES");
         cancelButton.setPreferredSize(null);
-        jPanel2.add(cancelButton, new java.awt.GridBagConstraints());
+        rightsplitButtonPanel.add(cancelButton);
 
         deleteButton.setText("DELETE INSTRUMENT");
         deleteButton.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.weightx = 1.0;
-        jPanel2.add(deleteButton, gridBagConstraints);
+        rightsplitButtonPanel.add(deleteButton);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.SOUTH);
+        rightsplitPanel.add(rightsplitButtonPanel, java.awt.BorderLayout.SOUTH);
 
-        jSplitPane1.setRightComponent(jPanel1);
+        overlord.setRightComponent(rightsplitPanel);
 
         searchCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Brand", "Serial #", "Rank", "Value", "Status", "Ligature", "Mouthpiece", "Mouthpiece Cap", "Bow" }));
         searchCombo.setPreferredSize(null);
@@ -527,9 +521,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         });
 
-        jScrollPane4.setPreferredSize(null);
+        leftsplitInstruTablePanel.setPreferredSize(null);
 
-        instrumentTable.setModel(new javax.swing.table.DefaultTableModel(
+        instruTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -555,8 +549,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 return canEdit [columnIndex];
             }
         });
-        instrumentTable.setPreferredSize(null);
-        jScrollPane4.setViewportView(instrumentTable);
+        instruTable.setPreferredSize(null);
+        instruTable.getTableHeader().setReorderingAllowed(false);
+        leftsplitInstruTablePanel.setViewportView(instruTable);
 
         searchButton.setText("Search");
         searchButton.setPreferredSize(null);
@@ -567,47 +562,47 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         advSearchButton.setText("ADVANCED SEARCH");
         advSearchButton.setPreferredSize(null);
 
-        org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout leftsplitPanelLayout = new org.jdesktop.layout.GroupLayout(leftsplitPanel);
+        leftsplitPanel.setLayout(leftsplitPanelLayout);
+        leftsplitPanelLayout.setHorizontalGroup(
+            leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, leftsplitPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                    .add(jPanel8Layout.createSequentialGroup()
-                        .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, leftsplitInstruTablePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                    .add(leftsplitPanelLayout.createSequentialGroup()
+                        .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jPanel8Layout.createSequentialGroup()
+                        .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(leftsplitPanelLayout.createSequentialGroup()
                                 .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 72, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(searchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .add(advSearchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel8Layout.createSequentialGroup()
+        leftsplitPanelLayout.setVerticalGroup(
+            leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(leftsplitPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(searchBar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(searchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(advSearchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                .add(leftsplitInstruTablePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jSplitPane1.setLeftComponent(jPanel8);
+        overlord.setLeftComponent(leftsplitPanel);
 
-        add(jSplitPane1, java.awt.BorderLayout.CENTER);
+        add(overlord, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchComboActionPerformed
@@ -630,15 +625,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
 }//GEN-LAST:event_ligComboActionPerformed
 
-    private void instruBox1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_instruBox1ActionPerformed
-    {//GEN-HEADEREND:event_instruBox1ActionPerformed
+    private void renterBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renterBoxActionPerformed
+    {//GEN-HEADEREND:event_renterBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_instruBox1ActionPerformed
+}//GEN-LAST:event_renterBoxActionPerformed
 
-    private void ligCombo1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ligCombo1ActionPerformed
-    {//GEN-HEADEREND:event_ligCombo1ActionPerformed
+    private void periodComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_periodComboActionPerformed
+    {//GEN-HEADEREND:event_periodComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ligCombo1ActionPerformed
+}//GEN-LAST:event_periodComboActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -646,62 +641,62 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JComboBox bowCombo;
     private javax.swing.JLabel bowLabel;
     private javax.swing.JTextField brandBox;
-    private javax.swing.JTextField brandBox1;
     private javax.swing.JLabel brandLabel;
-    private javax.swing.JLabel brandLabel1;
-    private javax.swing.JPanel buffer;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox capCombo;
     private javax.swing.JLabel capLabel;
+    private javax.swing.JPanel checkoutButtonPanel;
     private javax.swing.JPanel checkoutPanel;
+    private javax.swing.JTextField dateoutBox;
+    private javax.swing.JLabel dateoutLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JScrollPane detailNotePanel;
     private javax.swing.JPanel detailPanel;
+    private javax.swing.JComboBox feeCombo;
+    private javax.swing.JLabel feeLabel;
     private javax.swing.JButton formButton;
     private javax.swing.JPanel historyPanel;
+    private javax.swing.JSplitPane historySplit;
+    private javax.swing.JTable historyTable;
+    private javax.swing.JScrollPane historyTablePanel;
     private javax.swing.JButton inButton;
     private javax.swing.JTabbedPane infoTabs;
     private javax.swing.JTextField instruBox;
-    private javax.swing.JTextField instruBox1;
+    private javax.swing.JTable instruTable;
     private javax.swing.JLabel instrumentLabel;
-    private javax.swing.JLabel instrumentLabel1;
-    private javax.swing.JTable instrumentTable;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane leftsplitInstruTablePanel;
+    private javax.swing.JPanel leftsplitPanel;
     private javax.swing.JComboBox ligCombo;
-    private javax.swing.JComboBox ligCombo1;
     private javax.swing.JLabel ligatureLabel;
-    private javax.swing.JLabel ligatureLabel1;
     private javax.swing.JButton lostButton;
     private javax.swing.JComboBox mpieceCombo;
     private javax.swing.JLabel mpieceLabel;
     private javax.swing.JLabel noteLabel;
-    private javax.swing.JLabel noteLabel1;
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField otherBox;
+    private javax.swing.JLabel otherLabel;
     private javax.swing.JButton outButton;
+    private javax.swing.JSplitPane overlord;
+    private javax.swing.JComboBox periodCombo;
+    private javax.swing.JLabel periodLabel;
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
+    private javax.swing.JTextField renterBox;
+    private javax.swing.JLabel renterLabel;
+    private javax.swing.JPanel rightsplitButtonPanel;
+    private javax.swing.JPanel rightsplitPanel;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextField schoolyearBox;
+    private javax.swing.JLabel schoolyearLabel;
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox searchCombo;
     private javax.swing.JTextField serialBox;
-    private javax.swing.JTextField serialBox1;
     private javax.swing.JLabel serialLabel;
-    private javax.swing.JLabel serialLabel1;
     private javax.swing.JComboBox statusCombo;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox strapCombo;
-    private javax.swing.JComboBox strapCombo1;
     private javax.swing.JLabel strapLabel;
-    private javax.swing.JLabel strapLabel1;
     private javax.swing.JTextField valueBox;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
