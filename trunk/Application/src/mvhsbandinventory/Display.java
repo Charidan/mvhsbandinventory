@@ -35,37 +35,40 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        infoTabs = new javax.swing.JTabbedPane();
+        statusTab = new javax.swing.JTabbedPane();
         detailPanel = new javax.swing.JPanel();
+        instrumentLabel = new javax.swing.JLabel();
+        instruBox = new javax.swing.JTextField();
+        brandLabel = new javax.swing.JLabel();
+        brandBox = new javax.swing.JTextField();
+        serialLabel = new javax.swing.JLabel();
+        serialBox = new javax.swing.JTextField();
         rankLabel = new javax.swing.JLabel();
         rankBox = new javax.swing.JTextField();
         valueLabel = new javax.swing.JLabel();
         valueBox = new javax.swing.JTextField();
-        statusLabel = new javax.swing.JLabel();
-        statusCombo = new javax.swing.JComboBox();
+        strapLabel = new javax.swing.JLabel();
+        strapCombo = new javax.swing.JComboBox();
         ligatureLabel = new javax.swing.JLabel();
-        mpieceLabel = new javax.swing.JLabel();
-        capLabel = new javax.swing.JLabel();
         ligCombo = new javax.swing.JComboBox();
+        mpieceLabel = new javax.swing.JLabel();
         mpieceCombo = new javax.swing.JComboBox();
+        capLabel = new javax.swing.JLabel();
         capCombo = new javax.swing.JComboBox();
+        bowLabel = new javax.swing.JLabel();
+        bowCombo = new javax.swing.JComboBox();
         noteLabel = new javax.swing.JLabel();
-        instrumentLabel = new javax.swing.JLabel();
-        brandLabel = new javax.swing.JLabel();
-        serialLabel = new javax.swing.JLabel();
-        typeBox = new javax.swing.JTextField();
-        brandBox = new javax.swing.JTextField();
-        serialBox = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         notesTPane = new javax.swing.JTextPane();
-        bowCombo = new javax.swing.JComboBox();
-        bowLabel = new javax.swing.JLabel();
         historyPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        contractPanel = new javax.swing.JPanel();
-        saveButton1 = new javax.swing.JButton();
-        deleteButton1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         searchCombo = new javax.swing.JComboBox();
         searchBar = new javax.swing.JTextField();
@@ -80,150 +83,187 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         jSplitPane1.setAutoscrolls(true);
         jSplitPane1.setContinuousLayout(true);
         jSplitPane1.setName(""); // NOI18N
-        jSplitPane1.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        infoTabs.setPreferredSize(new java.awt.Dimension(9999, 9999));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        detailPanel.setLayout(new java.awt.GridBagLayout());
+
+        instrumentLabel.setText("Instrument:");
+        instrumentLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(instrumentLabel, gridBagConstraints);
+
+        instruBox.setEditable(false);
+        instruBox.setPreferredSize(null);
+        instruBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instruBoxActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(instruBox, gridBagConstraints);
+
+        brandLabel.setText("Brand:");
+        brandLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(brandLabel, gridBagConstraints);
+
+        brandBox.setEditable(false);
+        brandBox.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(brandBox, gridBagConstraints);
+
+        serialLabel.setText("Serial Number:");
+        serialLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(serialLabel, gridBagConstraints);
+
+        serialBox.setEditable(false);
+        serialBox.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(serialBox, gridBagConstraints);
 
         rankLabel.setText("Rank:");
+        rankLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(rankLabel, gridBagConstraints);
 
         rankBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rankBox.setText("3");
+        rankBox.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(rankBox, gridBagConstraints);
 
         valueLabel.setText("Value: $");
+        valueLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(valueLabel, gridBagConstraints);
 
         valueBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         valueBox.setText("0");
+        valueBox.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(valueBox, gridBagConstraints);
 
-        statusLabel.setText("Status:");
+        strapLabel.setText("Neck Strap:");
+        strapLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(strapLabel, gridBagConstraints);
 
-        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "On Loan", "In Storage", "Missing" }));
-        statusCombo.setSelectedIndex(1);
+        strapCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        strapCombo.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(strapCombo, gridBagConstraints);
 
         ligatureLabel.setText("Ligature:");
-
-        mpieceLabel.setText("Mouthpiece:");
-
-        capLabel.setText("Mouthpiece Cap:");
+        ligatureLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(ligatureLabel, gridBagConstraints);
 
         ligCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        ligCombo.setPreferredSize(null);
         ligCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ligComboActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(ligCombo, gridBagConstraints);
+
+        mpieceLabel.setText("Mouthpiece:");
+        mpieceLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(mpieceLabel, gridBagConstraints);
 
         mpieceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        mpieceCombo.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(mpieceCombo, gridBagConstraints);
+
+        capLabel.setText("Mouthpiece Cap:");
+        capLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(capLabel, gridBagConstraints);
 
         capCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
-
-        noteLabel.setText("Notes:");
-
-        instrumentLabel.setText("Instrument:");
-
-        brandLabel.setText("Brand:");
-
-        serialLabel.setText("Serial Number:");
-
-        typeBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeBoxActionPerformed(evt);
-            }
-        });
-
-        jScrollPane5.setViewportView(notesTPane);
-
-        bowCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        capCombo.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(capCombo, gridBagConstraints);
 
         bowLabel.setText("Bow:");
+        bowLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(bowLabel, gridBagConstraints);
 
-        org.jdesktop.layout.GroupLayout detailPanelLayout = new org.jdesktop.layout.GroupLayout(detailPanel);
-        detailPanel.setLayout(detailPanelLayout);
-        detailPanelLayout.setHorizontalGroup(
-            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
-                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, instrumentLabel)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, valueLabel)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, noteLabel))
-                        .addContainerGap())
-                    .add(detailPanelLayout.createSequentialGroup()
-                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(brandLabel)
-                            .add(serialLabel)
-                            .add(rankLabel)
-                            .add(statusLabel)
-                            .add(ligatureLabel)
-                            .add(mpieceLabel)
-                            .add(capLabel)
-                            .add(bowLabel))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, typeBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, brandBox)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, serialBox)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, valueBox)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
-        );
-        detailPanelLayout.setVerticalGroup(
-            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(detailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(instrumentLabel)
-                    .add(typeBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(brandBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(brandLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(serialBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(serialLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rankBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(rankLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(valueLabel)
-                    .add(valueBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(statusCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(statusLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(ligCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(ligatureLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(mpieceCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(mpieceLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(capCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(capLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(bowCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(bowLabel))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(noteLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .add(222, 222, 222))
-        );
+        bowCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
+        bowCombo.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(bowCombo, gridBagConstraints);
 
-        infoTabs.addTab("Details", detailPanel);
+        noteLabel.setText("Notes:");
+        noteLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        detailPanel.add(noteLabel, gridBagConstraints);
+
+        jScrollPane5.setMinimumSize(new java.awt.Dimension(25, 25));
+        jScrollPane5.setPreferredSize(null);
+
+        notesTPane.setMinimumSize(new java.awt.Dimension(25, 25));
+        notesTPane.setPreferredSize(null);
+        jScrollPane5.setViewportView(notesTPane);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        detailPanel.add(jScrollPane5, gridBagConstraints);
+
+        statusTab.addTab("Details", detailPanel);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,7 +293,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(historyPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
                 .addContainerGap())
         );
         historyPanelLayout.setVerticalGroup(
@@ -261,56 +301,55 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             .add(org.jdesktop.layout.GroupLayout.TRAILING, historyPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                .add(222, 222, 222))
+                .add(259, 259, 259))
         );
 
-        infoTabs.addTab("History", historyPanel);
+        statusTab.addTab("History", historyPanel);
 
-        org.jdesktop.layout.GroupLayout contractPanelLayout = new org.jdesktop.layout.GroupLayout(contractPanel);
-        contractPanel.setLayout(contractPanelLayout);
-        contractPanelLayout.setHorizontalGroup(
-            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 474, Short.MAX_VALUE)
-        );
-        contractPanelLayout.setVerticalGroup(
-            contractPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 657, Short.MAX_VALUE)
-        );
+        jLabel1.setText("Status:");
+        jLabel1.setPreferredSize(null);
 
-        infoTabs.addTab("Contract", contractPanel);
-
-        saveButton1.setText("SAVE INSTRUMENT");
-
-        deleteButton1.setText("DELETE INSTRUMENT");
-
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(saveButton1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 195, Short.MAX_VALUE)
-                .add(deleteButton1)
-                .addContainerGap())
-            .add(infoTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(711, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .add(infoTabs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton1)
-                    .add(deleteButton1))
-                .addContainerGap())
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(669, Short.MAX_VALUE))
         );
+
+        statusTab.addTab("Status", jPanel3);
+
+        jPanel1.add(statusTab, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setPreferredSize(null);
+
+        saveButton.setText("SAVE CHANGES");
+        saveButton.setPreferredSize(null);
+        jPanel2.add(saveButton);
+
+        cancelButton.setText("CANCEL CHANGES");
+        cancelButton.setPreferredSize(null);
+        jPanel2.add(cancelButton);
+
+        deleteButton.setText("DELETE INSTRUMENT");
+        deleteButton.setPreferredSize(null);
+        jPanel2.add(deleteButton);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         jSplitPane1.setRightComponent(jPanel1);
 
-        jPanel8.setPreferredSize(new java.awt.Dimension(400, 400));
-
         searchCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Brand", "Serial #", "Rank", "Value", "Status", "Ligature", "Mouthpiece", "Mouthpiece Cap", "Bow" }));
+        searchCombo.setPreferredSize(null);
         searchCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchComboActionPerformed(evt);
@@ -318,11 +357,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
 
         searchBar.setText("Search Bar");
+        searchBar.setPreferredSize(null);
         searchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBarActionPerformed(evt);
             }
         });
+
+        jScrollPane4.setPreferredSize(null);
 
         instrumentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -350,13 +392,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 return canEdit [columnIndex];
             }
         });
+        instrumentTable.setPreferredSize(null);
         jScrollPane4.setViewportView(instrumentTable);
 
         searchButton.setText("Search");
+        searchButton.setPreferredSize(null);
 
         addButton.setText("Add New Instrument");
+        addButton.setPreferredSize(null);
 
         advSearchButton.setText("ADVANCED SEARCH");
+        advSearchButton.setPreferredSize(null);
 
         org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -365,18 +411,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                     .add(jPanel8Layout.createSequentialGroup()
                         .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(addButton)
-                            .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                            .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                             .add(jPanel8Layout.createSequentialGroup()
                                 .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 72, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(searchButton))
-                            .add(advSearchButton))))
+                                .add(searchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(advSearchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -385,14 +431,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 .addContainerGap()
                 .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(searchBar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(searchButton)
+                    .add(searchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(addButton)
-                    .add(advSearchButton))
+                    .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(advSearchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -411,10 +457,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
 }//GEN-LAST:event_searchBarActionPerformed
 
-    private void typeBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_typeBoxActionPerformed
-    {//GEN-HEADEREND:event_typeBoxActionPerformed
+    private void instruBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_instruBoxActionPerformed
+    {//GEN-HEADEREND:event_instruBoxActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_typeBoxActionPerformed
+}//GEN-LAST:event_instruBoxActionPerformed
 
     private void ligComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ligComboActionPerformed
     {//GEN-HEADEREND:event_ligComboActionPerformed
@@ -428,16 +474,19 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel bowLabel;
     private javax.swing.JTextField brandBox;
     private javax.swing.JLabel brandLabel;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox capCombo;
     private javax.swing.JLabel capLabel;
-    private javax.swing.JPanel contractPanel;
-    private javax.swing.JButton deleteButton1;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JPanel historyPanel;
-    private javax.swing.JTabbedPane infoTabs;
+    private javax.swing.JTextField instruBox;
     private javax.swing.JLabel instrumentLabel;
     private javax.swing.JTable instrumentTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
@@ -452,15 +501,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
-    private javax.swing.JButton saveButton1;
+    private javax.swing.JButton saveButton;
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox searchCombo;
     private javax.swing.JTextField serialBox;
     private javax.swing.JLabel serialLabel;
-    private javax.swing.JComboBox statusCombo;
-    private javax.swing.JLabel statusLabel;
-    private javax.swing.JTextField typeBox;
+    private javax.swing.JTabbedPane statusTab;
+    private javax.swing.JComboBox strapCombo;
+    private javax.swing.JLabel strapLabel;
     private javax.swing.JTextField valueBox;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
