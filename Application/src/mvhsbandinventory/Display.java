@@ -35,8 +35,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        statusTab = new javax.swing.JTabbedPane();
+        infoTabs = new javax.swing.JTabbedPane();
         detailPanel = new javax.swing.JPanel();
+        statusLabel = new javax.swing.JLabel();
+        statusCombo = new javax.swing.JComboBox();
         instrumentLabel = new javax.swing.JLabel();
         instruBox = new javax.swing.JTextField();
         brandLabel = new javax.swing.JLabel();
@@ -63,8 +65,25 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         historyPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        checkoutPanel = new javax.swing.JPanel();
+        instrumentLabel1 = new javax.swing.JLabel();
+        instruBox1 = new javax.swing.JTextField();
+        brandLabel1 = new javax.swing.JLabel();
+        brandBox1 = new javax.swing.JTextField();
+        serialLabel1 = new javax.swing.JLabel();
+        serialBox1 = new javax.swing.JTextField();
+        strapLabel1 = new javax.swing.JLabel();
+        strapCombo1 = new javax.swing.JComboBox();
+        ligatureLabel1 = new javax.swing.JLabel();
+        ligCombo1 = new javax.swing.JComboBox();
+        noteLabel1 = new javax.swing.JLabel();
+        otherBox = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        formButton = new javax.swing.JButton();
+        outButton = new javax.swing.JButton();
+        inButton = new javax.swing.JButton();
+        lostButton = new javax.swing.JButton();
+        buffer = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -87,6 +106,19 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         detailPanel.setLayout(new java.awt.GridBagLayout());
+
+        statusLabel.setText("Status:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(statusLabel, gridBagConstraints);
+
+        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "In Storage", "At Shop", "On Loan", "Missing" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(statusCombo, gridBagConstraints);
 
         instrumentLabel.setText("Instrument:");
         instrumentLabel.setPreferredSize(null);
@@ -276,7 +308,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.weighty = 1.0;
         detailPanel.add(jScrollPane5, gridBagConstraints);
 
-        statusTab.addTab("Details", detailPanel);
+        infoTabs.addTab("Details", detailPanel);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -306,7 +338,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             historyPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(historyPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
                 .addContainerGap())
         );
         historyPanelLayout.setVerticalGroup(
@@ -314,48 +346,166 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             .add(org.jdesktop.layout.GroupLayout.TRAILING, historyPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                .add(259, 259, 259))
+                .add(342, 342, 342))
         );
 
-        statusTab.addTab("History", historyPanel);
+        infoTabs.addTab("History", historyPanel);
 
-        jLabel1.setText("Status:");
-        jLabel1.setPreferredSize(null);
+        checkoutPanel.setLayout(new java.awt.GridBagLayout());
 
-        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(711, Short.MAX_VALUE))
+        instrumentLabel1.setText("Owner:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(instrumentLabel1, gridBagConstraints);
+
+        instruBox1.setAutoscrolls(false);
+        instruBox1.setMinimumSize(new java.awt.Dimension(200, 20));
+        instruBox1.setPreferredSize(null);
+        instruBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instruBox1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        checkoutPanel.add(instruBox1, gridBagConstraints);
+
+        brandLabel1.setText("School Year:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(brandLabel1, gridBagConstraints);
+
+        brandBox1.setAutoscrolls(false);
+        brandBox1.setMinimumSize(new java.awt.Dimension(200, 20));
+        brandBox1.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        checkoutPanel.add(brandBox1, gridBagConstraints);
+
+        serialLabel1.setText("Date Out:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(serialLabel1, gridBagConstraints);
+
+        serialBox1.setAutoscrolls(false);
+        serialBox1.setMinimumSize(new java.awt.Dimension(200, 20));
+        serialBox1.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        checkoutPanel.add(serialBox1, gridBagConstraints);
+
+        strapLabel1.setText("Fee Paid:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(strapLabel1, gridBagConstraints);
+
+        strapCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived", " " }));
+        strapCombo1.setSelectedIndex(1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        checkoutPanel.add(strapCombo1, gridBagConstraints);
+
+        ligatureLabel1.setText("For Use In:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(ligatureLabel1, gridBagConstraints);
+
+        ligCombo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
+        ligCombo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ligCombo1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        checkoutPanel.add(ligCombo1, gridBagConstraints);
+
+        noteLabel1.setText("Other:");
+        noteLabel1.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(noteLabel1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        checkoutPanel.add(otherBox, gridBagConstraints);
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(107, 23));
+
+        formButton.setText("Generate Form");
+        jPanel3.add(formButton);
+
+        outButton.setText("Check Out");
+        jPanel3.add(outButton);
+
+        inButton.setText("Check In");
+        jPanel3.add(inButton);
+
+        lostButton.setText("Lost");
+        jPanel3.add(lostButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
+        checkoutPanel.add(jPanel3, gridBagConstraints);
+
+        org.jdesktop.layout.GroupLayout bufferLayout = new org.jdesktop.layout.GroupLayout(buffer);
+        buffer.setLayout(bufferLayout);
+        bufferLayout.setHorizontalGroup(
+            bufferLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 100, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(669, Short.MAX_VALUE))
+        bufferLayout.setVerticalGroup(
+            bufferLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 100, Short.MAX_VALUE)
         );
 
-        statusTab.addTab("Status", jPanel3);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.weighty = 2.0;
+        checkoutPanel.add(buffer, gridBagConstraints);
 
-        jPanel1.add(statusTab, java.awt.BorderLayout.CENTER);
+        infoTabs.addTab("Check In/Out", checkoutPanel);
 
-        jPanel2.setPreferredSize(null);
+        jPanel1.add(infoTabs, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         saveButton.setText("SAVE CHANGES");
         saveButton.setPreferredSize(null);
-        jPanel2.add(saveButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        jPanel2.add(saveButton, gridBagConstraints);
 
         cancelButton.setText("CANCEL CHANGES");
         cancelButton.setPreferredSize(null);
-        jPanel2.add(cancelButton);
+        jPanel2.add(cancelButton, new java.awt.GridBagConstraints());
 
         deleteButton.setText("DELETE INSTRUMENT");
         deleteButton.setPreferredSize(null);
-        jPanel2.add(deleteButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        jPanel2.add(deleteButton, gridBagConstraints);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.SOUTH);
 
@@ -451,7 +601,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(advSearchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -480,23 +630,41 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
 }//GEN-LAST:event_ligComboActionPerformed
 
+    private void instruBox1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_instruBox1ActionPerformed
+    {//GEN-HEADEREND:event_instruBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_instruBox1ActionPerformed
+
+    private void ligCombo1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ligCombo1ActionPerformed
+    {//GEN-HEADEREND:event_ligCombo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ligCombo1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton advSearchButton;
     private javax.swing.JComboBox bowCombo;
     private javax.swing.JLabel bowLabel;
     private javax.swing.JTextField brandBox;
+    private javax.swing.JTextField brandBox1;
     private javax.swing.JLabel brandLabel;
+    private javax.swing.JLabel brandLabel1;
+    private javax.swing.JPanel buffer;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox capCombo;
     private javax.swing.JLabel capLabel;
+    private javax.swing.JPanel checkoutPanel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JPanel detailPanel;
+    private javax.swing.JButton formButton;
     private javax.swing.JPanel historyPanel;
+    private javax.swing.JButton inButton;
+    private javax.swing.JTabbedPane infoTabs;
     private javax.swing.JTextField instruBox;
+    private javax.swing.JTextField instruBox1;
     private javax.swing.JLabel instrumentLabel;
+    private javax.swing.JLabel instrumentLabel1;
     private javax.swing.JTable instrumentTable;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -507,11 +675,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JComboBox ligCombo;
+    private javax.swing.JComboBox ligCombo1;
     private javax.swing.JLabel ligatureLabel;
+    private javax.swing.JLabel ligatureLabel1;
+    private javax.swing.JButton lostButton;
     private javax.swing.JComboBox mpieceCombo;
     private javax.swing.JLabel mpieceLabel;
     private javax.swing.JLabel noteLabel;
+    private javax.swing.JLabel noteLabel1;
     private javax.swing.JTextPane notesTPane;
+    private javax.swing.JTextField otherBox;
+    private javax.swing.JButton outButton;
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton saveButton;
@@ -519,10 +693,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox searchCombo;
     private javax.swing.JTextField serialBox;
+    private javax.swing.JTextField serialBox1;
     private javax.swing.JLabel serialLabel;
-    private javax.swing.JTabbedPane statusTab;
+    private javax.swing.JLabel serialLabel1;
+    private javax.swing.JComboBox statusCombo;
+    private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox strapCombo;
+    private javax.swing.JComboBox strapCombo1;
     private javax.swing.JLabel strapLabel;
+    private javax.swing.JLabel strapLabel1;
     private javax.swing.JTextField valueBox;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
