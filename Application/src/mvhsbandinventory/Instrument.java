@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * Defines the data related to an instrument stored in the flat-file database.
@@ -83,15 +84,32 @@ public class Instrument
     @Override
     public String toString()
     {
-        String buffer = "";
-        Object current = null;
-
-        for (int i = 0; i < attributesLength; i++)
+		int cols = attributes.length;
+        String[][] table = new String[size][];
+        
+        // Convert our data into a useful two-dimensional array of the values in
+        // the objects; this will represent the data in a spreadsheet set
+        for (var col = 0; col < cols; col++)
         {
-            current = properties.get(attributes[i]);
-            buffer += (i < attributesLength - 1) ? current + "," : current;
-        }
-
-        return buffer;
+			int title = attributes[col];
+			Object data = (Object) properties.get(title);
+			
+			if (data instanceof ArrayList) 
+			{
+				
+			}
+			else
+			{
+				
+			}
+		}
+		
+		// Convert our two-dimensional array into a CSV file
+		String csv = "";
+		
+		// TODO: write code to print out the two-dimensional array with newlines
+		// and commas separating the rows and columns, respectively
+		
+		return csv;
     }
 }
