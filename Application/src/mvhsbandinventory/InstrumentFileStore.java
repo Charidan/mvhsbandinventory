@@ -51,6 +51,35 @@ public class InstrumentFileStore extends InstrumentStore
 	}
 	
 	/**
+	 * Serializes the data contained in the instrument into a CSV string that
+	 * can be written to a file.  The data in the instrument will be written
+	 * such that there will be one attribute of the instrument per column, with 
+	 * the first row of each column containing the key name.  The second row 
+	 * will contain the key value.  If the key value is an ArrayList (rather 
+	 * than a string, the array list will be written to the string, one item per
+	 * row, starting at the second row.
+	 * @param instrument
+	 * @return csv-serialized instrument string
+	 */ 
+	public static String serialize (Instrument instrument)
+	{
+		
+	}
+	
+	/**
+	 * Parse the data serialized in CSV format (presumably with the 
+	 * InstrumentFileStore.serialize method) into an Instrument object.  See the 
+	 * documentation for the InstrumentFileStore.serialize method for more 
+	 * details on the serialization format for the CSV file.
+	 * @param csv-serialized instrument
+	 * @return instrument object
+	 */ 
+	public static Instrument unserialize (String csv)
+	{
+		
+	}
+	
+	/**
 	 * Determines whether the specified instrument is already stored in the 
 	 * data store.
 	 * @param instrument
@@ -80,6 +109,6 @@ public class InstrumentFileStore extends InstrumentStore
 	
 	public Instrument[] load ()
 	{
-		
+		return null;
 	}
 }
