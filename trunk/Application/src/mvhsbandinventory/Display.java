@@ -4,6 +4,8 @@
  */
 package mvhsbandinventory;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author nicholson
@@ -58,6 +60,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        deleteDialog = new javax.swing.JDialog();
+        deleteLabel = new javax.swing.JLabel();
+        confirmDelete = new javax.swing.JButton();
+        cancelDelete = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         rightsplitPanel = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
@@ -121,6 +127,31 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         searchButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         advSearchButton = new javax.swing.JButton();
+
+        deleteDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        deleteLabel.setText("Are you sure you want to delete this instrument?");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipady = 30;
+        deleteDialog.getContentPane().add(deleteLabel, gridBagConstraints);
+
+        confirmDelete.setText("YES");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.weightx = 1.0;
+        deleteDialog.getContentPane().add(confirmDelete, gridBagConstraints);
+
+        cancelDelete.setText("NO");
+        cancelDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelDeleteActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.weightx = 1.0;
+        deleteDialog.getContentPane().add(cancelDelete, gridBagConstraints);
 
         setLayout(new java.awt.BorderLayout());
 
@@ -510,6 +541,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         deleteButton.setText("DELETE INSTRUMENT");
         deleteButton.setPreferredSize(null);
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
         rightsplitButtonPanel.add(deleteButton);
 
         rightsplitPanel.add(rightsplitButtonPanel, java.awt.BorderLayout.SOUTH);
@@ -644,6 +680,24 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
 }//GEN-LAST:event_periodComboActionPerformed
 
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
+    {//GEN-HEADEREND:event_deleteButtonActionPerformed
+        deleteDialog.setTitle("Confirm Delete");
+        Main.window.setEnabled(false);
+        deleteDialog.setSize(new Dimension(300,125));
+        deleteDialog.setLocation(Main.window.getX()+Main.window.getWidth()/3, Main.window.getY()+Main.window.getHeight()/3);
+        deleteDialog.setResizable(false);
+        deleteDialog.setAlwaysOnTop(true);
+        deleteDialog.setVisible(true);
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void cancelDeleteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelDeleteActionPerformed
+    {//GEN-HEADEREND:event_cancelDeleteActionPerformed
+        deleteDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
+    }//GEN-LAST:event_cancelDeleteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton advSearchButton;
@@ -652,13 +706,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField brandBox;
     private javax.swing.JLabel brandLabel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton cancelDelete;
     private javax.swing.JComboBox capCombo;
     private javax.swing.JLabel capLabel;
     private javax.swing.JPanel checkoutButtonPanel;
     private javax.swing.JPanel checkoutPanel;
+    private javax.swing.JButton confirmDelete;
     private javax.swing.JTextField dateoutBox;
     private javax.swing.JLabel dateoutLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JDialog deleteDialog;
+    private javax.swing.JLabel deleteLabel;
     private javax.swing.JScrollPane detailNotePanel;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JComboBox feeCombo;
