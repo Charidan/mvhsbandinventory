@@ -4,6 +4,7 @@
  */
 package mvhsbandinventory;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
@@ -24,6 +25,7 @@ public class Main
         window.setSize(800,800);
         window.setTitle("MVHS - Band Inventory");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setMinimumSize(new Dimension(782,385));
         window.setVisible(true);
         panel.repaint();
     }
