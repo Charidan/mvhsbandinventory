@@ -42,7 +42,7 @@ public class InstrumentFileStore extends InstrumentStore
 	 * @param instrument
 	 * @return file that should reference the specified instrument
 	 */
-	private File file (Instrument instrument)
+	private File getFile (Instrument instrument)
 	{
 		String name = (String) instrument.get("name");
 		String brand = (String) instrument.get("brand");
@@ -223,7 +223,7 @@ public class InstrumentFileStore extends InstrumentStore
 	 */
 	public boolean exists (Instrument instrument)
 	{
-		return file(instrument).exists();
+		return getFile(instrument).exists();
 	}
 	
 	/**
@@ -241,7 +241,14 @@ public class InstrumentFileStore extends InstrumentStore
 	
 	public void update (Instrument instrument)
 	{
+		// Serialize the file
+		String csv = serialize(instrument);
 		
+		// Write the serialized instrument to the appropriate file on disk
+		File file = getFile(instrument);
+		Writer pointer = new BufferedWriter(new FileWriter());
+		pointer.write(csv);
+		pointer.close();
 	}
 	
 	public void delete (Instrument instrument)
