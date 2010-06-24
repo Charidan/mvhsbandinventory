@@ -85,13 +85,13 @@ public class Instrument
     public String toString()
     {
 		int cols = attributes.length;
-        String[][] table = new String[size][];
+        String[][] table = new String[size][]; //TODO: (from R) define "size" and add a second dimension size.
         
         // Convert our data into a useful two-dimensional array of the values in
         // the objects; this will represent the data in a spreadsheet set
-        for (var col = 0; col < cols; col++)
+        for (int col = 0; col < cols; col++) //From R: Made col an int (from "var") because var is a non-java word.
         {
-			int title = attributes[col];
+			String title = attributes[col]; //From R: made title a String (from int) to match data type.
 			Object data = (Object) properties.get(title);
 			
 			if (data instanceof ArrayList) 
