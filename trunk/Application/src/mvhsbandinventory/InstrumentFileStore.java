@@ -37,6 +37,22 @@ public class InstrumentFileStore extends InstrumentStore
 	}
 	
 	/**
+	 * Generates a File object that should reference the instrument based on 
+	 * the specified information about that instrument.  The specified 
+	 * information passed in via arguments must be the name, brand, and serial
+	 * number of the instrument.
+	 * @param name
+	 * @param brand
+	 * @param serial
+	 * @return file that should reference the specified instrument
+	 */
+	private File getFile (String name, String brand, String serial)
+	{
+		String fileName = name + "-" + brand + "-" + serial + ".csv";
+		return new File(directory, fileName);
+	}
+	
+	/**
 	 * Generates a File object that should reference the specified instrument
 	 * in the data store.
 	 * @param instrument
@@ -48,10 +64,7 @@ public class InstrumentFileStore extends InstrumentStore
 		String brand = (String) instrument.get("brand");
 		String serial = (String) instrument.get("serial");
 		
-		// Generate the CSV file name
-		String fileName = name + "-" + brand + "-" + serial + ".csv";
-		
-		return new File(directory, fileName);
+		return getFile(name, brand, serial);
 	}
 	
 	/**
@@ -251,7 +264,7 @@ public class InstrumentFileStore extends InstrumentStore
 		pointer.close();
 	}
 	
-	public void delete (Instrument instrument)
+	public void delete (Instrument instrument) throws Error
 	{
 		if (!exists(instrument))
 		{
@@ -263,9 +276,27 @@ public class InstrumentFileStore extends InstrumentStore
 		file.delete();
 	}
 	
-	public void read (String name)
+	public Instrument read (String name, String brand, String serial)
 	{
+		File file = getFile(name, brand, serial);
+		return read(file);
+	}
+	
+	public Instrument read (File file)
+	{
+		Path path = file.toPath();
+		InputStream stream = file.newInputStream();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 		
+		String line = "";
+		String raw = "";
+		
+		// Load all of the file into our buffer string
+		while ((line = reader.readLine()) != null) {
+			raw += line;
+		}
+		
+		return unserialize(raw);
 	}
 	
 	public Instrument[] load ()
