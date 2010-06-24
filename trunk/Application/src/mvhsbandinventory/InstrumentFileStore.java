@@ -62,17 +62,21 @@ public class InstrumentFileStore extends InstrumentStore
 	 * will contain the key value.  If the key value is an ArrayList (rather 
 	 * than a string, the array list will be written to the string, one item per
 	 * row, starting at the second row.
+	 * 
+	 * The attributes parameter allows you to choose a subset of the attributes
+	 * specified as valid in the Instrument.attributes static array.
 	 * @param instrument
+	 * @param attributes
 	 * @return csv-serialized instrument string
 	 */ 
-	public static String serialize (Instrument instrument)
+	public static String serialize (Instrument instrument, String[] attributes)
 	{
 		int height = 0;
-		int width = Instrument.attributesLength;
+		int width = attributes.length;
 		
 		// Determine if there (a) are any ArrayLists in the Instrument and (b)
 		// what the size of the largest ArrayList in the Instrument is
-		for (String key : Instrument.attributes) 
+		for (String key : attributes) 
 		{
 			Object value = instrument.get(key);
 			
@@ -90,7 +94,7 @@ public class InstrumentFileStore extends InstrumentStore
 		// table that we will generate a CSV file out of
 		for (int c = 0; c < width; c++) 
 		{
-			String key = Instrument.attributes[c];
+			String key = attributes[c];
 			Object value = instrument.get(key);
 			
 			table[c][0] = key;
@@ -129,6 +133,18 @@ public class InstrumentFileStore extends InstrumentStore
 	}
 	
 	/**
+	 * A convenience version of the InstrumentFileStore.serialize function that
+	 * exports every valid property specified in the Instrument.attributes 
+	 * static array.
+	 * @param instrument
+	 * @return csv-serialized instrument string
+	 */
+	public static String serialize (Instrument instrument)
+	{
+		return serialize(instrument, Instrument.attributes);
+	}
+	
+	/**
 	 * Parse the data serialized in CSV format (presumably with the 
 	 * InstrumentFileStore.serialize method) into an Instrument object.  See the 
 	 * documentation for the InstrumentFileStore.serialize method for more 
@@ -156,7 +172,6 @@ public class InstrumentFileStore extends InstrumentStore
 	
 	public void add (Instrument instrument)
 	{
-		
 	}
 	
 	public void update (Instrument instrument)
