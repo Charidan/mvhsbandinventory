@@ -154,7 +154,63 @@ public class InstrumentFileStore extends InstrumentStore
 	 */ 
 	public static Instrument unserialize (String csv)
 	{
+		// Create a two-dimensional array that will hold our CSV data
+		String[][] table = null;
 		
+		// Start by splitting the data into separate rows
+		ArrayList<Object> rows = Arrays.asList(csv.split(verticalSeparator));
+		
+		// Now, we're going to further split the rows into individual cells and
+		// determine the width of the table specified in the serialized data
+		int height = rows.length;
+		int width = 0;
+		
+		for (int r = 0; r < height; r++)
+		{
+			String row = rows.get(r);
+			String[] cells = row.split(horizontalSeparator);
+			
+			if (width == 0) 
+			{
+				width = cells.length;
+				table = new String[width][height];
+			}
+			
+			for (int c = 0; c < width; c++) 
+			{
+				table[c][r] = cells[c];
+			}
+		}
+		
+		// Create an Instrument object and fill in the data from the two-
+		// dimensional array
+		Instrument instrument = new Instrument();
+		
+		for (int c = 0; c < width; c++)
+		{
+			String attribute = table[c][0];
+			
+			// Infer the data type from the arrangement of data in the cells
+			if (table[c][2] !== "")
+			{
+				// There is content in the third row, meaning that there is an 
+				// array of items; we need to extract an arraylist of items
+				ArrayList<String> value = new ArrayList<String>();
+				for (int r = 1; r < height; r++) {
+					value.add(table[c][r]);
+				}
+				instrument.set(attribute, value);
+			}
+			else
+			{
+				// There's only one value for the field--there is just a string 
+				// for this field
+				String value = table[c][1];
+				instrument.set(attribute, value);
+			}
+		}
+		
+		return instrument;
 	}
 	
 	/**
@@ -170,8 +226,17 @@ public class InstrumentFileStore extends InstrumentStore
 		return file(instrument).exists();
 	}
 	
+	/**
+     * Adds a new instrument to the store; serializes all of the data and
+     * writes the data to the disk.
+     * @param instrument
+     */
 	public void add (Instrument instrument)
 	{
+		// With other store types, we might actually need to do something 
+		// different to create a new instrument item; for here, however, we 
+		// don't need anything extra
+		update(instrument);
 	}
 	
 	public void update (Instrument instrument)
