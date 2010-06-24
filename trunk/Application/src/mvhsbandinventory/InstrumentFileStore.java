@@ -1,6 +1,7 @@
 package mvhsbandinventory;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -9,6 +10,9 @@ import java.io.File;
 public class InstrumentFileStore extends InstrumentStore 
 {
 	private File directory;
+	
+	public static String horizontalSeparator = ",";
+	public static String verticalSeparator = System.getProperty("line.separator");
 	
 	/**
 	 * Constructs a new InstrumentFileStore object for storing Instrument 
@@ -63,7 +67,65 @@ public class InstrumentFileStore extends InstrumentStore
 	 */ 
 	public static String serialize (Instrument instrument)
 	{
+		int height = 0;
+		int width = Instrument.attributesLength;
 		
+		// Determine if there (a) are any ArrayLists in the Instrument and (b)
+		// what the size of the largest ArrayList in the Instrument is
+		for (String key : Instrument.attributes) 
+		{
+			Object value = instrument.get(key);
+			
+			if (value instanceof ArrayList) 
+			{
+				ArrayList<String> list = (ArrayList<String>) value;
+				height = (list.size() > height) ? list.size() : height;
+			}
+		}
+		
+		// Generate a two-dimensional array to be turned into our CSV file
+		String[][] table = new String[width][height];
+		
+		// Insert our data into the two-dimensional array so that we have a 
+		// table that we will generate a CSV file out of
+		for (int c = 0; c < width; c++) 
+		{
+			String key = Instrument.attributes[c];
+			Object value = instrument.get(key);
+			
+			table[c][0] = key;
+			
+			if (value instanceof ArrayList) 
+			{
+				ArrayList<String> list = (ArrayList<String>) value;
+				int length = list.size();
+				for (int r = 1; r <= length; r++) {
+					table[c][r] = list.get(r - 1);
+				}
+			} 
+			else 
+			{
+				table[c][1] = (String) value;
+			}
+		}
+		
+		// Serialize this table into CSV format so that we can later write the 
+		// data to file
+		String buffer = "";
+		
+		for (int r = 0; r < height; r++)
+		{
+			String rowBuffer = "";
+			
+			for (int c = 0; c < width; c++)
+			{
+				String cell = table[r][c];
+				rowBuffer += (c != width - 1) ? 
+					cell + horizontalSeparator : cell + verticalSeparator;
+			}
+		}
+		
+		return buffer;
 	}
 	
 	/**
