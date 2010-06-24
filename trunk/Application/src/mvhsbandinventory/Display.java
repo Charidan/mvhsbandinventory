@@ -18,9 +18,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {
         initComponents();
         //set textbox sizes
+        //detail panel
         instruBox.setColumns(10);
         brandBox.setColumns(10);
         serialBox.setColumns(10);
+        rankBox.setColumns(2);
+        valueBox.setColumns(10);
+        //history panel
         renterBox.setColumns(25);
         schoolyearBox.setColumns(25);
         dateoutBox.setColumns(25);
@@ -206,7 +210,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         rankBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(rankBox, gridBagConstraints);
@@ -223,7 +226,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         valueBox.setMinimumSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 95;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(valueBox, gridBagConstraints);
@@ -333,8 +335,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
+                {"6/24/2010 -- 12:10 PM", "Instrument Created"},
+                {"6/24/2010 -- 12:12 PM", "Form Created for Chaz Gwennap"},
                 {null, null},
                 {null, null}
             },
@@ -343,11 +345,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         historyTable.setPreferredSize(null);
@@ -373,7 +382,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(renterBox, gridBagConstraints);
@@ -389,7 +397,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         schoolyearBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(schoolyearBox, gridBagConstraints);
@@ -405,7 +412,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         dateoutBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(dateoutBox, gridBagConstraints);
