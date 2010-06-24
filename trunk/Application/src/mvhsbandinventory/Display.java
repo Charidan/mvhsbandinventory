@@ -17,6 +17,27 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public Display()
     {
         initComponents();
+        //set textbox sizes
+        instruBox.setColumns(10);
+        brandBox.setColumns(10);
+        serialBox.setColumns(10);
+        renterBox.setColumns(25);
+        schoolyearBox.setColumns(25);
+        dateoutBox.setColumns(25);
+
+        //TODO: remove crappy test code.
+        instruBox.setText("Flute");
+        brandBox.setText("Yamaha");
+        serialBox.setText("4B212A");
+        rankBox.setText("2");
+        valueBox.setText("250.49");
+        strapCombo.setSelectedIndex(3);
+        ligCombo.setSelectedIndex(3);
+        mpieceCombo.setSelectedIndex(1);
+        capCombo.setSelectedIndex(2);
+        bowCombo.setSelectedIndex(3);
+        notesTPane.setText("It's shiny, like a flute, but it's slightly flat.");
+        
     }
 
     public void setObject(Object bean)
@@ -105,7 +126,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
-        detailPanel.setPreferredSize(null);
         detailPanel.setLayout(new java.awt.GridBagLayout());
 
         statusLabel.setText("Status:");
@@ -131,8 +151,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         instruBox.setEditable(false);
         instruBox.setAutoscrolls(false);
-        instruBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        instruBox.setPreferredSize(null);
+        instruBox.setMaximumSize(new java.awt.Dimension(1000, 20));
+        instruBox.setMinimumSize(new java.awt.Dimension(1000, 20));
         instruBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 instruBoxActionPerformed(evt);
@@ -140,7 +160,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(instruBox, gridBagConstraints);
@@ -154,10 +173,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         brandBox.setEditable(false);
         brandBox.setAutoscrolls(false);
         brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        brandBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(brandBox, gridBagConstraints);
@@ -174,7 +191,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         serialBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(serialBox, gridBagConstraints);
@@ -205,7 +221,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         valueBox.setText("0");
         valueBox.setAutoscrolls(false);
         valueBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        valueBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipadx = 95;
@@ -295,7 +310,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel.add(noteLabel, gridBagConstraints);
 
         detailNotePanel.setMinimumSize(new java.awt.Dimension(25, 25));
-        detailNotePanel.setPreferredSize(null);
 
         notesTPane.setMinimumSize(new java.awt.Dimension(25, 25));
         notesTPane.setPreferredSize(null);
@@ -316,8 +330,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         historyPanel.setLayout(new java.awt.BorderLayout());
 
         historySplit.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-
-        historyTablePanel.setPreferredSize(null);
 
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -361,7 +373,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -378,7 +389,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         schoolyearBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -395,7 +405,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         dateoutBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -407,12 +416,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         checkoutPanel.add(feeLabel, gridBagConstraints);
 
-        feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived", " " }));
-        feeCombo.setSelectedIndex(1);
+        feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived" }));
         feeCombo.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(feeCombo, gridBagConstraints);
@@ -432,7 +439,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(periodCombo, gridBagConstraints);
@@ -452,7 +458,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(otherBox, gridBagConstraints);
 
-        checkoutButtonPanel.setPreferredSize(null);
         checkoutButtonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         formButton.setText("Generate Form");
@@ -521,14 +526,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         });
 
-        leftsplitInstruTablePanel.setPreferredSize(null);
-
         instruTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {"Flute", "Selmer", "45712"},
+                {"Flute", "Yamaha", "4B212A"},
+                {"Bb Clarinet", "Bundy", "7286"},
+                {null, "", null}
             },
             new String [] {
                 "Instrument", "Brand", "Serial #"
