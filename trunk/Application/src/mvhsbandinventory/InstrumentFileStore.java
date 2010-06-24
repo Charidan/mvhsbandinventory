@@ -252,6 +252,11 @@ public class InstrumentFileStore extends InstrumentStore
 		update(instrument);
 	}
 	
+	/**
+     * Updates an existing instrument in the store; serializes all of the data
+     * in the instrument parameter and writes the data to the disk.
+     * @param instrument
+     */
 	public void update (Instrument instrument)
 	{
 		// Serialize the file
@@ -264,6 +269,10 @@ public class InstrumentFileStore extends InstrumentStore
 		pointer.close();
 	}
 	
+	/**
+     * Deletes the instrument from the store permenantly.
+     * @param instrument
+     */
 	public void delete (Instrument instrument) throws Error
 	{
 		if (!exists(instrument))
@@ -276,18 +285,42 @@ public class InstrumentFileStore extends InstrumentStore
 		file.delete();
 	}
 	
+	/**
+	 * Read the instrument from the disk based on the specific information 
+	 * passed in about it.  The specific information passed in via arguments 
+	 * must be strings containing the name, brand, and serial of the instrument
+	 * to load from the disk.
+	 * @param name
+	 * @param brand
+	 * @param serial
+	 * @return a parsed instrument from the data store
+	 */
 	public Instrument read (String name, String brand, String serial)
 	{
+		// Determine and read the appropriate file from the disk based on the
+		// information about the instrument to read that was passed in
 		File file = getFile(name, brand, serial);
 		return read(file);
 	}
 	
+	/**
+	 * Read and parse the instrument data contained in the file object passed 
+	 * in via an argument.  A parsed instrument object is returned back.
+	 * 
+	 * Note that this is a datastore-type-dependent method.  Do not use this
+	 * externally unless it is absolutely necessary to do so.  Use of this 
+	 * method overload will make it difficult to switch to a different datastore
+	 * type later on.  Please use the method overload with the name, brand, and
+	 * serial arguments.
+	 * @param file
+	 * @return a parsed instrument from the data store
+	 */
 	public Instrument read (File file)
 	{
+		// Open the necessary overhead to read a file from the disk
 		Path path = file.toPath();
 		InputStream stream = file.newInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-		
 		String line = "";
 		String raw = "";
 		
@@ -295,10 +328,16 @@ public class InstrumentFileStore extends InstrumentStore
 		while ((line = reader.readLine()) != null) {
 			raw += line;
 		}
+		reader.close();
 		
+		// Return the file after it has been parsed into an Instrument
 		return unserialize(raw);
 	}
 	
+	/**
+     * Loads all of the instruments from the store.
+     * @return an array of all of the parsed instruments in the store
+     */
 	public Instrument[] load ()
 	{
 		return null;
