@@ -253,6 +253,18 @@ public class InstrumentFileStore extends InstrumentStore
 	
 	public void delete (Instrument instrument)
 	{
+		if (!exists(instrument))
+		{
+			throw new Error("The instrument that was flagged for deletion "+
+							"does not yet exist.");
+		}
+		
+		File file = getFile(instrument);
+		file.delete();
+	}
+	
+	public void read (String name)
+	{
 		
 	}
 	
