@@ -4,7 +4,7 @@
  */
 package mvhsbandinventory;
 
-import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,17 +19,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public Display()
     {
         initComponents();
-        //set textbox sizes
-        //detail panel
-        instruBox.setColumns(10);
-        brandBox.setColumns(10);
-        serialBox.setColumns(10);
-        rankBox.setColumns(2);
-        valueBox.setColumns(10);
-        //history panel
-        renterBox.setColumns(25);
-        schoolyearBox.setColumns(25);
-        dateoutBox.setColumns(25);
 
         //TODO: remove crappy test code.
         instruBox.setText("Flute");
@@ -61,9 +50,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         java.awt.GridBagConstraints gridBagConstraints;
 
         deleteDialog = new javax.swing.JDialog();
-        deleteLabel = new javax.swing.JLabel();
-        confirmDelete = new javax.swing.JButton();
-        cancelDelete = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         rightsplitPanel = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
@@ -130,29 +116,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         deleteDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        deleteLabel.setText("Are you sure you want to delete this instrument?");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipady = 30;
-        deleteDialog.getContentPane().add(deleteLabel, gridBagConstraints);
-
-        confirmDelete.setText("YES");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        gridBagConstraints.weightx = 1.0;
-        deleteDialog.getContentPane().add(confirmDelete, gridBagConstraints);
-
-        cancelDelete.setText("NO");
-        cancelDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelDeleteActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        gridBagConstraints.weightx = 1.0;
-        deleteDialog.getContentPane().add(cancelDelete, gridBagConstraints);
-
         setLayout(new java.awt.BorderLayout());
 
         overlord.setAutoscrolls(true);
@@ -184,6 +147,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(instrumentLabel, gridBagConstraints);
 
+        instruBox.setBackground(new java.awt.Color(240, 240, 240));
+        instruBox.setColumns(10);
         instruBox.setEditable(false);
         instruBox.setAutoscrolls(false);
         instruBox.setMaximumSize(new java.awt.Dimension(1000, 20));
@@ -205,6 +170,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(brandLabel, gridBagConstraints);
 
+        brandBox.setBackground(new java.awt.Color(240, 240, 240));
+        brandBox.setColumns(10);
         brandBox.setEditable(false);
         brandBox.setAutoscrolls(false);
         brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
@@ -220,10 +187,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(serialLabel, gridBagConstraints);
 
+        serialBox.setBackground(new java.awt.Color(240, 240, 240));
+        serialBox.setColumns(10);
         serialBox.setEditable(false);
         serialBox.setAutoscrolls(false);
         serialBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        serialBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -236,9 +204,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(rankLabel, gridBagConstraints);
 
+        rankBox.setColumns(2);
         rankBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rankBox.setText("3");
-        rankBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -251,6 +219,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(valueLabel, gridBagConstraints);
 
+        valueBox.setColumns(10);
         valueBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         valueBox.setText("0");
         valueBox.setAutoscrolls(false);
@@ -403,9 +372,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         checkoutPanel.add(renterLabel, gridBagConstraints);
 
+        renterBox.setColumns(25);
         renterBox.setAutoscrolls(false);
         renterBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        renterBox.setPreferredSize(null);
         renterBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 renterBoxActionPerformed(evt);
@@ -423,9 +392,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         checkoutPanel.add(schoolyearLabel, gridBagConstraints);
 
+        schoolyearBox.setColumns(25);
         schoolyearBox.setAutoscrolls(false);
         schoolyearBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        schoolyearBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -438,9 +407,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         checkoutPanel.add(dateoutLabel, gridBagConstraints);
 
+        dateoutBox.setColumns(25);
         dateoutBox.setAutoscrolls(false);
         dateoutBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        dateoutBox.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -684,19 +653,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {//GEN-HEADEREND:event_deleteButtonActionPerformed
         deleteDialog.setTitle("Confirm Delete");
         Main.window.setEnabled(false);
-        deleteDialog.setSize(new Dimension(300,125));
-        deleteDialog.setLocation(Main.window.getX()+Main.window.getWidth()/3, Main.window.getY()+Main.window.getHeight()/3);
-        deleteDialog.setResizable(false);
-        deleteDialog.setAlwaysOnTop(true);
+        int n = JOptionPane.showConfirmDialog(deleteDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         deleteDialog.setVisible(true);
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void cancelDeleteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelDeleteActionPerformed
-    {//GEN-HEADEREND:event_cancelDeleteActionPerformed
-        deleteDialog.setVisible(false);
+        switch(n)
+        {//TODO: Hook the delete confirmation dialog to something.
+            case JOptionPane.YES_OPTION: deleteDialog.setVisible(false);
+            default: deleteDialog.setVisible(false);
+        }
         Main.window.setEnabled(true);
         Main.window.requestFocus();
-    }//GEN-LAST:event_cancelDeleteActionPerformed
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -706,17 +672,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField brandBox;
     private javax.swing.JLabel brandLabel;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton cancelDelete;
     private javax.swing.JComboBox capCombo;
     private javax.swing.JLabel capLabel;
     private javax.swing.JPanel checkoutButtonPanel;
     private javax.swing.JPanel checkoutPanel;
-    private javax.swing.JButton confirmDelete;
     private javax.swing.JTextField dateoutBox;
     private javax.swing.JLabel dateoutLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JDialog deleteDialog;
-    private javax.swing.JLabel deleteLabel;
     private javax.swing.JScrollPane detailNotePanel;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JComboBox feeCombo;
