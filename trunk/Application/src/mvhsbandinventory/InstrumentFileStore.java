@@ -325,7 +325,8 @@ public class InstrumentFileStore extends InstrumentStore
 		String raw = "";
 		
 		// Load all of the file into our buffer string
-		while ((line = reader.readLine()) != null) {
+		while ((line = reader.readLine()) != null) 
+		{
 			raw += line;
 		}
 		reader.close();
@@ -340,6 +341,16 @@ public class InstrumentFileStore extends InstrumentStore
      */
 	public Instrument[] load ()
 	{
-		return null;
+		File[] files = directory.listFiles();
+		int size = files.length;
+		
+		Instrument[] instruments = new Instrument[size];
+		
+		for (int i = 0; i < size; i++)
+		{
+			instruments[i] = read(files[i]);
+		}
+		
+		return instruments;
 	}
 }
