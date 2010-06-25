@@ -41,19 +41,35 @@ public class InstrumentList
     {
 
     }
-
+	
+	/**
+	 * Returns an array of all of the Instrument objects that have the specified 
+	 * value (set by the value argument) set for the the key argument specified.
+	 * @param key
+	 * @param value
+	 * @return instrument array subset
+	 */
     public Instrument[] selectList (String key, Object value)
     {
-        Instrument[] selection = {};
+		// This is a cache of the length of the list of all of the Instrument
+		// objects that we're dealing with so that we can loop through them; we 
+		// determine this here so that we don't have to recalculate this for 
+		// every iteration of the loop
         int length = list.size();
-
-        Instrument current = null;
+        
+        // These are an array of the items that we're selecting and a variable 
+        // to mark the index of the next item to be inserted into the array
+        Instrument[] selection = {};
         int next = 0;
         
+        // Iterate through all of the items in our memcache of the data store
         for (int i = 0; i < length; i++) 
         {
-            current = (Instrument) list.get(i);
+			// Grab the item from the memcache for this index
+            Instrument current = (Instrument) list.get(i);
             
+            // If this item's value for the specified key matches the value 
+            // argument, add it to our selection array
             if (current.get(key) == value)
             {
                 selection[next] = current;
@@ -62,8 +78,9 @@ public class InstrumentList
         }
         
         return selection;
-    }
-
+	}
+	
+	
     public String exportToExcel (Instrument[] instruments) {
         // Netbeans, please stop whining about my code.
         return null;
