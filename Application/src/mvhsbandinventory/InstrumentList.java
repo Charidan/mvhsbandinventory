@@ -2,8 +2,12 @@ package mvhsbandinventory;
 
 import java.util.ArrayList;
 
+public enum SortType {
+	ASCENDING, DESCENDING
+}
+
 /**
- *
+ * 
  * @author jonathan
  */
 public class InstrumentList
@@ -27,16 +31,19 @@ public class InstrumentList
 
     public void add (Instrument instrument)
     {
+        // Add the item to our local memory cache and to our data store
         list.add(instrument);
+        store.add(instrument);
     }
 
     public void delete (Instrument instrument)
     {
+		// Delete the item from our local memory cache and to our data store
         list.remove(instrument);
-
-        // TODO: Add code to commit the data to the database.
+        store.delete(instrument);
     }
 
+	
     public void sort (String key)
     {
 
