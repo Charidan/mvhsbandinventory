@@ -49,7 +49,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        deleteDialog = new javax.swing.JDialog();
+        multiDialog = new javax.swing.JDialog();
         overlord = new javax.swing.JSplitPane();
         rightsplitPanel = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
@@ -114,7 +114,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addButton = new javax.swing.JButton();
         advSearchButton = new javax.swing.JButton();
 
-        deleteDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+        multiDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         setLayout(new java.awt.BorderLayout());
 
@@ -572,6 +572,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         addButton.setText("Add New Instrument");
         addButton.setPreferredSize(null);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         advSearchButton.setText("ADVANCED SEARCH");
         advSearchButton.setPreferredSize(null);
@@ -651,18 +656,34 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
     {//GEN-HEADEREND:event_deleteButtonActionPerformed
-        deleteDialog.setTitle("Confirm Delete");
         Main.window.setEnabled(false);
-        int n = JOptionPane.showConfirmDialog(deleteDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        deleteDialog.setVisible(true);
+        int n = JOptionPane.showConfirmDialog(multiDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         switch(n)
         {//TODO: Hook the delete confirmation dialog to something.
-            case JOptionPane.YES_OPTION: deleteDialog.setVisible(false);
-            default: deleteDialog.setVisible(false);
+            case JOptionPane.YES_OPTION: break;
         }
         Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addButtonActionPerformed
+    {//GEN-HEADEREND:event_addButtonActionPerformed
+        Main.window.setEnabled(false);
+        String type = "";
+        String brand = "";
+        String serial = "";
+        type = JOptionPane.showInputDialog(multiDialog, "Input Instrument Type (e.g. \"Flute\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
+        if(!(type == null))
+        {
+            brand = JOptionPane.showInputDialog(multiDialog, "Input Instrument Brand (e.g. \"Yamaha\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
+            if(!(brand == null)) serial = JOptionPane.showInputDialog(multiDialog, "Input Instrument Serial Number (e.g. \"971\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
+        }
+        //TODO cease chucking info into ether.
+        System.out.println("Type: "+type+" Brand: "+brand+" Serial#: "+serial);
+        multiDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
+    }//GEN-LAST:event_addButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -679,7 +700,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField dateoutBox;
     private javax.swing.JLabel dateoutLabel;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JDialog deleteDialog;
     private javax.swing.JScrollPane detailNotePanel;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JComboBox feeCombo;
@@ -701,6 +721,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton lostButton;
     private javax.swing.JComboBox mpieceCombo;
     private javax.swing.JLabel mpieceLabel;
+    private javax.swing.JDialog multiDialog;
     private javax.swing.JLabel noteLabel;
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField otherBox;
