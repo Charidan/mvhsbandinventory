@@ -676,8 +676,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         if(!(type == null))
         {
             brand = JOptionPane.showInputDialog(multiDialog, "Input Instrument Brand (e.g. \"Yamaha\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
-            if(!(brand == null)) serial = JOptionPane.showInputDialog(multiDialog, "Input Instrument Serial Number (e.g. \"971\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
-        }
+            if(!(brand == null))
+            {
+                serial = JOptionPane.showInputDialog(multiDialog, "Input Instrument Serial Number (e.g. \"971\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
+                if(serial == null) serial = "";
+            }
+            else brand = "";
+        } else type = "";
         //TODO cease chucking info into ether.
         System.out.println("Type: "+type+" Brand: "+brand+" Serial#: "+serial);
         multiDialog.setVisible(false);
