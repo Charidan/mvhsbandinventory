@@ -11,7 +11,7 @@ public class InstrumentList
     private List list;
     private InstrumentStore store;
     
-    public static String[] exportable = 
+    public static String[] singles = 
 		{ 
 			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
 			"Ligature", "Mouthpiece", "Caps", "Bow"
@@ -139,12 +139,12 @@ public class InstrumentList
 	/**
 	 * A convience overload of the exportToExcel function that exports the 
 	 * fields of the instrument object specified in the 
-	 * InstrumentList.exportable static array.
+	 * InstrumentList.singles static array.
 	 * @param instruments - an array of the instrument objects to be exported
 	 * @return a CSV string that can be written to file
 	 */
 	public String exportToExcel (Instrument[] instruments) 
     {
-		return exportToExcel(instruments, exportable);
+		return exportToExcel(instruments, singles);
     }
 }
