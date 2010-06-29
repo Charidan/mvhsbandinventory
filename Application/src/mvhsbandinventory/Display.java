@@ -58,9 +58,20 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         advsearchSearchButton = new javax.swing.JButton();
         advsearchResetButton = new javax.swing.JButton();
         advsearchCancelButton = new javax.swing.JButton();
-        multiDialog = new javax.swing.JDialog();
+        jopDialog = new javax.swing.JDialog();
         advsearchDialog = new javax.swing.JDialog();
         advsearchPanel = new javax.swing.JPanel();
+        addDialog = new javax.swing.JDialog();
+        addTextLabel = new javax.swing.JLabel();
+        addTypeLabel = new javax.swing.JLabel();
+        addTypeBox = new javax.swing.JTextField();
+        addBrandLabel = new javax.swing.JLabel();
+        addBrandBox = new javax.swing.JTextField();
+        addSerialLabel = new javax.swing.JLabel();
+        addSerialBox = new javax.swing.JTextField();
+        addButtonPanel = new javax.swing.JPanel();
+        addAcceptButton = new javax.swing.JButton();
+        addCancelButton = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         rightsplitPanel = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
@@ -151,14 +162,71 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         advsearchButtonPanel.add(advsearchCancelButton);
 
-        multiDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+        jopDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        jopDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
+        advsearchDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         advsearchDialog.setTitle("Advanced Search");
         advsearchDialog.setMinimumSize(new java.awt.Dimension(470, 150));
         advsearchDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         advsearchPanel.setLayout(new java.awt.GridBagLayout());
         advsearchDialog.getContentPane().add(advsearchPanel, new java.awt.GridBagConstraints());
+
+        addDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addDialog.setTitle("ADD NEW INSTRUMENT");
+        addDialog.setMinimumSize(new java.awt.Dimension(300, 200));
+        addDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        addTextLabel.setText("Enter Instrument Characteristics");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipady = 5;
+        addDialog.getContentPane().add(addTextLabel, gridBagConstraints);
+
+        addTypeLabel.setText("Type:");
+        addDialog.getContentPane().add(addTypeLabel, new java.awt.GridBagConstraints());
+
+        addTypeBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        addDialog.getContentPane().add(addTypeBox, gridBagConstraints);
+
+        addBrandLabel.setText("Brand:");
+        addDialog.getContentPane().add(addBrandLabel, new java.awt.GridBagConstraints());
+
+        addBrandBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        addDialog.getContentPane().add(addBrandBox, gridBagConstraints);
+
+        addSerialLabel.setText("Serial #:");
+        addDialog.getContentPane().add(addSerialLabel, new java.awt.GridBagConstraints());
+
+        addSerialBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        addDialog.getContentPane().add(addSerialBox, gridBagConstraints);
+
+        addAcceptButton.setText("CREATE");
+        addAcceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAcceptButtonActionPerformed(evt);
+            }
+        });
+        addButtonPanel.add(addAcceptButton);
+
+        addCancelButton.setText("CANCEL");
+        addCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCancelButtonActionPerformed(evt);
+            }
+        });
+        addButtonPanel.add(addCancelButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        addDialog.getContentPane().add(addButtonPanel, gridBagConstraints);
 
         setLayout(new java.awt.BorderLayout());
 
@@ -706,7 +774,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
     {//GEN-HEADEREND:event_deleteButtonActionPerformed
         Main.window.setEnabled(false);
-        int n = JOptionPane.showConfirmDialog(multiDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int n = JOptionPane.showConfirmDialog(jopDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         switch(n)
         {//TODO: Hook the delete confirmation dialog to something.
             case JOptionPane.YES_OPTION: break;
@@ -718,29 +786,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addButtonActionPerformed
     {//GEN-HEADEREND:event_addButtonActionPerformed
         Main.window.setEnabled(false);
-        String type = "";
-        String brand = "";
-        String serial = "";
-        type = JOptionPane.showInputDialog(multiDialog, "Input Instrument Type (e.g. \"Flute\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
-        if(!(type == null))
-        {
-            brand = JOptionPane.showInputDialog(multiDialog, "Input Instrument Brand (e.g. \"Yamaha\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
-            if(!(brand == null))
-            {
-                serial = JOptionPane.showInputDialog(multiDialog, "Input Instrument Serial Number (e.g. \"971\")", "Add New Instrument", JOptionPane.PLAIN_MESSAGE);
-                if(serial == null) serial = "";
-            }
-            else brand = "";
-        } else type = "";
-        //TODO cease chucking info into ether.
-        System.out.println("Type: "+type+" Brand: "+brand+" Serial#: "+serial);
-        multiDialog.setVisible(false);
-        Main.window.setEnabled(true);
-        
+
+        addTypeBox.setText("");
+        addBrandBox.setText("");
+        addSerialBox.setText("");
+
+        addDialog.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void advSearchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advSearchButtonActionPerformed
     {//GEN-HEADEREND:event_advSearchButtonActionPerformed
+        Main.window.setEnabled(false);
         advsearchResetButtonActionPerformed(evt);
         advsearchDialog.setVisible(true);
     }//GEN-LAST:event_advSearchButtonActionPerformed
@@ -756,6 +812,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void advsearchCancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchCancelButtonActionPerformed
     {//GEN-HEADEREND:event_advsearchCancelButtonActionPerformed
         advsearchDialog.setVisible(false);
+        Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_advsearchCancelButtonActionPerformed
 
@@ -791,8 +848,43 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         advsearchDialog.setMinimumSize(minSize);
     }//GEN-LAST:event_advsearchAddFieldButtonActionPerformed
 
+    private void addCancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addCancelButtonActionPerformed
+    {//GEN-HEADEREND:event_addCancelButtonActionPerformed
+        addDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
+    }//GEN-LAST:event_addCancelButtonActionPerformed
+
+    private void addAcceptButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addAcceptButtonActionPerformed
+    {//GEN-HEADEREND:event_addAcceptButtonActionPerformed
+        if(addTypeBox.getText().equals("") || addBrandBox.getText().equals("") || addSerialBox.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "Missing Data Input",
+                    "Data Entry Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else
+        {
+            System.out.println("Type: "+addTypeBox.getText()+" Brand: "+addBrandBox.getText()+" Serial: "+addSerialBox.getText());
+            addDialog.setVisible(false);
+            Main.window.setEnabled(true);
+            Main.window.requestFocus();
+        }
+    }//GEN-LAST:event_addAcceptButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAcceptButton;
+    private javax.swing.JTextField addBrandBox;
+    private javax.swing.JLabel addBrandLabel;
     private javax.swing.JButton addButton;
+    private javax.swing.JPanel addButtonPanel;
+    private javax.swing.JButton addCancelButton;
+    private javax.swing.JDialog addDialog;
+    private javax.swing.JTextField addSerialBox;
+    private javax.swing.JLabel addSerialLabel;
+    private javax.swing.JLabel addTextLabel;
+    private javax.swing.JTextField addTypeBox;
+    private javax.swing.JLabel addTypeLabel;
     private javax.swing.JButton advSearchButton;
     private javax.swing.JButton advsearchAddFieldButton;
     private javax.swing.JPanel advsearchButtonPanel;
@@ -827,6 +919,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField instruBox;
     private javax.swing.JTable instruTable;
     private javax.swing.JLabel instrumentLabel;
+    private javax.swing.JDialog jopDialog;
     private javax.swing.JScrollPane leftsplitInstruTablePanel;
     private javax.swing.JPanel leftsplitPanel;
     private javax.swing.JComboBox ligCombo;
@@ -834,7 +927,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton lostButton;
     private javax.swing.JComboBox mpieceCombo;
     private javax.swing.JLabel mpieceLabel;
-    private javax.swing.JDialog multiDialog;
     private javax.swing.JLabel noteLabel;
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField otherBox;
