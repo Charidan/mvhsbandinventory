@@ -5,8 +5,9 @@ import java.util.Comparator;
 class InstrumentAttributeComparator implements Comparator
 {
 	private String compareBy;
+	private boolean flip;
 	
-	public InstrumentAttributeComparator (String attribute) throws Exception
+	public InstrumentAttributeComparator (String attribute, boolean ascending) throws Exception
 	{
 		// Check to make sure that the attribute that was passed in to compare
 		// with is actually valid
@@ -17,6 +18,10 @@ class InstrumentAttributeComparator implements Comparator
 		
 		// Save that attribute value for later use in the compare function
 		compareBy = attribute;
+		
+		// Determine whether we will need to flip the result of the compare
+		// int function
+		flip = !ascending;
 	}
 	
 	public int compare (Object obj1, Object obj2)
@@ -41,7 +46,9 @@ class InstrumentAttributeComparator implements Comparator
 		String str1 = (String) value1;
 		String str2 = (String) value2;
 		
-		// Compare the strings and return a valid comparison value
-		return str1.compareTo(str2);
+		// Compare the strings and return a valid comparison value based on 
+		// whether we're doing an ascending or descending sort
+		int result = str1.compareTo(str2);
+		return (flip == true) ? result * -1 : result;
 	}
 }
