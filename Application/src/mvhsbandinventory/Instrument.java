@@ -16,9 +16,11 @@ public class Instrument
 {
     private Map properties = new HashMap();
 
-    public static String[] attributes = { "Name", "Brand", "Serial", "Rank",
-        "Value", "Status", "Notes", "Ligature", "Mouthpiece", "Caps", "Bow", 
-        "History" };
+    public static String[] attributes = 
+		{ 
+			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
+			"Ligature", "Mouthpiece", "Caps", "Bow", "History"
+        };
     
     public static List attributeList = Arrays.asList(attributes);
     public static int attributesLength = attributes.length;
