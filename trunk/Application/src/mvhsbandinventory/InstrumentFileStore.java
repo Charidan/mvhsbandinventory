@@ -90,7 +90,7 @@ public class InstrumentFileStore extends InstrumentStore
 	public static String serialize (Instrument instrument, String[] attributes,
 									boolean omitHeadings)
 	{
-		int height = 0;
+		int height = 1;
 		int width = attributes.length;
 		int headingStart = 0;
 		int dataStart = 0;
