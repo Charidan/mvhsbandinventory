@@ -4,7 +4,11 @@
  */
 package mvhsbandinventory;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -49,7 +53,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        advsearchAddFieldButton = new javax.swing.JButton();
+        advsearchButtonPanel = new javax.swing.JPanel();
+        advsearchSearchButton = new javax.swing.JButton();
+        advsearchResetButton = new javax.swing.JButton();
+        advsearchCancelButton = new javax.swing.JButton();
         multiDialog = new javax.swing.JDialog();
+        advsearchDialog = new javax.swing.JDialog();
+        advsearchPanel = new javax.swing.JPanel();
         overlord = new javax.swing.JSplitPane();
         rightsplitPanel = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
@@ -114,7 +125,40 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addButton = new javax.swing.JButton();
         advSearchButton = new javax.swing.JButton();
 
+        advsearchAddFieldButton.setText("Add Search Field");
+        advsearchAddFieldButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advsearchAddFieldButtonActionPerformed(evt);
+            }
+        });
+
+        advsearchSearchButton.setText("SEARCH");
+        advsearchButtonPanel.add(advsearchSearchButton);
+
+        advsearchResetButton.setText("RESET");
+        advsearchResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advsearchResetButtonActionPerformed(evt);
+            }
+        });
+        advsearchButtonPanel.add(advsearchResetButton);
+
+        advsearchCancelButton.setText("CANCEL");
+        advsearchCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advsearchCancelButtonActionPerformed(evt);
+            }
+        });
+        advsearchButtonPanel.add(advsearchCancelButton);
+
         multiDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        advsearchDialog.setTitle("Advanced Search");
+        advsearchDialog.setMinimumSize(new java.awt.Dimension(470, 150));
+        advsearchDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        advsearchPanel.setLayout(new java.awt.GridBagLayout());
+        advsearchDialog.getContentPane().add(advsearchPanel, new java.awt.GridBagConstraints());
 
         setLayout(new java.awt.BorderLayout());
 
@@ -580,6 +624,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         advSearchButton.setText("ADVANCED SEARCH");
         advSearchButton.setPreferredSize(null);
+        advSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advSearchButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout leftsplitPanelLayout = new org.jdesktop.layout.GroupLayout(leftsplitPanel);
         leftsplitPanel.setLayout(leftsplitPanelLayout);
@@ -592,7 +641,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     .add(leftsplitPanelLayout.createSequentialGroup()
                         .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                            .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                             .add(leftsplitPanelLayout.createSequentialGroup()
@@ -687,12 +736,77 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         System.out.println("Type: "+type+" Brand: "+brand+" Serial#: "+serial);
         multiDialog.setVisible(false);
         Main.window.setEnabled(true);
-        Main.window.requestFocus();
+        
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void advSearchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advSearchButtonActionPerformed
+    {//GEN-HEADEREND:event_advSearchButtonActionPerformed
+        advsearchResetButtonActionPerformed(evt);
+        advsearchDialog.setVisible(true);
+    }//GEN-LAST:event_advSearchButtonActionPerformed
+
+    private void advsearchResetButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchResetButtonActionPerformed
+    {//GEN-HEADEREND:event_advsearchResetButtonActionPerformed
+        advsearchPanel.removeAll();
+        advsearchAddFieldButtonActionPerformed(evt);
+        advsearchDialog.setMinimumSize(new Dimension(470, 150));
+        advsearchDialog.setSize(0,0);
+}//GEN-LAST:event_advsearchResetButtonActionPerformed
+
+    private void advsearchCancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchCancelButtonActionPerformed
+    {//GEN-HEADEREND:event_advsearchCancelButtonActionPerformed
+        advsearchDialog.setVisible(false);
+        Main.window.requestFocus();
+    }//GEN-LAST:event_advsearchCancelButtonActionPerformed
+
+    private void advsearchAddFieldButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchAddFieldButtonActionPerformed
+    {//GEN-HEADEREND:event_advsearchAddFieldButtonActionPerformed
+        advsearchPanel.remove(advsearchAddFieldButton);
+        advsearchPanel.remove(advsearchButtonPanel);
+
+        System.out.println("AddFieldButton");
+
+        JComboBox cb = new JComboBox();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+
+        System.out.println("Defined Vars");
+
+        cb.addItem("Contains");
+        cb.addItem("Without");
+        advsearchPanel.add(cb);
+        cb = new JComboBox();
+        for(String s : Instrument.attributes)
+        {
+            cb.addItem(s);
+        }
+        advsearchPanel.add(cb);
+        JTextField txt = new JTextField();
+        txt.setColumns(20);
+        advsearchPanel.add(txt, gbc);
+
+        System.out.println("Added Line");
+        
+        advsearchPanel.add(advsearchAddFieldButton, gbc);
+        advsearchPanel.add(advsearchButtonPanel, gbc);
+
+        Dimension size = advsearchDialog.getSize();
+        Dimension minSize = advsearchDialog.getMinimumSize();
+        advsearchDialog.setSize(size.width, size.height+25);
+        minSize.setSize(minSize.width, minSize.height+25);
+        advsearchDialog.setMinimumSize(minSize);
+    }//GEN-LAST:event_advsearchAddFieldButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton advSearchButton;
+    private javax.swing.JButton advsearchAddFieldButton;
+    private javax.swing.JPanel advsearchButtonPanel;
+    private javax.swing.JButton advsearchCancelButton;
+    private javax.swing.JDialog advsearchDialog;
+    private javax.swing.JPanel advsearchPanel;
+    private javax.swing.JButton advsearchResetButton;
+    private javax.swing.JButton advsearchSearchButton;
     private javax.swing.JComboBox bowCombo;
     private javax.swing.JLabel bowLabel;
     private javax.swing.JTextField brandBox;
