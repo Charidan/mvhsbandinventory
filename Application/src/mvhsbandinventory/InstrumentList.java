@@ -58,10 +58,18 @@ public class InstrumentList
         store.delete(instrument);
     }
 
-	
+	/**
+	 * Sorts the InstrumentList object memory cache of the instruments based on 
+	 * the values at the specified key.  The ascending parameter will determine
+	 * whether the list will be sorted in ascending or descending order.
+	 * @param key - the key to sort by
+	 * @param ascending - if set to true, the list will be sorted in ascending
+	 * order; if set to false, the list will be sorted in descending order
+	 */
     public void sort (String key, boolean ascending)
     {
-
+		Comparator comp = new InstrumentAttributeComparator(key, ascending);
+		list = Collections.sort(list, comp);
     }
 	
 	/**
