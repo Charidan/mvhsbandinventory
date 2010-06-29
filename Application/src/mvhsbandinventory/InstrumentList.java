@@ -30,7 +30,7 @@ public class InstrumentList
         
 		// Load all of the items from the datastore and put them into our 
 		// private ArrayList
-		list = Arrays.asList(store.load());
+		list = new ArrayList(Arrays.asList(store.load()));
     }
 	
 	/**
