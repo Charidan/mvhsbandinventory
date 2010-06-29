@@ -182,6 +182,10 @@ public class InstrumentFileStore extends InstrumentStore
 	 * InstrumentFileStore.serialize method) into an Instrument object.  See the 
 	 * documentation for the InstrumentFileStore.serialize method for more 
 	 * details on the serialization format for the CSV file.
+	 * 
+	 * Note that this function will only correctly unserialize data created with
+	 * the serialize function if the serialize function is set up to not omit 
+	 * headings.
 	 * @param csv-serialized instrument
 	 * @return instrument object
 	 */ 
