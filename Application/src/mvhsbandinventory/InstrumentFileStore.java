@@ -78,14 +78,22 @@ public class InstrumentFileStore extends InstrumentStore
 	 * 
 	 * The attributes parameter allows you to choose a subset of the attributes
 	 * specified as valid in the Instrument.attributes static array.
+	 * 
+	 * If the omitHeadings parameter is set to true, then there will be no 
+	 * headings printed at the top of the CSV output.  This is useful if one is
+	 * serializing multiple Instrument objects into a large list.
 	 * @param instrument
 	 * @param attributes
+	 * @param omitHeadings
 	 * @return csv-serialized instrument string
 	 */ 
-	public static String serialize (Instrument instrument, String[] attributes)
+	public static String serialize (Instrument instrument, String[] attributes,
+									boolean omitHeadings)
 	{
 		int height = 0;
 		int width = attributes.length;
+		int headingStart = 0;
+		int dataStart = 0;
 		
 		// Determine if there (a) are any ArrayLists in the Instrument and (b)
 		// what the size of the largest ArrayList in the Instrument is
@@ -100,6 +108,15 @@ public class InstrumentFileStore extends InstrumentStore
 			}
 		}
 		
+		// If we're adding headings to the CSV file, we'll increase the set 
+		// height by one to accomodate the header and change the dataStart 
+		// variable to one to allow the data to be below the header
+		if (omitHeadings == false)
+		{
+			height += 1;
+			dataStart = 1;
+		}
+		
 		// Generate a two-dimensional array to be turned into our CSV file
 		String[][] table = new String[width][height];
 		
@@ -110,19 +127,22 @@ public class InstrumentFileStore extends InstrumentStore
 			String key = attributes[c];
 			Object value = instrument.get(key);
 			
-			table[c][0] = key;
+			if (omitHeadings == false) 
+			{
+				table[c][headingStart] = key;
+			}
 			
 			if (value instanceof ArrayList) 
 			{
 				ArrayList<String> list = (ArrayList<String>) value;
 				int length = list.size();
-				for (int r = 1; r <= length; r++) {
+				for (int r = dataStart; r <= length; r++) {
 					table[c][r] = list.get(r - 1);
 				}
 			} 
 			else 
 			{
-				table[c][1] = (String) value;
+				table[c][dataStart] = (String) value;
 			}
 		}
 		
