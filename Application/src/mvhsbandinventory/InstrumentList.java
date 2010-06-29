@@ -2,10 +2,6 @@ package mvhsbandinventory;
 
 import java.util.ArrayList;
 
-public enum SortType {
-	ASCENDING, DESCENDING
-}
-
 /**
  * 
  * @author jonathan
@@ -44,7 +40,7 @@ public class InstrumentList
     }
 
 	
-    public void sort (String key)
+    public void sort (String key, boolean ascending)
     {
 
     }
