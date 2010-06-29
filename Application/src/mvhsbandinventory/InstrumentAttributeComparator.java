@@ -7,7 +7,8 @@ class InstrumentAttributeComparator implements Comparator
 	private String compareBy;
 	private boolean flip;
 	
-	public InstrumentAttributeComparator (String attribute, boolean ascending) throws Exception
+	public InstrumentAttributeComparator (String attribute, boolean ascending) 
+		throws Exception
 	{
 		// Check to make sure that the attribute that was passed in to compare
 		// with is actually valid
