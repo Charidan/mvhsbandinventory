@@ -10,6 +10,12 @@ public class InstrumentList
 {
     private ArrayList list = new ArrayList();
     private InstrumentStore store;
+    
+    public static String[] exportable = 
+		{ 
+			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
+			"Ligature", "Mouthpiece", "Caps", "Bow"
+        };
 
 	/**
 	 * The constructor for the instrument list class.  The model argument is the
@@ -101,8 +107,14 @@ public class InstrumentList
 	}
 	
 	
-    public String exportToExcel (Instrument[] instruments) {
+    public String exportToExcel (Instrument[] instruments) 
+    {
         // Netbeans, please stop whining about my code.
         return null;
     }
+    
+    public String exportToExcel (Instrument[] instruments, String[] fields)
+    {
+		
+	}
 }
