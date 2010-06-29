@@ -764,13 +764,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         advsearchPanel.remove(advsearchAddFieldButton);
         advsearchPanel.remove(advsearchButtonPanel);
 
-        System.out.println("AddFieldButton");
-
         JComboBox cb = new JComboBox();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-
-        System.out.println("Defined Vars");
 
         cb.addItem("Contains");
         cb.addItem("Without");
@@ -784,8 +780,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         JTextField txt = new JTextField();
         txt.setColumns(20);
         advsearchPanel.add(txt, gbc);
-
-        System.out.println("Added Line");
         
         advsearchPanel.add(advsearchAddFieldButton, gbc);
         advsearchPanel.add(advsearchButtonPanel, gbc);
