@@ -23,6 +23,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public Display()
     {
         initComponents();
+        for(String s: Instrument.attributes)
+        {
+            searchCombo.addItem(s);
+            sortCombo.addItem(s);
+        }
 
         //TODO: remove crappy test code.
         instruBox.setText("Flute");
@@ -130,11 +135,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitPanel = new javax.swing.JPanel();
         searchCombo = new javax.swing.JComboBox();
         searchBar = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+        leftsplitButtonPanel = new javax.swing.JPanel();
+        addButton = new javax.swing.JButton();
+        showallButton = new javax.swing.JButton();
+        advSearchButton = new javax.swing.JButton();
+        leftsplitSortByPanel = new javax.swing.JPanel();
+        sortCombo = new javax.swing.JComboBox();
+        sortButton = new javax.swing.JButton();
         leftsplitInstruTablePanel = new javax.swing.JScrollPane();
         instruTable = new javax.swing.JTable();
-        searchButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
-        advSearchButton = new javax.swing.JButton();
 
         advsearchAddFieldButton.setText("Add Search Field");
         advsearchAddFieldButton.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +243,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         overlord.setAutoscrolls(true);
         overlord.setContinuousLayout(true);
         overlord.setName(""); // NOI18N
+        overlord.setPreferredSize(null);
 
+        rightsplitPanel.setMinimumSize(new java.awt.Dimension(450, 308));
+        rightsplitPanel.setPreferredSize(null);
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
         detailPanel.setLayout(new java.awt.GridBagLayout());
@@ -633,21 +646,64 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         overlord.setRightComponent(rightsplitPanel);
 
-        searchCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Brand", "Serial #", "Rank", "Value", "Status", "Ligature", "Mouthpiece", "Mouthpiece Cap", "Bow" }));
-        searchCombo.setPreferredSize(null);
+        leftsplitPanel.setMinimumSize(new java.awt.Dimension(460, 79));
+        leftsplitPanel.setLayout(new java.awt.GridBagLayout());
+
         searchCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchComboActionPerformed(evt);
             }
         });
+        leftsplitPanel.add(searchCombo, new java.awt.GridBagConstraints());
 
+        searchBar.setColumns(20);
         searchBar.setText("Search Bar");
-        searchBar.setPreferredSize(null);
         searchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBarActionPerformed(evt);
             }
         });
+        leftsplitPanel.add(searchBar, new java.awt.GridBagConstraints());
+
+        searchButton.setText("Search");
+        searchButton.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        leftsplitPanel.add(searchButton, gridBagConstraints);
+
+        addButton.setText("Add New Instrument");
+        addButton.setPreferredSize(null);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        leftsplitButtonPanel.add(addButton);
+
+        showallButton.setText("Show All");
+        leftsplitButtonPanel.add(showallButton);
+
+        advSearchButton.setText("ADVANCED SEARCH");
+        advSearchButton.setPreferredSize(null);
+        advSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advSearchButtonActionPerformed(evt);
+            }
+        });
+        leftsplitButtonPanel.add(advSearchButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        leftsplitPanel.add(leftsplitButtonPanel, gridBagConstraints);
+
+        leftsplitSortByPanel.add(sortCombo);
+
+        sortButton.setText("Sort By");
+        leftsplitSortByPanel.add(sortButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        leftsplitPanel.add(leftsplitSortByPanel, gridBagConstraints);
 
         instruTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -679,62 +735,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         instruTable.getTableHeader().setReorderingAllowed(false);
         leftsplitInstruTablePanel.setViewportView(instruTable);
 
-        searchButton.setText("Search");
-        searchButton.setPreferredSize(null);
-
-        addButton.setText("Add New Instrument");
-        addButton.setPreferredSize(null);
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
-            }
-        });
-
-        advSearchButton.setText("ADVANCED SEARCH");
-        advSearchButton.setPreferredSize(null);
-        advSearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                advSearchButtonActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout leftsplitPanelLayout = new org.jdesktop.layout.GroupLayout(leftsplitPanel);
-        leftsplitPanel.setLayout(leftsplitPanelLayout);
-        leftsplitPanelLayout.setHorizontalGroup(
-            leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, leftsplitPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, leftsplitInstruTablePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                    .add(leftsplitPanelLayout.createSequentialGroup()
-                        .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(searchBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(leftsplitPanelLayout.createSequentialGroup()
-                                .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 72, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(searchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(advSearchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-        );
-        leftsplitPanelLayout.setVerticalGroup(
-            leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(leftsplitPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(searchBar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(searchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(leftsplitPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(addButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(advSearchButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(leftsplitInstruTablePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weighty = 1.0;
+        leftsplitPanel.add(leftsplitInstruTablePanel, gridBagConstraints);
 
         overlord.setLeftComponent(leftsplitPanel);
 
@@ -920,8 +927,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTable instruTable;
     private javax.swing.JLabel instrumentLabel;
     private javax.swing.JDialog jopDialog;
+    private javax.swing.JPanel leftsplitButtonPanel;
     private javax.swing.JScrollPane leftsplitInstruTablePanel;
     private javax.swing.JPanel leftsplitPanel;
+    private javax.swing.JPanel leftsplitSortByPanel;
     private javax.swing.JComboBox ligCombo;
     private javax.swing.JLabel ligatureLabel;
     private javax.swing.JButton lostButton;
@@ -949,6 +958,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JComboBox searchCombo;
     private javax.swing.JTextField serialBox;
     private javax.swing.JLabel serialLabel;
+    private javax.swing.JButton showallButton;
+    private javax.swing.JButton sortButton;
+    private javax.swing.JComboBox sortCombo;
     private javax.swing.JComboBox statusCombo;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox strapCombo;
