@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class InstrumentList
 {
-    private ArrayList list = new ArrayList();
+    private List list;
     private InstrumentStore store;
     
     public static String[] exportable = 
@@ -30,11 +30,7 @@ public class InstrumentList
         
 		// Load all of the items from the datastore and put them into our 
 		// private ArrayList
-		Instrument[] instruments = store.load();
-		for (Instrument instrument : instruments)
-		{
-			list.add(instrument);
-		}
+		list = Arrays.asList(store.load());
     }
 	
 	/**
