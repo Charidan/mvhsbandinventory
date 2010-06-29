@@ -365,11 +365,15 @@ public class InstrumentFileStore extends InstrumentStore
      */
 	public Instrument[] load ()
 	{
+		// Get a list of all of the instruments in the store and count them
 		File[] files = directory.listFiles();
 		int size = files.length;
 		
+		// Create an array of the instruments with a size equal to the number
+		// of instruments in the store
 		Instrument[] instruments = new Instrument[size];
 		
+		// Read and unserialize all of the files into our instruments array
 		for (int i = 0; i < size; i++)
 		{
 			instruments[i] = read(files[i]);
