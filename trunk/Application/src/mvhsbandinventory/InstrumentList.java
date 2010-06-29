@@ -109,12 +109,25 @@ public class InstrumentList
 	
     public String exportToExcel (Instrument[] instruments) 
     {
-        // Netbeans, please stop whining about my code.
-        return null;
+		return exportToExcel(instruments, exportable);
     }
     
     public String exportToExcel (Instrument[] instruments, String[] fields)
     {
+		int length = instruments.length;
 		
+		// Serialize the first item, with file headers
+		String export = InstrumentFileStore.serialize(instruments[0], fields, false);
+		
+		// For all of the items (except the first one since that's already been
+		// serialized) that were passed in, use the function in the 
+		// InstrumentFileStore class to serialize all of them into a large CSV
+		// document
+		for (int i = 1; i < length; i++)
+		{
+			export += InstrumentFileStore.serialize(instruments[i], fields, true);
+		}
+		
+		return export;
 	}
 }
