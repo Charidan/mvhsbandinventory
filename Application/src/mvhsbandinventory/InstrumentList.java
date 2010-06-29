@@ -11,6 +11,12 @@ public class InstrumentList
     private ArrayList list = new ArrayList();
     private InstrumentStore store;
 
+	/**
+	 * The constructor for the instrument list class.  The model argument is the
+	 * subclass of InstrumentStore that will be used for long-term storage of 
+	 * the instruments.
+	 * @param model
+	 */
     public InstrumentList (InstrumentStore model) 
     {
 		// Store our pointer to the store for later use
@@ -24,7 +30,12 @@ public class InstrumentList
 			list.add(instrument);
 		}
     }
-
+	
+	/**
+	 * Adds the Instrument object to the in-memory cache of the datastore and to
+	 * the data store that was specified via the constructor.
+	 * @param instrument - the Instrument to add
+	 */ 
     public void add (Instrument instrument)
     {
         // Add the item to our local memory cache and to our data store
@@ -32,6 +43,12 @@ public class InstrumentList
         store.add(instrument);
     }
 
+	/**
+	 * Deletes the specified Instrument object from the in-memory cache list of
+	 * instruments and from the data store that was specified via the 
+	 * constructor.
+	 * @param instrument - the Instrument object to remove
+	 */
     public void delete (Instrument instrument)
     {
 		// Delete the item from our local memory cache and to our data store
