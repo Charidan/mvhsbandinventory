@@ -22,10 +22,9 @@ public class Main
     public static void main(String[] args)
     {
         window.add(panel);
-        window.setSize(800,800);
         window.setTitle("MVHS - Band Inventory");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setMinimumSize(new Dimension(782,385));
+        window.setMinimumSize(new Dimension(920,575));
         window.setVisible(true);
         panel.repaint();
     }
