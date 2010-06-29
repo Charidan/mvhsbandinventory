@@ -168,13 +168,13 @@ public class InstrumentFileStore extends InstrumentStore
 	/**
 	 * A convenience version of the InstrumentFileStore.serialize function that
 	 * exports every valid property specified in the Instrument.attributes 
-	 * static array.
+	 * static array.  Note that with this function, headers will not be omitted.
 	 * @param instrument
 	 * @return csv-serialized instrument string
 	 */
 	public static String serialize (Instrument instrument)
 	{
-		return serialize(instrument, Instrument.attributes);
+		return serialize(instrument, Instrument.attributes, false);
 	}
 	
 	/**
