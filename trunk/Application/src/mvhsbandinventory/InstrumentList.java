@@ -105,13 +105,14 @@ public class InstrumentList
         
         return selection;
 	}
-	
-	
-    public String exportToExcel (Instrument[] instruments) 
-    {
-		return exportToExcel(instruments, exportable);
-    }
     
+    /**
+     * Creates a CSV string that can be opened by Excel to get an overview of  
+     * the Instrument objects in the application.
+     * @param instruments - an array of the instrument objects to be exported
+     * @param fields - an array of strings of the field names to be exported
+     * @return a CSV string that can be written to file
+     */
     public String exportToExcel (Instrument[] instruments, String[] fields)
     {
 		int length = instruments.length;
@@ -130,4 +131,16 @@ public class InstrumentList
 		
 		return export;
 	}
+	
+	/**
+	 * A convience overload of the exportToExcel function that exports the 
+	 * fields of the instrument object specified in the 
+	 * InstrumentList.exportable static array.
+	 * @param instruments - an array of the instrument objects to be exported
+	 * @return a CSV string that can be written to file
+	 */
+	public String exportToExcel (Instrument[] instruments) 
+    {
+		return exportToExcel(instruments, exportable);
+    }
 }
