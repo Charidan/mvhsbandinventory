@@ -160,4 +160,27 @@ public class InstrumentList
     {
 		return exportToExcel(instruments, singles);
     }
+
+	/**
+	 * Returns the number of items inside the list. Useful for building 
+	 * iterators to create tables.
+	 * @return an integer representing the number of Instruments stored in this
+	 * instance of the InstrumentList object
+	 */
+    public int size ()
+    {
+        return list.size();
+    }
+
+	/**
+	 * Retrieves the Instrument stored in the InstrumentList at the specified 
+	 * index.
+	 * @param index - the index to retrieve an Instrument from the 
+	 * InstrumentList at
+	 * @return the Instrument object at the specified index
+	 */
+    public Instrument get (int index)
+    {
+        return (Instrument) list.get(index);
+    }
 }
