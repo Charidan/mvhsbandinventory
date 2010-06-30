@@ -1,6 +1,12 @@
 package mvhsbandinventory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -66,10 +72,17 @@ public class InstrumentList
 	 * @param ascending - if set to true, the list will be sorted in ascending
 	 * order; if set to false, the list will be sorted in descending order
 	 */
-    public void sort (String key, boolean ascending)
+    public void sort(String key, boolean ascending)
     {
-		Comparator comp = new InstrumentAttributeComparator(key, ascending);
-		list = Collections.sort(list, comp);
+        try
+        {
+            Comparator comp = new InstrumentAttributeComparator(key, ascending);
+            Collections.sort(list, comp);
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(InstrumentList.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 	
 	/**
