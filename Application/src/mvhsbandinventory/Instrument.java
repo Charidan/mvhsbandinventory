@@ -19,7 +19,8 @@ public class Instrument
     public static String[] attributes = 
 		{ 
 			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
-			"Ligature", "Mouthpiece", "Caps", "Bow", "History"
+			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "History", 
+			"NeckStrap"
         };
     
     public static List attributeList = Arrays.asList(attributes);
