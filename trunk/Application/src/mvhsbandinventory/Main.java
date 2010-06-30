@@ -13,20 +13,26 @@ import javax.swing.JFrame;
  */
 public class Main
 {
-    public static JFrame window = new JFrame();
-    public static Display panel = new Display();
-    public static InstrumentFileStore ifs = new InstrumentFileStore();
-    public static InstrumentList il = new InstrumentList(ifs);
+
+    public static JFrame window;
+    public static Display panel;
+    public static InstrumentFileStore ifs;
+    public static InstrumentList il;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args)
     {
+        ifs = new InstrumentFileStore("C:/csvTest");
+        il = new InstrumentList(ifs);
+        window = new JFrame();
+        panel = new Display();
+
         window.add(panel);
         window.setTitle("MVHS - Band Inventory");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setMinimumSize(new Dimension(920,575));
+        window.setMinimumSize(new Dimension(920, 575));
         window.setVisible(true);
         panel.repaint();
     }
