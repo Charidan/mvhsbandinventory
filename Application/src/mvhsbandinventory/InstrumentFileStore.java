@@ -29,7 +29,6 @@ public class InstrumentFileStore extends InstrumentStore
      * Constructs a new InstrumentFileStore object for storing Instrument
      * information on the disk.
      * @param path
-     * @throws Error
      */
     public InstrumentFileStore(String path)
     {
