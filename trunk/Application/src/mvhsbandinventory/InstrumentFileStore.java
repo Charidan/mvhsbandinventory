@@ -228,7 +228,7 @@ public class InstrumentFileStore extends InstrumentStore
             String attribute = table[c][0];
 
             // Infer the data type from the arrangement of data in the cells
-            if (table[c][2] !==  "")
+            if (!table[c][2].equals(""))
             {
                 // There is content in the third row, meaning that there is an
                 // array of items; we need to extract an arraylist of items
@@ -315,11 +315,11 @@ public class InstrumentFileStore extends InstrumentStore
      * Deletes the instrument from the store permenantly.
      * @param instrument
      */
-    public void delete(Instrument instrument) throws IOException
+    public void delete(Instrument instrument) throws Exception
     {
         if (!exists(instrument))
         {
-            throw new IOException("The instrument that was flagged for deletion "
+            throw new Exception("The instrument that was flagged for deletion "
                     + "does not yet exist.");
         }
 
