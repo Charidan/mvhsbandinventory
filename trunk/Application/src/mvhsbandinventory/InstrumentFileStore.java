@@ -31,7 +31,7 @@ public class InstrumentFileStore extends InstrumentStore
      * @param path
      * @throws Error
      */
-    public void InstrumentFileStore(String path)
+    public InstrumentFileStore(String path)
     {
         directory = new File(path);
     }
