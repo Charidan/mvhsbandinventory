@@ -183,4 +183,32 @@ public class InstrumentList
     {
         return (Instrument) list.get(index);
     }
+    
+    /**
+     * Retrieves the Instrument stored in the InstrumentList that has the 
+     * specified name, brand and serial codes.  All of these arguments have the
+     * type string.
+     * @param name
+     * @param brand
+     * @param serial
+     * @return the Instrument object that satisfies all of the requirements that
+     * were passed in via arguments
+     */
+    public Instrument get (String name, String brand, String serial)
+    {
+		int length = list.size();
+		for (int i = 0; i < length; i++)
+		{
+			Instrument instrument = list.get(i);
+			
+			String testName = instrument.get("Name");
+			String testBrand = instrument.get("Brand");
+			String testSerial = instrument.get("Serial");
+			
+			if (testName == name && testBrand == brand && testSerial == serial)
+			{
+				return instrument;
+			}
+		}
+	}
 }
