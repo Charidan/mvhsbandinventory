@@ -24,7 +24,7 @@ public abstract class InstrumentStore
      * Deletes the instrument from the store permenantly.
      * @param instrument
      */
-    public abstract void delete (Instrument instrument);
+    public abstract void delete (Instrument instrument) throws Exception;
 
 	/**
 	 * Determines whether the specified instrument is already stored in the 
