@@ -27,7 +27,8 @@ public class InstrumentFileStore extends InstrumentStore
 
     /**
      * Constructs a new InstrumentFileStore object for storing Instrument
-     * information on the disk.
+     * information on the disk.  The path argument needs to be a path for a
+     * valid folder where all of the CSV files will reside.
      * @param path
      */
     public InstrumentFileStore(String path)
@@ -227,7 +228,7 @@ public class InstrumentFileStore extends InstrumentStore
             String attribute = table[c][0];
 
             // Infer the data type from the arrangement of data in the cells
-            if (!table[c][2].equals(""))
+            if (!"".equals(table[c][2]))
             {
                 // There is content in the third row, meaning that there is an
                 // array of items; we need to extract an arraylist of items
