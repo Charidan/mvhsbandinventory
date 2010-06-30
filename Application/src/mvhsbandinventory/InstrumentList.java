@@ -20,7 +20,8 @@ public class InstrumentList
     public static String[] singles = 
 		{ 
 			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
-			"Ligature", "Mouthpiece", "Caps", "Bow"
+			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap"
+
         };
 
 	/**
