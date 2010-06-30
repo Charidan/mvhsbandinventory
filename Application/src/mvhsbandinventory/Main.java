@@ -15,6 +15,8 @@ public class Main
 {
     public static JFrame window = new JFrame();
     public static Display panel = new Display();
+    public static InstrumentFileStore ifs = new InstrumentFileStore();
+    public static InstrumentList il = new InstrumentList(ifs);
 
     /**
      * @param args the command line arguments
