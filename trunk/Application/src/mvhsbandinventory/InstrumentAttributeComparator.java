@@ -1,6 +1,7 @@
 package mvhsbandinventory;
 
 import java.util.Comparator;
+import java.util.List;
 
 class InstrumentAttributeComparator implements Comparator
 {
@@ -39,7 +40,7 @@ class InstrumentAttributeComparator implements Comparator
 		// Check to make sure that we can actually compare the values that we 
 		// just pulled out (e.g. the values are not ArrayList objects).
 		if (value1 instanceof List || value2 instanceof List) {
-			throws new Exception("Cannot compare the attributes specified.");
+                    return 0;
 		}
 		
 		// Cast both of these values as strings so that we can actually compare
