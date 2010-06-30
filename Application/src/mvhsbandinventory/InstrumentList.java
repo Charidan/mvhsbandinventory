@@ -70,9 +70,15 @@ public class InstrumentList
 	 */
     public void delete (Instrument instrument)
     {
-		// Delete the item from our local memory cache and to our data store
-        list.remove(instrument);
-        store.delete(instrument);
+        try
+        {
+            // Delete the item from our local memory cache and to our data store
+            list.remove(instrument);
+            store.delete(instrument);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InstrumentList.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 	/**
@@ -223,5 +229,7 @@ public class InstrumentList
 				return instrument;
 			}
 		}
+
+        return null;
 	}
 }
