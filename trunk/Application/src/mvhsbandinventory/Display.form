@@ -1138,48 +1138,10 @@
                 <Component class="javax.swing.JTable" name="instruTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="4">
-                        <Column editable="false" title="Instrument" type="java.lang.String">
-                          <Data value="Flute"/>
-                          <Data value="Flute"/>
-                          <Data value="Bb Clarinet"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="false" title="Brand" type="java.lang.String">
-                          <Data value="Selmer"/>
-                          <Data value="Yamaha"/>
-                          <Data value="Bundy"/>
-                          <Data value=""/>
-                        </Column>
-                        <Column editable="false" title="Serial #" type="java.lang.String">
-                          <Data value="45712"/>
-                          <Data value="4B212A"/>
-                          <Data value="7286"/>
-                          <Data value="null"/>
-                        </Column>
-                      </Table>
+                      <Table columnCount="0" rowCount="4"/>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
-                    </Property>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="null"/>
+                      <TableColumnModel selectionModel="0"/>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
