@@ -197,9 +197,6 @@
         <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="continuousLayout" type="boolean" value="true"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="null"/>
-        </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -213,9 +210,6 @@
           <Properties>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[450, 308]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="null"/>
             </Property>
           </Properties>
           <Constraints>
@@ -977,6 +971,9 @@
                       <Dimension value="null"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="cancelButton">
                   <Properties>
@@ -1104,6 +1101,11 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
+                <Component class="javax.swing.JLabel" name="sortLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Sort By:"/>
+                  </Properties>
+                </Component>
                 <Component class="javax.swing.JComboBox" name="sortCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -1113,8 +1115,11 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="sortButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Sort By"/>
+                    <Property name="text" type="java.lang.String" value="Sort"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1180,6 +1185,9 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="instruTableMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
