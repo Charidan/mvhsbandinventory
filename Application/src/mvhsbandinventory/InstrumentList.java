@@ -50,6 +50,17 @@ public class InstrumentList
         list.add(instrument);
         store.add(instrument);
     }
+    
+    /**
+     * Commits the changes that were made to the instrument object to the long-
+     * term datastore.
+     * @param instrument - the Instrument to update
+     */
+    public void update (Instrument instrument)
+    {
+		// Commit the changes to the instrument to the disk
+		store.update(instrument);
+	}
 
 	/**
 	 * Deletes the specified Instrument object from the in-memory cache list of
@@ -199,13 +210,15 @@ public class InstrumentList
 		int length = list.size();
 		for (int i = 0; i < length; i++)
 		{
-			Instrument instrument = list.get(i);
+			Instrument instrument = (Instrument) list.get(i);
 			
-			String testName = instrument.get("Name");
-			String testBrand = instrument.get("Brand");
-			String testSerial = instrument.get("Serial");
+			String testName = (String) instrument.get("Name");
+			String testBrand = (String) instrument.get("Brand");
+			String testSerial = (String) instrument.get("Serial");
 			
-			if (testName == name && testBrand == brand && testSerial == serial)
+			if (testName.equals(name) &&
+                    testBrand.equals(brand) &&
+                    testSerial.equals(serial))
 			{
 				return instrument;
 			}
