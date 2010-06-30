@@ -33,17 +33,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         resetTable();
 
         //TODO: remove crappy test code.
-        instruBox.setText("Flute");
-        brandBox.setText("Yamaha");
-        serialBox.setText("4B212A");
-        rankBox.setText("2");
-        valueBox.setText("250.49");
-        strapCombo.setSelectedIndex(3);
-        ligCombo.setSelectedIndex(3);
-        mpieceCombo.setSelectedIndex(1);
-        capCombo.setSelectedIndex(2);
-        bowCombo.setSelectedIndex(3);
-        notesTPane.setText("It's shiny, like a flute, but it's slightly flat.");
+//        instruBox.setText("Flute");
+//        brandBox.setText("Yamaha");
+//        serialBox.setText("4B212A");
+//        rankBox.setText("2");
+//        valueBox.setText("250.49");
+//        strapCombo.setSelectedIndex(3);
+//        ligCombo.setSelectedIndex(3);
+//        mpieceCombo.setSelectedIndex(1);
+//        capCombo.setSelectedIndex(2);
+//        bowCombo.setSelectedIndex(3);
+//        notesTPane.setText("It's shiny, like a flute, but it's slightly flat.");
         
     }
     
@@ -748,31 +748,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         instruTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Flute", "Selmer", "45712"},
-                {"Flute", "Yamaha", "4B212A"},
-                {"Bb Clarinet", "Bundy", "7286"},
-                {null, "", null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Instrument", "Brand", "Serial #"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        instruTable.setPreferredSize(null);
+        ));
         instruTable.getTableHeader().setReorderingAllowed(false);
         instruTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -955,7 +939,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Mouthpiece", mpieceCombo.getSelectedItem());
             instru.set("Caps", capCombo.getSelectedItem());
             instru.set("Bow", bowCombo.getSelectedItem());
-            instru.set("Strap", statusCombo.getSelectedItem());
+            instru.set("NeckStrap", statusCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
             Main.il.update(instru);
         } catch(Exception ex)
