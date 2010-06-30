@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -29,6 +30,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             sortCombo.addItem(s);
         }
 
+        resetTable();
+
         //TODO: remove crappy test code.
         instruBox.setText("Flute");
         brandBox.setText("Yamaha");
@@ -42,6 +45,32 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         bowCombo.setSelectedIndex(3);
         notesTPane.setText("It's shiny, like a flute, but it's slightly flat.");
         
+    }
+    
+    public void resetTable()
+    {
+        int s = Main.il.size();
+        String[][] rows = new String[s][3];
+        for(int i = 0; i < s; i++)
+        {
+            Instrument instru = Main.il.get(i);
+            rows[i][0] = (String) instru.get("Type");
+            rows[i][1] = (String) instru.get("Brand");
+            rows[i][2] = (String) instru.get("Serial");
+        }
+        String[] cols = new String[3];
+        cols[0] = "Type";
+        cols[1] = "Brand";
+        cols[2] = "Serial";
+        instruTable = new JTable(rows, cols);
+    }
+
+    public Instrument getTableSelected()
+    {
+        int i = instruTable.getSelectedRow();
+        return Main.il.get((String) instruTable.getValueAt(i, 0),
+                (String) instruTable.getValueAt(i, 1),
+                (String) instruTable.getValueAt(i, 2));
     }
 
     public void setObject(Object bean)
@@ -141,6 +170,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         showallButton = new javax.swing.JButton();
         advSearchButton = new javax.swing.JButton();
         leftsplitSortByPanel = new javax.swing.JPanel();
+        sortLabel = new javax.swing.JLabel();
         sortCombo = new javax.swing.JComboBox();
         sortButton = new javax.swing.JButton();
         leftsplitInstruTablePanel = new javax.swing.JScrollPane();
@@ -243,10 +273,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         overlord.setAutoscrolls(true);
         overlord.setContinuousLayout(true);
         overlord.setName(""); // NOI18N
-        overlord.setPreferredSize(null);
 
         rightsplitPanel.setMinimumSize(new java.awt.Dimension(450, 308));
-        rightsplitPanel.setPreferredSize(null);
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
         detailPanel.setLayout(new java.awt.GridBagLayout());
@@ -627,6 +655,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         saveButton.setText("SAVE CHANGES");
         saveButton.setPreferredSize(null);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
         rightsplitButtonPanel.add(saveButton);
 
         cancelButton.setText("CANCEL CHANGES");
@@ -696,9 +729,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         leftsplitPanel.add(leftsplitButtonPanel, gridBagConstraints);
 
+        sortLabel.setText("Sort By:");
+        leftsplitSortByPanel.add(sortLabel);
+
         leftsplitSortByPanel.add(sortCombo);
 
-        sortButton.setText("Sort By");
+        sortButton.setText("Sort");
+        sortButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortButtonActionPerformed(evt);
+            }
+        });
         leftsplitSortByPanel.add(sortButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -733,6 +774,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         instruTable.setPreferredSize(null);
         instruTable.getTableHeader().setReorderingAllowed(false);
+        instruTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                instruTableMouseClicked(evt);
+            }
+        });
         leftsplitInstruTablePanel.setViewportView(instruTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -872,12 +918,59 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     JOptionPane.ERROR_MESSAGE);
         } else
         {
-            System.out.println("Type: "+addTypeBox.getText()+" Brand: "+addBrandBox.getText()+" Serial: "+addSerialBox.getText());
-            addDialog.setVisible(false);
-            Main.window.setEnabled(true);
-            Main.window.requestFocus();
+            try
+            {//TODO delete test print
+                System.out.println("Type: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
+                Instrument in = new Instrument();
+                in.set("type", addTypeBox.getText());
+                in.set("brand", addBrandBox.getText());
+                in.set("serial", addSerialBox.getText());
+                Main.il.add(in);
+                addDialog.setVisible(false);
+                Main.window.setEnabled(true);
+                Main.window.requestFocus();
+            } catch(Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+
         }
     }//GEN-LAST:event_addAcceptButtonActionPerformed
+
+    private void sortButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortButtonActionPerformed
+    {//GEN-HEADEREND:event_sortButtonActionPerformed
+        String s = (String) sortCombo.getSelectedItem();
+        Main.il.sort(s, true);
+    }//GEN-LAST:event_sortButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
+    {//GEN-HEADEREND:event_saveButtonActionPerformed
+        try
+        {
+            Instrument instru = getTableSelected();
+            instru.set("Rank", rankBox.getText());
+            instru.set("Value", valueBox.getText());
+            instru.set("Status", statusCombo.getSelectedItem());
+            instru.set("Ligature", ligCombo.getSelectedItem());
+            instru.set("Mouthpiece", mpieceCombo.getSelectedItem());
+            instru.set("Caps", capCombo.getSelectedItem());
+            instru.set("Bow", bowCombo.getSelectedItem());
+            instru.set("Strap", statusCombo.getSelectedItem());
+            instru.set("Notes", notesTPane.getText());
+            Main.il.update(instru);
+        } catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "An Error has occurred while saving:\n"+ex.getMessage(),
+                    "Save Failed",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void instruTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_instruTableMouseClicked
+    {//GEN-HEADEREND:event_instruTableMouseClicked
+        //TODO add your handling code here:
+}//GEN-LAST:event_instruTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
@@ -961,6 +1054,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton showallButton;
     private javax.swing.JButton sortButton;
     private javax.swing.JComboBox sortCombo;
+    private javax.swing.JLabel sortLabel;
     private javax.swing.JComboBox statusCombo;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox strapCombo;
