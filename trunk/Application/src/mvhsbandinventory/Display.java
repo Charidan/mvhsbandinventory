@@ -107,6 +107,21 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addAcceptButton = new javax.swing.JButton();
         addCancelButton = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
+        leftsplitPanel = new javax.swing.JPanel();
+        searchCombo = new javax.swing.JComboBox();
+        searchBar = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+        leftsplitButtonPanel = new javax.swing.JPanel();
+        showallButton = new javax.swing.JButton();
+        advSearchButton = new javax.swing.JButton();
+        leftsplitSortByPanel = new javax.swing.JPanel();
+        sortLabel = new javax.swing.JLabel();
+        sortCombo = new javax.swing.JComboBox();
+        sortButton = new javax.swing.JButton();
+        leftsplitInstruTablePanel = new javax.swing.JScrollPane();
+        instruTable = new javax.swing.JTable();
+        leftsplitaddButtonPanel = new javax.swing.JPanel();
+        addButton = new javax.swing.JButton();
         rightsplitPanel = new javax.swing.JPanel();
         infoTabs = new javax.swing.JTabbedPane();
         detailPanel = new javax.swing.JPanel();
@@ -161,20 +176,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        leftsplitPanel = new javax.swing.JPanel();
-        searchCombo = new javax.swing.JComboBox();
-        searchBar = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
-        leftsplitButtonPanel = new javax.swing.JPanel();
-        addButton = new javax.swing.JButton();
-        showallButton = new javax.swing.JButton();
-        advSearchButton = new javax.swing.JButton();
-        leftsplitSortByPanel = new javax.swing.JPanel();
-        sortLabel = new javax.swing.JLabel();
-        sortCombo = new javax.swing.JComboBox();
-        sortButton = new javax.swing.JButton();
-        leftsplitInstruTablePanel = new javax.swing.JScrollPane();
-        instruTable = new javax.swing.JTable();
 
         advsearchAddFieldButton.setText("Add Search Field");
         advsearchAddFieldButton.addActionListener(new java.awt.event.ActionListener() {
@@ -273,6 +274,107 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         overlord.setAutoscrolls(true);
         overlord.setContinuousLayout(true);
         overlord.setName(""); // NOI18N
+
+        leftsplitPanel.setMinimumSize(new java.awt.Dimension(460, 79));
+        leftsplitPanel.setLayout(new java.awt.GridBagLayout());
+
+        searchCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchComboActionPerformed(evt);
+            }
+        });
+        leftsplitPanel.add(searchCombo, new java.awt.GridBagConstraints());
+
+        searchBar.setColumns(20);
+        searchBar.setText("Search Bar");
+        searchBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBarActionPerformed(evt);
+            }
+        });
+        leftsplitPanel.add(searchBar, new java.awt.GridBagConstraints());
+
+        searchButton.setText("Search");
+        searchButton.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        leftsplitPanel.add(searchButton, gridBagConstraints);
+
+        showallButton.setText("Show All");
+        leftsplitButtonPanel.add(showallButton);
+
+        advSearchButton.setText("ADVANCED SEARCH");
+        advSearchButton.setPreferredSize(null);
+        advSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advSearchButtonActionPerformed(evt);
+            }
+        });
+        leftsplitButtonPanel.add(advSearchButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        leftsplitPanel.add(leftsplitButtonPanel, gridBagConstraints);
+
+        sortLabel.setText("Sort By:");
+        leftsplitSortByPanel.add(sortLabel);
+
+        leftsplitSortByPanel.add(sortCombo);
+
+        sortButton.setText("Sort");
+        sortButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortButtonActionPerformed(evt);
+            }
+        });
+        leftsplitSortByPanel.add(sortButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        leftsplitPanel.add(leftsplitSortByPanel, gridBagConstraints);
+
+        instruTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        instruTable.getTableHeader().setReorderingAllowed(false);
+        instruTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                instruTableMouseClicked(evt);
+            }
+        });
+        leftsplitInstruTablePanel.setViewportView(instruTable);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weighty = 1.0;
+        leftsplitPanel.add(leftsplitInstruTablePanel, gridBagConstraints);
+
+        addButton.setText("ADD NEW INSTRUMENT");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        leftsplitaddButtonPanel.add(addButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        leftsplitPanel.add(leftsplitaddButtonPanel, gridBagConstraints);
+
+        overlord.setLeftComponent(leftsplitPanel);
 
         rightsplitPanel.setMinimumSize(new java.awt.Dimension(450, 308));
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
@@ -488,31 +590,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"6/24/2010 -- 12:10 PM", "Instrument Created"},
-                {"6/24/2010 -- 12:12 PM", "Form Created for Chaz Gwennap"},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Date", "Event"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        historyTable.setPreferredSize(null);
+        ));
         historyTable.getTableHeader().setReorderingAllowed(false);
         historyTablePanel.setViewportView(historyTable);
 
@@ -679,102 +765,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         overlord.setRightComponent(rightsplitPanel);
 
-        leftsplitPanel.setMinimumSize(new java.awt.Dimension(460, 79));
-        leftsplitPanel.setLayout(new java.awt.GridBagLayout());
-
-        searchCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchComboActionPerformed(evt);
-            }
-        });
-        leftsplitPanel.add(searchCombo, new java.awt.GridBagConstraints());
-
-        searchBar.setColumns(20);
-        searchBar.setText("Search Bar");
-        searchBar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBarActionPerformed(evt);
-            }
-        });
-        leftsplitPanel.add(searchBar, new java.awt.GridBagConstraints());
-
-        searchButton.setText("Search");
-        searchButton.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        leftsplitPanel.add(searchButton, gridBagConstraints);
-
-        addButton.setText("Add New Instrument");
-        addButton.setPreferredSize(null);
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
-            }
-        });
-        leftsplitButtonPanel.add(addButton);
-
-        showallButton.setText("Show All");
-        leftsplitButtonPanel.add(showallButton);
-
-        advSearchButton.setText("ADVANCED SEARCH");
-        advSearchButton.setPreferredSize(null);
-        advSearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                advSearchButtonActionPerformed(evt);
-            }
-        });
-        leftsplitButtonPanel.add(advSearchButton);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        leftsplitPanel.add(leftsplitButtonPanel, gridBagConstraints);
-
-        sortLabel.setText("Sort By:");
-        leftsplitSortByPanel.add(sortLabel);
-
-        leftsplitSortByPanel.add(sortCombo);
-
-        sortButton.setText("Sort");
-        sortButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sortButtonActionPerformed(evt);
-            }
-        });
-        leftsplitSortByPanel.add(sortButton);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        leftsplitPanel.add(leftsplitSortByPanel, gridBagConstraints);
-
-        instruTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        instruTable.getTableHeader().setReorderingAllowed(false);
-        instruTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                instruTableMouseClicked(evt);
-            }
-        });
-        leftsplitInstruTablePanel.setViewportView(instruTable);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.weighty = 1.0;
-        leftsplitPanel.add(leftsplitInstruTablePanel, gridBagConstraints);
-
-        overlord.setLeftComponent(leftsplitPanel);
-
         add(overlord, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -906,16 +896,19 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             {//TODO delete test print
                 System.out.println("Type: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
                 Instrument in = new Instrument();
-                in.set("type", addTypeBox.getText());
-                in.set("brand", addBrandBox.getText());
-                in.set("serial", addSerialBox.getText());
+                in.set("Name", addTypeBox.getText());
+                in.set("Brand", addBrandBox.getText());
+                in.set("Serial", addSerialBox.getText());
                 Main.il.add(in);
                 addDialog.setVisible(false);
                 Main.window.setEnabled(true);
                 Main.window.requestFocus();
             } catch(Exception ex)
             {
-                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(jopDialog,
+                    "An Error has occurred while creating the instrument:\n"+ex.getMessage(),
+                    "Instrument Creation Failed",
+                    JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -945,7 +938,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while saving:\n"+ex.getMessage(),
+                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
                     "Save Failed",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -953,7 +946,22 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void instruTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_instruTableMouseClicked
     {//GEN-HEADEREND:event_instruTableMouseClicked
-        //TODO add your handling code here:
+        Instrument instru = getTableSelected();
+        //set the Details panel
+        statusCombo.setSelectedItem((String) instru.get("Status"));
+        instruBox.setText((String) instru.get("Name"));
+        brandBox.setText((String) instru.get("Brand"));
+        serialBox.setText((String) instru.get("Serial"));
+        rankBox.setText((String) instru.get("Rank"));
+        valueBox.setText((String) instru.get("Value"));
+        strapCombo.setSelectedItem((String) instru.get("NeckStrap"));
+        ligCombo.setSelectedItem((String) instru.get("Ligature"));
+        mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
+        capCombo.setSelectedItem((String) instru.get("MouthpieceCap"));
+        bowCombo.setSelectedItem((String) instru.get("Bow"));
+        notesTPane.setText((String) instru.get("Notes"));
+
+        //TODO set the History panel
 }//GEN-LAST:event_instruTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1008,6 +1016,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JScrollPane leftsplitInstruTablePanel;
     private javax.swing.JPanel leftsplitPanel;
     private javax.swing.JPanel leftsplitSortByPanel;
+    private javax.swing.JPanel leftsplitaddButtonPanel;
     private javax.swing.JComboBox ligCombo;
     private javax.swing.JLabel ligatureLabel;
     private javax.swing.JButton lostButton;
