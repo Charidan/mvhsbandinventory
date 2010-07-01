@@ -6,6 +6,8 @@ package mvhsbandinventory;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -71,6 +73,51 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         return Main.il.get((String) instruTable.getValueAt(i, 0),
                 (String) instruTable.getValueAt(i, 1),
                 (String) instruTable.getValueAt(i, 2));
+    }
+
+    public void saveDetails()
+    {
+        try
+        {
+            Instrument instru = getTableSelected();
+            instru.set("Rank", rankBox.getText());
+            instru.set("Value", valueBox.getText());
+            instru.set("Status", statusCombo.getSelectedItem());
+            instru.set("Ligature", ligCombo.getSelectedItem());
+            instru.set("Mouthpiece", mpieceCombo.getSelectedItem());
+            instru.set("Caps", capCombo.getSelectedItem());
+            instru.set("Bow", bowCombo.getSelectedItem());
+            instru.set("NeckStrap", statusCombo.getSelectedItem());
+            instru.set("Notes", notesTPane.getText());
+            Main.il.update(instru);
+        } catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
+                    "Save Failed",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void saveHistory()
+    {
+        try
+        {
+            Instrument instru = getTableSelected();
+            instru.set("Renter", renterBox);
+            instru.set("SchoolYear", schoolyearBox);
+            instru.set("DateOut", dateoutBox);
+            instru.set("Fee", feeCombo);
+            instru.set("Period", periodCombo);
+            instru.set("Other", otherBox);
+            Main.il.update(instru);
+        } catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
+                    "Save Failed",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void setObject(Object bean)
@@ -162,16 +209,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         schoolyearBox = new javax.swing.JTextField();
         dateoutLabel = new javax.swing.JLabel();
         dateoutBox = new javax.swing.JTextField();
-        feeLabel = new javax.swing.JLabel();
-        feeCombo = new javax.swing.JComboBox();
         periodLabel = new javax.swing.JLabel();
         periodCombo = new javax.swing.JComboBox();
+        feeLabel = new javax.swing.JLabel();
+        feeCombo = new javax.swing.JComboBox();
+        contractLabel = new javax.swing.JLabel();
+        contractCombo = new javax.swing.JComboBox();
         otherLabel = new javax.swing.JLabel();
         otherBox = new javax.swing.JTextField();
         checkoutButtonPanel = new javax.swing.JPanel();
         formButton = new javax.swing.JButton();
-        outButton = new javax.swing.JButton();
-        inButton = new javax.swing.JButton();
+        checkoutButton = new javax.swing.JButton();
+        checkinButton = new javax.swing.JButton();
         lostButton = new javax.swing.JButton();
         rightsplitButtonPanel = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
@@ -665,20 +714,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(dateoutBox, gridBagConstraints);
 
-        feeLabel.setText("Fee Paid:");
-        feeLabel.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(feeLabel, gridBagConstraints);
-
-        feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived" }));
-        feeCombo.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(feeCombo, gridBagConstraints);
-
         periodLabel.setText("For Use In:");
         periodLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -697,6 +732,32 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         checkoutPanel.add(periodCombo, gridBagConstraints);
+
+        feeLabel.setText("Fee Paid:");
+        feeLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(feeLabel, gridBagConstraints);
+
+        feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived" }));
+        feeCombo.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        checkoutPanel.add(feeCombo, gridBagConstraints);
+
+        contractLabel.setText("Contract:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        checkoutPanel.add(contractLabel, gridBagConstraints);
+
+        contractCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Uncreated", "Created", "Signed" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        checkoutPanel.add(contractCombo, gridBagConstraints);
 
         otherLabel.setText("Other:");
         otherLabel.setPreferredSize(null);
@@ -719,16 +780,31 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         formButton.setPreferredSize(null);
         checkoutButtonPanel.add(formButton);
 
-        outButton.setText("Check Out");
-        outButton.setPreferredSize(null);
-        checkoutButtonPanel.add(outButton);
+        checkoutButton.setText("Check Out");
+        checkoutButton.setPreferredSize(null);
+        checkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutButtonActionPerformed(evt);
+            }
+        });
+        checkoutButtonPanel.add(checkoutButton);
 
-        inButton.setText("Check In");
-        inButton.setPreferredSize(null);
-        checkoutButtonPanel.add(inButton);
+        checkinButton.setText("Check In");
+        checkinButton.setPreferredSize(null);
+        checkinButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkinButtonActionPerformed(evt);
+            }
+        });
+        checkoutButtonPanel.add(checkinButton);
 
         lostButton.setText("Lost");
         lostButton.setPreferredSize(null);
+        lostButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lostButtonActionPerformed(evt);
+            }
+        });
         checkoutButtonPanel.add(lostButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -906,6 +982,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             {//TODO delete test print
                 System.out.println("Name: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
                 Instrument instru = new Instrument();
+                for(String att: Instrument.attributes) instru.set(att, "");
                 instru.set("Name", addTypeBox.getText());
                 instru.set("Brand", addBrandBox.getText());
                 instru.set("Serial", addSerialBox.getText());
@@ -932,35 +1009,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
     {//GEN-HEADEREND:event_saveButtonActionPerformed
-        try
-        {
-            Instrument instru = getTableSelected();
-            //Details panel
-            instru.set("Rank", rankBox.getText());
-            instru.set("Value", valueBox.getText());
-            instru.set("Status", statusCombo.getSelectedItem());
-            instru.set("Ligature", ligCombo.getSelectedItem());
-            instru.set("Mouthpiece", mpieceCombo.getSelectedItem());
-            instru.set("Caps", capCombo.getSelectedItem());
-            instru.set("Bow", bowCombo.getSelectedItem());
-            instru.set("NeckStrap", statusCombo.getSelectedItem());
-            instru.set("Notes", notesTPane.getText());
-            //History panel
-            instru.set("Renter", renterBox);
-            instru.set("SchoolYear", schoolyearBox);
-            instru.set("DateOut", dateoutBox);
-            instru.set("Fee", feeCombo);
-            instru.set("Period", periodCombo);
-            instru.set("Other", otherBox);
-            //Save it
-            Main.il.update(instru);
-        } catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
-                    "Save Failed",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+        saveDetails();
+        saveHistory();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void instruTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_instruTableMouseClicked
@@ -988,6 +1038,24 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         periodCombo.setSelectedItem((String) instru.get("Period"));
         otherBox.setText((String) instru.get("Other"));
 }//GEN-LAST:event_instruTableMouseClicked
+
+    private void lostButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lostButtonActionPerformed
+    {//GEN-HEADEREND:event_lostButtonActionPerformed
+        statusCombo.setSelectedItem("Missing");
+        saveHistory();
+    }//GEN-LAST:event_lostButtonActionPerformed
+
+    private void checkinButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkinButtonActionPerformed
+    {//GEN-HEADEREND:event_checkinButtonActionPerformed
+        statusCombo.setSelectedItem("In Storage");
+        saveHistory();
+}//GEN-LAST:event_checkinButtonActionPerformed
+
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkoutButtonActionPerformed
+    {//GEN-HEADEREND:event_checkoutButtonActionPerformed
+        statusCombo.setSelectedItem("On Loan");
+        saveHistory();
+}//GEN-LAST:event_checkoutButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
@@ -1017,8 +1085,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox capCombo;
     private javax.swing.JLabel capLabel;
+    private javax.swing.JButton checkinButton;
+    private javax.swing.JButton checkoutButton;
     private javax.swing.JPanel checkoutButtonPanel;
     private javax.swing.JPanel checkoutPanel;
+    private javax.swing.JComboBox contractCombo;
+    private javax.swing.JLabel contractLabel;
     private javax.swing.JTextField dateoutBox;
     private javax.swing.JLabel dateoutLabel;
     private javax.swing.JButton deleteButton;
@@ -1031,7 +1103,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JSplitPane historySplit;
     private javax.swing.JTable historyTable;
     private javax.swing.JScrollPane historyTablePanel;
-    private javax.swing.JButton inButton;
     private javax.swing.JTabbedPane infoTabs;
     private javax.swing.JTextField instruBox;
     private javax.swing.JTable instruTable;
@@ -1051,7 +1122,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField otherBox;
     private javax.swing.JLabel otherLabel;
-    private javax.swing.JButton outButton;
     private javax.swing.JSplitPane overlord;
     private javax.swing.JComboBox periodCombo;
     private javax.swing.JLabel periodLabel;
