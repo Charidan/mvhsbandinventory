@@ -6,8 +6,6 @@ package mvhsbandinventory;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
