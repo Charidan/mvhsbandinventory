@@ -196,13 +196,10 @@ public class InstrumentFileStore extends InstrumentStore
      * @param csv-serialized instrument
      * @return instrument object
      */
-    public static Instrument unserialize(String csv)
+    public static Instrument unserialize(List<String> rows)
     {
         // Create a two-dimensional array that will hold our CSV data
         String[][] table = null;
-
-        // Start by splitting the data into separate rows
-        List<String> rows = Arrays.asList(csv.split(verticalSeparator));
 
         // Now, we're going to further split the rows into individual cells and
         // determine the width of the table specified in the serialized data
@@ -235,7 +232,7 @@ public class InstrumentFileStore extends InstrumentStore
             String attribute = table[c][0];
 
             // Infer the data type from the arrangement of data in the cells
-            if (!"".equals(table[c][2]))
+            if (table[c].length > 2)
             {
                 // There is content in the third row, meaning that there is an
                 // array of items; we need to extract an arraylist of items
@@ -252,7 +249,8 @@ public class InstrumentFileStore extends InstrumentStore
                 {
                     Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else
+            }
+            else
             {
                 // There's only one value for the field--there is just a string
                 // for this field
@@ -368,7 +366,7 @@ public class InstrumentFileStore extends InstrumentStore
     {
         BufferedReader reader = null;
         String line = "";
-        String raw = "";
+        ArrayList<String> lines = new ArrayList<String>();
 
         try
         {
@@ -377,7 +375,7 @@ public class InstrumentFileStore extends InstrumentStore
             // Load all of the file into our buffer string
             while ((line = reader.readLine()) != null)
             {
-                raw += line;
+                lines.add(line);
             }
         } catch (FileNotFoundException ex)
         {
@@ -397,7 +395,7 @@ public class InstrumentFileStore extends InstrumentStore
         }
 
         // Return the file after it has been parsed into an Instrument
-        return unserialize(raw);
+        return unserialize(lines);
     }
 
     /**
