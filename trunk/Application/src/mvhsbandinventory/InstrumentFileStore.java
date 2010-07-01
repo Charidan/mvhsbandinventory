@@ -60,9 +60,9 @@ public class InstrumentFileStore extends InstrumentStore
      */
     private File getFile(Instrument instrument)
     {
-        String name = (String) instrument.get("name");
-        String brand = (String) instrument.get("brand");
-        String serial = (String) instrument.get("serial");
+        String name = (String) instrument.get("Name");
+        String brand = (String) instrument.get("Brand");
+        String serial = (String) instrument.get("Serial");
 
         return getFile(name, brand, serial);
     }
@@ -156,10 +156,12 @@ public class InstrumentFileStore extends InstrumentStore
 
             for (int c = 0; c < width; c++)
             {
-                String cell = table[r][c];
+                String cell = table[c][r];
                 rowBuffer += (c != width - 1)
                         ? cell + horizontalSeparator : cell + verticalSeparator;
             }
+
+            buffer += rowBuffer;
         }
 
         return buffer;
@@ -402,7 +404,6 @@ public class InstrumentFileStore extends InstrumentStore
         // Get a list of all of the instruments in the store and count them
         File[] files = directory.listFiles();
         int size = files.length;
-        System.out.println("size =" +size);
 
         // Create an array of the instruments with a size equal to the number
         // of instruments in the store
@@ -411,7 +412,6 @@ public class InstrumentFileStore extends InstrumentStore
         // Read and unserialize all of the files into our instruments array
         for (int i = 0; i < size; i++)
         {
-            System.out.println("In load loop! " +i);
             instruments[i] = read(files[i]);
         }
 
