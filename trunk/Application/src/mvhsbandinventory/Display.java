@@ -904,7 +904,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         {
             try
             {//TODO delete test print
-                System.out.println("Type: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
+                System.out.println("Name: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
                 Instrument instru = new Instrument();
                 instru.set("Name", addTypeBox.getText());
                 instru.set("Brand", addBrandBox.getText());
@@ -935,6 +935,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         try
         {
             Instrument instru = getTableSelected();
+            //Details panel
             instru.set("Rank", rankBox.getText());
             instru.set("Value", valueBox.getText());
             instru.set("Status", statusCombo.getSelectedItem());
@@ -944,6 +945,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Bow", bowCombo.getSelectedItem());
             instru.set("NeckStrap", statusCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
+            //History panel
+            instru.set("Renter", renterBox);
+            instru.set("SchoolYear", schoolyearBox);
+            instru.set("DateOut", dateoutBox);
+            instru.set("Fee", feeCombo);
+            instru.set("Period", periodCombo);
+            instru.set("Other", otherBox);
+            //Save it
             Main.il.update(instru);
         } catch(Exception ex)
         {
@@ -971,7 +980,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         bowCombo.setSelectedItem((String) instru.get("Bow"));
         notesTPane.setText((String) instru.get("Notes"));
 
-        //TODO set the History panel
+        //set the History panel
+        renterBox.setText((String) instru.get("Renter"));
+        schoolyearBox.setText((String) instru.get("SchoolYear"));
+        dateoutBox.setText((String) instru.get("DateOut"));
+        feeCombo.setSelectedItem((String) instru.get("Fee"));
+        periodCombo.setSelectedItem((String) instru.get("Period"));
+        otherBox.setText((String) instru.get("Other"));
 }//GEN-LAST:event_instruTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
