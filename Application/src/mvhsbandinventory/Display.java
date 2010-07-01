@@ -99,6 +99,32 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         }
     }
 
+    public void displayInstrument()
+    {
+        Instrument instru = getTableSelected();
+        //set the Details panel
+        statusCombo.setSelectedItem((String) instru.get("Status"));
+        instruBox.setText((String) instru.get("Name"));
+        brandBox.setText((String) instru.get("Brand"));
+        serialBox.setText((String) instru.get("Serial"));
+        rankBox.setText((String) instru.get("Rank"));
+        valueBox.setText((String) instru.get("Value"));
+        strapCombo.setSelectedItem((String) instru.get("NeckStrap"));
+        ligCombo.setSelectedItem((String) instru.get("Ligature"));
+        mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
+        capCombo.setSelectedItem((String) instru.get("MouthpieceCap"));
+        bowCombo.setSelectedItem((String) instru.get("Bow"));
+        notesTPane.setText((String) instru.get("Notes"));
+
+        //set the History panel
+        renterBox.setText((String) instru.get("Renter"));
+        schoolyearBox.setText((String) instru.get("SchoolYear"));
+        dateoutBox.setText((String) instru.get("DateOut"));
+        feeCombo.setSelectedItem((String) instru.get("Fee"));
+        periodCombo.setSelectedItem((String) instru.get("Period"));
+        otherBox.setText((String) instru.get("Other"));
+    }
+
     public void saveHistory()
     {
         try
@@ -740,6 +766,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         checkoutPanel.add(feeLabel, gridBagConstraints);
 
         feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived" }));
+        feeCombo.setSelectedIndex(1);
         feeCombo.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -890,7 +917,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         int n = JOptionPane.showConfirmDialog(jopDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         switch(n)
         {//TODO: Hook the delete confirmation dialog to something.
-            case JOptionPane.YES_OPTION: break;
+            case JOptionPane.YES_OPTION: Main.il.delete(getTableSelected());
         }
         Main.window.setEnabled(true);
         Main.window.requestFocus();
@@ -986,6 +1013,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 instru.set("Name", addTypeBox.getText());
                 instru.set("Brand", addBrandBox.getText());
                 instru.set("Serial", addSerialBox.getText());
+
+                instru.set("Rank", "3");
+                instru.set("Value", "0");
+                instru.set("Period", "0");
+                instru.set("Fee", "Unpaid");
+                instru.set("Contract", "Uncreated");
+                
                 Main.il.add(instru);
                 addDialog.setVisible(false);
                 Main.window.setEnabled(true);
@@ -1011,32 +1045,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {//GEN-HEADEREND:event_saveButtonActionPerformed
         saveDetails();
         saveHistory();
+        displayInstrument();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void instruTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_instruTableMouseClicked
     {//GEN-HEADEREND:event_instruTableMouseClicked
-        Instrument instru = getTableSelected();
-        //set the Details panel
-        statusCombo.setSelectedItem((String) instru.get("Status"));
-        instruBox.setText((String) instru.get("Name"));
-        brandBox.setText((String) instru.get("Brand"));
-        serialBox.setText((String) instru.get("Serial"));
-        rankBox.setText((String) instru.get("Rank"));
-        valueBox.setText((String) instru.get("Value"));
-        strapCombo.setSelectedItem((String) instru.get("NeckStrap"));
-        ligCombo.setSelectedItem((String) instru.get("Ligature"));
-        mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
-        capCombo.setSelectedItem((String) instru.get("MouthpieceCap"));
-        bowCombo.setSelectedItem((String) instru.get("Bow"));
-        notesTPane.setText((String) instru.get("Notes"));
-
-        //set the History panel
-        renterBox.setText((String) instru.get("Renter"));
-        schoolyearBox.setText((String) instru.get("SchoolYear"));
-        dateoutBox.setText((String) instru.get("DateOut"));
-        feeCombo.setSelectedItem((String) instru.get("Fee"));
-        periodCombo.setSelectedItem((String) instru.get("Period"));
-        otherBox.setText((String) instru.get("Other"));
+        displayInstrument();
 }//GEN-LAST:event_instruTableMouseClicked
 
     private void lostButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lostButtonActionPerformed
