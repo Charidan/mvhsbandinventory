@@ -108,16 +108,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addCancelButton = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         leftsplitPanel = new javax.swing.JPanel();
+        searchLabel = new javax.swing.JLabel();
         searchCombo = new javax.swing.JComboBox();
         searchBar = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         leftsplitButtonPanel = new javax.swing.JPanel();
-        showallButton = new javax.swing.JButton();
-        advSearchButton = new javax.swing.JButton();
-        leftsplitSortByPanel = new javax.swing.JPanel();
         sortLabel = new javax.swing.JLabel();
         sortCombo = new javax.swing.JComboBox();
         sortButton = new javax.swing.JButton();
+        showallButton = new javax.swing.JButton();
+        advSearchButton = new javax.swing.JButton();
+        leftsplitSortByPanel = new javax.swing.JPanel();
         leftsplitInstruTablePanel = new javax.swing.JScrollPane();
         instruTable = new javax.swing.JTable();
         leftsplitaddButtonPanel = new javax.swing.JPanel();
@@ -275,8 +276,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         overlord.setContinuousLayout(true);
         overlord.setName(""); // NOI18N
 
-        leftsplitPanel.setMinimumSize(new java.awt.Dimension(460, 79));
+        leftsplitPanel.setMinimumSize(new java.awt.Dimension(480, 79));
         leftsplitPanel.setLayout(new java.awt.GridBagLayout());
+
+        searchLabel.setText("Search By:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        leftsplitPanel.add(searchLabel, gridBagConstraints);
 
         searchCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,7 +305,22 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         searchButton.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
         leftsplitPanel.add(searchButton, gridBagConstraints);
+
+        sortLabel.setText("Sort By:");
+        leftsplitButtonPanel.add(sortLabel);
+
+        leftsplitButtonPanel.add(sortCombo);
+
+        sortButton.setText("Sort");
+        sortButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortButtonActionPerformed(evt);
+            }
+        });
+        leftsplitButtonPanel.add(sortButton);
 
         showallButton.setText("Show All");
         leftsplitButtonPanel.add(showallButton);
@@ -315,20 +337,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         leftsplitPanel.add(leftsplitButtonPanel, gridBagConstraints);
-
-        sortLabel.setText("Sort By:");
-        leftsplitSortByPanel.add(sortLabel);
-
-        leftsplitSortByPanel.add(sortCombo);
-
-        sortButton.setText("Sort");
-        sortButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sortButtonActionPerformed(evt);
-            }
-        });
-        leftsplitSortByPanel.add(sortButton);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         leftsplitPanel.add(leftsplitSortByPanel, gridBagConstraints);
@@ -355,7 +363,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weighty = 1.0;
         leftsplitPanel.add(leftsplitInstruTablePanel, gridBagConstraints);
@@ -588,6 +596,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         historySplit.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        historyTablePanel.setMinimumSize(new java.awt.Dimension(100, 200));
+
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -602,7 +612,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         historyTable.getTableHeader().setReorderingAllowed(false);
         historyTablePanel.setViewportView(historyTable);
 
-        historySplit.setLeftComponent(historyTablePanel);
+        historySplit.setTopComponent(historyTablePanel);
 
         checkoutPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -895,11 +905,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             try
             {//TODO delete test print
                 System.out.println("Type: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
-                Instrument in = new Instrument();
-                in.set("Name", addTypeBox.getText());
-                in.set("Brand", addBrandBox.getText());
-                in.set("Serial", addSerialBox.getText());
-                Main.il.add(in);
+                Instrument instru = new Instrument();
+                instru.set("Name", addTypeBox.getText());
+                instru.set("Brand", addBrandBox.getText());
+                instru.set("Serial", addSerialBox.getText());
+                Main.il.add(instru);
                 addDialog.setVisible(false);
                 Main.window.setEnabled(true);
                 Main.window.requestFocus();
@@ -1042,6 +1052,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox searchCombo;
+    private javax.swing.JLabel searchLabel;
     private javax.swing.JTextField serialBox;
     private javax.swing.JLabel serialLabel;
     private javax.swing.JButton showallButton;
