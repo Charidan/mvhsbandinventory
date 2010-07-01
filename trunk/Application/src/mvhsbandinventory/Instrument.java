@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
 
 /**
  * Defines the data related to an instrument stored in the flat-file database.
@@ -58,7 +57,7 @@ public class Instrument
     public void set (String attribute, Object value) throws Exception
     {
         // Prevent people from storing arbitrary values in the instrument
-        if (!attributeList.contains(value))
+        if (!attributeList.contains(attribute))
         {
             throw new Exception("Illegal attribute name.");
         }
