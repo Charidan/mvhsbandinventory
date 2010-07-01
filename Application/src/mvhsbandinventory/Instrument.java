@@ -19,9 +19,10 @@ public class Instrument
 		{ 
 			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
 			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "History", 
-			"NeckStrap"
+			"NeckStrap", "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other"
         };
-    
+
+
     public static List attributeList = Arrays.asList(attributes);
     public static int attributesLength = attributes.length;
 
