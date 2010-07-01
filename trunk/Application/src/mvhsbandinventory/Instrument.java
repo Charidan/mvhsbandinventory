@@ -19,7 +19,8 @@ public class Instrument
 		{ 
 			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
 			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "History", 
-			"NeckStrap", "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other"
+			"NeckStrap", "Renter", "SchoolYear", "DateOut", "Fee", "Period", 
+            "Other", "Contract"
         };
 
 

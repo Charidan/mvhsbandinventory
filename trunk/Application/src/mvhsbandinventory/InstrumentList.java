@@ -21,7 +21,8 @@ public class InstrumentList
 		{ 
 			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
 			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
-            "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other"
+            "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
+            "Contract"
 
         };
 
