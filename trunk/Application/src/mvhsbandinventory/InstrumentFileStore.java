@@ -140,7 +140,12 @@ public class InstrumentFileStore extends InstrumentStore
                 {
                     table[c][r] = list.get(r - 1);
                 }
-            } else
+            } 
+            else if (value == null)
+            {
+				table[c][dataStart] = "";
+			}
+            else
             {
                 table[c][dataStart] = (String) value;
             }
