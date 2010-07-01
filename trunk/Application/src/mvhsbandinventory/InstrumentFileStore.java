@@ -141,10 +141,6 @@ public class InstrumentFileStore extends InstrumentStore
                     table[c][r] = list.get(r - 1);
                 }
             } 
-            else if (value == null)
-            {
-				table[c][dataStart] = "";
-			}
             else
             {
                 table[c][dataStart] = (String) value;
@@ -213,11 +209,11 @@ public class InstrumentFileStore extends InstrumentStore
 
             if (width == 0)
             {
-                width = cells.length;
-                table = new String[width][height];
+                table = new String[cells.length][height];
             }
 
-            for (int c = 0; c < width; c++)
+            int length = cells.length;
+            for (int c = 0; c < length; c++)
             {
                 table[c][r] = cells[c];
             }
@@ -239,7 +235,8 @@ public class InstrumentFileStore extends InstrumentStore
                 ArrayList<String> value = new ArrayList<String>();
                 for (int r = 1; r < height; r++)
                 {
-                    value.add(table[c][r]);
+                    String raw = table[c][r];
+                    value.add((raw.equals("null")) ? null : raw);
                 }
 
                 try
@@ -257,7 +254,7 @@ public class InstrumentFileStore extends InstrumentStore
                 String value = table[c][1];
                 try
                 {
-                    instrument.set(attribute, value);
+                    instrument.set(attribute, (value.equals("null") ? null : value));
                 } catch (Exception ex)
                 {
                     Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
@@ -375,7 +372,9 @@ public class InstrumentFileStore extends InstrumentStore
             // Load all of the file into our buffer string
             while ((line = reader.readLine()) != null)
             {
-                lines.add(line);
+                if (!line.equals("") && line != null) {
+                    lines.add(line);
+                }
             }
         } catch (FileNotFoundException ex)
         {
