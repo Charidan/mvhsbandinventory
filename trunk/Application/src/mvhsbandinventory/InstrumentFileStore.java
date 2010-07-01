@@ -141,6 +141,10 @@ public class InstrumentFileStore extends InstrumentStore
                     table[c][r] = list.get(r - 1);
                 }
             } 
+            else if ("".equals(value) || " ".equals(value))
+            {
+				table[c][dataStart] = null;
+			}
             else
             {
                 table[c][dataStart] = (String) value;
