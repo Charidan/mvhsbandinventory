@@ -24,7 +24,7 @@ public class Main
      */
     public static void main(String[] args)
     {
-        ifs = new InstrumentFileStore("C:/csvTest");
+        ifs = new InstrumentFileStore("/home/jonathan/csvtest");
         il = new InstrumentList(ifs);
         window = new JFrame();
         panel = new Display();
