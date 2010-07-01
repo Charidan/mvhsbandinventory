@@ -8,8 +8,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -24,7 +26,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public Display()
     {
         initComponents();
-        for(String s: Instrument.attributes)
+        for(String s : Instrument.attributes)
         {
             searchCombo.addItem(s);
             sortCombo.addItem(s);
@@ -32,7 +34,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         resetTable();
 
-        //TODO: remove crappy test code.
+    //TODO: remove crappy test code.
 //        instruBox.setText("Flute");
 //        brandBox.setText("Yamaha");
 //        serialBox.setText("4B212A");
@@ -44,25 +46,34 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 //        capCombo.setSelectedIndex(2);
 //        bowCombo.setSelectedIndex(3);
 //        notesTPane.setText("It's shiny, like a flute, but it's slightly flat.");
-        
+
     }
-    
+
     public void resetTable()
     {
-        int s = Main.il.size();
-        String[][] rows = new String[s][3];
-        for(int i = 0; i < s; i++)
+        int s = Main.il.size() - 1;
+        String[][] data;
+        if(s > 0)
         {
-            Instrument instru = Main.il.get(i);
-            rows[i][0] = (String) instru.get("Type");
-            rows[i][1] = (String) instru.get("Brand");
-            rows[i][2] = (String) instru.get("Serial");
+            data = new String[s][3];
+            for(int i = 0; i < s; i++)
+            {
+                Instrument instru = Main.il.get(i);
+                data[i][0] = (String) instru.get("Type");
+                data[i][1] = (String) instru.get("Brand");
+                data[i][2] = (String) instru.get("Serial");
+            }
+        } else
+        {
+            data = new String[1][3];
+            data[0][0] = "No";
+            data[0][1] = "Instruments";
+            data[0][2] = "Found";
         }
-        String[] cols = new String[3];
-        cols[0] = "Type";
-        cols[1] = "Brand";
-        cols[2] = "Serial";
-        instruTable = new JTable(rows, cols);
+        System.out.println("data: "+data[0][0]);
+        instruTable = new JTable(new InstrumentTableModel(data));
+        leftsplitinstruTablePane = new JScrollPane(instruTable);
+        instruTable.setFillsViewportHeight(true);
     }
 
     public Instrument getTableSelected()
@@ -91,7 +102,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
+                    "An Error has occurred while saving the instrument:\n" + ex.getMessage(),
                     "Save Failed",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -138,7 +149,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
+                    "An Error has occurred while saving the instrument:\n" + ex.getMessage(),
                     "Save Failed",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -190,7 +201,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         showallButton = new javax.swing.JButton();
         advSearchButton = new javax.swing.JButton();
         leftsplitSortByPanel = new javax.swing.JPanel();
-        leftsplitInstruTablePanel = new javax.swing.JScrollPane();
+        leftsplitinstruTablePane = new javax.swing.JScrollPane();
         instruTable = new javax.swing.JTable();
         leftsplitaddButtonPanel = new javax.swing.JPanel();
         addButton = new javax.swing.JButton();
@@ -431,7 +442,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 instruTableMouseClicked(evt);
             }
         });
-        leftsplitInstruTablePanel.setViewportView(instruTable);
+        leftsplitinstruTablePane.setViewportView(instruTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -439,7 +450,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weighty = 1.0;
-        leftsplitPanel.add(leftsplitInstruTablePanel, gridBagConstraints);
+        leftsplitPanel.add(leftsplitinstruTablePane, gridBagConstraints);
 
         addButton.setText("ADD NEW INSTRUMENT");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -915,7 +926,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         int n = JOptionPane.showConfirmDialog(jopDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         switch(n)
         {//TODO: Hook the delete confirmation dialog to something.
-            case JOptionPane.YES_OPTION: Main.il.delete(getTableSelected());
+            case JOptionPane.YES_OPTION:
+                Main.il.delete(getTableSelected());
         }
         Main.window.setEnabled(true);
         Main.window.requestFocus();
@@ -944,7 +956,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         advsearchPanel.removeAll();
         advsearchAddFieldButtonActionPerformed(evt);
         advsearchDialog.setMinimumSize(new Dimension(470, 150));
-        advsearchDialog.setSize(0,0);
+        advsearchDialog.setSize(0, 0);
 }//GEN-LAST:event_advsearchResetButtonActionPerformed
 
     private void advsearchCancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchCancelButtonActionPerformed
@@ -975,14 +987,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         JTextField txt = new JTextField();
         txt.setColumns(20);
         advsearchPanel.add(txt, gbc);
-        
+
         advsearchPanel.add(advsearchAddFieldButton, gbc);
         advsearchPanel.add(advsearchButtonPanel, gbc);
 
         Dimension size = advsearchDialog.getSize();
         Dimension minSize = advsearchDialog.getMinimumSize();
-        advsearchDialog.setSize(size.width, size.height+25);
-        minSize.setSize(minSize.width, minSize.height+25);
+        advsearchDialog.setSize(size.width, size.height + 25);
+        minSize.setSize(minSize.width, minSize.height + 25);
         advsearchDialog.setMinimumSize(minSize);
     }//GEN-LAST:event_advsearchAddFieldButtonActionPerformed
 
@@ -1007,7 +1019,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             {//TODO delete test print
                 System.out.println("Name: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
                 Instrument instru = new Instrument();
-                for(String att: Instrument.attributes) instru.set(att, "");
+                for(String att : Instrument.attributes) instru.set(att, "");
                 instru.set("Name", addTypeBox.getText());
                 instru.set("Brand", addBrandBox.getText());
                 instru.set("Serial", addSerialBox.getText());
@@ -1017,7 +1029,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 instru.set("Period", "0");
                 instru.set("Fee", "Unpaid");
                 instru.set("Contract", "Uncreated");
-                
+
                 Main.il.add(instru);
                 addDialog.setVisible(false);
                 Main.window.setEnabled(true);
@@ -1025,9 +1037,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             } catch(Exception ex)
             {
                 JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while creating the instrument:\n"+ex.getMessage(),
-                    "Instrument Creation Failed",
-                    JOptionPane.ERROR_MESSAGE);
+                        "An Error has occurred while creating the instrument:\n" + ex.getMessage(),
+                        "Instrument Creation Failed",
+                        JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -1121,10 +1133,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel instrumentLabel;
     private javax.swing.JDialog jopDialog;
     private javax.swing.JPanel leftsplitButtonPanel;
-    private javax.swing.JScrollPane leftsplitInstruTablePanel;
     private javax.swing.JPanel leftsplitPanel;
     private javax.swing.JPanel leftsplitSortByPanel;
     private javax.swing.JPanel leftsplitaddButtonPanel;
+    private javax.swing.JScrollPane leftsplitinstruTablePane;
     private javax.swing.JComboBox ligCombo;
     private javax.swing.JLabel ligatureLabel;
     private javax.swing.JButton lostButton;
@@ -1163,4 +1175,67 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField valueBox;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
+
+    class InstrumentTableModel extends AbstractTableModel
+    {
+
+        private String[] columnNames =
+        {
+            "Type", "Brand", "Serial #"
+        };
+        private String[][] data;
+
+        public InstrumentTableModel(String[][] data)
+        {
+            this.data = data;
+        }
+
+        public int getColumnCount()
+        {
+            return columnNames.length;
+        }
+
+        public int getRowCount()
+        {
+            return data.length;
+        }
+
+        @Override
+        public String getColumnName(int col)
+        {
+            return columnNames[col];
+        }
+
+        public Object getValueAt(int row, int col)
+        {
+            return data[row][col];
+        }
+
+        @Override
+        public Class getColumnClass(int c)
+        {
+            return String.class;
+        }
+
+        /*
+         * Don't need to implement this method unless your table's
+         * editable.
+         */
+        @Override
+        public boolean isCellEditable(int row, int col)
+        {
+            return false;
+        }
+
+        /*
+         * Don't need to implement this method unless your table's
+         * data can change.
+         */
+        @Override
+        public void setValueAt(Object value, int row, int col)
+        {
+            data[row][col] = (String) value;
+            fireTableCellUpdated(row, col);
+        }
+    }
 }
