@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class InstrumentList
 {
-    private List list;
+    private List<Instrument> list;
     private InstrumentStore store;
     
     public static String[] singles = 
@@ -39,7 +39,7 @@ public class InstrumentList
         
 		// Load all of the items from the datastore and put them into our 
 		// private ArrayList
-		list = new ArrayList(Arrays.asList(store.load()));
+		list = new ArrayList<Instrument>(Arrays.asList(store.load()));
     }
 	
 	/**
@@ -201,7 +201,7 @@ public class InstrumentList
 	 */
     public Instrument get (int index)
     {
-        return (Instrument) list.get(index);
+        return list.get(index);
     }
     
     /**
