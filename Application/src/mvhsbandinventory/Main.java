@@ -17,7 +17,6 @@ public class Main
     public static JFrame window;
     public static Display panel;
     public static InstrumentFileStore ifs;
-    public static InstrumentList il;
 
     /**
      * @param args the command line arguments
@@ -25,9 +24,8 @@ public class Main
     public static void main(String[] args)
     {
         ifs = new InstrumentFileStore("/home/jonathan/csvtest");
-        il = new InstrumentList(ifs);
         window = new JFrame();
-        panel = new Display();
+        panel = new Display(new InstrumentList(ifs));
 
         window.add(panel);
         window.setTitle("MVHS - Band Inventory");

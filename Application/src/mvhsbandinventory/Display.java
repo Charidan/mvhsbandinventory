@@ -21,18 +21,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 {
 
     private Object bean;
+    private InstrumentList instruments;
 
     /** Creates new customizer DispTest */
-    public Display()
+    public Display(InstrumentList instruments)
     {
+        this.instruments = instruments;
         initComponents();
         for(String s : Instrument.attributes)
         {
             searchCombo.addItem(s);
             sortCombo.addItem(s);
         }
-
-        resetTable();
 
     //TODO: remove crappy test code.
 //        instruBox.setText("Flute");
@@ -49,37 +49,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     }
 
-    public void resetTable()
-    {
-        int s = Main.il.size() - 1;
-        String[][] data;
-        if(s > 0)
-        {
-            data = new String[s][3];
-            for(int i = 0; i < s; i++)
-            {
-                Instrument instru = Main.il.get(i);
-                data[i][0] = (String) instru.get("Type");
-                data[i][1] = (String) instru.get("Brand");
-                data[i][2] = (String) instru.get("Serial");
-            }
-        } else
-        {
-            data = new String[1][3];
-            data[0][0] = "No";
-            data[0][1] = "Instruments";
-            data[0][2] = "Found";
-        }
-        System.out.println("data: "+data[0][0]);
-        instruTable = new JTable(new InstrumentTableModel(data));
-        leftsplitinstruTablePane = new JScrollPane(instruTable);
-        instruTable.setFillsViewportHeight(true);
-    }
-
     public Instrument getTableSelected()
     {
         int i = instruTable.getSelectedRow();
-        return Main.il.get((String) instruTable.getValueAt(i, 0),
+        return instruments.get((String) instruTable.getValueAt(i, 0),
                 (String) instruTable.getValueAt(i, 1),
                 (String) instruTable.getValueAt(i, 2));
     }
@@ -98,7 +71,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Bow", bowCombo.getSelectedItem());
             instru.set("NeckStrap", statusCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
-            Main.il.update(instru);
+            instruments.update(instru);
         } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
@@ -145,7 +118,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Fee", feeCombo);
             instru.set("Period", periodCombo);
             instru.set("Other", otherBox);
-            Main.il.update(instru);
+            instruments.update(instru);
         } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
@@ -425,17 +398,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         leftsplitPanel.add(leftsplitSortByPanel, gridBagConstraints);
 
-        instruTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        instruTable.setModel(instruments);
         instruTable.getTableHeader().setReorderingAllowed(false);
         instruTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -927,7 +890,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         switch(n)
         {//TODO: Hook the delete confirmation dialog to something.
             case JOptionPane.YES_OPTION:
-                Main.il.delete(getTableSelected());
+                instruments.delete(getTableSelected());
         }
         Main.window.setEnabled(true);
         Main.window.requestFocus();
@@ -1030,7 +993,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 instru.set("Fee", "Unpaid");
                 instru.set("Contract", "Uncreated");
 
-                Main.il.add(instru);
+                instruments.add(instru);
                 addDialog.setVisible(false);
                 Main.window.setEnabled(true);
                 Main.window.requestFocus();
@@ -1048,7 +1011,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void sortButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortButtonActionPerformed
     {//GEN-HEADEREND:event_sortButtonActionPerformed
         String s = (String) sortCombo.getSelectedItem();
-        Main.il.sort(s, true);
+        instruments.sort(s, true);
     }//GEN-LAST:event_sortButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
@@ -1175,67 +1138,4 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField valueBox;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
-
-    class InstrumentTableModel extends AbstractTableModel
-    {
-
-        private String[] columnNames =
-        {
-            "Type", "Brand", "Serial #"
-        };
-        private String[][] data;
-
-        public InstrumentTableModel(String[][] data)
-        {
-            this.data = data;
-        }
-
-        public int getColumnCount()
-        {
-            return columnNames.length;
-        }
-
-        public int getRowCount()
-        {
-            return data.length;
-        }
-
-        @Override
-        public String getColumnName(int col)
-        {
-            return columnNames[col];
-        }
-
-        public Object getValueAt(int row, int col)
-        {
-            return data[row][col];
-        }
-
-        @Override
-        public Class getColumnClass(int c)
-        {
-            return String.class;
-        }
-
-        /*
-         * Don't need to implement this method unless your table's
-         * editable.
-         */
-        @Override
-        public boolean isCellEditable(int row, int col)
-        {
-            return false;
-        }
-
-        /*
-         * Don't need to implement this method unless your table's
-         * data can change.
-         */
-        @Override
-        public void setValueAt(Object value, int row, int col)
-        {
-            data[row][col] = (String) value;
-            fireTableCellUpdated(row, col);
-        }
-    }
 }
