@@ -64,12 +64,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             Instrument instru = getTableSelected();
             instru.set("Rank", rankBox.getText());
             instru.set("Value", valueBox.getText());
-            instru.set("Status", statusCombo.getSelectedItem());
-            instru.set("Ligature", ligCombo.getSelectedItem());
-            instru.set("Mouthpiece", mpieceCombo.getSelectedItem());
-            instru.set("Caps", capCombo.getSelectedItem());
-            instru.set("Bow", bowCombo.getSelectedItem());
-            instru.set("NeckStrap", statusCombo.getSelectedItem());
+            instru.set("Status", (String) statusCombo.getSelectedItem());
+            instru.set("Ligature", (String) ligCombo.getSelectedItem());
+            instru.set("Mouthpiece", (String) mpieceCombo.getSelectedItem());
+            instru.set("Caps", (String) capCombo.getSelectedItem());
+            instru.set("Bow", (String) bowCombo.getSelectedItem());
+            instru.set("NeckStrap", (String) statusCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
             instruments.update(instru);
         } catch(Exception ex)
@@ -112,12 +112,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         try
         {
             Instrument instru = getTableSelected();
-            instru.set("Renter", renterBox);
-            instru.set("SchoolYear", schoolyearBox);
-            instru.set("DateOut", dateoutBox);
-            instru.set("Fee", feeCombo);
-            instru.set("Period", periodCombo);
-            instru.set("Other", otherBox);
+            instru.set("Renter", renterBox.getText());
+            instru.set("SchoolYear", schoolyearBox.getText());
+            instru.set("DateOut", dateoutBox.getText());
+            instru.set("Fee", (String) feeCombo.getSelectedItem());
+            instru.set("Period", (String) periodCombo.getSelectedItem());
+            instru.set("Other", otherBox.getText());
             instruments.update(instru);
         } catch(Exception ex)
         {
