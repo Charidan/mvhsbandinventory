@@ -8,10 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -360,6 +357,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         searchButton.setText("Search");
         searchButton.setPreferredSize(null);
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -835,6 +837,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         cancelButton.setText("CANCEL CHANGES");
         cancelButton.setPreferredSize(null);
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         rightsplitButtonPanel.add(cancelButton);
 
         deleteButton.setText("DELETE INSTRUMENT");
@@ -855,12 +862,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void searchComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchComboActionPerformed
     {//GEN-HEADEREND:event_searchComboActionPerformed
-        // TODO add your handling code here:
+        searchButtonActionPerformed(evt);
 }//GEN-LAST:event_searchComboActionPerformed
 
     private void searchBarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchBarActionPerformed
     {//GEN-HEADEREND:event_searchBarActionPerformed
-        // TODO add your handling code here:
+        searchButtonActionPerformed(evt);
 }//GEN-LAST:event_searchBarActionPerformed
 
     private void instruBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_instruBoxActionPerformed
@@ -1004,7 +1011,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                         "Instrument Creation Failed",
                         JOptionPane.ERROR_MESSAGE);
             }
-
         }
     }//GEN-LAST:event_addAcceptButtonActionPerformed
 
@@ -1043,6 +1049,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         statusCombo.setSelectedItem("On Loan");
         saveHistory();
 }//GEN-LAST:event_checkoutButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchButtonActionPerformed
+    {//GEN-HEADEREND:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
+    {//GEN-HEADEREND:event_cancelButtonActionPerformed
+        displayInstrument();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
