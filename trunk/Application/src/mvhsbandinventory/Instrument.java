@@ -13,18 +13,18 @@ import java.util.Map;
  */
 public class Instrument
 {
-    private Map properties = new HashMap();
+    private Map<String,String> properties = new HashMap<String,String>();
 
     public static String[] attributes = 
 		{ 
 			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
-			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "History", 
-			"NeckStrap", "Renter", "SchoolYear", "DateOut", "Fee", "Period", 
-            "Other", "Contract"
+			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
+            "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
+            "Contract", "History"
         };
 
 
-    public static List attributeList = Arrays.asList(attributes);
+    public static List<String> attributeList = Arrays.asList(attributes);
     public static int attributesLength = attributes.length;
 
     /**
@@ -40,7 +40,7 @@ public class Instrument
      * @param properties
      * @throws Exception
      */
-    public Instrument (Object[] properties) throws Exception {
+    public Instrument (String[] properties) throws Exception {
         for (int i = 0; i < attributesLength; i++) {
             set(attributes[i], properties[i]);
         }
@@ -56,7 +56,7 @@ public class Instrument
      * @param value
      * @throws Exception
      */
-    public void set (String attribute, Object value) throws Exception
+    public void set (String attribute, String value) throws Exception
     {
         // Prevent people from storing arbitrary values in the instrument
         if (!attributeList.contains(attribute))
@@ -74,7 +74,7 @@ public class Instrument
      * @param attribute
      * @return value
      */
-    public Object get (String attribute)
+    public String get (String attribute)
     {
         return properties.get(attribute);
     }

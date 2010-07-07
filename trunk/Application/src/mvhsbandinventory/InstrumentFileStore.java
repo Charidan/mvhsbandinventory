@@ -9,10 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,8 +19,8 @@ public class InstrumentFileStore extends InstrumentStore
 {
 
     private File directory;
-    public static String horizontalSeparator = ",";
-    public static String verticalSeparator = System.getProperty("line.separator");
+    public static String H_SEP = ",";
+    public static String V_SEP = System.getProperty("line.separator");
 
     /**
      * Constructs a new InstrumentFileStore object for storing Instrument
@@ -163,7 +160,7 @@ public class InstrumentFileStore extends InstrumentStore
             {
                 String cell = table[c][r];
                 rowBuffer += (c != width - 1)
-                        ? cell + horizontalSeparator : cell + verticalSeparator;
+                        ? cell + H_SEP : cell + V_SEP;
             }
 
             buffer += rowBuffer;
@@ -209,7 +206,7 @@ public class InstrumentFileStore extends InstrumentStore
         for (int r = 0; r < height; r++)
         {
             String row = rows.get(r);
-            String[] cells = row.split(horizontalSeparator);
+            String[] cells = row.split(H_SEP);
 
             if (width == 0)
             {
@@ -245,10 +242,11 @@ public class InstrumentFileStore extends InstrumentStore
 
                 try
                 {
-                    instrument.set(attribute, value);
+                    //instrument.set(attribute, value);
+                    //TODO fix history handling
                 } catch (Exception ex)
                 {
-                    Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
             }
             else
@@ -261,7 +259,7 @@ public class InstrumentFileStore extends InstrumentStore
                     instrument.set(attribute, (value.equals("null") ? null : value));
                 } catch (Exception ex)
                 {
-                    Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
             }
         }
@@ -313,7 +311,6 @@ public class InstrumentFileStore extends InstrumentStore
             pointer.close();
         } catch (IOException ex)
         {
-            Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -382,10 +379,9 @@ public class InstrumentFileStore extends InstrumentStore
             }
         } catch (FileNotFoundException ex)
         {
-            Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (IOException ex)
         {
-            Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
         } finally
         {
             try
@@ -393,7 +389,6 @@ public class InstrumentFileStore extends InstrumentStore
                 reader.close();
             } catch (IOException ex)
             {
-                Logger.getLogger(InstrumentFileStore.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

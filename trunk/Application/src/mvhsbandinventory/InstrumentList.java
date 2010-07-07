@@ -301,17 +301,17 @@ public class InstrumentList extends AbstractTableModel
             {
                 case 0:
                 {
-                    instru.set("Name", value);
+                    instru.set("Name", (String) value);
                     break;
                 }
                 case 1:
                 {
-                    instru.set("Brand", value);
+                    instru.set("Brand", (String) value);
                     break;
                 }
                 case 2:
                 {
-                    instru.set("Serial", value);
+                    instru.set("Serial", (String) value);
                     break;
                 }
             }
