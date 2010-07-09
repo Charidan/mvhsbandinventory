@@ -19,11 +19,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private Object bean;
     private InstrumentList instruments;
+    private HistoryTableModel histModel;
 
     /** Creates new customizer DispTest */
     public Display(InstrumentList instruments)
     {
         this.instruments = instruments;
+        histModel = new HistoryTableModel(this);
         initComponents();
         for(String s : Instrument.attributes)
         {
@@ -49,6 +51,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public Instrument getTableSelected()
     {
         int i = instruTable.getSelectedRow();
+        if(i < 0) return Instrument.NULL_INSTRUMENT;
         return instruments.get((String) instruTable.getValueAt(i, 0),
                 (String) instruTable.getValueAt(i, 1),
                 (String) instruTable.getValueAt(i, 2));
@@ -102,6 +105,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         feeCombo.setSelectedItem((String) instru.get("Fee"));
         periodCombo.setSelectedItem((String) instru.get("Period"));
         otherBox.setText((String) instru.get("Other"));
+
+        //set the History table
+        histModel.fireTableDataChanged();
     }
 
     public void saveHistory()
@@ -647,17 +653,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         historyTablePanel.setMinimumSize(new java.awt.Dimension(100, 200));
 
-        historyTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        historyTable.setModel(histModel);
         historyTable.getTableHeader().setReorderingAllowed(false);
         historyTablePanel.setViewportView(historyTable);
 

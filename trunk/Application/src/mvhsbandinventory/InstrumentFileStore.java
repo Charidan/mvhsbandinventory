@@ -1,14 +1,15 @@
 package mvhsbandinventory;
 
+import au.com.bytecode.opencsv.CSVParser;
+import au.com.bytecode.opencsv.CSVWriter;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,10 +18,7 @@ import java.util.List;
  */
 public class InstrumentFileStore extends InstrumentStore
 {
-
     private File directory;
-    public static String H_SEP = ",";
-    public static String V_SEP = System.getProperty("line.separator");
 
     /**
      * Constructs a new InstrumentFileStore object for storing Instrument
@@ -64,207 +62,73 @@ public class InstrumentFileStore extends InstrumentStore
         return getFile(name, brand, serial);
     }
 
-    /**
-     * Serializes the data contained in the instrument into a CSV string that
-     * can be written to a file.  The data in the instrument will be written
-     * such that there will be one attribute of the instrument per column, with
-     * the first row of each column containing the key name.  The second row
-     * will contain the key value.  If the key value is an ArrayList (rather
-     * than a string, the array list will be written to the string, one item per
-     * row, starting at the second row.
-     *
-     * The attributes parameter allows you to choose a subset of the attributes
-     * specified as valid in the Instrument.attributes static array.
-     *
-     * If the omitHeadings parameter is set to true, then there will be no
-     * headings printed at the top of the CSV output.  This is useful if one is
-     * serializing multiple Instrument objects into a large list.
-     * @param instrument
-     * @param attributes
-     * @param omitHeadings
-     * @return csv-serialized instrument string
-     */
-    public static String serialize(Instrument instrument, String[] attributes,
-            boolean omitHeadings)
+    public static List<String[]> prepare(Instrument instrument, 
+                                         String[] attributes,
+                                         boolean includeHistory)
     {
-        int height = 1;
-        int width = attributes.length;
-        int headingStart = 0;
-        int dataStart = 0;
+        List<String[]> rows = new ArrayList<String[]>();
 
-        // Determine if there (a) are any ArrayLists in the Instrument and (b)
-        // what the size of the largest ArrayList in the Instrument is
-        for (String key : attributes)
+        // Prepare all of the attributes for storage in the CSV file
+        for (String attribute : attributes)
         {
-            Object value = instrument.get(key);
+            String value = instrument.get(attribute);
+            String[] row = new String[2];
 
-            if (value instanceof ArrayList)
-            {
-                ArrayList<String> list = (ArrayList<String>) value;
-                height = (list.size() > height) ? list.size() : height;
-            }
+            row[0] = attribute;
+            row[1] = value;
+
+            rows.add(row);
         }
 
-        // If we're adding headings to the CSV file, we'll increase the set
-        // height by one to accomodate the header and change the dataStart
-        // variable to one to allow the data to be below the header
-        if (omitHeadings == false)
+        // If requested, prepare all of the history items for storage in the
+        // CSV file; we're adding "History" as a heading before that item
+        if (includeHistory)
         {
-            height += 1;
-            dataStart = 1;
+            List<String> history = instrument.getHistory();
+            history.add(0, "History");
+            String[] row = (String[]) history.toArray();
+
+            rows.add(row);
         }
 
-        // Generate a two-dimensional array to be turned into our CSV file
-        String[][] table = new String[width][height];
-
-        // Insert our data into the two-dimensional array so that we have a
-        // table that we will generate a CSV file out of
-        for (int c = 0; c < width; c++)
-        {
-            String key = attributes[c];
-            Object value = instrument.get(key);
-
-            if (omitHeadings == false)
-            {
-                table[c][headingStart] = key;
-            }
-
-            if (value instanceof ArrayList)
-            {
-                ArrayList<String> list = (ArrayList<String>) value;
-                int length = list.size();
-                for (int r = dataStart; r <= length; r++)
-                {
-                    table[c][r] = list.get(r - 1);
-                }
-            } 
-            else if ("".equals(value) || " ".equals(value))
-            {
-				table[c][dataStart] = null;
-			}
-            else
-            {
-                table[c][dataStart] = (String) value;
-            }
-        }
-
-        // Serialize this table into CSV format so that we can later write the
-        // data to file
-        String buffer = "";
-
-        for (int r = 0; r < height; r++)
-        {
-            String rowBuffer = "";
-
-            for (int c = 0; c < width; c++)
-            {
-                String cell = table[c][r];
-                rowBuffer += (c != width - 1)
-                        ? cell + H_SEP : cell + V_SEP;
-            }
-
-            buffer += rowBuffer;
-        }
-
-        return buffer;
+        return rows;
     }
 
-    /**
-     * A convenience version of the InstrumentFileStore.serialize function that
-     * exports every valid property specified in the Instrument.attributes
-     * static array.  Note that with this function, headers will not be omitted.
-     * @param instrument
-     * @return csv-serialized instrument string
-     */
-    public static String serialize(Instrument instrument)
+    public static List<String[]> prepare(Instrument instrument)
     {
-        return serialize(instrument, Instrument.attributes, false);
+        return prepare(instrument, Instrument.attributes, true);
     }
 
-    /**
-     * Parse the data serialized in CSV format (presumably with the
-     * InstrumentFileStore.serialize method) into an Instrument object.  See the
-     * documentation for the InstrumentFileStore.serialize method for more
-     * details on the serialization format for the CSV file.
-     *
-     * Note that this function will only correctly unserialize data created with
-     * the serialize function if the serialize function is set up to not omit
-     * headings.
-     * @param csv-serialized instrument
-     * @return instrument object
-     */
-    public static Instrument unserialize(List<String> rows)
+    public static Instrument parse(List<String> rows)
     {
-        // Create a two-dimensional array that will hold our CSV data
-        String[][] table = null;
-
-        // Now, we're going to further split the rows into individual cells and
-        // determine the width of the table specified in the serialized data
-        int height = rows.size();
-        int width = 0;
-
-        for (int r = 0; r < height; r++)
-        {
-            String row = rows.get(r);
-            String[] cells = row.split(H_SEP);
-
-            if (width == 0)
-            {
-                table = new String[cells.length][height];
-            }
-
-            int length = cells.length;
-            for (int c = 0; c < length; c++)
-            {
-                table[c][r] = cells[c];
-            }
-        }
-
-        // Create an Instrument object and fill in the data from the two-
-        // dimensional array
+        CSVParser parser = new CSVParser();
         Instrument instrument = new Instrument();
 
-        for (int c = 0; c < width; c++)
+        try
         {
-            String attribute = table[c][0];
-
-            // Infer the data type from the arrangement of data in the cells
-            if (table[c].length > 2)
+            for (String row : rows)
             {
-                // There is content in the third row, meaning that there is an
-                // array of items; we need to extract an arraylist of items
-                ArrayList<String> value = new ArrayList<String>();
-                for (int r = 1; r < height; r++)
-                {
-                    String raw = table[c][r];
-                    value.add((raw.equals("null")) ? null : raw);
-                }
+                String[] cells = parser.parseLine(row);
+                String attribute = cells[0];
 
-                try
+                if ("History".equals(attribute))
                 {
-                    //instrument.set(attribute, value);
-                    //TODO fix history handling
-                } catch (Exception ex)
-                {
-                    
+                    List<String> history = Arrays.asList(cells);
+                    history.remove(0);
+                    instrument.setHistory(history);
                 }
-            }
-            else
-            {
-                // There's only one value for the field--there is just a string
-                // for this field
-                String value = table[c][1];
-                try
+                else
                 {
-                    instrument.set(attribute, (value.equals("null") ? null : value));
-                } catch (Exception ex)
-                {
-                    
+                    String value = cells[1];
+                    instrument.set(attribute, value);
                 }
             }
         }
-
-        return instrument;
+        catch (Exception e) {}
+        finally
+        {
+            return instrument;
+        }
     }
 
     /**
@@ -300,17 +164,27 @@ public class InstrumentFileStore extends InstrumentStore
      */
     public void update(Instrument instrument)
     {
+        CSVWriter writer = null;
+        
         try
         {
-            // Serialize the file
-            String csv = serialize(instrument);
-            // Write the serialized instrument to the appropriate file on disk
+            // Prepare the data in the Instrument object for being written to
+            // the disk drive
+            List<String[]> table = prepare(instrument);
+
+            // Use the opencsv library to write the data to the disk drive
             File file = getFile(instrument);
-            Writer pointer = new BufferedWriter(new FileWriter(file));
-            pointer.write(csv);
-            pointer.close();
-        } catch (IOException ex)
-        {
+            writer = new CSVWriter(new FileWriter(file));
+            writer.writeAll(table);
+        } 
+        catch (IOException ex) {}
+        finally {
+            // Make sure that the IO actually gets closed so that we don't have
+            // any random file locks floating around
+            try
+            {
+                writer.close();
+            } catch (IOException ex) {}
         }
     }
 
@@ -377,23 +251,20 @@ public class InstrumentFileStore extends InstrumentStore
                     lines.add(line);
                 }
             }
-        } catch (FileNotFoundException ex)
+        }
+        catch (FileNotFoundException ex) {}
+        catch (IOException ex) {}
+        finally
         {
-            
-        } catch (IOException ex)
-        {
-        } finally
-        {
+            // Make sure that the file reader is closed down properly
             try
             {
                 reader.close();
-            } catch (IOException ex)
-            {
-            }
+            } catch (IOException ex) {}
         }
 
         // Return the file after it has been parsed into an Instrument
-        return unserialize(lines);
+        return parse(lines);
     }
 
     /**
