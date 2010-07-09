@@ -24,7 +24,8 @@ public class Main
     public static void main(String[] args)
     {
         //ifs = new InstrumentFileStore("/home/jonathan/csvtest"); //linux
-        ifs = new InstrumentFileStore("C:/csvTest"); //pc
+        //ifs = new InstrumentFileStore("C:/csvTest"); //pc
+        ifs = new InstrumentFileStore("/users/chazgwennap/documents/csvtest"); //mac
         window = new JFrame();
         panel = new Display(new InstrumentList(ifs));
 
