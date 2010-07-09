@@ -1,5 +1,6 @@
 package mvhsbandinventory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,36 +14,33 @@ import java.util.Map;
  */
 public class Instrument
 {
+    public static final Instrument NULL_INSTRUMENT = new Instrument();
     private Map<String,String> properties = new HashMap<String,String>();
+    private List<String> history = new ArrayList<String>();
 
-    public static String[] attributes = 
-		{ 
-			"Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes", 
-			"Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
-            "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
-            "Contract", "History"
-        };
+    public static final String[] attributes =
+    {
+        "Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
+        "Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
+        "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
+        "Contract"
+    };
 
 
-    public static List<String> attributeList = Arrays.asList(attributes);
-    public static int attributesLength = attributes.length;
+    public static final List<String> attributeList = Arrays.asList(attributes);
+    public static final int attributesLength = attributes.length;
 
     /**
      * Constructor for an instrument without any properties.
      */
-    public Instrument () {}
-
-    /**
-     * Constructor for an instrument contructed from the data in an array.  The
-     * values in the array must be arranged in an order corresponding to the
-     * static Instruments.attributes array.
-     *
-     * @param properties
-     * @throws Exception
-     */
-    public Instrument (String[] properties) throws Exception {
-        for (int i = 0; i < attributesLength; i++) {
-            set(attributes[i], properties[i]);
+    public Instrument ()
+    {
+        for(String s: attributes)
+        {
+            try
+            {
+                set(s, "");
+            } catch(Exception ex) {}
         }
     }
 
@@ -77,5 +75,37 @@ public class Instrument
     public String get (String attribute)
     {
         return properties.get(attribute);
+    }
+
+    /**
+     * An accessor that retrieves all of the items stored in the history.
+     *
+     * @return history
+     */
+    public List<String> getHistory ()
+    {
+        return history;
+    }
+
+    /**
+     * A mutator that overwrites the entire history of this object with the
+     * list supplied via the history argument.
+     *
+     * @param history
+     */
+    public void setHistory (List<String> history)
+    {
+        this.history = history;
+    }
+
+    /**
+     * Adds a history line to the history List attached to this object.  The
+     * history line is provided in the form of a string as the first argument
+     *
+     * @param line
+     */
+    public void addHistory (String line)
+    {
+        history.add(line);
     }
 }
