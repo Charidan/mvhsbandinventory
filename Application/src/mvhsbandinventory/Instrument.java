@@ -38,10 +38,7 @@ public class Instrument
     {
         for (String s : attributeList)
         {
-            try
-            {
-                set(s, "");
-            } catch(Exception ex) {}
+           properties.put(s, "");
         }
     }
 
