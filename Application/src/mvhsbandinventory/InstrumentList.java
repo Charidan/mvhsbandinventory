@@ -38,12 +38,17 @@ public class InstrumentList extends AbstractTableModel
      */
     public InstrumentList(InstrumentStore model)
     {
-        // Store our pointer to the store for later use
-        store = model;
+        try {
+            // Store our pointer to the store for later use
+            store = model;
 
-        // Load all of the items from the datastore and put them into our
-        // private ArrayList
-        list = new ArrayList<Instrument>(Arrays.asList(store.load()));
+            // Load all of the items from the datastore and put them into our
+            // private ArrayList
+            list = new ArrayList<Instrument>(Arrays.asList(store.load()));
+        } catch (Exception e) {
+            // The file path was defined incorrectly; find a way to let the user
+            // fix it
+        }
     }
 
     /**
