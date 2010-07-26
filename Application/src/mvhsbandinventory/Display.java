@@ -48,7 +48,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     }
 
-    public Instrument getTableSelected()
+    public Instrument getSelectedInstrument()
     {
         int i = instruTable.getSelectedRow();
         if(i < 0) return Instrument.NULL_INSTRUMENT;
@@ -61,7 +61,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {
         try
         {
-            Instrument instru = getTableSelected();
+            Instrument instru = getSelectedInstrument();
             instru.set("Rank", rankBox.getText());
             instru.set("Value", valueBox.getText());
             instru.set("Status", (String) statusCombo.getSelectedItem());
@@ -83,7 +83,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     public void displayInstrument()
     {
-        Instrument instru = getTableSelected();
+        Instrument instru = getSelectedInstrument();
         //set the Details panel
         statusCombo.setSelectedItem((String) instru.get("Status"));
         instruBox.setText((String) instru.get("Name"));
@@ -114,7 +114,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {
         try
         {
-            Instrument instru = getTableSelected();
+            Instrument instru = getSelectedInstrument();
             instru.set("Renter", renterBox.getText());
             instru.set("SchoolYear", schoolyearBox.getText());
             instru.set("DateOut", dateoutBox.getText());
@@ -775,6 +775,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         formButton.setText("Generate Form");
         formButton.setPreferredSize(null);
+        formButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formButtonActionPerformed(evt);
+            }
+        });
         checkoutButtonPanel.add(formButton);
 
         checkoutButton.setText("Check Out");
@@ -893,7 +898,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         switch(n)
         {//TODO: Hook the delete confirmation dialog to something.
             case JOptionPane.YES_OPTION:
-                instruments.delete(getTableSelected());
+                instruments.delete(getSelectedInstrument());
         }
         Main.window.setEnabled(true);
         Main.window.requestFocus();
@@ -981,11 +986,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     JOptionPane.ERROR_MESSAGE);
         } else
         {
+            //TODO delete test print
+            System.out.println("Name: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
+            Instrument instru = new Instrument();
             try
-            {//TODO delete test print
-                System.out.println("Name: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
-                Instrument instru = new Instrument();
-                for(String att : Instrument.attributes) instru.set(att, "");
+            {
                 instru.set("Name", addTypeBox.getText());
                 instru.set("Brand", addBrandBox.getText());
                 instru.set("Serial", addSerialBox.getText());
@@ -995,11 +1000,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 instru.set("Period", "0");
                 instru.set("Fee", "Unpaid");
                 instru.set("Contract", "Uncreated");
-
-                instruments.add(instru);
-                addDialog.setVisible(false);
-                Main.window.setEnabled(true);
-                Main.window.requestFocus();
             } catch(Exception ex)
             {
                 JOptionPane.showMessageDialog(jopDialog,
@@ -1007,6 +1007,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                         "Instrument Creation Failed",
                         JOptionPane.ERROR_MESSAGE);
             }
+            instruments.add(instru);
+            addDialog.setVisible(false);
+            Main.window.setEnabled(true);
+            Main.window.requestFocus();
         }
     }//GEN-LAST:event_addAcceptButtonActionPerformed
 
@@ -1055,6 +1059,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {//GEN-HEADEREND:event_cancelButtonActionPerformed
         displayInstrument();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void formButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_formButtonActionPerformed
+    {//GEN-HEADEREND:event_formButtonActionPerformed
+        //conGen.generateContract(getSelectedInstrument());
+    }//GEN-LAST:event_formButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
