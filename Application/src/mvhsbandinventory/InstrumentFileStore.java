@@ -271,10 +271,19 @@ public class InstrumentFileStore extends InstrumentStore
      * Loads all of the instruments from the store.
      * @return an array of all of the parsed instruments in the store
      */
-    public Instrument[] load()
+    public Instrument[] load() throws Exception
     {
-        // Get a list of all of the instruments in the store and count them
+        // Get a list of all of the instruments in the store
         File[] files = directory.listFiles();
+        
+        // If there are no files in the directory, don't try to create an array
+        // of instruments of zero length
+        if (files == null)
+        {
+            throw new FileNotFoundException("The directory location for the " +
+                    "storage of instrument files is not valid.");
+        }
+
         int size = files.length;
 
         // Create an array of the instruments with a size equal to the number
