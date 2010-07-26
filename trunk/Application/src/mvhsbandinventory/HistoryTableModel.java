@@ -29,7 +29,7 @@ public class HistoryTableModel extends AbstractTableModel
 
     public int getRowCount()
     {
-        return disp.getTableSelected().getHistory().size();
+        return disp.getSelectedInstrument().getHistory().size();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class HistoryTableModel extends AbstractTableModel
 
     public Object getValueAt(int row, int col)
     {
-        return disp.getTableSelected().getHistory().get(row);
+        return disp.getSelectedInstrument().getHistory().get(row);
     }
 
     @Override
