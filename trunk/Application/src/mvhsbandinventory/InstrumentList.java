@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -103,41 +104,20 @@ public class InstrumentList extends AbstractTableModel
     /**
      * Returns an array of all of the Instrument objects that have the specified
      * value (set by the value argument) set for the the key argument specified.
-     * @param key
-     * @param value
+     * @param parameters - an array of InstrumentAttributeMatcher instances that
+     *      represent all of the conditions for finding instruments
      * @return instrument array subset
      */
-    public Instrument[] selectList(String key, Object value)
+    public Instrument[] selectList(InstrumentAttributeMatcher[] parameters)
     {
         // This is a cache of the length of the list of all of the Instrument
         // objects that we're dealing with so that we can loop through them; we
         // determine this here so that we don't have to recalculate this for
         // every iteration of the loop
         int length = list.size();
-
-        // These are an array of the items that we're selecting and a variable 
-        // to mark the index of the next item to be inserted into the array
-        Instrument[] selection =
-        {
-        };
-        int next = 0;
-
-        // Iterate through all of the items in our memcache of the data store
-        for(int i = 0; i < length; i++)
-        {
-            // Grab the item from the memcache for this index
-            Instrument current = (Instrument) list.get(i);
-
-            // If this item's value for the specified key matches the value 
-            // argument, add it to our selection array
-            if(current.get(key) == value)
-            {
-                selection[next] = current;
-                next++;
-            }
-        }
-
-        return selection;
+        
+        // Return an empty instrument list to keep the build from breaking
+        return new Instrument[0];
     }
 
     /**
