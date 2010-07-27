@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -82,10 +80,7 @@ public class InstrumentList extends AbstractTableModel
             // Delete the item from our local memory cache and to our data store
             list.remove(instrument);
             store.delete(instrument);
-        } catch(Exception ex)
-        {
-            Logger.getLogger(InstrumentList.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch(Exception ex) {}
     }
 
     /**
@@ -102,10 +97,7 @@ public class InstrumentList extends AbstractTableModel
         {
             Comparator comp = new InstrumentAttributeComparator(key, ascending);
             Collections.sort(list, comp);
-        } catch(Exception ex)
-        {
-            Logger.getLogger(InstrumentList.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch(Exception ex) {}
     }
 
     /**
