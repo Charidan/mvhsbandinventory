@@ -51,11 +51,20 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     public Instrument getSelectedInstrument()
     {
-        int i = instruTable.getSelectedRow();
-        if(i < 0) return Instrument.NULL_INSTRUMENT;
-        return instruments.get((String) instruTable.getValueAt(i, 0),
-                (String) instruTable.getValueAt(i, 1),
-                (String) instruTable.getValueAt(i, 2));
+        try
+        {
+            int i = instruTable.getSelectedRow();
+            if(i < 0) return Instrument.NULL_INSTRUMENT;
+            return instruments.get((String) instruTable.getValueAt(i, 0),
+                    (String) instruTable.getValueAt(i, 1),
+                    (String) instruTable.getValueAt(i, 2));
+    
+        }
+        catch (Exception e) {}
+        finally
+        {
+            return Instrument.NULL_INSTRUMENT;
+        }
     }
 
     public void saveDetails()
