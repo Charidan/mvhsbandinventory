@@ -7,6 +7,7 @@ package mvhsbandinventory;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.io.File;
 
 /**
  *
@@ -19,6 +20,12 @@ public class Main
     public static Display panel;
     public static InstrumentFileStore store;
     public static InstrumentList list;
+    public static String[] paths = 
+        {
+            "/home/jonathan/csvtest",
+            "C:/csvTest",
+            "/users/chazgwennap/documents/csvtest"
+        };
 
     /**
      * @param args the command line arguments
@@ -28,11 +35,23 @@ public class Main
         try
         {
             // TODO: Move this file path information into some sort of configuration
-            // file that isn't covered by the version control system so we don't
-            // keep overwriting each others' file paths
+            // file that isn't covered by the version control system
+            int length = paths.length;
+            String path = null;
 
-            // store = new InstrumentFileStore("/home/jonathan/csvtest"); //linux
-            store = new InstrumentFileStore("C:/csvTest"); //pc
+            // Try to find a directory path that actually is valid
+            for (int i = 0; i < length; i++)
+            {
+                String pathString = paths[i];
+                File pathFile = new File(pathString);
+                
+                if (pathFile.exists())
+                {
+                    path = pathString;
+                }
+            }
+
+            store = new InstrumentFileStore(path);
             list = new InstrumentList(store);
 
             window = new JFrame();
@@ -55,7 +74,7 @@ public class Main
                 window,
                 "Unable to load application.  This typically occurs " +
                 "because the file path to the datastore containing the " +
-                "instrument data is incorrect.",
+                "instrument data is not in the array of search paths.",
                 "Unable to load application.",
                 JOptionPane.ERROR_MESSAGE
             );
