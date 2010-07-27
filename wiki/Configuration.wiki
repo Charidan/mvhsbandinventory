@@ -7,7 +7,7 @@ Since the file store path is going to vary significantly between users of the ap
 
 = Creating the Config File =
 
-In NetBeans, right click the `mvhsbandinventory` package in the `Source Packages` directory in the `MVHSBandInventory` project.  Select `New` -> `Other...` in the context menu.  A window will appear with a set of categories and choices in those categories.  In the `Other` category of that window, select `Properties File` and click `Next >`.  Name the file `app` and click `Finish`.  Open up the `app.properties` file for editing and insert the appropriate file store path configuration information.  Examples for each major platform are as follows.
+In !NetBeans, right click the `mvhsbandinventory` package in the `Source Packages` directory in the `MVHSBandInventory` project.  Select `New` -> `Other...` in the context menu.  A window will appear with a set of categories and choices in those categories.  In the `Other` category of that window, select `Properties File` and click `Next >`.  Name the file `app` and click `Finish`.  Open up the `app.properties` file for editing and insert the appropriate file store path configuration information.  Examples for each major platform are as follows.
 
 *After you create this file, please don't commit it to Google Code.*
 
