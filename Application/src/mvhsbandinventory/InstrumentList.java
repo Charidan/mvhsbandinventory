@@ -197,17 +197,25 @@ public class InstrumentList extends AbstractTableModel
      * @return the Instrument object that satisfies all of the requirements that
      * were passed in via arguments
      */
-    public Instrument get(String name, String brand, String serial)
+    public Instrument get(String name, String brand, String serial) throws Exception
     {
+        // We're going to do a sequential search through all of the items to
+        // find the one that matches
+
+        // TODO: Maybe look at using binary search or skip list searching here
+        // to massively improve performance
         int length = list.size();
         for(int i = 0; i < length; i++)
         {
-            Instrument instrument = (Instrument) list.get(i);
-
+            // Retrieve information about the instrument to compare against the
+            // arguments that were passed in
+            Instrument instrument = (Instrument)  list.get(i);
             String testName = (String) instrument.get("Name");
             String testBrand = (String) instrument.get("Brand");
             String testSerial = (String) instrument.get("Serial");
 
+            // Compare against the parameters that were passed in. If those
+            // match, return this instrument
             if(testName.equals(name) &&
                     testBrand.equals(brand) &&
                     testSerial.equals(serial))
@@ -216,7 +224,9 @@ public class InstrumentList extends AbstractTableModel
             }
         }
 
-        return null;
+        // Since we're not supposed to return null, let's throw an error
+        // to indicate that nothing is found
+        throw new Exception("No instruments exist that have those parameters.");
     }
 
     public boolean isEmpty()
