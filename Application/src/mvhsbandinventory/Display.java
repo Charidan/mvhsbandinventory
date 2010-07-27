@@ -27,6 +27,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         this.instruments = instruments;
         histModel = new HistoryTableModel(this);
         initComponents();
+
         for(String s : Instrument.attributes)
         {
             searchCombo.addItem(s);
@@ -1011,6 +1012,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             addDialog.setVisible(false);
             Main.window.setEnabled(true);
             Main.window.requestFocus();
+            
+            // TODO: find some way to update the items in the panel
+            
         }
     }//GEN-LAST:event_addAcceptButtonActionPerformed
 
