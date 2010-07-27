@@ -178,13 +178,16 @@ public class InstrumentFileStore extends InstrumentStore
             writer.writeAll(table);
         } 
         catch (IOException ex) {}
-        finally {
+        finally
+        {
             // Make sure that the IO actually gets closed so that we don't have
             // any random file locks floating around
             try
             {
                 writer.close();
-            } catch (IOException ex) {}
+            } 
+            catch (IOException ex) {}
+            catch (NullPointerException ex) {}
         }
     }
 
