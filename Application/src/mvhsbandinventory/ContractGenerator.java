@@ -54,12 +54,12 @@ public class ContractGenerator
             s.drawLine(170, 668, 475, 668);
             s.moveTextPositionByAmount(-70, -68);
             s.setFont(hb, 12);
-            s.drawString("Instrument:");
+            s.drawString("INSTRUMENT:");
             s.moveTextPositionByAmount(0, -16);
             s.setFont(hb, 12);
-            s.drawString("Make / Model:");
+            s.drawString("MAKE / MODEL:");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("Serial #:");
+            s.drawString("SERIAL #:");
             s.moveTextPositionByAmount(0, -16);
             s.drawString("Replacement Value:");
             s.moveTextPositionByAmount(0, -16);
@@ -83,6 +83,27 @@ public class ContractGenerator
             s.drawString("others or used for non Mountain View High School related activities without the ");
             s.moveTextPositionByAmount(0, -16);
             s.drawString("instructor's consent.");
+            s.moveTextPositionByAmount(0, -80);
+            s.drawString("The above instrument shall be returned upon completion of course, when student is");
+            s.moveTextPositionByAmount(0, -16);
+            s.drawString("no longer required to play this instrument, or upon instructor's request. When the");
+            s.moveTextPositionByAmount(0, -16);
+            s.drawString("instrument is returned and found to be in the same or better condition, this contract");
+            s.moveTextPositionByAmount(0, -16);
+            s.drawString("will become null and void. (Reasonable wear and tear is expected)");
+            s.moveTextPositionByAmount(0, -32);
+            s.setFont(hb, 12);
+            s.drawString("STUDENT:");
+            s.moveTextPositionByAmount(0, -32);
+            s.drawString("PARENT:");
+            s.moveTextPositionByAmount(0, -32);
+            s.drawString("INSTRUCTOR:");
+            s.moveTextPositionByAmount(16, -32);
+            s.setFont(hbo, 12);
+            s.drawString("PLEASE NOTE ANY DENTS OR OTHER IMPERFECTIONS BEFORE SIGNING!");
+            s.setFont(hbo, 20);
+            s.moveTextPositionByAmount(0, 224);
+            s.drawString("NOTE: $50 cleaning fee per year or season is required.");
 
 
 
@@ -92,9 +113,17 @@ public class ContractGenerator
             try
             {
                 document.save("C:/csvTest/hello.pdf");
-            } catch (COSVisitorException ex)
+            } catch (Exception ex)
             {
-                System.out.println("Oops v2" +ex);
+                System.out.println("you might not be using a pc" +ex);
+                try
+                {
+                    document.save("/Users/chazgwennap/Documents/pdftest/hello.pdf");
+                }
+                catch (Exception exe)
+                {
+                    System.out.println("Oops v2" +exe);
+                }
             }
             document.close();
 
