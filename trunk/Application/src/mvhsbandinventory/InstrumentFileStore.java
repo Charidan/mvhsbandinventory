@@ -86,7 +86,7 @@ public class InstrumentFileStore extends InstrumentStore
         {
             List<String> history = instrument.getHistory();
             history.add(0, "History");
-            String[] row = (String[]) history.toArray();
+            String[] row = history.toArray(new String[0]);
 
             rows.add(row);
         }
