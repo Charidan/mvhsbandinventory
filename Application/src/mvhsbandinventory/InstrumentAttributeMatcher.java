@@ -22,4 +22,12 @@ public class InstrumentAttributeMatcher
         this.value = value;
         this.contains = contains;
     }
+
+    public boolean isMatch (Instrument instrument)
+    {
+        String toTest = instrument.get(key);
+        boolean test = toTest.contains(value);
+        
+        return (contains) ? test : !test;
+    }
 }
