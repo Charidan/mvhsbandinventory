@@ -988,42 +988,59 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void addAcceptButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addAcceptButtonActionPerformed
     {//GEN-HEADEREND:event_addAcceptButtonActionPerformed
-        if(addTypeBox.getText().equals("") || addBrandBox.getText().equals("") || addSerialBox.getText().equals(""))
+        // Check to make sure that all of the fields were properly filled in
+        if(addTypeBox.getText().equals("") ||
+                addBrandBox.getText().equals("") ||
+                addSerialBox.getText().equals(""))
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "Missing Data Input",
+                    "All of the three fields on the \"Add Instrument\" form \n" +
+                    "are required to be filled in. One of them was left blank.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else
+        }
+        else
         {
-            //TODO delete test print
-            System.out.println("Name: " + addTypeBox.getText() + " Brand: " + addBrandBox.getText() + " Serial: " + addSerialBox.getText());
+            // TODO: delete test print
+            System.out.println("Name: " + addTypeBox.getText() + 
+                    " Brand: " + addBrandBox.getText() +
+                    " Serial: " + addSerialBox.getText());
+            
+            // Creating a new instrument
             Instrument instru = new Instrument();
+
             try
             {
+                // Adding core fields from the "Add Instrument" window
                 instru.set("Name", addTypeBox.getText());
                 instru.set("Brand", addBrandBox.getText());
                 instru.set("Serial", addSerialBox.getText());
 
+                // Adding default values for new instruments
+                // TODO: Move these into some sort of configuration system
                 instru.set("Rank", "3");
                 instru.set("Value", "0");
                 instru.set("Period", "0");
                 instru.set("Fee", "Unpaid");
                 instru.set("Contract", "Uncreated");
-            } catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 JOptionPane.showMessageDialog(jopDialog,
-                        "An Error has occurred while creating the instrument:\n" + ex.getMessage(),
+                        "An internal error has occurred while creating the " +
+                        "instrument:\n" + ex.getMessage(),
                         "Instrument Creation Failed",
                         JOptionPane.ERROR_MESSAGE);
             }
+
+            // Add the instrument to the instrument list
             instruments.add(instru);
+
             addDialog.setVisible(false);
             Main.window.setEnabled(true);
             Main.window.requestFocus();
             
-            // TODO: find some way to update the items in the panel
-            
+            // TODO: Find some way to update the items in the panel
         }
     }//GEN-LAST:event_addAcceptButtonActionPerformed
 
