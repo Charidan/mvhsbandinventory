@@ -107,16 +107,29 @@ public class InstrumentList extends AbstractTableModel
      *      represent all of the conditions for finding instruments
      * @return instrument array subset
      */
-    public Instrument[] selectList(InstrumentAttributeMatcher[] parameters)
+    public List<Instrument> selectList(InstrumentAttributeMatcher[] parameters)
     {
-        // This is a cache of the length of the list of all of the Instrument
-        // objects that we're dealing with so that we can loop through them; we
-        // determine this here so that we don't have to recalculate this for
-        // every iteration of the loop
-        int length = list.size();
-        
-        // Return an empty instrument list to keep the build from breaking
-        return new Instrument[0];
+        List<Instrument> selection = new ArrayList<Instrument>();
+        boolean result;
+
+        // Loop through all of the items in our internal cache of the list
+        for (Instrument instrument : list)
+        {
+            result = true;
+            
+            // Match against all of the inputted parameters; if any are false,
+            // the match doesn't work
+            for (InstrumentAttributeMatcher parameter : parameters)
+            {
+                if (!parameter.isMatch(instrument)) result = false;
+            }
+
+            // If all of the matches, succeeded, add the item to the result list
+            if (result) selection.add(instrument);
+        }
+
+        // Return the result list back to the calling function
+        return selection;
     }
 
     /**
