@@ -54,6 +54,10 @@ public class InstrumentList extends AbstractTableModel
         // Add the item to our local memory cache and to our data store
         list.add(instrument);
         store.add(instrument);
+
+        // Tell any attached tables that an item
+        int index = list.size() - 1;
+        fireTableRowsInserted(index, index);
     }
 
     /**

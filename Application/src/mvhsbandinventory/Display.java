@@ -1039,8 +1039,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             addDialog.setVisible(false);
             Main.window.setEnabled(true);
             Main.window.requestFocus();
-            
-            // TODO: Find some way to update the items in the panel
         }
     }//GEN-LAST:event_addAcceptButtonActionPerformed
 
