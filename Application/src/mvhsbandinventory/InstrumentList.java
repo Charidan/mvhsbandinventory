@@ -55,7 +55,7 @@ public class InstrumentList extends AbstractTableModel
         list.add(instrument);
         store.add(instrument);
 
-        // Tell any attached tables that an item
+        // Tell any attached tables that an item has been added
         int index = list.size() - 1;
         fireTableRowsInserted(index, index);
     }
