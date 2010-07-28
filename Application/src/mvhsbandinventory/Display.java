@@ -873,7 +873,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         Main.window.setEnabled(false);
         int n = JOptionPane.showConfirmDialog(jopDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         switch(n)
-        {//TODO: Hook the delete confirmation dialog to something.
+        {
             case JOptionPane.YES_OPTION:
                 instruments.delete(getSelectedInstrument());
         }
@@ -1070,7 +1070,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void showallButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showallButtonActionPerformed
     {//GEN-HEADEREND:event_showallButtonActionPerformed
-        instruments.selectList(instruments.SHOWALL);
+        instruments.selectList(InstrumentList.SHOWALL);
     }//GEN-LAST:event_showallButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
