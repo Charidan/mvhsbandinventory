@@ -118,6 +118,7 @@ public class InstrumentList extends AbstractTableModel
      */
     public void selectList(InstrumentAttributeMatcher[] parameters)
     {
+        lastSort = parameters;
         List<Instrument> selection = new ArrayList<Instrument>();
         boolean result;
 
