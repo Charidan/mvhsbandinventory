@@ -77,7 +77,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Status", (String) statusCombo.getSelectedItem());
             instru.set("Ligature", (String) ligCombo.getSelectedItem());
             instru.set("Mouthpiece", (String) mpieceCombo.getSelectedItem());
-            instru.set("Caps", (String) capCombo.getSelectedItem());
+            instru.set("MouthpieceCap", (String) capCombo.getSelectedItem());
             instru.set("Bow", (String) bowCombo.getSelectedItem());
             instru.set("NeckStrap", (String) statusCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
