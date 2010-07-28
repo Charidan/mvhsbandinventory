@@ -52,7 +52,7 @@ public class ContractGenerator
             s.drawString("BOND FOR MUSICAL INSTRUMENT");
             s.setLineWidth(1);
             s.drawLine(170, 668, 475, 668);
-            s.moveTextPositionByAmount(-70, -68);
+            s.moveTextPositionByAmount(-70, -68); //100, 600
             s.setFont(hb, 12);
             s.drawString("INSTRUMENT:");
             s.moveTextPositionByAmount(0, -16);
@@ -67,7 +67,7 @@ public class ContractGenerator
             s.moveTextPositionByAmount(0, -16);
             s.drawString("Bow:");
             s.setFont(h, 12);
-            s.moveTextPositionByAmount(0, -20);
+            s.moveTextPositionByAmount(0, -20); //100, 500
             s.drawString("We, the undersigned, verify that the above information is correct, and agree to accept");
             s.moveTextPositionByAmount(0, -16);
             s.drawString("the responsibility for the care and maintenance of the above instrument and ");
@@ -81,7 +81,7 @@ public class ContractGenerator
             s.drawString("class or school performances. Under no circumstances may this property be loaned to ");
             s.moveTextPositionByAmount(0, -16);
             s.drawString("others or used for non Mountain View High School related activities without the ");
-            s.moveTextPositionByAmount(0, -16);
+            s.moveTextPositionByAmount(0, -16); //100, 388
             s.drawString("instructor's consent.");
             s.moveTextPositionByAmount(0, -80);
             s.drawString("The above instrument shall be returned upon completion of course, when student is");
@@ -98,12 +98,34 @@ public class ContractGenerator
             s.drawString("PARENT:");
             s.moveTextPositionByAmount(0, -32);
             s.drawString("INSTRUCTOR:");
-            s.moveTextPositionByAmount(16, -32);
+            s.moveTextPositionByAmount(16, -32); //116, 164
             s.setFont(hbo, 12);
             s.drawString("PLEASE NOTE ANY DENTS OR OTHER IMPERFECTIONS BEFORE SIGNING!");
             s.setFont(hbo, 20);
-            s.moveTextPositionByAmount(0, 224);
+            s.moveTextPositionByAmount(0, 204); //116, 368
             s.drawString("NOTE: $50 cleaning fee per year or season is required.");
+            s.moveTextPositionByAmount(159, 232); //275, 600
+            s.setFont(hb, 12);
+            s.drawString("ON LOAN TO:");
+            s.moveTextPositionByAmount(0, -16);
+            s.drawString("FOR USE IN:");
+            s.moveTextPositionByAmount(0, -16);
+            s.drawString("NECK STRAP:");
+            s.moveTextPositionByAmount(0, -16);
+            s.drawString("LIGATURE:");
+            s.moveTextPositionByAmount(0, -16);
+            s.drawString("MOUTHPIECE CAP");
+            s.moveTextPositionByAmount(0, -16); //275, 520
+            s.drawString("OTHER:");
+            s.moveTextPositionByAmount(25, -292); //300, 228
+            s.drawString("DATE LOANED:");
+            s.moveTextPositionByAmount(0, -32);
+            s.drawString("FEE PAID:");
+            s.moveTextPositionByAmount(0, -32);
+            s.drawString("DATE RETURNED:");
+
+
+
 
 
 
