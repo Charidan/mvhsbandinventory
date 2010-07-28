@@ -16,7 +16,7 @@ public class InstrumentList extends AbstractTableModel
     public static final InstrumentAttributeMatcher[] SHOWALL = {};
     private List<Instrument> list;
     private List<Instrument> displayList;
-    private InstrumentAttributeMatcher[] lastSort = SHOWALL;
+    private InstrumentAttributeMatcher[] lastSearch = SHOWALL;
     private InstrumentStore store;
     private String[] columnNames =
     {
@@ -59,8 +59,7 @@ public class InstrumentList extends AbstractTableModel
         store.add(instrument);
 
         // Tell any attached tables that an item has been added
-        int index = list.size() - 1;
-        selectList(lastSort);
+        selectList(lastSearch);
         fireTableChanged(null);
     }
 
@@ -88,7 +87,7 @@ public class InstrumentList extends AbstractTableModel
             // Delete the item from our local memory cache and to our data store
             list.remove(instrument);
             store.delete(instrument);
-            selectList(lastSort);
+            selectList(lastSearch);
         } catch(Exception ex) {}
     }
 
@@ -118,9 +117,10 @@ public class InstrumentList extends AbstractTableModel
      */
     public void selectList(InstrumentAttributeMatcher[] parameters)
     {
-        lastSort = parameters;
+        lastSearch = parameters;
         if(parameters==SHOWALL)
         {
+            System.out.println("SHOWALL");
             displayList = list;
             fireTableChanged(null);
             return;
