@@ -13,8 +13,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class InstrumentList extends AbstractTableModel
 {
-
+    public static final InstrumentAttributeMatcher[] SHOWALL = {};
     private List<Instrument> list;
+    private List<Instrument> displayList;
+    private InstrumentAttributeMatcher[] lastSort = SHOWALL;
     private InstrumentStore store;
     private String[] columnNames =
     {
@@ -42,6 +44,7 @@ public class InstrumentList extends AbstractTableModel
         // Load all of the items from the datastore and put them into our
         // private ArrayList
         list = new ArrayList<Instrument>(Arrays.asList(store.load()));
+        displayList = list;
     }
 
     /**
@@ -57,7 +60,8 @@ public class InstrumentList extends AbstractTableModel
 
         // Tell any attached tables that an item has been added
         int index = list.size() - 1;
-        fireTableRowsInserted(index, index);
+        selectList(lastSort);
+        fireTableChanged(null);
     }
 
     /**
@@ -84,6 +88,7 @@ public class InstrumentList extends AbstractTableModel
             // Delete the item from our local memory cache and to our data store
             list.remove(instrument);
             store.delete(instrument);
+            selectList(lastSort);
         } catch(Exception ex) {}
     }
 
@@ -100,7 +105,7 @@ public class InstrumentList extends AbstractTableModel
         try
         {
             Comparator comp = new InstrumentAttributeComparator(key, ascending);
-            Collections.sort(list, comp);
+            Collections.sort(displayList, comp);
         } catch(Exception ex) {}
     }
 
@@ -111,7 +116,7 @@ public class InstrumentList extends AbstractTableModel
      *      represent all of the conditions for finding instruments
      * @return instrument array subset
      */
-    public List<Instrument> selectList(InstrumentAttributeMatcher[] parameters)
+    public void selectList(InstrumentAttributeMatcher[] parameters)
     {
         List<Instrument> selection = new ArrayList<Instrument>();
         boolean result;
@@ -132,8 +137,9 @@ public class InstrumentList extends AbstractTableModel
             if (result) selection.add(instrument);
         }
 
-        // Return the result list back to the calling function
-        return selection;
+        // Displays the result list
+        displayList = selection;
+        fireTableChanged(null);
     }
 
     /**
@@ -238,7 +244,7 @@ public class InstrumentList extends AbstractTableModel
 
     public int getRowCount()
     {
-        return list.size();
+        return displayList.size();
     }
 
     @Override
@@ -249,7 +255,7 @@ public class InstrumentList extends AbstractTableModel
 
     public Object getValueAt(int row, int col)
     {
-        Instrument instru = list.get(row);
+        Instrument instru = displayList.get(row);
         switch(col)
         {
             case 0:
@@ -278,7 +284,7 @@ public class InstrumentList extends AbstractTableModel
     @Override
     public void setValueAt(Object value, int row, int col)
     {
-        Instrument instru = list.get(row);
+        Instrument instru = displayList.get(row);
         try
         {
             switch(col)
