@@ -34,7 +34,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         for(String s : Instrument.attributes)
         {
-            searchCombo.addItem(s);
             sortCombo.addItem(s);
         }
 
@@ -185,10 +184,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addCancelButton = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         leftsplitPanel = new javax.swing.JPanel();
-        searchLabel = new javax.swing.JLabel();
-        searchCombo = new javax.swing.JComboBox();
-        searchBar = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
         leftsplitButtonPanel = new javax.swing.JPanel();
         sortLabel = new javax.swing.JLabel();
         sortCombo = new javax.swing.JComboBox();
@@ -363,41 +358,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitPanel.setMinimumSize(new java.awt.Dimension(480, 79));
         leftsplitPanel.setLayout(new java.awt.GridBagLayout());
 
-        searchLabel.setText("Search By:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.weightx = 1.0;
-        leftsplitPanel.add(searchLabel, gridBagConstraints);
-
-        searchCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchComboActionPerformed(evt);
-            }
-        });
-        leftsplitPanel.add(searchCombo, new java.awt.GridBagConstraints());
-
-        searchBar.setColumns(20);
-        searchBar.setText("Search Bar");
-        searchBar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBarActionPerformed(evt);
-            }
-        });
-        leftsplitPanel.add(searchBar, new java.awt.GridBagConstraints());
-
-        searchButton.setText("Search");
-        searchButton.setPreferredSize(null);
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        leftsplitPanel.add(searchButton, gridBagConstraints);
-
         sortLabel.setText("Sort By:");
         leftsplitButtonPanel.add(sortLabel);
 
@@ -412,10 +372,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitButtonPanel.add(sortButton);
 
         showallButton.setText("Show All");
+        showallButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showallButtonActionPerformed(evt);
+            }
+        });
         leftsplitButtonPanel.add(showallButton);
 
-        advSearchButton.setText("ADVANCED SEARCH");
-        advSearchButton.setPreferredSize(null);
+        advSearchButton.setText("Search");
         advSearchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 advSearchButtonActionPerformed(evt);
@@ -885,16 +849,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         add(overlord, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchComboActionPerformed
-    {//GEN-HEADEREND:event_searchComboActionPerformed
-        searchButtonActionPerformed(evt);
-}//GEN-LAST:event_searchComboActionPerformed
-
-    private void searchBarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchBarActionPerformed
-    {//GEN-HEADEREND:event_searchBarActionPerformed
-        searchButtonActionPerformed(evt);
-}//GEN-LAST:event_searchBarActionPerformed
-
     private void instruBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_instruBoxActionPerformed
     {//GEN-HEADEREND:event_instruBoxActionPerformed
         // TODO add your handling code here:
@@ -1092,12 +1046,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         saveHistory();
 }//GEN-LAST:event_checkoutButtonActionPerformed
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchButtonActionPerformed
-    {//GEN-HEADEREND:event_searchButtonActionPerformed
-        InstrumentAttributeMatcher[] matchers = {jcomps2matcher(contains, searchCombo, searchBar)};
-        instruments.selectList(matchers);
-    }//GEN-LAST:event_searchButtonActionPerformed
-
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
     {//GEN-HEADEREND:event_cancelButtonActionPerformed
         displayInstrument();
@@ -1120,6 +1068,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         }
         instruments.selectList(matchers);
     }//GEN-LAST:event_advsearchSearchButtonActionPerformed
+
+    private void showallButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showallButtonActionPerformed
+    {//GEN-HEADEREND:event_showallButtonActionPerformed
+        instruments.selectList(instruments.SHOWALL);
+    }//GEN-LAST:event_showallButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
@@ -1198,10 +1151,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField schoolyearBox;
     private javax.swing.JLabel schoolyearLabel;
-    private javax.swing.JTextField searchBar;
-    private javax.swing.JButton searchButton;
-    private javax.swing.JComboBox searchCombo;
-    private javax.swing.JLabel searchLabel;
     private javax.swing.JTextField serialBox;
     private javax.swing.JLabel serialLabel;
     private javax.swing.JButton showallButton;
