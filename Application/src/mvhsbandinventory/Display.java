@@ -1035,7 +1035,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
             // Add the instrument to the instrument list
             instruments.add(instru);
-
+            instruTable.tableChanged(null);
             addDialog.setVisible(false);
             Main.window.setEnabled(true);
             Main.window.requestFocus();

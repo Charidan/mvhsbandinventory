@@ -227,7 +227,7 @@ public class InstrumentList extends AbstractTableModel
 
     public boolean isEmpty()
     {
-        return list.size() == 0;
+        return list.isEmpty();
     }
 
     //Below this point are methods for the TabelModel handling
