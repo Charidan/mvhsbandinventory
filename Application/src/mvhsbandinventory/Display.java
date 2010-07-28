@@ -4,6 +4,7 @@
  */
 package mvhsbandinventory;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
@@ -20,12 +21,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private Object bean;
     private InstrumentList instruments;
     private HistoryTableModel histModel;
+    private JComboBox contains;
 
     /** Creates new customizer DispTest */
     public Display(InstrumentList instruments)
     {
         this.instruments = instruments;
         histModel = new HistoryTableModel(this);
+        contains = new JComboBox();
+        contains.addItem("Contains");
         initComponents();
 
         for(String s : Instrument.attributes)
@@ -139,6 +143,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     "Save Failed",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public InstrumentAttributeMatcher jcomps2matcher(JComboBox contains, JComboBox attribute, JTextField value)
+    {
+        return new InstrumentAttributeMatcher((String) attribute.getSelectedItem(), value.getText(), contains.getSelectedItem().equals("Contains"));
     }
 
     public void setObject(Object bean)
@@ -256,6 +265,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
 
         advsearchSearchButton.setText("SEARCH");
+        advsearchSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advsearchSearchButtonActionPerformed(evt);
+            }
+        });
         advsearchButtonPanel.add(advsearchSearchButton);
 
         advsearchResetButton.setText("RESET");
@@ -1080,7 +1094,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchButtonActionPerformed
     {//GEN-HEADEREND:event_searchButtonActionPerformed
-        // TODO add your handling code here:
+        InstrumentAttributeMatcher[] matchers = {jcomps2matcher(contains, searchCombo, searchBar)};
+        instruments.selectList(matchers);
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
@@ -1092,6 +1107,19 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {//GEN-HEADEREND:event_formButtonActionPerformed
         //conGen.generateContract(getSelectedInstrument());
     }//GEN-LAST:event_formButtonActionPerformed
+
+    private void advsearchSearchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchSearchButtonActionPerformed
+    {//GEN-HEADEREND:event_advsearchSearchButtonActionPerformed
+        Component[] comps = advsearchPanel.getComponents();
+        int end = comps.length-2;
+        int stop = end/3;
+        InstrumentAttributeMatcher[] matchers = new InstrumentAttributeMatcher[stop/3];
+        for(int i = 0; i<stop; i++)
+        {
+            matchers[i] = jcomps2matcher((JComboBox) comps[i*3], (JComboBox) comps[i*3+1], (JTextField) comps[i*3+2]);
+        }
+        instruments.selectList(matchers);
+    }//GEN-LAST:event_advsearchSearchButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
