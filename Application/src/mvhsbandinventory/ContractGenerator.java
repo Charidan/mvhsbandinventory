@@ -59,18 +59,18 @@ public class ContractGenerator
             s.drawLine(148, 668, 455, 668);
             s.moveTextPositionByAmount(-73, -68); //75, 600
             s.setFont(hb, 12);
-            s.drawString("INSTRUMENT:");
+            s.drawString("INSTRUMENT:   " +i.get("Name"));
             s.moveTextPositionByAmount(0, -16);
             s.setFont(hb, 12);
-            s.drawString("MAKE / MODEL:");
+            s.drawString("MAKE / MODEL:   " +i.get("Brand"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("SERIAL #:");
+            s.drawString("SERIAL #:   " +i.get("Serial"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("REPLACEMENT VALUE:");
+            s.drawString("REPLACEMENT VALUE:   $" +i.get("Value"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("MOUTHPIECE:");
+            s.drawString("MOUTHPIECE:   " +i.get("Mouthpiece"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("BOW:");
+            s.drawString("BOW:   " +i.get("Bow"));
             s.setFont(h, 12);
             s.moveTextPositionByAmount(0, -20); //100, 500
             s.drawString("We, the undersigned, verify that the above information is correct, and agree to accept");
@@ -111,17 +111,17 @@ public class ContractGenerator
             s.drawString("NOTE: $50 cleaning fee per year or season is required.");
             s.moveTextPositionByAmount(209, 244); //275, 600
             s.setFont(hb, 12);
-            s.drawString("ON LOAN TO:");
+            s.drawString("ON LOAN TO:   " +i.get("Renter"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("FOR USE IN:");
+            s.drawString("FOR USE IN:   " +i.get("Period"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("NECK STRAP:");
+            s.drawString("NECK STRAP:   " +i.get("NeckStrap"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("LIGATURE:");
+            s.drawString("LIGATURE:   " +i.get("Ligature"));
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("MOUTHPIECE CAP");
+            s.drawString("MOUTHPIECE CAP:   " +i.get("MouthpieceCap"));
             s.moveTextPositionByAmount(0, -16); //275, 520
-            s.drawString("OTHER:");
+            s.drawString("OTHER: " +i.get("Other"));
             s.moveTextPositionByAmount(25, -292); //300, 228
             s.drawString("DATE LOANED:");
             s.moveTextPositionByAmount(0, -32);
@@ -148,6 +148,9 @@ public class ContractGenerator
             s.drawString("(check number)");
             s.moveTextPositionByAmount(-195, 156);
             s.drawString("(Make checks payable to \"MVHS Music\")");
+            s.setFont(hb, 16);
+            s.moveTextPositionByAmount(100, 280);
+            s.drawString("School Year:  " +i.get("SchoolYear"));
 
             s.endText();
             s.close();
@@ -155,7 +158,7 @@ public class ContractGenerator
             // Determine the file path for saving the document in relative to 
             // the user's temp directory and then save the PDF file there
             String path = System.getProperty("java.io.tmpdir") +
-                    File.pathSeparator + "contract.pdf";
+                    i.get("Name")+"_" +i.get("Brand")+"_" +i.get("Serial") + "_contract.pdf";
             document.save(path);
 
             // Try to open the document in the default desktop application for
