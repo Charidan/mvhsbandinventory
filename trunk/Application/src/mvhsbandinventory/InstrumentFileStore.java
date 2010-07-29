@@ -113,8 +113,14 @@ public class InstrumentFileStore extends InstrumentStore
 
                 if ("History".equals(attribute))
                 {
-                    List<String> history = Arrays.asList(cells);
-                    history.remove(0);
+                    List<String> history = new ArrayList<String>();
+                    int width = cells.length;
+
+                    for (int i = 1; i < width; i++)
+                    {
+                        history.add(cells[i]);
+                    }
+
                     instrument.setHistory(history);
                 }
                 else
