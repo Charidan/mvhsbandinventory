@@ -34,7 +34,7 @@ public class ContractGenerator
         
     }
     
-    public void generateContract() //Will take Intrument i later
+    public void generateContract(Instrument i) //Will take Intrument i later
     {
         try
         {
