@@ -82,7 +82,7 @@ public class Instrument
      */
     public List<String> getHistory ()
     {
-        return history;
+        return new ArrayList<String>(history);
     }
 
     /**
@@ -93,7 +93,7 @@ public class Instrument
      */
     public void setHistory (List<String> history)
     {
-        this.history = history;
+        this.history = new ArrayList<String>(history);
     }
 
     /**
