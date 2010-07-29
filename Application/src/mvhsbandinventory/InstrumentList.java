@@ -1,5 +1,10 @@
 package mvhsbandinventory;
 
+import au.com.bytecode.opencsv.CSVWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -154,11 +159,57 @@ public class InstrumentList extends AbstractTableModel
      * the Instrument objects in the application.
      * @param instruments - an array of the instrument objects to be exported
      * @param fields - an array of strings of the field names to be exported
-     * @return a CSV string that can be written to file
      */
-    public String exportToExcel(Instrument[] instruments, String[] fields)
+    public void exportToExcel(Instrument[] instruments, String[] fields)
     {
-        return "";  // Placeholder to keep the build from breaking
+        int width = fields.length;
+        List<String[]> table = new ArrayList<String[]>();
+
+        table.add(fields);
+
+        for (Instrument instrument : instruments)
+        {
+            String[] row = new String[width];
+
+
+            for (int w = 0; w < width; w++)
+            {
+                row[w] = instrument.get(fields[w]);
+            }
+
+            table.add(row);
+        }
+
+        CSVWriter writer = null;
+
+        try
+        {
+            String path = System.getProperty("java.io.tmpdir") +
+                    File.pathSeparator + "export.csv";
+            File file = new File(path);
+            writer = new CSVWriter(new FileWriter(file));
+            writer.writeAll(table);
+
+            if (Desktop.isDesktopSupported())
+            {
+                Desktop desktop = Desktop.getDesktop();
+
+                if (desktop.isSupported(Desktop.Action.OPEN))
+                {
+                    desktop.open(file);
+                }
+            }
+        }
+        catch (IOException e) {}
+        finally
+        {
+            try
+            {
+                writer.close();
+            }
+            catch (IOException e) {}
+            catch (NullPointerException e) {}
+        }
     }
 
     /**
@@ -168,9 +219,9 @@ public class InstrumentList extends AbstractTableModel
      * @param instruments - an array of the instrument objects to be exported
      * @return a CSV string that can be written to file
      */
-    public String exportToExcel(Instrument[] instruments)
+    public void exportToExcel(Instrument[] instruments)
     {
-        return exportToExcel(instruments, singles);
+        exportToExcel(instruments, singles);
     }
 
     /**
