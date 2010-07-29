@@ -97,29 +97,44 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {
         Instrument instru = getSelectedInstrument();
         //set the Details panel
-        statusCombo.setSelectedItem((String) instru.get("Status"));
+        if(instru.get("Status").equals("")) statusCombo.setSelectedIndex(0);
+        else statusCombo.setSelectedItem((String) instru.get("Status"));
+
         instruBox.setText((String) instru.get("Name"));
         brandBox.setText((String) instru.get("Brand"));
         serialBox.setText((String) instru.get("Serial"));
         rankBox.setText((String) instru.get("Rank"));
         valueBox.setText((String) instru.get("Value"));
-        strapCombo.setSelectedItem((String) instru.get("NeckStrap"));
-        ligCombo.setSelectedItem((String) instru.get("Ligature"));
-        mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
-        capCombo.setSelectedItem((String) instru.get("MouthpieceCap"));
-        bowCombo.setSelectedItem((String) instru.get("Bow"));
+
+        if(instru.get("NeckStrap").equals("")) strapCombo.setSelectedIndex(0);
+        else strapCombo.setSelectedItem((String) instru.get("NeckStrap"));
+        if(instru.get("Ligature").equals("")) ligCombo.setSelectedIndex(0);
+        else ligCombo.setSelectedItem((String) instru.get("Ligature"));
+        if(instru.get("Mouthpiece").equals("")) mpieceCombo.setSelectedIndex(0);
+        else mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
+        if(instru.get("MouthpieceCap").equals("")) capCombo.setSelectedIndex(0);
+        else capCombo.setSelectedItem((String) instru.get("MouthpieceCap"));
+        if(instru.get("Bow").equals("")) bowCombo.setSelectedIndex(0);
+        else bowCombo.setSelectedItem((String) instru.get("Bow"));
+
         notesTPane.setText((String) instru.get("Notes"));
 
         //set the History panel
         renterBox.setText((String) instru.get("Renter"));
         schoolyearBox.setText((String) instru.get("SchoolYear"));
         dateoutBox.setText((String) instru.get("DateOut"));
-        feeCombo.setSelectedItem((String) instru.get("Fee"));
-        periodCombo.setSelectedItem((String) instru.get("Period"));
-        otherBox.setText((String) instru.get("Other"));
+        
+        if(instru.get("Fee").equals("")) feeCombo.setSelectedIndex(1);
+        else feeCombo.setSelectedItem((String) instru.get("Fee"));
+        if(instru.get("Period").equals("")) periodCombo.setSelectedIndex(0);
+        else periodCombo.setSelectedItem((String) instru.get("Period"));
+        if(instru.get("Contract").equals("")) contractCombo.setSelectedIndex(0);
+        else contractCombo.setSelectedItem((String) instru.get("Contract"));
 
+        otherBox.setText((String) instru.get("Other"));
+        
         //set the History table
-        histModel.fireTableDataChanged();
+        histModel.fireTableChanged(null);
     }
 
     public void saveHistory()
@@ -394,6 +409,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitPanel.add(leftsplitSortByPanel, gridBagConstraints);
 
         instruTable.setModel(instruments);
+        instruTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         instruTable.getTableHeader().setReorderingAllowed(false);
         instruTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1024,6 +1040,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void instruTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_instruTableMouseClicked
     {//GEN-HEADEREND:event_instruTableMouseClicked
+        if(instruTable.getSelectedRow() == -1) return;
         displayInstrument();
 }//GEN-LAST:event_instruTableMouseClicked
 
