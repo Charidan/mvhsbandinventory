@@ -5,7 +5,9 @@
 
 package mvhsbandinventory;
 
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,9 +38,12 @@ public class ContractGenerator
     
     public void generateContract(Instrument i) //Will take Intrument i later
     {
+        PDDocument document = null;
+        
         try
         {
-            PDDocument document = new PDDocument();
+            document = new PDDocument();
+            
             PDPage blankPage = new PDPage();
             document.addPage(blankPage);
             
@@ -144,34 +149,41 @@ public class ContractGenerator
             s.moveTextPositionByAmount(-195, 156);
             s.drawString("(Make checks payable to \"MVHS Music\")");
 
-
-
-
-
-
             s.endText();
             s.close();
             
-            try
+            // Determine the file path for saving the document in relative to 
+            // the user's temp directory and then save the PDF file there
+            String path = System.getProperty("java.io.tmpdir") +
+                    File.pathSeparator + "contract.pdf";
+            document.save(path);
+
+            // Try to open the document in the default desktop application for
+            // reading PDF files
+            if (Desktop.isDesktopSupported())
             {
-                document.save("C:/csvTest/hello.pdf");
-            } catch (Exception ex)
-            {
-                System.out.println("you might not be using a pc. " +ex);
-                try
+                Desktop desktop = Desktop.getDesktop();
+
+                if (desktop.isSupported(Desktop.Action.OPEN))
                 {
-                    document.save("/volumes/no name/hello.pdf");
-                }
-                catch (Exception exe)
-                {
-                    System.out.println("no such file path" +exe);
+                    desktop.open(new File(path));
                 }
             }
-            document.close();
-
-        } catch (IOException ex)
+        }
+        catch (org.apache.pdfbox.exceptions.COSVisitorException ex) {}
+        catch (IOException ex)
         {
-            System.out.println("FILE IS OPEN SILLY " +ex);
+            System.out.println("Unable to write to the PDF file.  This usually" +
+                    "happens because the file is currently opened in another" +
+                    "application, such as a PDF reader.");
+        }
+        finally {
+            try
+            {
+                document.close();
+            }
+            catch (IOException ex) {}
+            catch (NullPointerException ex) {}
         }
     }
 
