@@ -45,14 +45,14 @@ public class ContractGenerator
             PDPageContentStream s = new PDPageContentStream(document, blankPage);
             s.beginText();
             s.setFont(hbo, 16);
-            s.moveTextPositionByAmount(200, 700);
+            s.moveTextPositionByAmount(180, 700);
             s.drawString("MOUNTAIN VIEW HIGH SCHOOL");
             s.setFont(hb, 18);
-            s.moveTextPositionByAmount(-30, -32);
+            s.moveTextPositionByAmount(-32, -32);
             s.drawString("BOND FOR MUSICAL INSTRUMENT");
             s.setLineWidth(1);
-            s.drawLine(170, 668, 475, 668);
-            s.moveTextPositionByAmount(-70, -68); //100, 600
+            s.drawLine(148, 668, 455, 668);
+            s.moveTextPositionByAmount(-73, -68); //75, 600
             s.setFont(hb, 12);
             s.drawString("INSTRUMENT:");
             s.moveTextPositionByAmount(0, -16);
@@ -61,11 +61,11 @@ public class ContractGenerator
             s.moveTextPositionByAmount(0, -16);
             s.drawString("SERIAL #:");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("Replacement Value:");
+            s.drawString("REPLACEMENT VALUE:");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("Mouthpiece:");
+            s.drawString("MOUTHPIECE:");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("Bow:");
+            s.drawString("BOW:");
             s.setFont(h, 12);
             s.moveTextPositionByAmount(0, -20); //100, 500
             s.drawString("We, the undersigned, verify that the above information is correct, and agree to accept");
@@ -98,13 +98,13 @@ public class ContractGenerator
             s.drawString("PARENT:");
             s.moveTextPositionByAmount(0, -32);
             s.drawString("INSTRUCTOR:");
-            s.moveTextPositionByAmount(16, -32); //116, 164
+            s.moveTextPositionByAmount(10, -32); //116, 164
             s.setFont(hbo, 12);
             s.drawString("PLEASE NOTE ANY DENTS OR OTHER IMPERFECTIONS BEFORE SIGNING!");
-            s.setFont(hbo, 20);
-            s.moveTextPositionByAmount(0, 204); //116, 368
+            s.setFont(hbo, 16);
+            s.moveTextPositionByAmount(12, 224); //116, 368
             s.drawString("NOTE: $50 cleaning fee per year or season is required.");
-            s.moveTextPositionByAmount(159, 232); //275, 600
+            s.moveTextPositionByAmount(209, 244); //275, 600
             s.setFont(hb, 12);
             s.drawString("ON LOAN TO:");
             s.moveTextPositionByAmount(0, -16);
@@ -123,6 +123,26 @@ public class ContractGenerator
             s.drawString("FEE PAID:");
             s.moveTextPositionByAmount(0, -32);
             s.drawString("DATE RETURNED:");
+            s.drawLine(160,164,325,164);
+            s.drawLine(130, 196, 325, 196);
+            s.drawLine(140, 228, 325, 228);
+            s.drawLine(440, 164, 530, 164);
+            s.drawLine(395, 196, 530, 196);
+            s.drawLine(425, 228, 530, 228);
+            s.drawLine(75, 100, 530, 100);
+            s.drawLine(75, 75, 530, 75);
+            s.drawLine(75, 50, 530, 50);
+            s.setFont(h, 8);
+            s.moveTextPositionByAmount(-131, -8);
+            s.drawString("(signature)");
+            s.moveTextPositionByAmount(0, 32);
+            s.drawString("(signature)");
+            s.moveTextPositionByAmount(0, 32);
+            s.drawString("(signature)");
+            s.moveTextPositionByAmount(230, -32);
+            s.drawString("(check number)");
+            s.moveTextPositionByAmount(-195, 156);
+            s.drawString("(Make checks payable to \"MVHS Music\")");
 
 
 
@@ -137,14 +157,14 @@ public class ContractGenerator
                 document.save("C:/csvTest/hello.pdf");
             } catch (Exception ex)
             {
-                System.out.println("you might not be using a pc" +ex);
+                System.out.println("you might not be using a pc. " +ex);
                 try
                 {
-                    document.save("/Users/chazgwennap/Documents/pdftest/hello.pdf");
+                    document.save("/volumes/no name/hello.pdf");
                 }
                 catch (Exception exe)
                 {
-                    System.out.println("Oops v2" +exe);
+                    System.out.println("no such file path" +exe);
                 }
             }
             document.close();
