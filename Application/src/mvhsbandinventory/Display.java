@@ -22,6 +22,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private InstrumentList instruments;
     private HistoryTableModel histModel;
     private JComboBox contains;
+    private ContractGenerator conGen;
 
     /** Creates new customizer DispTest */
     public Display(InstrumentList instruments)
@@ -30,12 +31,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         histModel = new HistoryTableModel(this);
         contains = new JComboBox();
         contains.addItem("Contains");
+        conGen = new ContractGenerator();
         initComponents();
 
         for(String s : Instrument.attributes)
         {
             sortCombo.addItem(s);
         }
+
+
 
     //TODO: remove crappy test code.
 //        instruBox.setText("Flute");
@@ -1069,7 +1073,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void formButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_formButtonActionPerformed
     {//GEN-HEADEREND:event_formButtonActionPerformed
-        //conGen.generateContract(getSelectedInstrument());
+        conGen.generateContract(getSelectedInstrument());
     }//GEN-LAST:event_formButtonActionPerformed
 
     private void advsearchSearchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchSearchButtonActionPerformed
