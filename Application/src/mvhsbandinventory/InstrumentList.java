@@ -155,8 +155,10 @@ public class InstrumentList extends AbstractTableModel
     }
 
     /**
-     * Creates a CSV string that can be opened by Excel to get an overview of  
-     * the Instrument objects in the application.
+     * Creates a CSV file (compatible with Excel and other similar applications)
+     * to get an overview of the Instrument objects in the application.  The
+     * CSV file is stored into the user's default Temp directory and then
+     * opened with the default CSV application.
      * @param instruments - an array of the instrument objects to be exported
      * @param fields - an array of strings of the field names to be exported
      */
