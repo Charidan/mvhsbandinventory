@@ -1073,6 +1073,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void formButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_formButtonActionPerformed
     {//GEN-HEADEREND:event_formButtonActionPerformed
+        saveHistory();
         conGen.generateContract(getSelectedInstrument());
     }//GEN-LAST:event_formButtonActionPerformed
 
