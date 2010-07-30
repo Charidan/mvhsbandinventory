@@ -48,11 +48,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         instruTable.getSelectionModel().addListSelectionListener(
                 new InstrumentTableListener(instruTable, this));
 
-        // If there are instruments in the list, select the first one
-        if (!instruments.isEmpty())
-        {
-            instruTable.setRowSelectionInterval(0, 0);
-        }
+        selectFirstInstrument();
     }
 
     public Instrument getSelectedInstrument()
@@ -138,6 +134,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         
         //set the History table
         histModel.fireTableChanged(null);
+    }
+
+    public void selectFirstInstrument ()
+    {
+        // If there are instruments in the list, select the first one
+        if (!instruments.isEmpty())
+        {
+            instruTable.setRowSelectionInterval(0, 0);
+        }
     }
 
     public void saveHistory()
