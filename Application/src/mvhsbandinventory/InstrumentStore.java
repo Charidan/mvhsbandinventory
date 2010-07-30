@@ -6,6 +6,9 @@ package mvhsbandinventory;
  */
 public abstract class InstrumentStore
 {
+
+    public InstrumentStoreListener storeListener;
+
     /**
      * Adds a new instrument to the store; serializes all of the data and
      * writes the data to the disk.
@@ -41,4 +44,20 @@ public abstract class InstrumentStore
      * @return an array of all of the parsed instruments in the store
      */
     public abstract Instrument[] load () throws Exception;
+
+    /**
+     * Adds a new listener that listens for changes in content in the
+     * InstrumentStore to ensure that the UI is updated in real-time
+     * @param l - the InstrumentStoreListener that will handle events fired
+     * from the instrument store
+     */
+    public synchronized void addListener (InstrumentStoreListener l)
+    {
+         storeListener = InstrumentStoreEventMulticaster.add(storeListener, l);
+    }
+
+    public synchronized void removeListener (InstrumentStoreListener l)
+    {
+         storeListener = InstrumentStoreEventMulticaster.remove(storeListener, l);
+    }
 }
