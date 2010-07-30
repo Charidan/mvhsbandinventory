@@ -164,10 +164,10 @@ public class InstrumentList extends AbstractTableModel
      * to get an overview of the Instrument objects in the application.  The
      * CSV file is stored into the user's default Temp directory and then
      * opened with the default CSV application.
-     * @param instruments - an array of the instrument objects to be exported
+     * @param instruments - a list of the instrument objects to be exported
      * @param fields - an array of strings of the field names to be exported
      */
-    public void exportToExcel(Instrument[] instruments, String[] fields)
+    public void exportToExcel(List<Instrument> instruments, String[] fields)
     {
         int width = fields.length;
         List<String[]> table = new ArrayList<String[]>();
@@ -223,10 +223,10 @@ public class InstrumentList extends AbstractTableModel
      * A convience overload of the exportToExcel function that exports the
      * fields of the instrument object specified in the
      * InstrumentList.singles static array.
-     * @param instruments - an array of the instrument objects to be exported
+     * @param instruments - a list of the instrument objects to be exported
      * @return a CSV string that can be written to file
      */
-    public void exportToExcel(Instrument[] instruments)
+    public void exportToExcel(List<Instrument> instruments)
     {
         exportToExcel(instruments, singles);
     }
