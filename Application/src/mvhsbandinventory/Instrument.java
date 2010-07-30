@@ -2,6 +2,7 @@ package mvhsbandinventory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,6 +105,7 @@ public class Instrument
      */
     public void addHistory (String line)
     {
-        history.add(line);
+        Date d = new Date();
+        history.add(d + "- " +line);
     }
 }

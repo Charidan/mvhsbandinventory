@@ -138,6 +138,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Fee", (String) feeCombo.getSelectedItem());
             instru.set("Period", (String) periodCombo.getSelectedItem());
             instru.set("Other", otherBox.getText());
+            instru.set("Status", (String) statusCombo.getSelectedItem());
             instruments.update(instru);
         } catch(Exception ex)
         {
@@ -997,6 +998,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 instru.set("Period", "0");
                 instru.set("Fee", "Unpaid");
                 instru.set("Contract", "Uncreated");
+                instru.addHistory("Instrument created.");
             }
             catch(Exception ex)
             {
@@ -1024,8 +1026,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
     {//GEN-HEADEREND:event_saveButtonActionPerformed
-        saveDetails();
+
+        Instrument i = getSelectedInstrument();
+        i.addHistory("Instrument saved.");
         saveHistory();
+        saveDetails();
         displayInstrument();
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -1037,20 +1042,29 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void lostButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lostButtonActionPerformed
     {//GEN-HEADEREND:event_lostButtonActionPerformed
+        Instrument i = getSelectedInstrument();
+        i.addHistory("Instrument found missing.");
         statusCombo.setSelectedItem("Missing");
         saveHistory();
+        displayInstrument();
     }//GEN-LAST:event_lostButtonActionPerformed
 
     private void checkinButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkinButtonActionPerformed
     {//GEN-HEADEREND:event_checkinButtonActionPerformed
+        Instrument i = getSelectedInstrument();
+        i.addHistory("Instrument checked in.");
         statusCombo.setSelectedItem("In Storage");
         saveHistory();
+        displayInstrument();
 }//GEN-LAST:event_checkinButtonActionPerformed
 
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkoutButtonActionPerformed
     {//GEN-HEADEREND:event_checkoutButtonActionPerformed
+        Instrument i = getSelectedInstrument();
+        i.addHistory("Instrument checked out.");
         statusCombo.setSelectedItem("On Loan");
         saveHistory();
+        displayInstrument();
 }//GEN-LAST:event_checkoutButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
@@ -1060,8 +1074,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void formButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_formButtonActionPerformed
     {//GEN-HEADEREND:event_formButtonActionPerformed
+        
+        Instrument i = getSelectedInstrument();
         saveHistory();
-        conGen.generateContract(getSelectedInstrument());
+        i.addHistory("Contract Generated for " + i.get("Renter") +".");
+        conGen.generateContract(i);
+        displayInstrument();
     }//GEN-LAST:event_formButtonActionPerformed
 
     private void advsearchSearchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchSearchButtonActionPerformed
