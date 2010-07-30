@@ -110,7 +110,9 @@ public class InstrumentList extends AbstractTableModel
         {
             Comparator comp = new InstrumentAttributeComparator(key, ascending);
             Collections.sort(displayList, comp);
-        } catch(Exception ex) {}
+            fireTableChanged(null);
+        } 
+        catch(Exception ex) {}
     }
 
     /**
