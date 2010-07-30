@@ -39,7 +39,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             sortCombo.addItem(s);
         }
 
-
+        advsearchResetButtonActionPerformed(null);
 
     //TODO: remove crappy test code.
 //        instruBox.setText("Flute");
@@ -891,6 +891,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
     {//GEN-HEADEREND:event_deleteButtonActionPerformed
         Main.window.setEnabled(false);
+        if(getSelectedInstrument().equals(Instrument.NULL_INSTRUMENT))
+        {
+            JOptionPane.showMessageDialog(jopDialog, "Instrument could not be deleted: No instrument selected.", "Delete Failed", JOptionPane.WARNING_MESSAGE);
+            Main.window.setEnabled(true);
+        Main.window.requestFocus();
+            return;
+        }
         int n = JOptionPane.showConfirmDialog(jopDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         switch(n)
         {
@@ -915,7 +922,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void advSearchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advSearchButtonActionPerformed
     {//GEN-HEADEREND:event_advSearchButtonActionPerformed
         Main.window.setEnabled(false);
-        advsearchResetButtonActionPerformed(evt);
         advsearchDialog.setVisible(true);
     }//GEN-LAST:event_advSearchButtonActionPerformed
 
@@ -1080,14 +1086,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void advsearchSearchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advsearchSearchButtonActionPerformed
     {//GEN-HEADEREND:event_advsearchSearchButtonActionPerformed
         Component[] comps = advsearchPanel.getComponents();
-        int end = comps.length-2;
-        int stop = end/3;
-        InstrumentAttributeMatcher[] matchers = new InstrumentAttributeMatcher[stop/3];
+        int stop = comps.length/3;
+        InstrumentAttributeMatcher[] matchers = new InstrumentAttributeMatcher[stop];
         for(int i = 0; i<stop; i++)
         {
             matchers[i] = jcomps2matcher((JComboBox) comps[i*3], (JComboBox) comps[i*3+1], (JTextField) comps[i*3+2]);
         }
         instruments.selectList(matchers);
+        advsearchDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
     }//GEN-LAST:event_advsearchSearchButtonActionPerformed
 
     private void showallButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showallButtonActionPerformed
