@@ -125,12 +125,16 @@ public class InstrumentList extends AbstractTableModel
     public void selectList(InstrumentAttributeMatcher[] parameters)
     {
         lastSearch = parameters;
-        if(parameters==SHOWALL)
+
+        // For performance, if we're just told to show all of the items, just
+        // show all of the items.  Don't bother looping through all of them.
+        if (parameters == SHOWALL)
         {
             displayList = list;
             fireTableChanged(null);
             return;
         }
+
         List<Instrument> selection = new ArrayList<Instrument>();
         boolean result;
 
