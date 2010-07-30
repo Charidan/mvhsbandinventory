@@ -40,20 +40,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         }
 
         advsearchResetButtonActionPerformed(null);
-
-    //TODO: remove crappy test code.
-//        instruBox.setText("Flute");
-//        brandBox.setText("Yamaha");
-//        serialBox.setText("4B212A");
-//        rankBox.setText("2");
-//        valueBox.setText("250.49");
-//        strapCombo.setSelectedIndex(3);
-//        ligCombo.setSelectedIndex(3);
-//        mpieceCombo.setSelectedIndex(1);
-//        capCombo.setSelectedIndex(2);
-//        bowCombo.setSelectedIndex(3);
-//        notesTPane.setText("It's shiny, like a flute, but it's slightly flat.");
-
     }
 
     public Instrument getSelectedInstrument()
@@ -870,22 +856,22 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void instruBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_instruBoxActionPerformed
     {//GEN-HEADEREND:event_instruBoxActionPerformed
-        // TODO add your handling code here:
+       
 }//GEN-LAST:event_instruBoxActionPerformed
 
     private void ligComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ligComboActionPerformed
     {//GEN-HEADEREND:event_ligComboActionPerformed
-        // TODO add your handling code here:
+        
 }//GEN-LAST:event_ligComboActionPerformed
 
     private void renterBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renterBoxActionPerformed
     {//GEN-HEADEREND:event_renterBoxActionPerformed
-        // TODO add your handling code here:
+        
 }//GEN-LAST:event_renterBoxActionPerformed
 
     private void periodComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_periodComboActionPerformed
     {//GEN-HEADEREND:event_periodComboActionPerformed
-        // TODO add your handling code here:
+        
 }//GEN-LAST:event_periodComboActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
@@ -994,11 +980,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         }
         else
         {
-            // TODO: delete test print
-            System.out.println("Name: " + addTypeBox.getText() + 
-                    " Brand: " + addBrandBox.getText() +
-                    " Serial: " + addSerialBox.getText());
-            
             // Creating a new instrument
             Instrument instru = new Instrument();
 

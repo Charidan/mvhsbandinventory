@@ -125,7 +125,6 @@ public class InstrumentList extends AbstractTableModel
         lastSearch = parameters;
         if(parameters==SHOWALL)
         {
-            System.out.println("SHOWALL");
             displayList = list;
             fireTableChanged(null);
             return;
