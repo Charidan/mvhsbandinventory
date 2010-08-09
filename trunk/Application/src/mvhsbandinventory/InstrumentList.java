@@ -378,8 +378,8 @@ public class InstrumentList extends AbstractTableModel
         fireTableCellUpdated(row, col);
     }
 
-    void exportToExcel()
+    public void exportToExcel()
     {
-        exportToExcel(dataList);
+        exportToExcel(displayList);
     }
 }
