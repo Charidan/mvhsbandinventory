@@ -25,7 +25,8 @@ public class Main
             "/home/jonathan/csvtest",
             "C:/csvTest",
             "/users/chazgwennap/documents/csvtest",
-            "/volumes/no name/test"
+            "/volumes/no name/test",
+            "C:/Users/Charidan/Desktop/fileStore"
         };
 
     /**

@@ -19,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
 public class InstrumentList extends AbstractTableModel
 {
     public static final InstrumentAttributeMatcher[] SHOWALL = {};
-    private List<Instrument> list;
+    private List<Instrument> dataList;
     private List<Instrument> displayList;
     private InstrumentAttributeMatcher[] lastSearch = SHOWALL;
     private InstrumentStore store;
@@ -48,8 +48,8 @@ public class InstrumentList extends AbstractTableModel
 
         // Load all of the items from the datastore and put them into our
         // private ArrayList
-        list = new ArrayList<Instrument>(Arrays.asList(store.load()));
-        displayList = list;
+        dataList = new ArrayList<Instrument>(Arrays.asList(store.load()));
+        displayList = dataList;
     }
 
     /**
@@ -60,7 +60,7 @@ public class InstrumentList extends AbstractTableModel
     public void add(Instrument instrument)
     {
         // Add the item to our local memory cache and to our data store
-        list.add(instrument);
+        dataList.add(instrument);
         store.add(instrument);
 
         // Tell any attached tables that an item has been added
@@ -90,7 +90,7 @@ public class InstrumentList extends AbstractTableModel
         try
         {
             // Delete the item from our local memory cache and to our data store
-            list.remove(instrument);
+            dataList.remove(instrument);
             store.delete(instrument);
             selectList(lastSearch);
         } catch(Exception ex) {}
@@ -130,7 +130,7 @@ public class InstrumentList extends AbstractTableModel
         // show all of the items.  Don't bother looping through all of them.
         if (parameters == SHOWALL)
         {
-            displayList = list;
+            displayList = dataList;
             fireTableChanged(null);
             return;
         }
@@ -139,7 +139,7 @@ public class InstrumentList extends AbstractTableModel
         boolean result;
 
         // Loop through all of the items in our internal cache of the list
-        for (Instrument instrument : list)
+        for (Instrument instrument : dataList)
         {
             result = true;
             
@@ -239,7 +239,7 @@ public class InstrumentList extends AbstractTableModel
      */
     public int size()
     {
-        return list.size();
+        return dataList.size();
     }
 
     /**
@@ -251,7 +251,7 @@ public class InstrumentList extends AbstractTableModel
      */
     public Instrument get(int index)
     {
-        return list.get(index);
+        return dataList.get(index);
     }
 
     /**
@@ -271,12 +271,12 @@ public class InstrumentList extends AbstractTableModel
 
         // TODO: Maybe look at using binary search or skip list searching here
         // to massively improve performance
-        int length = list.size();
+        int length = dataList.size();
         for(int i = 0; i < length; i++)
         {
             // Retrieve information about the instrument to compare against the
             // arguments that were passed in
-            Instrument instrument = (Instrument)  list.get(i);
+            Instrument instrument = (Instrument)  dataList.get(i);
             String testName = (String) instrument.get("Name");
             String testBrand = (String) instrument.get("Brand");
             String testSerial = (String) instrument.get("Serial");
@@ -298,7 +298,7 @@ public class InstrumentList extends AbstractTableModel
 
     public boolean isEmpty()
     {
-        return list.isEmpty();
+        return dataList.isEmpty();
     }
 
     //Below this point are methods for the TabelModel handling
@@ -376,5 +376,10 @@ public class InstrumentList extends AbstractTableModel
             System.out.println(ex.getMessage());
         }
         fireTableCellUpdated(row, col);
+    }
+
+    void exportToExcel()
+    {
+        exportToExcel(dataList);
     }
 }
