@@ -210,12 +210,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitFilterButtonPanel = new javax.swing.JPanel();
         advSearchButton = new javax.swing.JButton();
         showallButton = new javax.swing.JButton();
+        excelButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         leftsplitSortButtonPanel = new javax.swing.JPanel();
         sortLabel = new javax.swing.JLabel();
         sortCombo = new javax.swing.JComboBox();
         sortButton = new javax.swing.JButton();
-        excelButton = new javax.swing.JButton();
         leftsplitSortByPanel = new javax.swing.JPanel();
         leftsplitinstruTablePane = new javax.swing.JScrollPane();
         instruTable = new javax.swing.JTable();
@@ -400,6 +400,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         leftsplitFilterButtonPanel.add(showallButton);
 
+        excelButton.setText("Export to Excel");
+        excelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excelButtonActionPerformed(evt);
+            }
+        });
+        leftsplitFilterButtonPanel.add(excelButton);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         leftsplitPanel.add(leftsplitFilterButtonPanel, gridBagConstraints);
@@ -420,14 +428,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         });
         leftsplitSortButtonPanel.add(sortButton);
-
-        excelButton.setText("Export to Excel");
-        excelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excelButtonActionPerformed(evt);
-            }
-        });
-        leftsplitSortButtonPanel.add(excelButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
