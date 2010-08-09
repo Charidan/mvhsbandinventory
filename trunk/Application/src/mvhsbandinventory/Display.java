@@ -48,7 +48,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         instruTable.getSelectionModel().addListSelectionListener(
                 new InstrumentTableListener(instruTable, this));
 
-        selectFirstInstrument();
+        // If there are instruments in the list, select the first one
+        if (!instruments.isEmpty())
+        {
+            instruTable.setRowSelectionInterval(0, 0);
+        }
     }
 
     public Instrument getSelectedInstrument()
@@ -70,6 +74,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     public void saveDetails()
     {
+        if(instruBox.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(jopDialog, "Error: Attempt to save a NULL_INSTRUMENT.", "Save Failed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try
         {
             Instrument instru = getSelectedInstrument();
@@ -136,17 +145,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         histModel.fireTableChanged(null);
     }
 
-    public void selectFirstInstrument ()
-    {
-        // If there are instruments in the list, select the first one
-        if (!instruments.isEmpty())
-        {
-            instruTable.setRowSelectionInterval(0, 0);
-        }
-    }
-
     public void saveHistory()
     {
+        if(instruBox.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(jopDialog, "Error: Attempt to save a NULL_INSTRUMENT.", "Save Failed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try
         {
             Instrument instru = getSelectedInstrument();
