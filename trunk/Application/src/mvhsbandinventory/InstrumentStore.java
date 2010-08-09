@@ -1,11 +1,15 @@
 package mvhsbandinventory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author jonathan
  */
 public abstract class InstrumentStore
 {
+    List<InstrumentStoreListener> listeners = new ArrayList<InstrumentStoreListener>();
 
     /**
      * Adds a new instrument to the store; serializes all of the data and
@@ -42,4 +46,36 @@ public abstract class InstrumentStore
      * @return an array of all of the parsed instruments in the store
      */
     public abstract Instrument[] load () throws Exception;
+
+    public synchronized void addListener (InstrumentStoreListener listener)
+    {
+        listeners.add(listener);
+    }
+
+    public synchronized void removeListener (InstrumentStoreListener listener)
+    {
+        listeners.remove(listener);
+    }
+
+    public synchronized void fireEvent (int type, Instrument instrument)
+    {
+        InstrumentStoreEvent event = new InstrumentStoreEvent(this,
+                type, instrument);
+
+        for (InstrumentStoreListener listener : listeners)
+        {
+            switch (type)
+            {
+                case InstrumentStoreEvent.ADDED:
+                    listener.instrumentAdded(event);
+                    break;
+                case InstrumentStoreEvent.MODIFIED:
+                    listener.instrumentModified(event);
+                    break;
+                case InstrumentStoreEvent.REMOVED:
+                    listener.instrumentRemoved(event);
+                    break;
+            }
+        }
+    }
 }
