@@ -220,6 +220,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitSortButtonPanel = new javax.swing.JPanel();
         sortLabel = new javax.swing.JLabel();
         sortCombo = new javax.swing.JComboBox();
+        sortReverseCombo = new javax.swing.JComboBox();
         sortButton = new javax.swing.JButton();
         leftsplitSortByPanel = new javax.swing.JPanel();
         leftsplitinstruTablePane = new javax.swing.JScrollPane();
@@ -425,6 +426,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitSortButtonPanel.add(sortLabel);
 
         leftsplitSortButtonPanel.add(sortCombo);
+
+        sortReverseCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ascending", "Descending" }));
+        leftsplitSortButtonPanel.add(sortReverseCombo);
 
         sortButton.setText("Sort");
         sortButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1063,7 +1067,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void sortButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortButtonActionPerformed
     {//GEN-HEADEREND:event_sortButtonActionPerformed
         String s = (String) sortCombo.getSelectedItem();
-        instruments.sort(s, true);
+        instruments.sort(s, sortReverseCombo.getSelectedIndex()==0);
     }//GEN-LAST:event_sortButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
@@ -1234,6 +1238,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton sortButton;
     private javax.swing.JComboBox sortCombo;
     private javax.swing.JLabel sortLabel;
+    private javax.swing.JComboBox sortReverseCombo;
     private javax.swing.JComboBox statusCombo;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox strapCombo;
