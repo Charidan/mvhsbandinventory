@@ -207,12 +207,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addCancelButton = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         leftsplitPanel = new javax.swing.JPanel();
-        leftsplitButtonPanel = new javax.swing.JPanel();
+        leftsplitFilterButtonPanel = new javax.swing.JPanel();
+        advSearchButton = new javax.swing.JButton();
+        showallButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        leftsplitSortButtonPanel = new javax.swing.JPanel();
         sortLabel = new javax.swing.JLabel();
         sortCombo = new javax.swing.JComboBox();
         sortButton = new javax.swing.JButton();
-        showallButton = new javax.swing.JButton();
-        advSearchButton = new javax.swing.JButton();
+        excelButton = new javax.swing.JButton();
         leftsplitSortByPanel = new javax.swing.JPanel();
         leftsplitinstruTablePane = new javax.swing.JScrollPane();
         instruTable = new javax.swing.JTable();
@@ -381,18 +384,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         leftsplitPanel.setMinimumSize(new java.awt.Dimension(480, 79));
         leftsplitPanel.setLayout(new java.awt.GridBagLayout());
 
-        sortLabel.setText("Sort By:");
-        leftsplitButtonPanel.add(sortLabel);
-
-        leftsplitButtonPanel.add(sortCombo);
-
-        sortButton.setText("Sort");
-        sortButton.addActionListener(new java.awt.event.ActionListener() {
+        advSearchButton.setText("Search");
+        advSearchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sortButtonActionPerformed(evt);
+                advSearchButtonActionPerformed(evt);
             }
         });
-        leftsplitButtonPanel.add(sortButton);
+        leftsplitFilterButtonPanel.add(advSearchButton);
 
         showallButton.setText("Show All");
         showallButton.addActionListener(new java.awt.event.ActionListener() {
@@ -400,19 +398,40 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 showallButtonActionPerformed(evt);
             }
         });
-        leftsplitButtonPanel.add(showallButton);
-
-        advSearchButton.setText("Search");
-        advSearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                advSearchButtonActionPerformed(evt);
-            }
-        });
-        leftsplitButtonPanel.add(advSearchButton);
+        leftsplitFilterButtonPanel.add(showallButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        leftsplitPanel.add(leftsplitButtonPanel, gridBagConstraints);
+        leftsplitPanel.add(leftsplitFilterButtonPanel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        leftsplitPanel.add(jSeparator1, gridBagConstraints);
+
+        sortLabel.setText("Sort By:");
+        leftsplitSortButtonPanel.add(sortLabel);
+
+        leftsplitSortButtonPanel.add(sortCombo);
+
+        sortButton.setText("Sort");
+        sortButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortButtonActionPerformed(evt);
+            }
+        });
+        leftsplitSortButtonPanel.add(sortButton);
+
+        excelButton.setText("Export to Excel");
+        excelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excelButtonActionPerformed(evt);
+            }
+        });
+        leftsplitSortButtonPanel.add(excelButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        leftsplitPanel.add(leftsplitSortButtonPanel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         leftsplitPanel.add(leftsplitSortByPanel, gridBagConstraints);
@@ -490,6 +509,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(instruBox, gridBagConstraints);
@@ -507,6 +527,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(brandBox, gridBagConstraints);
@@ -524,6 +545,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         serialBox.setMinimumSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(serialBox, gridBagConstraints);
@@ -556,6 +578,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         valueBox.setMinimumSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(valueBox, gridBagConstraints);
@@ -1120,6 +1143,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         instruments.selectList(InstrumentList.SHOWALL);
     }//GEN-LAST:event_showallButtonActionPerformed
 
+    private void excelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelButtonActionPerformed
+        instruments.exportToExcel();
+    }//GEN-LAST:event_excelButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
     private javax.swing.JTextField addBrandBox;
@@ -1159,6 +1186,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton deleteButton;
     private javax.swing.JScrollPane detailNotePanel;
     private javax.swing.JPanel detailPanel;
+    private javax.swing.JButton excelButton;
     private javax.swing.JComboBox feeCombo;
     private javax.swing.JLabel feeLabel;
     private javax.swing.JButton formButton;
@@ -1170,9 +1198,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField instruBox;
     private javax.swing.JTable instruTable;
     private javax.swing.JLabel instrumentLabel;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JDialog jopDialog;
-    private javax.swing.JPanel leftsplitButtonPanel;
+    private javax.swing.JPanel leftsplitFilterButtonPanel;
     private javax.swing.JPanel leftsplitPanel;
+    private javax.swing.JPanel leftsplitSortButtonPanel;
     private javax.swing.JPanel leftsplitSortByPanel;
     private javax.swing.JPanel leftsplitaddButtonPanel;
     private javax.swing.JScrollPane leftsplitinstruTablePane;
