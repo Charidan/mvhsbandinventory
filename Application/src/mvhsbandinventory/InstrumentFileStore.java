@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import net.contentobjects.jnotify.JNotify;
+import net.contentobjects.jnotify.JNotifyException;
+import net.contentobjects.jnotify.JNotifyListener;
 
 /**
  *
@@ -19,6 +22,8 @@ import java.util.List;
 public class InstrumentFileStore extends InstrumentStore
 {
     private File directory;
+    private JNotifyListener listener;
+    private int listenerID;
 
     /**
      * Constructs a new InstrumentFileStore object for storing Instrument
@@ -29,6 +34,20 @@ public class InstrumentFileStore extends InstrumentStore
     public InstrumentFileStore(String path)
     {
         directory = new File(path);
+
+        // Set up JNotify to monitor file store events
+        int events = JNotify.FILE_CREATED |
+                JNotify.FILE_MODIFIED |
+                JNotify.FILE_DELETED;
+
+        boolean recursive = false;
+        listener = new InstrumentFileStoreListener(this);
+
+        try
+        {
+            listenerID = JNotify.addWatch(path, events, recursive, listener);
+        }
+        catch (JNotifyException ex) {}
     }
 
     /**
