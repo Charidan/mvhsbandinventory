@@ -83,6 +83,6 @@ class InstrumentAttributeComparator implements Comparator
             // whether we're doing an ascending or descending sort
             result = str1.compareTo(str2);
         }
-        return (flip==true) ? result*-1 : result;
+        return (flip == true) ? result * -1 : result;
     }
 }

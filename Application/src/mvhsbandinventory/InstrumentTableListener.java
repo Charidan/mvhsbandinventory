@@ -8,7 +8,8 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author jonathan
  */
-public class InstrumentTableListener implements ListSelectionListener {
+public class InstrumentTableListener implements ListSelectionListener
+{
     JTable table;
     Display display;
 
