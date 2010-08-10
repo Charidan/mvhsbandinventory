@@ -1,23 +1,37 @@
 package mvhsbandinventory;
 
+import net.contentobjects.jnotify.JNotifyListener;
+
 /**
  *
  * @author jonathan
  */
-public class InstrumentFileStoreListener implements InstrumentStoreListener
+public class InstrumentFileStoreListener implements JNotifyListener
 {
 
-    public void instrumentAdded(InstrumentStoreEvent event)
+    private InstrumentFileStore store;
+
+    InstrumentFileStoreListener(InstrumentFileStore store)
+    {
+        this.store = store;
+    }
+
+    public void fileCreated(int i, String string, String string1)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void instrumentRemoved(InstrumentStoreEvent event)
+    public void fileDeleted(int i, String string, String string1)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void instrumentModified(InstrumentStoreEvent event)
+    public void fileModified(int i, String string, String string1)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void fileRenamed(int i, String string, String string1, String string2)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
