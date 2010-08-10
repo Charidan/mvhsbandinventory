@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.contentobjects.jnotify.JNotify;
 import net.contentobjects.jnotify.JNotifyException;
 import net.contentobjects.jnotify.JNotifyListener;
@@ -47,7 +49,7 @@ public class InstrumentFileStore extends InstrumentStore
         {
             listenerID = JNotify.addWatch(path, events, recursive, listener);
         }
-        catch (JNotifyException ex) {}
+        catch (JNotifyException e) {}
     }
 
     /**
