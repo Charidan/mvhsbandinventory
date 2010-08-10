@@ -4,7 +4,7 @@ package mvhsbandinventory;
  *
  * @author jonathan
  */
-public class InstrumentFileStoreListener extends InstrumentStoreListener
+public class InstrumentFileStoreListener implements InstrumentStoreListener
 {
 
     public void instrumentAdded(InstrumentStoreEvent event)
