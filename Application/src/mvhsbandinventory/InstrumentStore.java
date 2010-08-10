@@ -59,11 +59,11 @@ public abstract class InstrumentStore
 
     public synchronized void fireEvent (int type, Instrument instrument)
     {
-        InstrumentStoreEvent event = new InstrumentStoreEvent(this,
-                type, instrument);
-
         for (InstrumentStoreListener listener : listeners)
         {
+            InstrumentStoreEvent event = new InstrumentStoreEvent(this, type,
+                    instrument);
+            
             switch (type)
             {
                 case InstrumentStoreEvent.ADDED:
