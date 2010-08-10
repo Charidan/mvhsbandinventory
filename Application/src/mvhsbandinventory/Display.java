@@ -49,10 +49,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 new InstrumentTableListener(instruTable, this));
 
         // If there are instruments in the list, select the first one
-        if (!instruments.isEmpty())
-        {
-            instruTable.setRowSelectionInterval(0, 0);
-        }
+        sort();
     }
 
     public Instrument getSelectedInstrument()
@@ -180,6 +177,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public void setObject(Object bean)
     {
         this.bean = bean;
+    }
+
+    private void sort()
+    {
+        String s = (String) sortCombo.getSelectedItem();
+        instruments.sort(s, sortReverseCombo.getSelectedIndex()==0);
+        if (!instruments.isEmpty())
+        {
+            instruTable.setRowSelectionInterval(0, 0);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -937,6 +944,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             case JOptionPane.YES_OPTION:
                 instruments.delete(getSelectedInstrument());
         }
+
+        if (!instruments.isEmpty())
+        {
+            instruTable.setRowSelectionInterval(0, 0);
+        }
         Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -1057,6 +1069,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
             // Add the instrument to the instrument list
             instruments.add(instru);
+            sort();
             
             addDialog.setVisible(false);
             Main.window.setEnabled(true);
@@ -1066,8 +1079,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void sortButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortButtonActionPerformed
     {//GEN-HEADEREND:event_sortButtonActionPerformed
-        String s = (String) sortCombo.getSelectedItem();
-        instruments.sort(s, sortReverseCombo.getSelectedIndex()==0);
+        sort();
     }//GEN-LAST:event_sortButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
