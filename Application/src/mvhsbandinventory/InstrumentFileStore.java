@@ -290,7 +290,9 @@ public class InstrumentFileStore extends InstrumentStore
             try
             {
                 reader.close();
-            } catch (IOException ex) {}
+            } 
+            catch (IOException ex) {}
+            catch (NullPointerException ex) {}
         }
 
         // Return the file after it has been parsed into an Instrument

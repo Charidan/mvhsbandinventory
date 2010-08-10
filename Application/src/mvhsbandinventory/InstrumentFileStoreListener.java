@@ -39,7 +39,9 @@ public class InstrumentFileStoreListener implements JNotifyListener
     }
 
     private void sendEvent (int type, String root, String name) {
-        File changed = new File(root + File.pathSeparator + name);
+        File changed = new File(root + File.separator + name);
+        System.err.println(changed);
+
         Instrument instrument = store.read(changed);
         store.fireEvent(type, instrument);
     }
