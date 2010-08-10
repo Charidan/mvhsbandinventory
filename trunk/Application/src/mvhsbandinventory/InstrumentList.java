@@ -50,6 +50,19 @@ public class InstrumentList extends AbstractTableModel
         // private ArrayList
         dataList = new ArrayList<Instrument>(Arrays.asList(store.load()));
         displayList = dataList;
+
+        // Add a listener to the store so that we can update this when the data
+        // in the store changes
+        store.addListener(new InstrumentChangeListener(this));
+    }
+
+    public void addLocal(Instrument instrument)
+    {
+        dataList.add(instrument);
+
+        // Tell any attached tables that an item has been added
+        selectList(lastSearch);
+        fireTableChanged(null);
     }
 
     /**
@@ -59,15 +72,18 @@ public class InstrumentList extends AbstractTableModel
      */
     public void add(Instrument instrument)
     {
-        // Add the item to our local memory cache and to our data store
-        dataList.add(instrument);
+        // Add the item to our data store
         store.add(instrument);
 
-        // Tell any attached tables that an item has been added
-        selectList(lastSearch);
-        fireTableChanged(null);
+        // Add the item to our in-memory cache of the item
+        addLocal(instrument);
     }
 
+    public void updateLocal (Instrument instrument)
+    {
+        
+    }
+    
     /**
      * Commits the changes that were made to the instrument object to the long-
      * term datastore.
@@ -77,6 +93,16 @@ public class InstrumentList extends AbstractTableModel
     {
         // Commit the changes to the instrument to the disk
         store.update(instrument);
+
+        // Update the item in our in-memory cache
+        updateLocal(instrument);
+    }
+    
+    public void deleteLocal(Instrument instrument)
+    {
+        dataList.remove(instrument);
+        selectList(lastSearch);
+        fireTableChanged(null);
     }
 
     /**
@@ -87,12 +113,13 @@ public class InstrumentList extends AbstractTableModel
      */
     public void delete(Instrument instrument)
     {
+        // Remoe the item from our in-memory cache
+        deleteLocal(instrument);
+
         try
         {
-            // Delete the item from our local memory cache and to our data store
-            dataList.remove(instrument);
+            // Delete the item from our data store
             store.delete(instrument);
-            selectList(lastSearch);
         } catch(Exception ex) {}
     }
 
@@ -186,7 +213,7 @@ public class InstrumentList extends AbstractTableModel
 
             table.add(row);
         }
-
+        
         CSVWriter writer = null;
 
         try
