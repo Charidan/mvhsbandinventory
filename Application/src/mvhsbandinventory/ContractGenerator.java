@@ -1,7 +1,3 @@
-/*
-
- */
-
 package mvhsbandinventory;
 
 import java.awt.Desktop;
@@ -13,10 +9,6 @@ import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-/**
- *
- * @author nicholson
- */
 public class ContractGenerator
 {
     public static PDFont hbo = PDType1Font.HELVETICA_BOLD_OBLIQUE;
@@ -67,30 +59,41 @@ public class ContractGenerator
             s.moveTextPositionByAmount(0, -16);
             s.drawString("BOW:   " +i.get("Bow"));
             s.setFont(h, 12);
-            s.moveTextPositionByAmount(0, -20);
-            s.drawString("We, the undersigned, verify that the above information is correct, and agree to accept");
+            s.moveTextPositionByAmount(0, -20); //100, 500
+            s.drawString("We, the undersigned, verify that the above information" +
+                    " is correct, and agree to accept");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("the responsibility for the care and maintenance of the above instrument and ");
+            s.drawString("the responsibility for the care and maintenance of the" +
+                    " above instrument and ");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("accessories. We realize that in the case of theft, loss, or damage, it is our responsibility ");
+            s.drawString("accessories. We realize that in the case of theft, " +
+                    "loss, or damage, it is our responsibility ");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("to repair or replace this equipment. We further realize the loan of this musical ");
+            s.drawString("to repair or replace this equipment. We further " +
+                    "realize the loan of this musical ");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("instrument is a privelege for the purpose of practicing at home and participationg in ");
+            s.drawString("instrument is a privelege for the purpose of " +
+                    "practicing at home and participationg in ");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("class or school performances. Under no circumstances may this property be loaned to ");
+            s.drawString("class or school performances. Under no circumstances " +
+                    "may this property be loaned to ");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("others or used for non Mountain View High School related activities without the ");
-            s.moveTextPositionByAmount(0, -16);
+            s.drawString("others or used for non Mountain View High School " +
+                    "related activities without the ");
+            s.moveTextPositionByAmount(0, -16); //100, 388
             s.drawString("instructor's consent.");
             s.moveTextPositionByAmount(0, -80);
-            s.drawString("The above instrument shall be returned upon completion of course, when student is");
+            s.drawString("The above instrument shall be returned upon completion" +
+                    " of course, when student is");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("no longer required to play this instrument, or upon instructor's request. When the");
+            s.drawString("no longer required to play this instrument, or upon " +
+                    "instructor's request. When the");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("instrument is returned and found to be in the same or better condition, this contract");
+            s.drawString("instrument is returned and found to be in the same or " +
+                    "better condition, this contract");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("will become null and void. (Reasonable wear and tear is expected)");
+            s.drawString("will become null and void. (Reasonable wear and tear " +
+                    "is expected)");
             s.moveTextPositionByAmount(0, -32);
             s.setFont(hb, 12);
             s.drawString("STUDENT:");
@@ -100,7 +103,8 @@ public class ContractGenerator
             s.drawString("INSTRUCTOR:");
             s.moveTextPositionByAmount(10, -32);
             s.setFont(hbo, 12);
-            s.drawString("PLEASE NOTE ANY DENTS OR OTHER IMPERFECTIONS BEFORE SIGNING!");
+            s.drawString("PLEASE NOTE ANY DENTS OR OTHER IMPERFECTIONS BEFORE " +
+                    "SIGNING!");
             s.setFont(hbo, 16);
             s.moveTextPositionByAmount(12, 224);
             s.drawString("NOTE: $50 cleaning fee per year or season is required.");
