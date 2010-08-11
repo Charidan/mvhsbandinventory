@@ -57,7 +57,20 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         try
         {
             int i = instruTable.getSelectedRow();
-            
+
+            if (i == -1)
+            {
+                if (!instruments.isTableEmpty())
+                {
+                    instruTable.setRowSelectionInterval(0, 0);
+                    i = instruTable.getSelectedRow();
+                }
+                else
+                {
+                    return Instrument.NULL_INSTRUMENT;
+                }
+            }
+
             return instruments.get((String) instruTable.getValueAt(i, 0),
                     (String) instruTable.getValueAt(i, 1),
                     (String) instruTable.getValueAt(i, 2));
@@ -183,7 +196,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {
         String s = (String) sortCombo.getSelectedItem();
         instruments.sort(s, sortReverseCombo.getSelectedIndex()==0);
-        if (!instruments.isEmpty())
+        if (!instruments.isTableEmpty())
         {
             instruTable.setRowSelectionInterval(0, 0);
         }
@@ -945,10 +958,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 instruments.delete(getSelectedInstrument());
         }
 
-        if (!instruments.isEmpty())
-        {
-            instruTable.setRowSelectionInterval(0, 0);
-        }
+        sort();
         Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -1158,6 +1168,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void showallButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showallButtonActionPerformed
     {//GEN-HEADEREND:event_showallButtonActionPerformed
         instruments.selectList(InstrumentList.SHOWALL);
+        sort();
     }//GEN-LAST:event_showallButtonActionPerformed
 
     private void excelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelButtonActionPerformed

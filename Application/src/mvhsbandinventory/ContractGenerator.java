@@ -1,20 +1,12 @@
 /*
- * Copyright (c) 2009  Mel Nicholson.
- * All Rights Reserved.
+
  */
 
 package mvhsbandinventory;
 
 import java.awt.Desktop;
-import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import org.apache.pdfbox.cos.COSDocument;
-import org.apache.pdfbox.exceptions.COSVisitorException;
-import org.apache.pdfbox.io.RandomAccess;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
@@ -36,18 +28,21 @@ public class ContractGenerator
         
     }
     
-    public void generateContract(Instrument i) //Will take Intrument i later
+    public void generateContract(Instrument i)
     {
         PDDocument document = null;
         
         try
         {
+            //Create new document
             document = new PDDocument();
-            
-            PDPage blankPage = new PDPage();
-            document.addPage(blankPage);
-            
-            PDPageContentStream s = new PDPageContentStream(document, blankPage);
+
+            //Add new page to document
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            //Write all text and lines to page
+            PDPageContentStream s = new PDPageContentStream(document, page);
             s.beginText();
             s.setFont(hbo, 16);
             s.moveTextPositionByAmount(180, 700);
@@ -57,7 +52,7 @@ public class ContractGenerator
             s.drawString("BOND FOR MUSICAL INSTRUMENT");
             s.setLineWidth(1);
             s.drawLine(148, 668, 455, 668);
-            s.moveTextPositionByAmount(-73, -68); //75, 600
+            s.moveTextPositionByAmount(-73, -68);
             s.setFont(hb, 12);
             s.drawString("INSTRUMENT:   " +i.get("Name"));
             s.moveTextPositionByAmount(0, -16);
@@ -72,7 +67,7 @@ public class ContractGenerator
             s.moveTextPositionByAmount(0, -16);
             s.drawString("BOW:   " +i.get("Bow"));
             s.setFont(h, 12);
-            s.moveTextPositionByAmount(0, -20); //100, 500
+            s.moveTextPositionByAmount(0, -20);
             s.drawString("We, the undersigned, verify that the above information is correct, and agree to accept");
             s.moveTextPositionByAmount(0, -16);
             s.drawString("the responsibility for the care and maintenance of the above instrument and ");
@@ -86,7 +81,7 @@ public class ContractGenerator
             s.drawString("class or school performances. Under no circumstances may this property be loaned to ");
             s.moveTextPositionByAmount(0, -16);
             s.drawString("others or used for non Mountain View High School related activities without the ");
-            s.moveTextPositionByAmount(0, -16); //100, 388
+            s.moveTextPositionByAmount(0, -16);
             s.drawString("instructor's consent.");
             s.moveTextPositionByAmount(0, -80);
             s.drawString("The above instrument shall be returned upon completion of course, when student is");
@@ -103,13 +98,13 @@ public class ContractGenerator
             s.drawString("PARENT:");
             s.moveTextPositionByAmount(0, -32);
             s.drawString("INSTRUCTOR:");
-            s.moveTextPositionByAmount(10, -32); //116, 164
+            s.moveTextPositionByAmount(10, -32);
             s.setFont(hbo, 12);
             s.drawString("PLEASE NOTE ANY DENTS OR OTHER IMPERFECTIONS BEFORE SIGNING!");
             s.setFont(hbo, 16);
-            s.moveTextPositionByAmount(12, 224); //116, 368
+            s.moveTextPositionByAmount(12, 224);
             s.drawString("NOTE: $50 cleaning fee per year or season is required.");
-            s.moveTextPositionByAmount(209, 244); //275, 600
+            s.moveTextPositionByAmount(209, 244);
             s.setFont(hb, 12);
             s.drawString("ON LOAN TO:   " +i.get("Renter"));
             s.moveTextPositionByAmount(0, -16);
@@ -120,14 +115,16 @@ public class ContractGenerator
             s.drawString("LIGATURE:   " +i.get("Ligature"));
             s.moveTextPositionByAmount(0, -16);
             s.drawString("MOUTHPIECE CAP:   " +i.get("MouthpieceCap"));
-            s.moveTextPositionByAmount(0, -16); //275, 520
+            s.moveTextPositionByAmount(0, -16); 
             s.drawString("OTHER: " +i.get("Other"));
-            s.moveTextPositionByAmount(25, -292); //300, 228
+            s.moveTextPositionByAmount(25, -292);
             s.drawString("DATE LOANED:");
             s.moveTextPositionByAmount(0, -32);
             s.drawString("FEE PAID:");
             s.moveTextPositionByAmount(0, -32);
             s.drawString("DATE RETURNED:");
+
+            //Signature lines
             s.drawLine(160,164,325,164);
             s.drawLine(130, 196, 325, 196);
             s.drawLine(140, 228, 325, 228);
@@ -152,6 +149,7 @@ public class ContractGenerator
             s.moveTextPositionByAmount(100, 280);
             s.drawString("School Year:  " +i.get("SchoolYear"));
 
+            //Closes content streamer so that it can be reopened.
             s.endText();
             s.close();
             
@@ -174,15 +172,11 @@ public class ContractGenerator
             }
         }
         catch (org.apache.pdfbox.exceptions.COSVisitorException ex) {}
-        catch (IOException ex)
-        {
-            System.out.println("Unable to write to the PDF file.  This usually" +
-                    "happens because the file is currently opened in another" +
-                    "application, such as a PDF reader.");
-        }
+        catch (IOException ex) {}
         finally {
             try
             {
+                //Allows document to be reopened later.
                 document.close();
             }
             catch (IOException ex) {}
