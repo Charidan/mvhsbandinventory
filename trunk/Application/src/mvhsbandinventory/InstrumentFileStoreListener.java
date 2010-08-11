@@ -2,6 +2,7 @@ package mvhsbandinventory;
 
 import java.io.File;
 import net.contentobjects.jnotify.JNotifyListener;
+import java.util.regex.*;
 
 /**
  *
@@ -24,7 +25,38 @@ public class InstrumentFileStoreListener implements JNotifyListener
 
     public void fileDeleted (int wd, String root, String name)
     {
-        sendEvent(InstrumentStoreEvent.REMOVED, root, name);
+        System.out.println("File deleted: " + name);
+
+        Pattern splitter = Pattern.compile("_");
+        Pattern typeDelimiter = Pattern.compile("\\.");
+
+        String[] chunks = splitter.split(name);
+        int chunkLen = chunks.length;
+        int lastChunk = chunkLen - 1;
+        Instrument remaining = new Instrument();
+
+        for (int i = 0; i < chunkLen; i++)
+        {
+            String chunk = chunks[i];
+            String attribute = Instrument.attributes[i];
+
+            if (i == lastChunk)
+            {
+                String[] subChunks = typeDelimiter.split(chunk, 2);
+                chunk = subChunks[0];
+            }
+
+            System.out.println("Adding following key/value pair:" +
+                    attribute + "/" + chunk);
+            
+            try
+            {
+                remaining.set(attribute, chunk);
+            }
+            catch (Exception ex) {}
+        }
+
+        store.fireEvent(InstrumentStoreEvent.REMOVED, remaining);
     }
 
     public void fileModified (int wd, String root, String name)
@@ -40,7 +72,7 @@ public class InstrumentFileStoreListener implements JNotifyListener
 
     private void sendEvent (int type, String root, String name) {
         File changed = new File(root + File.separator + name);
-        //System.err.println(changed);
+        System.out.println("Sending change event for:" + changed);
 
         Instrument instrument = store.read(changed);
         store.fireEvent(type, instrument);

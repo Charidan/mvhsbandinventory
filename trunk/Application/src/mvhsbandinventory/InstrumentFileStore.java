@@ -281,7 +281,9 @@ public class InstrumentFileStore extends InstrumentStore
             }
         }
         catch (FileNotFoundException ex) {}
-        catch (IOException ex) {}
+        catch (IOException ex) {
+            System.out.println("File is locked.");
+        }
         finally
         {
             // Make sure that the file reader is closed down properly
