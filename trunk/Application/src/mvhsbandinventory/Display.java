@@ -1054,6 +1054,20 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        // Check to make sure that there isn't already an instrument by the same
+        // name as this one
+        if (!instruments.isUnique(addTypeBox.getText(),
+                addBrandBox.getText(),
+                addSerialBox.getText()))
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "There is already an instrument in the database that has \n" +
+                    "the same name, brand, and serial as this one.",
+                    "Data Entry Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         // Creating a new instrument
         Instrument instru = new Instrument();
