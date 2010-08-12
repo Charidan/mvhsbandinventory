@@ -316,6 +316,29 @@ public class InstrumentList extends AbstractTableModel
         throw new Exception("No instruments exist that have those parameters.");
     }
 
+    public boolean isUnique(String name, String brand, String serial)
+    {
+        try
+        {
+            get(name, brand, serial);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean isUnique(Instrument instrument)
+    {
+        String name = instrument.get("Name");
+        String brand = instrument.get("Brand");
+        String serial = instrument.get("Serial");
+
+        return isUnique(name, brand, serial);
+
+    }
+
     public boolean isEmpty()
     {
         return dataList.isEmpty();

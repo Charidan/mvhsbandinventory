@@ -2,7 +2,7 @@ package mvhsbandinventory;
 
 import java.io.File;
 import net.contentobjects.jnotify.JNotifyListener;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -25,8 +25,6 @@ public class InstrumentFileStoreListener implements JNotifyListener
 
     public void fileDeleted (int wd, String root, String name)
     {
-        System.out.println("File deleted: " + name);
-
         Pattern splitter = Pattern.compile("_");
         Pattern typeDelimiter = Pattern.compile("\\.");
 
@@ -45,9 +43,6 @@ public class InstrumentFileStoreListener implements JNotifyListener
                 String[] subChunks = typeDelimiter.split(chunk, 2);
                 chunk = subChunks[0];
             }
-
-            System.out.println("Adding following key/value pair:" +
-                    attribute + "/" + chunk);
             
             try
             {
@@ -72,8 +67,6 @@ public class InstrumentFileStoreListener implements JNotifyListener
 
     private void sendEvent (int type, String root, String name) {
         File changed = new File(root + File.separator + name);
-        System.out.println("Sending change event for:" + changed);
-
         Instrument instrument = store.read(changed);
 
         if (instrument.isValid())
