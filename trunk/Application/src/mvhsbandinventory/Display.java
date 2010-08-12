@@ -80,14 +80,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     public void saveDetails()
     {
-        if(instruBox.getText().equals(""))
+        Instrument instru = getSelectedInstrument();
+
+        if(!instru.isValid())
         {
             JOptionPane.showMessageDialog(jopDialog, "Error: Attempt to save a NULL_INSTRUMENT.", "Save Failed", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         try
         {
-            Instrument instru = getSelectedInstrument();
             instru.set("Rank", rankBox.getText());
             instru.set("Value", valueBox.getText());
             instru.set("Status", (String) statusCombo.getSelectedItem());
@@ -98,7 +100,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("NeckStrap", (String) strapCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
             instruments.update(instru);
-        } catch(Exception ex)
+        }
+        catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "An Error has occurred while saving the instrument:\n" + ex.getMessage(),
@@ -153,14 +156,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     public void saveHistory()
     {
-        if(instruBox.getText().equals(""))
+        Instrument instru = getSelectedInstrument();
+
+        if(!instru.isValid())
         {
             JOptionPane.showMessageDialog(jopDialog, "Error: Attempt to save a NULL_INSTRUMENT.", "Save Failed", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         try
         {
-            Instrument instru = getSelectedInstrument();
             instru.set("Renter", renterBox.getText());
             instru.set("SchoolYear", schoolyearBox.getText());
             instru.set("DateOut", dateoutBox.getText());
@@ -169,7 +174,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Other", otherBox.getText());
             instru.set("Status", (String) statusCombo.getSelectedItem());
             instruments.update(instru);
-        } catch(Exception ex)
+        }
+        catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "An Error has occurred while saving the instrument:\n" + ex.getMessage(),
@@ -940,18 +946,22 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
     {//GEN-HEADEREND:event_deleteButtonActionPerformed
         Main.window.setEnabled(false);
-        if(getSelectedInstrument().equals(Instrument.NULL_INSTRUMENT))
+        Instrument instru = getSelectedInstrument();
+
+        if(!instru.isValid())
         {
             JOptionPane.showMessageDialog(jopDialog, "Instrument could not be deleted: No instrument selected.", "Delete Failed", JOptionPane.WARNING_MESSAGE);
             Main.window.setEnabled(true);
-        Main.window.requestFocus();
+            Main.window.requestFocus();
             return;
         }
+
         int n = JOptionPane.showConfirmDialog(jopDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
         switch(n)
         {
             case JOptionPane.YES_OPTION:
-                instruments.delete(getSelectedInstrument());
+                instruments.delete(instru);
         }
 
         sort();
@@ -1033,54 +1043,53 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void addAcceptButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addAcceptButtonActionPerformed
     {//GEN-HEADEREND:event_addAcceptButtonActionPerformed
         // Check to make sure that all of the fields were properly filled in
-        if(addTypeBox.getText().equals("") ||
-                addBrandBox.getText().equals("") ||
-                addSerialBox.getText().equals(""))
+        if(!Instrument.isValid(addTypeBox.getText(),
+                addBrandBox.getText(),
+                addSerialBox.getText()))
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "All of the three fields on the \"Add Instrument\" form \n" +
                     "are required to be filled in. One of them was left blank.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        else
+        
+        // Creating a new instrument
+        Instrument instru = new Instrument();
+
+        try
         {
-            // Creating a new instrument
-            Instrument instru = new Instrument();
+            // Adding core fields from the "Add Instrument" window
+            instru.set("Name", addTypeBox.getText());
+            instru.set("Brand", addBrandBox.getText());
+            instru.set("Serial", addSerialBox.getText());
 
-            try
-            {
-                // Adding core fields from the "Add Instrument" window
-                instru.set("Name", addTypeBox.getText());
-                instru.set("Brand", addBrandBox.getText());
-                instru.set("Serial", addSerialBox.getText());
-
-                // Adding default values for new instruments
-                // TODO: Move these into some sort of configuration system
-                instru.set("Rank", "3");
-                instru.set("Value", "0");
-                instru.set("Period", "0");
-                instru.set("Fee", "Unpaid");
-                instru.set("Contract", "Uncreated");
-                instru.addHistory("Instrument created.");
-            }
-            catch(Exception ex)
-            {
-                JOptionPane.showMessageDialog(jopDialog,
-                        "An internal error has occurred while creating the " +
-                        "instrument:\n" + ex.getMessage(),
-                        "Instrument Creation Failed",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-
-            // Add the instrument to the instrument list
-            instruments.add(instru);
-            sort();
-            
-            addDialog.setVisible(false);
-            Main.window.setEnabled(true);
-            Main.window.requestFocus();
+            // Adding default values for new instruments
+            // TODO: Move these into some sort of configuration system
+            instru.set("Rank", "3");
+            instru.set("Value", "0");
+            instru.set("Period", "0");
+            instru.set("Fee", "Unpaid");
+            instru.set("Contract", "Uncreated");
+            instru.addHistory("Instrument created.");
         }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "An internal error has occurred while creating the " +
+                    "instrument:\n" + ex.getMessage(),
+                    "Instrument Creation Failed",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Add the instrument to the instrument list
+        instruments.add(instru);
+        sort();
+
+        addDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
     }//GEN-LAST:event_addAcceptButtonActionPerformed
 
     private void sortButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortButtonActionPerformed
