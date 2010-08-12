@@ -327,7 +327,10 @@ public class InstrumentFileStore extends InstrumentStore
         {
             Instrument instrument = read(file);
 
-            instruments.add(instrument);
+            if (instrument.isValid())
+            {
+                instruments.add(instrument);
+            }
         }
 
         return instruments;
