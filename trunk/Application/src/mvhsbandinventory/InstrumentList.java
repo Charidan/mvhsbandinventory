@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -48,7 +47,7 @@ public class InstrumentList extends AbstractTableModel
 
         // Load all of the items from the datastore and put them into our
         // private ArrayList
-        dataList = new ArrayList<Instrument>(Arrays.asList(store.load()));
+        dataList = new ArrayList<Instrument>(store.load());
         displayList = dataList;
 
         // Add a listener to the store so that we can update this when the data
