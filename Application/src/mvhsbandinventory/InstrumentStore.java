@@ -45,7 +45,7 @@ public abstract class InstrumentStore
      * Loads all of the instruments from the store.
      * @return an array of all of the parsed instruments in the store
      */
-    public abstract Instrument[] load () throws Exception;
+    public abstract List<Instrument> load () throws Exception;
 
     public synchronized void addListener (InstrumentStoreListener listener)
     {

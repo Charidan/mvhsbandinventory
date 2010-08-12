@@ -301,9 +301,9 @@ public class InstrumentFileStore extends InstrumentStore
 
     /**
      * Loads all of the instruments from the store.
-     * @return an array of all of the parsed instruments in the store
+     * @return a list of all of the parsed instruments in the store
      */
-    public Instrument[] load() throws Exception
+    public List<Instrument> load() throws Exception
     {
         // Get a list of all of the instruments in the store
         File[] files = directory.listFiles();
@@ -320,12 +320,14 @@ public class InstrumentFileStore extends InstrumentStore
 
         // Create an array of the instruments with a size equal to the number
         // of instruments in the store
-        Instrument[] instruments = new Instrument[size];
+        List<Instrument> instruments = new ArrayList<Instrument>();
 
         // Read and unserialize all of the files into our instruments array
-        for (int i = 0; i < size; i++)
+        for (File file : files)
         {
-            instruments[i] = read(files[i]);
+            Instrument instrument = read(file);
+
+            instruments.add(instrument);
         }
 
         return instruments;
