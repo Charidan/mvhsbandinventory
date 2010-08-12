@@ -28,7 +28,7 @@ public class InstrumentChangeListener implements InstrumentStoreListener
         catch (Exception ex)
         {
             list.addLocal(event.instrument);
-            System.out.println("added " + event.instrument);
+            System.out.println("[Realtime] Added: " + event.instrument);
         }
     }
 
@@ -42,13 +42,16 @@ public class InstrumentChangeListener implements InstrumentStoreListener
         {
             Instrument existing = list.get(name, brand, serial);
             list.deleteLocal(existing);
+            System.out.println("[Realtime] Deleted: " + event.instrument);
         }
         catch (Exception ex) {}
     }
 
     public void instrumentModified (InstrumentStoreEvent event)
     {
-        
+        list.updateLocal(event.instrument);
+        Main.panel.displayInstrument();
+        System.out.println("[Realtime] Modified: " + event.instrument);
     }
 
 }
