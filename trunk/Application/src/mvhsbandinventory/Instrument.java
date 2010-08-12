@@ -108,4 +108,19 @@ public class Instrument
         Date d = new Date();
         history.add(d + "- " +line);
     }
+
+    public static boolean isValid (String name, String brand, String serial)
+    {
+        return !("".equals(name) || "".equals(brand) || "".equals(serial) ||
+                name.equals(null) || brand.equals(null) || serial.equals(null));
+    }
+
+    public boolean isValid ()
+    {
+        String name = properties.get("Name");
+        String brand = properties.get("Brand");
+        String serial = properties.get("Serial");
+
+        return isValid(name, brand, serial);
+    }
 }

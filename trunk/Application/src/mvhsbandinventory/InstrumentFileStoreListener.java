@@ -75,7 +75,11 @@ public class InstrumentFileStoreListener implements JNotifyListener
         System.out.println("Sending change event for:" + changed);
 
         Instrument instrument = store.read(changed);
-        store.fireEvent(type, instrument);
+
+        if (instrument.isValid())
+        {
+            store.fireEvent(type, instrument);
+        }
     }
 
 }
