@@ -79,6 +79,34 @@ public class InstrumentList extends AbstractTableModel
         store.add(instrument);
     }
 
+    public void updateLocal(Instrument instrument)
+    {
+        // Find the existing related element in the datastore
+        String name = instrument.get("Name");
+        String brand = instrument.get("Brand");
+        String serial = instrument.get("Serial");
+
+        try
+        {
+            // Get existing instrument
+            Instrument existing = get(name, brand, serial);
+
+            // Merge in the changes to the instrument's attributes
+            for (String attribute : Instrument.attributes)
+            {
+                String update = instrument.get(attribute);
+                existing.set(attribute, update);
+            }
+            
+            // Merge in the changes to the instrument's history
+            existing.setHistory(instrument.getHistory());
+
+            // Fire the table changed event
+            fireTableChanged(null);
+        }
+        catch (Exception e) {}
+    }
+
     /**
      * Commits the changes that were made to the instrument object to the long-
      * term datastore.

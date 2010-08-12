@@ -113,6 +113,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public void displayInstrument()
     {
         Instrument instru = getSelectedInstrument();
+        
         //set the Details panel
         if(instru.get("Status").equals("")) statusCombo.setSelectedIndex(0);
         else statusCombo.setSelectedItem((String) instru.get("Status"));
