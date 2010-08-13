@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
  */
 public class InstrumentFileStoreListener implements JNotifyListener
 {
-
     private InstrumentFileStore store;
 
     public InstrumentFileStoreListener (InstrumentFileStore store)
