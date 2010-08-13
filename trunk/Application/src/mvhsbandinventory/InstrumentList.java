@@ -368,6 +368,10 @@ public class InstrumentList extends AbstractTableModel
         return dataList.isEmpty();
     }
 
+    public int displayIndexOf(Instrument instrument)
+    {
+        return displayList.indexOf(instrument);
+    }
 
     //Below this point are methods for the TabelModel handling
     public boolean isTableEmpty()

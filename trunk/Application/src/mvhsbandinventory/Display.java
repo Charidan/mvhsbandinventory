@@ -39,13 +39,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         advsearchResetButtonActionPerformed(null);
 
         // Set up the instrument table to have the appropriate responses to user
-        // interaction (the right side adjusts to show the stuff on the left) and changes
+        // interaction (the right side adjusts to show the stuff on the left) 
         instruTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         instruTable.getSelectionModel().addListSelectionListener(
                 new InstrumentTableListener(instruTable, this));
 
-        // If there are instruments in the list, select the first one
+        // If there are instruments in the list, sort them appropriately
         sort();
+        setSelectedIndex(0);
     }
 
     public Instrument getSelectedInstrument()
@@ -59,7 +60,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 if (!instruments.isTableEmpty())
                 {
                     instruTable.setRowSelectionInterval(0, 0);
-                    i = instruTable.getSelectedRow();
+                    i = 0;
                 }
                 else
                 {
@@ -76,6 +77,25 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         {
             return Instrument.NULL_INSTRUMENT;
         }
+    }
+
+    // Yes.  This is public.  This *is* called via the constructor.  I know.
+    // but it's only overwritable if you subclass Display, which isn't likely to
+    // happen.  And besides, if you subclass Display you can kinda overwrite the
+    // constructor anyway, so it's kinda moot.
+    public void setSelectedIndex (int row) {
+        if (!instruments.isTableEmpty())
+        {
+            instruTable.setRowSelectionInterval(row, row);
+        }
+    }
+
+    public void setSelectedInstrument (Instrument instrument)
+    {
+        int index = instruments.displayIndexOf(instrument);
+        int row = (index == -1) ? 0 : index;
+
+        setSelectedIndex(row);
     }
 
     public void saveDetails()
@@ -198,11 +218,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void sort()
     {
         String s = (String) sortCombo.getSelectedItem();
-        instruments.sort(s, sortReverseCombo.getSelectedIndex()==0);
-        if (!instruments.isTableEmpty())
-        {
-            instruTable.setRowSelectionInterval(0, 0);
-        }
+        instruments.sort(s, sortReverseCombo.getSelectedIndex() == 0);
     }
 
     /** This method is called from within the constructor to
