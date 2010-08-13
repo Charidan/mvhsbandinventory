@@ -1157,8 +1157,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void instruTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_instruTableMouseClicked
     {//GEN-HEADEREND:event_instruTableMouseClicked
-        //if(instruTable.getSelectedRow() == -1) return;
-        //displayInstrument();
+        
 }//GEN-LAST:event_instruTableMouseClicked
 
     private void lostButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lostButtonActionPerformed
