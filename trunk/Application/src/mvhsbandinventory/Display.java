@@ -99,7 +99,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Bow", (String) bowCombo.getSelectedItem());
             instru.set("NeckStrap", (String) strapCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
-            instruments.update(instru);
+            saveHistory();
         }
         catch(Exception ex)
         {
@@ -1117,7 +1117,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         Instrument i = getSelectedInstrument();
         i.addHistory("Instrument saved.");
-        saveHistory();
         saveDetails();
         displayInstrument();
     }//GEN-LAST:event_saveButtonActionPerformed
