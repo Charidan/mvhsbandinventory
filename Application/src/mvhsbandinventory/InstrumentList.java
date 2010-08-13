@@ -62,7 +62,7 @@ public class InstrumentList extends AbstractTableModel
         
         // Tell any attached tables that an item has been added
         selectList(lastSearch);
-        fireTableChanged(null);
+        fireTableDataChanged();
     }
 
     /**
@@ -120,7 +120,7 @@ public class InstrumentList extends AbstractTableModel
         dataList.remove(instrument);
         
         selectList(lastSearch);
-        fireTableChanged(null);
+        fireTableDataChanged();
     }
 
     /**
@@ -154,7 +154,7 @@ public class InstrumentList extends AbstractTableModel
         {
             Comparator comp = new InstrumentAttributeComparator(key, ascending);
             Collections.sort(displayList, comp);
-            fireTableChanged(null);
+            fireTableDataChanged();
         } 
         catch(Exception ex) {}
     }
@@ -175,7 +175,7 @@ public class InstrumentList extends AbstractTableModel
         if (parameters == SHOWALL)
         {
             displayList = dataList;
-            fireTableChanged(null);
+            fireTableDataChanged();
             return;
         }
 
@@ -200,7 +200,7 @@ public class InstrumentList extends AbstractTableModel
 
         // Displays the result list
         displayList = selection;
-        fireTableChanged(null);
+        fireTableDataChanged();
     }
 
     /**
@@ -423,6 +423,7 @@ public class InstrumentList extends AbstractTableModel
     public void setValueAt(Object value, int row, int col)
     {
         Instrument instru = displayList.get(row);
+
         try
         {
             switch(col)
@@ -444,10 +445,12 @@ public class InstrumentList extends AbstractTableModel
                 }
             }
             update(instru);
-        } catch(Exception ex)
+        }
+        catch(Exception ex)
         {
             System.out.println(ex.getMessage());
         }
+        
         fireTableCellUpdated(row, col);
     }
 
