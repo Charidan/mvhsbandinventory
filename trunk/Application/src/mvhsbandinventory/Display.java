@@ -1212,7 +1212,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         {
             matchers[i] = jcomps2matcher((JComboBox) comps[i*3], (JComboBox) comps[i*3+1], (JTextField) comps[i*3+2]);
         }
+        
+        Instrument selection = getSelectedInstrument();
         instruments.selectList(matchers);
+        setSelectedInstrument(selection);
+
         advsearchDialog.setVisible(false);
         Main.window.setEnabled(true);
         Main.window.requestFocus();
@@ -1220,8 +1224,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void showallButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showallButtonActionPerformed
     {//GEN-HEADEREND:event_showallButtonActionPerformed
+        Instrument selected = getSelectedInstrument();
         instruments.selectList(InstrumentList.SHOWALL);
         sort();
+        setSelectedInstrument(selected);
     }//GEN-LAST:event_showallButtonActionPerformed
 
     private void excelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelButtonActionPerformed
