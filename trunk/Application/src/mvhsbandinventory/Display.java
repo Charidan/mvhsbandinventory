@@ -987,8 +987,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         switch(n)
         {
             case JOptionPane.YES_OPTION:
+                int index = instruments.displayIndexOf(instru);
                 instruments.delete(instru);
                 sort();
+
+                int rows = instruments.getRowCount();
+                int selection = (index >= rows) ? rows - 1 : index;
+                setSelectedIndex(selection);
         }
 
         
