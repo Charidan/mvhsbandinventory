@@ -969,21 +969,29 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         if(!instru.isValid())
         {
-            JOptionPane.showMessageDialog(jopDialog, "Instrument could not be deleted: No instrument selected.", "Delete Failed", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(jopDialog, 
+                    "Instrument could not be deleted: No instrument selected.", 
+                    "Delete Failed", 
+                    JOptionPane.WARNING_MESSAGE);
             Main.window.setEnabled(true);
             Main.window.requestFocus();
             return;
         }
 
-        int n = JOptionPane.showConfirmDialog(jopDialog, "Are you sure you want to delete this instrument?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int n = JOptionPane.showConfirmDialog(jopDialog, 
+                "Are you sure you want to delete this instrument?", 
+                "Confirm Delete", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE);
 
         switch(n)
         {
             case JOptionPane.YES_OPTION:
                 instruments.delete(instru);
+                sort();
         }
 
-        sort();
+        
         Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_deleteButtonActionPerformed
