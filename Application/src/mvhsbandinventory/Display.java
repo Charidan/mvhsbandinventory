@@ -84,7 +84,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         return instruments.displayIndexOf(instrument);
     }
 
-    public void setSelectedIndex (int index) {
+    private void setSelectedIndex (int index) {
         int row = (index == -1) ? 0 : index;
 
         if (!instruments.isTableEmpty())
