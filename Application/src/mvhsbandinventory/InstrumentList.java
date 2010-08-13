@@ -100,9 +100,6 @@ public class InstrumentList extends AbstractTableModel
             
             // Merge in the changes to the instrument's history
             existing.setHistory(instrument.getHistory());
-
-            // Fire the table changed event
-            fireTableChanged(null);
         }
         catch (Exception e) {}
     }
@@ -116,7 +113,6 @@ public class InstrumentList extends AbstractTableModel
     {
         // Commit the changes to the instrument to the disk
         store.update(instrument);
-        fireTableDataChanged();
     }
     
     public void deleteLocal (Instrument instrument)
