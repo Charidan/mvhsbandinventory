@@ -1127,7 +1127,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void sortButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortButtonActionPerformed
     {//GEN-HEADEREND:event_sortButtonActionPerformed
+        Instrument selected = getSelectedInstrument();
         sort();
+        setSelectedInstrument(selected);
     }//GEN-LAST:event_sortButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
