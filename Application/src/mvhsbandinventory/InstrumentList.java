@@ -116,6 +116,7 @@ public class InstrumentList extends AbstractTableModel
     {
         // Commit the changes to the instrument to the disk
         store.update(instrument);
+        fireTableDataChanged();
     }
     
     public void deleteLocal (Instrument instrument)
@@ -348,11 +349,11 @@ public class InstrumentList extends AbstractTableModel
         try
         {
             get(name, brand, serial);
-            return true;
+            return false;
         }
         catch (Exception e)
         {
-            return false;
+            return true;
         }
     }
 
@@ -371,12 +372,13 @@ public class InstrumentList extends AbstractTableModel
         return dataList.isEmpty();
     }
 
+
+    //Below this point are methods for the TabelModel handling
     public boolean isTableEmpty()
     {
         return displayList.isEmpty();
     }
 
-    //Below this point are methods for the TabelModel handling
     public int getColumnCount()
     {
         return columnNames.length;
