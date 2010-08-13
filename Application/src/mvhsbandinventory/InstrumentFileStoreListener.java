@@ -25,6 +25,9 @@ public class InstrumentFileStoreListener implements JNotifyListener
 
     public void fileDeleted (int wd, String root, String name)
     {
+        if (new File(root, name).exists())
+            return;
+
         Pattern splitter = Pattern.compile("_");
         Pattern typeDelimiter = Pattern.compile("\\.");
 
