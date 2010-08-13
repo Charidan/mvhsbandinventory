@@ -79,10 +79,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         }
     }
 
-    // Yes.  This is public.  This *is* called via the constructor.  I know.
-    // but it's only overwritable if you subclass Display, which isn't likely to
-    // happen.  And besides, if you subclass Display you can kinda overwrite the
-    // constructor anyway, so it's kinda moot.
+    public int getSelectedIndex () {
+        Instrument instrument = getSelectedInstrument();
+        return instruments.displayIndexOf(instrument);
+    }
+
     public void setSelectedIndex (int row) {
         if (!instruments.isTableEmpty())
         {
