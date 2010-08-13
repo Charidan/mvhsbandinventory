@@ -79,10 +79,11 @@ class InstrumentAttributeComparator implements Comparator
 
         } else
         {
-            // Compare the strings and return a valid comparison value based on 
-            // whether we're doing an ascending or descending sort
-            result = str1.compareTo(str2);
+            // Compare the strings.
+            result = str1.compareToIgnoreCase(str2);
         }
+        // Return a valid comparison value based on whether we're doing an
+        // ascending or descending sort
         return (flip == true) ? result * -1 : result;
     }
 }
