@@ -27,8 +27,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private boolean detailChange;
     private boolean histChange;
     private int lastSelect = 0;
-    private ArrayList<InstrumentLock> locks = new ArrayList<InstrumentLock>();
-
+    
     /** Creates new customizer DispTest */
     public Display(InstrumentList instruments)
     {
@@ -157,29 +156,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 lastSelect = getSelectedIndex();
             }
         }
-    }
-
-    public void removeLock(Instrument toUnlock)
-    {
-        for(InstrumentLock lock: locks)
-        {
-            if(lock.getInstrument().equals(toUnlock))
-            {
-                locks.remove(lock);
-            }
-        }
-    }
-
-    public void addLock(int lockType, Instrument toLock)
-    {
-        for(InstrumentLock lock: locks)
-        {
-            if(lock.getInstrument().equals(toLock))
-            {
-                locks.remove(lock);
-            }
-        }
-        locks.add(new InstrumentLock(lockType, toLock));
     }
 
     public void saveDetails(Instrument instru)
