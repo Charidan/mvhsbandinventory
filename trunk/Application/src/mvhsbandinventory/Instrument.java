@@ -20,7 +20,7 @@ public class Instrument
 
     public static final String[] attributes =
     {
-        "Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
+        "Instrument", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
         "Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
         "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
         "Contract"
@@ -117,7 +117,7 @@ public class Instrument
 
     public boolean isValid ()
     {
-        String name = properties.get("Name");
+        String name = properties.get("Instrument");
         String brand = properties.get("Brand");
         String serial = properties.get("Serial");
 

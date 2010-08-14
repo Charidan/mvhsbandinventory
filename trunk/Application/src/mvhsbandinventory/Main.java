@@ -60,9 +60,9 @@ public class Main
             panel = new Display(list);
 
             window.add(panel);
-            window.setTitle("MVHS - Band Inventory");
+            window.setTitle("MVHS - Instrument Inventory");
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            window.setMinimumSize(new Dimension(750, 450));
+            window.setMinimumSize(new Dimension(810, 450));
             window.setVisible(true);
             panel.repaint();
         } 

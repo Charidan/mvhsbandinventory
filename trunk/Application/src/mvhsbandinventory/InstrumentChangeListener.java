@@ -14,7 +14,7 @@ public class InstrumentChangeListener implements InstrumentStoreListener
 
     public void instrumentAdded (InstrumentStoreEvent event)
     {
-        String name = event.instrument.get("Name");
+        String name = event.instrument.get("Instrument");
         String brand = event.instrument.get("Brand");
         String serial = event.instrument.get("Serial");
 
@@ -31,7 +31,7 @@ public class InstrumentChangeListener implements InstrumentStoreListener
 
     public void instrumentRemoved (InstrumentStoreEvent event)
     {
-        String name = event.instrument.get("Name");
+        String name = event.instrument.get("Instrument");
         String brand = event.instrument.get("Brand");
         String serial = event.instrument.get("Serial");
 

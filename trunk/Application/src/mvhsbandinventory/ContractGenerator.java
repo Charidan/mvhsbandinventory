@@ -46,7 +46,7 @@ public class ContractGenerator
             s.drawLine(148, 668, 455, 668);
             s.moveTextPositionByAmount(-73, -68);
             s.setFont(hb, 12);
-            s.drawString("INSTRUMENT:   " +i.get("Name"));
+            s.drawString("INSTRUMENT:   " +i.get("Instrument"));
             s.moveTextPositionByAmount(0, -16);
             s.setFont(hb, 12);
             s.drawString("MAKE / MODEL:   " +i.get("Brand"));
@@ -160,7 +160,7 @@ public class ContractGenerator
             // Determine the file path for saving the document in relative to 
             // the user's temp directory and then save the PDF file there
             String path = System.getProperty("java.io.tmpdir") +
-                    i.get("Name")+"_" +i.get("Brand")+"_" +i.get("Serial") + "_contract.pdf";
+                    i.get("Instrument")+"_" +i.get("Brand")+"_" +i.get("Serial") + "_contract.pdf";
             document.save(path);
 
             // Try to open the document in the default desktop application for

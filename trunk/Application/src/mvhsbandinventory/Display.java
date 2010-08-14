@@ -199,7 +199,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             statusCombo.setSelectedItem((String) instru.get("Status"));
         }
 
-        instruBox.setText((String) instru.get("Name"));
+        instruBox.setText((String) instru.get("Instrument"));
         brandBox.setText((String) instru.get("Brand"));
         serialBox.setText((String) instru.get("Serial"));
         rankBox.setText((String) instru.get("Rank"));
@@ -466,7 +466,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         addDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addDialog.setTitle("ADD NEW INSTRUMENT");
-        addDialog.setMinimumSize(new java.awt.Dimension(300, 200));
+        addDialog.setMinimumSize(new java.awt.Dimension(310, 200));
         addDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         addTextLabel.setText("Enter Instrument Characteristics");
@@ -475,7 +475,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.ipady = 5;
         addDialog.getContentPane().add(addTextLabel, gridBagConstraints);
 
-        addTypeLabel.setText("Type:");
+        addTypeLabel.setText("Instrument:");
         addDialog.getContentPane().add(addTypeLabel, new java.awt.GridBagConstraints());
 
         addTypeBox.setColumns(20);
@@ -1310,7 +1310,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         try
         {
             // Adding core fields from the "Add Instrument" window
-            instru.set("Name", addTypeBox.getText());
+            instru.set("Instrument", addTypeBox.getText());
             instru.set("Brand", addBrandBox.getText());
             instru.set("Serial", addSerialBox.getText());
 
