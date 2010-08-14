@@ -1,4 +1,5 @@
 #summary "It builds!  Let's ship it!" -- Anonymous
+#labels Featured
 
 = Introduction =
 
