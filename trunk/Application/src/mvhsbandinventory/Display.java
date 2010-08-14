@@ -525,7 +525,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         overlord.setContinuousLayout(true);
         overlord.setName(""); // NOI18N
 
-        leftsplitPanel.setMinimumSize(new java.awt.Dimension(480, 79));
+        leftsplitPanel.setMinimumSize(new java.awt.Dimension(350, 79));
         leftsplitPanel.setLayout(new java.awt.GridBagLayout());
 
         advSearchButton.setText("Search");
@@ -620,6 +620,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         rightsplitPanel.setMinimumSize(new java.awt.Dimension(450, 308));
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
+        infoTabs.setMinimumSize(new java.awt.Dimension(1086, 350));
+
+        detailPanel.setMinimumSize(new java.awt.Dimension(1081, 200));
         detailPanel.setLayout(new java.awt.GridBagLayout());
 
         statusLabel.setText("Status:");
