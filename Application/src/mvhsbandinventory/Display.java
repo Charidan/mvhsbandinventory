@@ -1303,14 +1303,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void addAcceptButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addAcceptButtonActionPerformed
     {//GEN-HEADEREND:event_addAcceptButtonActionPerformed
+        String name = addTypeBox.getText();
+        String brand = addBrandBox.getText();
+        String serial = addSerialBox.getText();
+        
         // Check to make sure that all of the fields were properly filled in
-        if(!Instrument.isValid(addTypeBox.getText(),
-                addBrandBox.getText(),
-                addSerialBox.getText()))
+        if(!Instrument.isValid(name, brand, serial))
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "All of the three fields on the \"Add Instrument\" form \n"
-                    +"are required to be filled in. One of them was left blank.",
+                    + "are required to be filled in. One of them was left blank.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -1318,13 +1320,24 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         // Check to make sure that there isn't already an instrument by the same
         // name as this one
-        if(!instruments.isUnique(addTypeBox.getText(),
-                addBrandBox.getText(),
-                addSerialBox.getText()))
+        if(!instruments.isUnique(name, brand, serial))
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "There is already an instrument in the database that has \n"
-                    +"the same name, brand, and serial as this one.",
+                    + "the same name, brand, and serial as this one.",
+                    "Data Entry Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!Instrument.isSaveable(name, brand, serial))
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "Currently, the only characters allowed for use in any of "
+                    + "the \"Add Instrument\" window fields are A - Z (both "
+                    + "upper case and lower case) 0 - 9, dash, and space.  The "
+                    + "text that you entered in one of those fields contains a "
+                    + "character that is not allowed.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
