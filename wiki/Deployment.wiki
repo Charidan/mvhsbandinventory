@@ -1,0 +1,13 @@
+#summary "It builds!  Let's ship it!" -- Anonymous
+
+= Introduction =
+
+Currently, the application needs a shortcut to run the JAR file with the appropriate file information.  Since a shortcut on Windows can do much of the same things that a BAT file can, it makes sense to use this as a user-friendly (and less likely to be flagged as malware accidentally) alternative to a BAT file.
+
+= Details =
+
+Creating the shortcut will vary based on the target operating system.  Jump down to the appropriate section for the target operating system.
+
+== Windows Vista & Windows 7 ==
+
+Right click the desktop.  In the context menu, click "New" -> "Shortcut".
