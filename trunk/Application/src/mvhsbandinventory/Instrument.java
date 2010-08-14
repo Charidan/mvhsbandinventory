@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Defines the data related to an instrument stored in the flat-file database.
@@ -111,8 +112,7 @@ public class Instrument
 
     public static boolean isValid (String name, String brand, String serial)
     {
-        return !("".equals(name) || "".equals(brand) || "".equals(serial) ||
-                name.equals(null) || brand.equals(null) || serial.equals(null));
+        return !("".equals(name) || "".equals(brand) || "".equals(serial));
     }
 
     public boolean isValid ()
@@ -122,5 +122,12 @@ public class Instrument
         String serial = properties.get("Serial");
 
         return isValid(name, brand, serial);
+    }
+
+    public static boolean isSaveable (String name, String brand, String serial)
+    {
+        Pattern valid = Pattern.compile("[a-zA-Z0-9 \\-\\.]");
+        return valid.matcher(name).matches() && valid.matcher(brand).matches() &&
+                valid.matcher(serial).matches();
     }
 }
