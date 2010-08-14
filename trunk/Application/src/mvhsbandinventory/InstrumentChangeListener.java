@@ -57,4 +57,16 @@ public class InstrumentChangeListener implements InstrumentStoreListener
         System.out.println("[Realtime] Modified: " + event.instrument);
     }
 
+    public void instrumentLockAdded(InstrumentStoreEvent event) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void instrumentLockRemoved(InstrumentStoreEvent event) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void instrumentLockModified(InstrumentStoreEvent event) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
