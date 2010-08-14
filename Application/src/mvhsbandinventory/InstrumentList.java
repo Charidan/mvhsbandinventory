@@ -137,7 +137,8 @@ public class InstrumentList extends AbstractTableModel
             deleteLocal(instrument);
             store.delete(instrument);
             
-        } catch(Exception ex) {}
+        }
+        catch(Exception ex) {}
     }
 
     /**
