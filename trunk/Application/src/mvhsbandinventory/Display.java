@@ -1309,11 +1309,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         if (!Instrument.isSaveable(name, brand, serial))
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "Currently, the only characters allowed for use in any of "
-                    + "the \"Add Instrument\" window fields are A - Z (both "
-                    + "upper case and lower case) 0 - 9, dash, and space.  The "
-                    + "text that you entered in one of those fields contains a "
-                    + "character that is not allowed.",
+                    "Currently, the only characters allowed for use in any of \n"
+                    + "the \"Add Instrument\" window fields are A - Z (both \n"
+                    + "upper case and lower case) 0 - 9, dash, and space.   \n"
+                    + "The text that you entered in one of those fields \n"
+                    + "contains a character that is not allowed.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
