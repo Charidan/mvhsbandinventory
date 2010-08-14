@@ -7,12 +7,14 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author nicholson
  */
-public class Display extends javax.swing.JPanel implements java.beans.Customizer
+public class Display extends javax.swing.JPanel implements java.beans.Customizer, ListSelectionListener
 {
 
     private Object bean;
@@ -20,6 +22,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private HistoryTableModel histModel;
     private JComboBox contains;
     private ContractGenerator conGen;
+    private boolean detailChange;
+    private boolean histChange;
+    private int lastSelect = 0;
 
     /** Creates new customizer DispTest */
     public Display(InstrumentList instruments)
@@ -41,8 +46,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // Set up the instrument table to have the appropriate responses to user
         // interaction (the right side adjusts to show the stuff on the left) 
         instruTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        instruTable.getSelectionModel().addListSelectionListener(
-                new InstrumentTableListener(instruTable, this));
+        instruTable.getSelectionModel().addListSelectionListener(this);
 
         // If there are instruments in the list, sort them appropriately
         sort();
@@ -55,14 +59,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         {
             int i = instruTable.getSelectedRow();
 
-            if (i == -1)
+            if(i==-1)
             {
-                if (!instruments.isTableEmpty())
+                if(!instruments.isTableEmpty())
                 {
                     instruTable.setRowSelectionInterval(0, 0);
                     i = 0;
-                }
-                else
+                } else
                 {
                     return Instrument.NULL_INSTRUMENT;
                 }
@@ -71,39 +74,90 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             return instruments.get((String) instruTable.getValueAt(i, 0),
                     (String) instruTable.getValueAt(i, 1),
                     (String) instruTable.getValueAt(i, 2));
-    
-        }
-        catch (Exception e) 
+
+        } catch(Exception e)
         {
             return Instrument.NULL_INSTRUMENT;
         }
     }
 
-    public int getSelectedIndex () {
+    public int getSelectedIndex()
+    {
         Instrument instrument = getSelectedInstrument();
         return instruments.displayIndexOf(instrument);
     }
 
-    private void setSelectedIndex (int index) {
-        int row = (index == -1) ? 0 : index;
+    private void setSelectedIndex(int index)
+    {
+        int row = (index==-1) ? 0 : index;
 
-        if (!instruments.isTableEmpty())
+        if(!instruments.isTableEmpty())
         {
             instruTable.setRowSelectionInterval(row, row);
         }
     }
 
-    public void setSelectedInstrument (Instrument instrument)
+    public void setSelectedInstrument(Instrument instrument)
     {
         int index = instruments.displayIndexOf(instrument);
 
         setSelectedIndex(index);
     }
 
-    public void saveDetails()
+    public void valueChanged(ListSelectionEvent e)
     {
-        Instrument instru = getSelectedInstrument();
+        if(e.getSource()==instruTable.getSelectionModel()
+                &&instruTable.getRowSelectionAllowed())
+        {
+            if(detailChange||histChange)
+            {
+                int action = JOptionPane.showConfirmDialog(jopDialog, "Do you wish to save the changes to this instrument?", "Unsaved Data Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                switch(action)
+                {
+                    case JOptionPane.YES_OPTION:
+                    {
+                        Instrument instru = instruments.get(lastSelect);
+                        instru.addHistory("Instrument saved.");
+                        saveDetails(instru);
+                        saveHistory(instru);
+                        lastSelect = getSelectedIndex();
+                        return;
+                    }
+                    case JOptionPane.CLOSED_OPTION:
+                    {
+                        instruTable.changeSelection(lastSelect, 0, false, false);
+                        return;
+                    }
+                    case JOptionPane.CANCEL_OPTION:
+                    {
+                        boolean d = detailChange;
+                        boolean h = histChange;
+                        detailChange = false;
+                        histChange = false;
+                        instruTable.changeSelection(lastSelect, 0, false, false);
+                        detailChange = d;
+                        histChange = h;
+                        return;
+                    }
+                    case JOptionPane.NO_OPTION:
+                    {
+                        displayInstrument();
+                        lastSelect = getSelectedIndex();
+                        detailChange = false;
+                        histChange = false;
+                        return;
+                    }
+                }
+            } else
+            {
+                displayInstrument();
+                lastSelect = getSelectedIndex();
+            }
+        }
+    }
 
+    public void saveDetails(Instrument instru)
+    {
         if(!instru.isValid())
         {
             JOptionPane.showMessageDialog(jopDialog, "Error: Attempt to save a NULL_INSTRUMENT.", "Save Failed", JOptionPane.ERROR_MESSAGE);
@@ -121,12 +175,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Bow", (String) bowCombo.getSelectedItem());
             instru.set("NeckStrap", (String) strapCombo.getSelectedItem());
             instru.set("Notes", notesTPane.getText());
-            saveHistory();
-        }
-        catch(Exception ex)
+            instruments.update(instru);
+            detailChange = false;
+        } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while saving the instrument:\n" + ex.getMessage(),
+                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
                     "Save Failed",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -135,10 +189,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     public void displayInstrument()
     {
         Instrument instru = getSelectedInstrument();
-        
+
         //set the Details panel
-        if(instru.get("Status").equals("")) statusCombo.setSelectedIndex(0);
-        else statusCombo.setSelectedItem((String) instru.get("Status"));
+        if(instru.get("Status").equals(""))
+        {
+            statusCombo.setSelectedIndex(0);
+        } else
+        {
+            statusCombo.setSelectedItem((String) instru.get("Status"));
+        }
 
         instruBox.setText((String) instru.get("Name"));
         brandBox.setText((String) instru.get("Brand"));
@@ -146,16 +205,41 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         rankBox.setText((String) instru.get("Rank"));
         valueBox.setText((String) instru.get("Value"));
 
-        if(instru.get("NeckStrap").equals("")) strapCombo.setSelectedIndex(0);
-        else strapCombo.setSelectedItem((String) instru.get("NeckStrap"));
-        if(instru.get("Ligature").equals("")) ligCombo.setSelectedIndex(0);
-        else ligCombo.setSelectedItem((String) instru.get("Ligature"));
-        if(instru.get("Mouthpiece").equals("")) mpieceCombo.setSelectedIndex(0);
-        else mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
-        if(instru.get("MouthpieceCap").equals("")) capCombo.setSelectedIndex(0);
-        else capCombo.setSelectedItem((String) instru.get("MouthpieceCap"));
-        if(instru.get("Bow").equals("")) bowCombo.setSelectedIndex(0);
-        else bowCombo.setSelectedItem((String) instru.get("Bow"));
+        if(instru.get("NeckStrap").equals(""))
+        {
+            strapCombo.setSelectedIndex(0);
+        } else
+        {
+            strapCombo.setSelectedItem((String) instru.get("NeckStrap"));
+        }
+        if(instru.get("Ligature").equals(""))
+        {
+            ligCombo.setSelectedIndex(0);
+        } else
+        {
+            ligCombo.setSelectedItem((String) instru.get("Ligature"));
+        }
+        if(instru.get("Mouthpiece").equals(""))
+        {
+            mpieceCombo.setSelectedIndex(0);
+        } else
+        {
+            mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
+        }
+        if(instru.get("MouthpieceCap").equals(""))
+        {
+            capCombo.setSelectedIndex(0);
+        } else
+        {
+            capCombo.setSelectedItem((String) instru.get("MouthpieceCap"));
+        }
+        if(instru.get("Bow").equals(""))
+        {
+            bowCombo.setSelectedIndex(0);
+        } else
+        {
+            bowCombo.setSelectedItem((String) instru.get("Bow"));
+        }
 
         notesTPane.setText((String) instru.get("Notes"));
 
@@ -163,24 +247,37 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         renterBox.setText((String) instru.get("Renter"));
         schoolyearBox.setText((String) instru.get("SchoolYear"));
         dateoutBox.setText((String) instru.get("DateOut"));
-        
-        if(instru.get("Fee").equals("")) feeCombo.setSelectedIndex(1);
-        else feeCombo.setSelectedItem((String) instru.get("Fee"));
-        if(instru.get("Period").equals("")) periodCombo.setSelectedIndex(0);
-        else periodCombo.setSelectedItem((String) instru.get("Period"));
-        if(instru.get("Contract").equals("")) contractCombo.setSelectedIndex(0);
-        else contractCombo.setSelectedItem((String) instru.get("Contract"));
+
+        if(instru.get("Fee").equals(""))
+        {
+            feeCombo.setSelectedIndex(1);
+        } else
+        {
+            feeCombo.setSelectedItem((String) instru.get("Fee"));
+        }
+        if(instru.get("Period").equals(""))
+        {
+            periodCombo.setSelectedIndex(0);
+        } else
+        {
+            periodCombo.setSelectedItem((String) instru.get("Period"));
+        }
+        if(instru.get("Contract").equals(""))
+        {
+            contractCombo.setSelectedIndex(0);
+        } else
+        {
+            contractCombo.setSelectedItem((String) instru.get("Contract"));
+        }
 
         otherBox.setText((String) instru.get("Other"));
-        
+
         //set the History table
         histModel.fireTableChanged(null);
     }
 
-    public void saveHistory()
+    public void saveHistory(Instrument instru)
     {
-        Instrument instru = getSelectedInstrument();
-
         if(!instru.isValid())
         {
             JOptionPane.showMessageDialog(jopDialog, "Error: Attempt to save a NULL_INSTRUMENT.", "Save Failed", JOptionPane.ERROR_MESSAGE);
@@ -197,11 +294,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Other", otherBox.getText());
             instru.set("Status", (String) statusCombo.getSelectedItem());
             instruments.update(instru);
-        }
-        catch(Exception ex)
+            histChange = false;
+        } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while saving the instrument:\n" + ex.getMessage(),
+                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
                     "Save Failed",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -220,7 +317,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void sort()
     {
         String s = (String) sortCombo.getSelectedItem();
-        instruments.sort(s, sortReverseCombo.getSelectedIndex() == 0);
+        instruments.sort(s, sortReverseCombo.getSelectedIndex()==0);
     }
 
     /** This method is called from within the constructor to
@@ -606,6 +703,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         rankBox.setColumns(2);
         rankBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rankBox.setText("3");
+        rankBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                rankBoxKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -623,6 +725,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         valueBox.setText("0");
         valueBox.setAutoscrolls(false);
         valueBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        valueBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                valueBoxKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -637,6 +744,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         strapCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         strapCombo.setPreferredSize(null);
+        strapCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                strapComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -651,6 +767,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         ligCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         ligCombo.setPreferredSize(null);
+        ligCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ligComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         ligCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ligComboActionPerformed(evt);
@@ -670,6 +795,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         mpieceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         mpieceCombo.setPreferredSize(null);
+        mpieceCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                mpieceComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -684,6 +818,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         capCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         capCombo.setPreferredSize(null);
+        capCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                capComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -698,6 +841,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         bowCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         bowCombo.setPreferredSize(null);
+        bowCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                bowComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -714,6 +866,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         notesTPane.setMinimumSize(new java.awt.Dimension(25, 25));
         notesTPane.setPreferredSize(null);
+        notesTPane.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                notesTPaneKeyTyped(evt);
+            }
+        });
         detailNotePanel.setViewportView(notesTPane);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -755,6 +912,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 renterBoxActionPerformed(evt);
             }
         });
+        renterBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                renterBoxKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -770,6 +932,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         schoolyearBox.setColumns(25);
         schoolyearBox.setAutoscrolls(false);
         schoolyearBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        schoolyearBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                schoolyearBoxKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -785,6 +952,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         dateoutBox.setColumns(25);
         dateoutBox.setAutoscrolls(false);
         dateoutBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        dateoutBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dateoutBoxKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -799,6 +971,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         periodCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
         periodCombo.setPreferredSize(null);
+        periodCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                periodComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         periodCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 periodComboActionPerformed(evt);
@@ -819,6 +1000,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived" }));
         feeCombo.setSelectedIndex(1);
         feeCombo.setPreferredSize(null);
+        feeCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                feeComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -831,6 +1021,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         checkoutPanel.add(contractLabel, gridBagConstraints);
 
         contractCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Uncreated", "Created", "Signed" }));
+        contractCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                contractComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -844,6 +1043,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         checkoutPanel.add(otherLabel, gridBagConstraints);
 
         otherBox.setPreferredSize(null);
+        otherBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                otherBoxKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -944,22 +1148,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void instruBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_instruBoxActionPerformed
     {//GEN-HEADEREND:event_instruBoxActionPerformed
-       
 }//GEN-LAST:event_instruBoxActionPerformed
 
     private void ligComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ligComboActionPerformed
     {//GEN-HEADEREND:event_ligComboActionPerformed
-        
 }//GEN-LAST:event_ligComboActionPerformed
 
     private void renterBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renterBoxActionPerformed
     {//GEN-HEADEREND:event_renterBoxActionPerformed
-        
 }//GEN-LAST:event_renterBoxActionPerformed
 
     private void periodComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_periodComboActionPerformed
     {//GEN-HEADEREND:event_periodComboActionPerformed
-        
 }//GEN-LAST:event_periodComboActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
@@ -969,19 +1169,19 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         if(!instru.isValid())
         {
-            JOptionPane.showMessageDialog(jopDialog, 
-                    "Instrument could not be deleted: No instrument selected.", 
-                    "Delete Failed", 
+            JOptionPane.showMessageDialog(jopDialog,
+                    "Instrument could not be deleted: No instrument selected.",
+                    "Delete Failed",
                     JOptionPane.WARNING_MESSAGE);
             Main.window.setEnabled(true);
             Main.window.requestFocus();
             return;
         }
 
-        int n = JOptionPane.showConfirmDialog(jopDialog, 
-                "Are you sure you want to delete this instrument?", 
-                "Confirm Delete", 
-                JOptionPane.YES_NO_OPTION, 
+        int n = JOptionPane.showConfirmDialog(jopDialog,
+                "Are you sure you want to delete this instrument?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
 
         switch(n)
@@ -992,11 +1192,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 sort();
 
                 int rows = instruments.getRowCount();
-                int selection = (index >= rows) ? rows - 1 : index;
+                int selection = (index>=rows) ? rows-1 : index;
                 setSelectedIndex(selection);
         }
 
-        
+
         Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -1060,8 +1260,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         Dimension size = advsearchDialog.getSize();
         Dimension minSize = advsearchDialog.getMinimumSize();
-        advsearchDialog.setSize(size.width, size.height + 25);
-        minSize.setSize(minSize.width, minSize.height + 25);
+        advsearchDialog.setSize(size.width, size.height+25);
+        minSize.setSize(minSize.width, minSize.height+25);
         advsearchDialog.setMinimumSize(minSize);
     }//GEN-LAST:event_advsearchAddFieldButtonActionPerformed
 
@@ -1080,8 +1280,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                 addSerialBox.getText()))
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "All of the three fields on the \"Add Instrument\" form \n" +
-                    "are required to be filled in. One of them was left blank.",
+                    "All of the three fields on the \"Add Instrument\" form \n"
+                    +"are required to be filled in. One of them was left blank.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -1089,18 +1289,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         // Check to make sure that there isn't already an instrument by the same
         // name as this one
-        if (!instruments.isUnique(addTypeBox.getText(),
+        if(!instruments.isUnique(addTypeBox.getText(),
                 addBrandBox.getText(),
                 addSerialBox.getText()))
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "There is already an instrument in the database that has \n" +
-                    "the same name, brand, and serial as this one.",
+                    "There is already an instrument in the database that has \n"
+                    +"the same name, brand, and serial as this one.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         // Creating a new instrument
         Instrument instru = new Instrument();
 
@@ -1119,12 +1319,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Fee", "Unpaid");
             instru.set("Contract", "Uncreated");
             instru.addHistory("Instrument created.");
-        }
-        catch(Exception ex)
+        } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "An internal error has occurred while creating the " +
-                    "instrument:\n" + ex.getMessage(),
+                    "An internal error has occurred while creating the "
+                    +"instrument:\n"+ex.getMessage(),
                     "Instrument Creation Failed",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -1148,16 +1347,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveButtonActionPerformed
     {//GEN-HEADEREND:event_saveButtonActionPerformed
-
         Instrument i = getSelectedInstrument();
         i.addHistory("Instrument saved.");
-        saveDetails();
+        saveDetails(getSelectedInstrument());
+        saveHistory(getSelectedInstrument());
         displayInstrument();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void instruTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_instruTableMouseClicked
     {//GEN-HEADEREND:event_instruTableMouseClicked
-        
 }//GEN-LAST:event_instruTableMouseClicked
 
     private void lostButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lostButtonActionPerformed
@@ -1165,7 +1363,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         Instrument i = getSelectedInstrument();
         i.addHistory("Instrument found missing.");
         statusCombo.setSelectedItem("Missing");
-        saveHistory();
+        saveHistory(getSelectedInstrument());
         displayInstrument();
     }//GEN-LAST:event_lostButtonActionPerformed
 
@@ -1174,7 +1372,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         Instrument i = getSelectedInstrument();
         i.addHistory("Instrument checked in.");
         statusCombo.setSelectedItem("In Storage");
-        saveHistory();
+        saveHistory(getSelectedInstrument());
         displayInstrument();
 }//GEN-LAST:event_checkinButtonActionPerformed
 
@@ -1183,7 +1381,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         Instrument i = getSelectedInstrument();
         i.addHistory("Instrument checked out.");
         statusCombo.setSelectedItem("On Loan");
-        saveHistory();
+        saveHistory(getSelectedInstrument());
         displayInstrument();
 }//GEN-LAST:event_checkoutButtonActionPerformed
 
@@ -1194,10 +1392,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void formButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_formButtonActionPerformed
     {//GEN-HEADEREND:event_formButtonActionPerformed
-        
+
         Instrument i = getSelectedInstrument();
-        saveHistory();
-        i.addHistory("Contract Generated for " + i.get("Renter") +".");
+        saveHistory(getSelectedInstrument());
+        i.addHistory("Contract Generated for "+i.get("Renter")+".");
         conGen.generateContract(i);
         displayInstrument();
     }//GEN-LAST:event_formButtonActionPerformed
@@ -1211,7 +1409,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         {
             matchers[i] = jcomps2matcher((JComboBox) comps[i*3], (JComboBox) comps[i*3+1], (JTextField) comps[i*3+2]);
         }
-        
+
         Instrument selection = getSelectedInstrument();
         instruments.selectList(matchers);
         setSelectedInstrument(selection);
@@ -1232,6 +1430,81 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private void excelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelButtonActionPerformed
         instruments.exportToExcel();
     }//GEN-LAST:event_excelButtonActionPerformed
+
+    private void rankBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_rankBoxKeyTyped
+    {//GEN-HEADEREND:event_rankBoxKeyTyped
+        detailChange = true;
+    }//GEN-LAST:event_rankBoxKeyTyped
+
+    private void valueBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_valueBoxKeyTyped
+    {//GEN-HEADEREND:event_valueBoxKeyTyped
+        detailChange = true;
+    }//GEN-LAST:event_valueBoxKeyTyped
+
+    private void strapComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_strapComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_strapComboPopupMenuWillBecomeInvisible
+        detailChange = true;
+    }//GEN-LAST:event_strapComboPopupMenuWillBecomeInvisible
+
+    private void ligComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_ligComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_ligComboPopupMenuWillBecomeInvisible
+        detailChange = true;
+    }//GEN-LAST:event_ligComboPopupMenuWillBecomeInvisible
+
+    private void mpieceComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_mpieceComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_mpieceComboPopupMenuWillBecomeInvisible
+        detailChange = true;
+    }//GEN-LAST:event_mpieceComboPopupMenuWillBecomeInvisible
+
+    private void capComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_capComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_capComboPopupMenuWillBecomeInvisible
+        detailChange = true;
+    }//GEN-LAST:event_capComboPopupMenuWillBecomeInvisible
+
+    private void bowComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_bowComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_bowComboPopupMenuWillBecomeInvisible
+        detailChange = true;
+    }//GEN-LAST:event_bowComboPopupMenuWillBecomeInvisible
+
+    private void notesTPaneKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_notesTPaneKeyTyped
+    {//GEN-HEADEREND:event_notesTPaneKeyTyped
+        detailChange = true;
+    }//GEN-LAST:event_notesTPaneKeyTyped
+
+    private void renterBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_renterBoxKeyTyped
+    {//GEN-HEADEREND:event_renterBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_renterBoxKeyTyped
+
+    private void schoolyearBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_schoolyearBoxKeyTyped
+    {//GEN-HEADEREND:event_schoolyearBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_schoolyearBoxKeyTyped
+
+    private void dateoutBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_dateoutBoxKeyTyped
+    {//GEN-HEADEREND:event_dateoutBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_dateoutBoxKeyTyped
+
+    private void periodComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_periodComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_periodComboPopupMenuWillBecomeInvisible
+        histChange = true;
+    }//GEN-LAST:event_periodComboPopupMenuWillBecomeInvisible
+
+    private void feeComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_feeComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_feeComboPopupMenuWillBecomeInvisible
+        histChange = true;
+    }//GEN-LAST:event_feeComboPopupMenuWillBecomeInvisible
+
+    private void contractComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_contractComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_contractComboPopupMenuWillBecomeInvisible
+        histChange = true;
+    }//GEN-LAST:event_contractComboPopupMenuWillBecomeInvisible
+
+    private void otherBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_otherBoxKeyTyped
+    {//GEN-HEADEREND:event_otherBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_otherBoxKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
