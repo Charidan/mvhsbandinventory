@@ -3,9 +3,7 @@ package mvhsbandinventory;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.util.ArrayList;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -1311,9 +1309,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             JOptionPane.showMessageDialog(jopDialog,
                     "Currently, the only characters allowed for use in any of \n"
                     + "the \"Add Instrument\" window fields are A - Z (both \n"
-                    + "upper case and lower case) 0 - 9, dash, and space.   \n"
-                    + "The text that you entered in one of those fields \n"
-                    + "contains a character that is not allowed.",
+                    + "upper case and lower case) 0 - 9, dash, space, and \n" 
+                    + "parenthesis.  The text that you entered in one of \n"
+                    + "those fields contains a character that is not allowed.",
                     "Data Entry Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
