@@ -74,7 +74,7 @@ public class InstrumentFileStore extends InstrumentStore
      */
     private File getFile(Instrument instrument)
     {
-        String name = (String) instrument.get("Name");
+        String name = (String) instrument.get("Instrument");
         String brand = (String) instrument.get("Brand");
         String serial = (String) instrument.get("Serial");
 

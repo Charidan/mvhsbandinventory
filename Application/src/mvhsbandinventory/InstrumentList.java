@@ -24,11 +24,11 @@ public class InstrumentList extends AbstractTableModel
     private InstrumentStore store;
     private String[] columnNames =
     {
-        "Type", "Brand", "Serial #"
+        "Instrument", "Brand", "Serial #"
     };
     public static String[] singles =
     {
-        "Name", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
+        "Instrument", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
         "Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
         "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
         "Contract"
@@ -82,7 +82,7 @@ public class InstrumentList extends AbstractTableModel
     public void updateLocal(Instrument instrument)
     {
         // Find the existing related element in the datastore
-        String name = instrument.get("Name");
+        String name = instrument.get("Instrument");
         String brand = instrument.get("Brand");
         String serial = instrument.get("Serial");
 
@@ -321,7 +321,7 @@ public class InstrumentList extends AbstractTableModel
             // Retrieve information about the instrument to compare against the
             // arguments that were passed in
             Instrument instrument = (Instrument)  dataList.get(i);
-            String testName = (String) instrument.get("Name");
+            String testName = (String) instrument.get("Instrument");
             String testBrand = (String) instrument.get("Brand");
             String testSerial = (String) instrument.get("Serial");
 
@@ -355,7 +355,7 @@ public class InstrumentList extends AbstractTableModel
 
     public boolean isUnique(Instrument instrument)
     {
-        String name = instrument.get("Name");
+        String name = instrument.get("Instrument");
         String brand = instrument.get("Brand");
         String serial = instrument.get("Serial");
 
@@ -401,7 +401,7 @@ public class InstrumentList extends AbstractTableModel
         switch(col)
         {
             case 0:
-                return instru.get("Name");
+                return instru.get("Instrument");
             case 1:
                 return instru.get("Brand");
             case 2:
@@ -434,7 +434,7 @@ public class InstrumentList extends AbstractTableModel
             {
                 case 0:
                 {
-                    instru.set("Name", (String) value);
+                    instru.set("Instrument", (String) value);
                     break;
                 }
                 case 1:
