@@ -5,6 +5,9 @@
 package mvhsbandinventory;
 
 import java.awt.Dimension;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -20,7 +23,8 @@ public class Main
     public static Display panel;
     public static InstrumentFileStore store;
     public static InstrumentList list;
-    public static final String path = "C:/InstrumentInventory/data";
+
+    public static File dataDir = new File(getBasePath(), "data");
 
     /**
      * @param args the command line arguments
@@ -29,10 +33,15 @@ public class Main
     {
         try
         {
-            File dir = new File(path);
-            if(!dir.exists()) dir.mkdirs();
-            else if(!dir.isDirectory()) throw new Error("Target folder "+path+" is a file instead of a directory.");
-            store = new InstrumentFileStore(path);
+            if (!dataDir.exists())
+            {
+                if (!dataDir.mkdir()) {
+                    throw new Exception("Unable to create data directory in" +
+                            getBasePath().getAbsolutePath() + ".");
+                }
+            }
+
+            store = new InstrumentFileStore(dataDir.getAbsolutePath());
             list = new InstrumentList(store);
 
             window = new JFrame();
@@ -57,6 +66,19 @@ public class Main
                 "Unable to load application.",
                 JOptionPane.ERROR_MESSAGE
             );
+        }
+    }
+
+    public static File getBasePath ()
+    {
+        try
+        {
+            return new File(Main.class.getProtectionDomain().getCodeSource()
+                    .getLocation().toURI().getPath()).getParentFile();
+        }
+        catch (URISyntaxException ex)
+        {
+            return new File(System.getProperty("user.home"));
         }
     }
 }
