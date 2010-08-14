@@ -20,14 +20,7 @@ public class Main
     public static Display panel;
     public static InstrumentFileStore store;
     public static InstrumentList list;
-    public static String[] paths = 
-        {
-            "/home/jonathan/csvtest",
-            "C:/csvTest",
-            "/users/chazgwennap/documents/csvtest",
-            "/volumes/no name/test",
-            "C:/Users/Charidan/Desktop/fileStore"
-        };
+    public static final String path = "C:/InstrumentInventory/data";
 
     /**
      * @param args the command line arguments
@@ -36,23 +29,9 @@ public class Main
     {
         try
         {
-            // TODO: Move this file path information into some sort of configuration
-            // file that isn't covered by the version control system
-            int length = paths.length;
-            String path = null;
-
-            // Try to find a directory path that actually is valid
-            for (int i = 0; i < length; i++)
-            {
-                String pathString = paths[i];
-                File pathFile = new File(pathString);
-                
-                if (pathFile.exists())
-                {
-                    path = pathString;
-                }
-            }
-
+            File dir = new File(path);
+            if(!dir.exists()) dir.mkdirs();
+            else if(!dir.isDirectory()) throw new Error("Target folder "+path+" is a file instead of a directory.");
             store = new InstrumentFileStore(path);
             list = new InstrumentList(store);
 
@@ -74,9 +53,7 @@ public class Main
             JOptionPane.showMessageDialog
             (
                 window,
-                "Unable to load application.  This typically occurs " +
-                "because the file path to the datastore containing the " +
-                "instrument data is not in the array of search paths.",
+                e.getMessage(),
                 "Unable to load application.",
                 JOptionPane.ERROR_MESSAGE
             );
