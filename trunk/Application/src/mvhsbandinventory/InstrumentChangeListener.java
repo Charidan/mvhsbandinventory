@@ -46,6 +46,8 @@ public class InstrumentChangeListener implements InstrumentStoreListener
 
     public void instrumentModified (InstrumentStoreEvent event)
     {
+        System.out.println("[Realtime] Modified: " + event.instrument);
+
         if (list.isUnique(event.instrument))
         {
             instrumentAdded(event);
@@ -54,7 +56,6 @@ public class InstrumentChangeListener implements InstrumentStoreListener
 
         list.updateLocal(event.instrument);
         Main.panel.displayInstrument();
-        System.out.println("[Realtime] Modified: " + event.instrument);
     }
 
 }
