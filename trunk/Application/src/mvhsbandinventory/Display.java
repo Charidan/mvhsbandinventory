@@ -1330,7 +1330,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             // Adding default values for new instruments
             // TODO: Move these into some sort of configuration system
             instru.set("Rank", "3");
-            instru.set("Value", "0");
             instru.set("Period", "0");
             instru.set("Fee", "Unpaid");
             instru.set("Contract", "Uncreated");
