@@ -166,6 +166,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         try
         {
+            instru.set("Type", typeBox.getText());
             instru.set("Rank", rankBox.getText());
             instru.set("Value", valueBox.getText());
             instru.set("Status", (String) statusCombo.getSelectedItem());
@@ -202,6 +203,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         instruBox.setText((String) instru.get("Instrument"));
         brandBox.setText((String) instru.get("Brand"));
         serialBox.setText((String) instru.get("Serial"));
+        typeBox.setText((String) instru.get("Type"));
         rankBox.setText((String) instru.get("Rank"));
         valueBox.setText((String) instru.get("Value"));
 
@@ -376,6 +378,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         brandBox = new javax.swing.JTextField();
         serialLabel = new javax.swing.JLabel();
         serialBox = new javax.swing.JTextField();
+        typeLabel = new javax.swing.JLabel();
+        typeBox = new javax.swing.JTextField();
         rankLabel = new javax.swing.JLabel();
         rankBox = new javax.swing.JTextField();
         valueLabel = new javax.swing.JLabel();
@@ -697,6 +701,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(serialBox, gridBagConstraints);
 
+        typeLabel.setText("Type:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(typeLabel, gridBagConstraints);
+
+        typeBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        detailPanel.add(typeBox, gridBagConstraints);
+
         rankLabel.setText("Rank:");
         rankLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -725,7 +741,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         valueBox.setColumns(20);
         valueBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        valueBox.setText("0");
         valueBox.setAutoscrolls(false);
         valueBox.setMinimumSize(new java.awt.Dimension(200, 20));
         valueBox.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1612,6 +1627,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox strapCombo;
     private javax.swing.JLabel strapLabel;
+    private javax.swing.JTextField typeBox;
+    private javax.swing.JLabel typeLabel;
     private javax.swing.JTextField valueBox;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
