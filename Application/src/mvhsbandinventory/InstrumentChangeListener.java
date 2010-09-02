@@ -1,5 +1,8 @@
 package mvhsbandinventory;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jonathan
@@ -17,15 +20,14 @@ public class InstrumentChangeListener implements InstrumentStoreListener
         String name = event.instrument.get("Instrument");
         String brand = event.instrument.get("Brand");
         String serial = event.instrument.get("Serial");
-
-        try
-        {
-            list.get(name, brand, serial);
-        }
-        catch (Exception ex)
-        {
-            list.addLocal(event.instrument);
-            System.out.println("[Realtime] Added: " + event.instrument);
+        
+        try {
+            if (list.get(name, brand, serial) == null) {
+                list.addLocal(event.instrument);
+                System.out.println("[Realtime] Added: " + event.instrument);
+            }
+        } catch (Exception ex) {
+            System.out.println("Instrument Added FAILED:" +ex);
         }
     }
 

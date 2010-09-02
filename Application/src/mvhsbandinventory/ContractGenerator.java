@@ -72,8 +72,8 @@ public class ContractGenerator
             s.drawString("to repair or replace this equipment. We further " +
                     "realize the loan of this musical ");
             s.moveTextPositionByAmount(0, -16);
-            s.drawString("instrument is a privelege for the purpose of " +
-                    "practicing at home and participationg in ");
+            s.drawString("instrument is a privilege for the purpose of " +
+                    "practicing at home and participating in ");
             s.moveTextPositionByAmount(0, -16);
             s.drawString("class or school performances. Under no circumstances " +
                     "may this property be loaned to ");
@@ -122,7 +122,7 @@ public class ContractGenerator
             s.moveTextPositionByAmount(0, -16); 
             s.drawString("OTHER: " +i.get("Other"));
             s.moveTextPositionByAmount(25, -292);
-            s.drawString("DATE LOANED:");
+            s.drawString("DATE LOANED:   " +i.get("DateOut"));
             s.moveTextPositionByAmount(0, -32);
             s.drawString("FEE PAID:");
             s.moveTextPositionByAmount(0, -32);
