@@ -101,6 +101,10 @@ public class InstrumentList extends AbstractTableModel
             // Merge in the changes to the instrument's history
             existing.setHistory(instrument.getHistory());
         }
+        catch (NullPointerException ex)
+        {
+            System.out.println("NullPointerException: "+ex+" Attempt to update nonexisting instrument");
+        }
         catch (Exception e) {}
     }
 
@@ -336,22 +340,25 @@ public class InstrumentList extends AbstractTableModel
             }
         }
 
-        // Since we're not supposed to return null, let's throw an error
-        // to indicate that nothing is found
-        throw new Exception("No instruments exist that have those parameters.");
+        // Return null to indicate nothing has been found.
+        return null;
     }
 
     public boolean isUnique(String name, String brand, String serial)
     {
         try
         {
-            get(name, brand, serial);
+            if(get(name, brand, serial) == null)
+            {
+                return true;
+            }
             return false;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            return true;
+            System.out.println("isUnique(" +name +","+brand+","+serial+") FAILED" +ex);
         }
+        return false;
     }
 
     public boolean isUnique(Instrument instrument)

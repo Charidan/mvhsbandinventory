@@ -70,13 +70,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     return Instrument.NULL_INSTRUMENT;
                 }
             }
-
-            return instruments.get((String) instruTable.getValueAt(i, 0),
+            Instrument instrument = instruments.get((String) instruTable.getValueAt(i, 0),
                     (String) instruTable.getValueAt(i, 1),
                     (String) instruTable.getValueAt(i, 2));
+            if(instrument == null)
+            {
+                return Instrument.NULL_INSTRUMENT;
+            }
+            return instrument;
 
-        } catch(Exception e)
+        } catch(Exception ex)
         {
+            System.out.println("getSelectedInstrument() FAILED" +ex);
             return Instrument.NULL_INSTRUMENT;
         }
     }
@@ -117,11 +122,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     case JOptionPane.YES_OPTION:
                     {
                         Instrument instru = instruments.get(lastSelect);
-                        instru.addHistory("Instrument saved.");
-                        saveDetails(instru);
-                        saveHistory(instru);
-                        lastSelect = getSelectedIndex();
-                        return;
+                        if(instru != null)
+                        {
+                            instru.addHistory("Instrument saved.");
+                            saveDetails(instru);
+                            saveHistory(instru);
+                            lastSelect = getSelectedIndex();
+                            return;
+                        }
                     }
                     case JOptionPane.CLOSED_OPTION:
                     {
