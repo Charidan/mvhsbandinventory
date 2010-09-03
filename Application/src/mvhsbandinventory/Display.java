@@ -174,12 +174,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         try
         {
-            instru.set("Type", typeBox.getText());
+            instru.set("Type", (String) typeCombo.getSelectedItem());
             instru.set("Rank", rankBox.getText());
             instru.set("Value", valueBox.getText());
             instru.set("Status", (String) statusCombo.getSelectedItem());
             instru.set("Ligature", (String) ligCombo.getSelectedItem());
             instru.set("Mouthpiece", (String) mpieceCombo.getSelectedItem());
+            instru.set("MouthpieceModel", (String) mpmodelBox.getText());
             instru.set("MouthpieceCap", (String) capCombo.getSelectedItem());
             instru.set("Bow", (String) bowCombo.getSelectedItem());
             instru.set("NeckStrap", (String) strapCombo.getSelectedItem());
@@ -211,7 +212,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         instruBox.setText((String) instru.get("Instrument"));
         brandBox.setText((String) instru.get("Brand"));
         serialBox.setText((String) instru.get("Serial"));
-        typeBox.setText((String) instru.get("Type"));
+
+        if(instru.get("Type").equals(""))
+        {
+            typeCombo.setSelectedIndex(0);
+        } else
+        {
+            typeCombo.setSelectedItem((String) instru.get("Type"));
+        }
+
         rankBox.setText((String) instru.get("Rank"));
         valueBox.setText((String) instru.get("Value"));
 
@@ -236,6 +245,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         {
             mpieceCombo.setSelectedItem((String) instru.get("Mouthpiece"));
         }
+
+        mpmodelBox.setText(instru.get("MouthpieceModel"));
+        
         if(instru.get("MouthpieceCap").equals(""))
         {
             capCombo.setSelectedIndex(0);
@@ -387,7 +399,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         serialLabel = new javax.swing.JLabel();
         serialBox = new javax.swing.JTextField();
         typeLabel = new javax.swing.JLabel();
-        typeBox = new javax.swing.JTextField();
+        typeCombo = new javax.swing.JComboBox();
         rankLabel = new javax.swing.JLabel();
         rankBox = new javax.swing.JTextField();
         valueLabel = new javax.swing.JLabel();
@@ -398,6 +410,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         ligCombo = new javax.swing.JComboBox();
         mpieceLabel = new javax.swing.JLabel();
         mpieceCombo = new javax.swing.JComboBox();
+        mpmodelLabel = new javax.swing.JLabel();
+        mpmodelBox = new javax.swing.JTextField();
         capLabel = new javax.swing.JLabel();
         capCombo = new javax.swing.JComboBox();
         bowLabel = new javax.swing.JLabel();
@@ -714,12 +728,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(typeLabel, gridBagConstraints);
 
-        typeBox.setColumns(20);
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Woodwind", "Brass", "Strings", "Percussion", "Electronic", "Other" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        detailPanel.add(typeBox, gridBagConstraints);
+        detailPanel.add(typeCombo, gridBagConstraints);
 
         rankLabel.setText("Rank:");
         rankLabel.setPreferredSize(null);
@@ -831,10 +844,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        detailPanel.add(mpieceCombo, gridBagConstraints);
+
+        mpmodelLabel.setText("Make/Model:");
+        detailPanel.add(mpmodelLabel, new java.awt.GridBagConstraints());
+
+        mpmodelBox.setColumns(15);
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        detailPanel.add(mpieceCombo, gridBagConstraints);
+        detailPanel.add(mpmodelBox, gridBagConstraints);
 
         capLabel.setText("Mouthpiece Cap:");
         capLabel.setPreferredSize(null);
@@ -1608,6 +1628,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JButton lostButton;
     private javax.swing.JComboBox mpieceCombo;
     private javax.swing.JLabel mpieceLabel;
+    private javax.swing.JTextField mpmodelBox;
+    private javax.swing.JLabel mpmodelLabel;
     private javax.swing.JLabel noteLabel;
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField otherBox;
@@ -1635,7 +1657,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox strapCombo;
     private javax.swing.JLabel strapLabel;
-    private javax.swing.JTextField typeBox;
+    private javax.swing.JComboBox typeCombo;
     private javax.swing.JLabel typeLabel;
     private javax.swing.JTextField valueBox;
     private javax.swing.JLabel valueLabel;

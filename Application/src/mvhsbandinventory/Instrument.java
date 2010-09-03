@@ -24,7 +24,7 @@ public class Instrument
         "Instrument", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
         "Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
         "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
-        "Contract", "Type"
+        "Contract", "Type", "MouthpieceModel"
     };
 
 
