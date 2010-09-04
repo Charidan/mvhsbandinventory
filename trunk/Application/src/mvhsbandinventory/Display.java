@@ -704,6 +704,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         infoTabs.setMinimumSize(new java.awt.Dimension(1086, 350));
 
         detailPanel.setMinimumSize(new java.awt.Dimension(1081, 200));
+        detailPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                detailPanelComponentHidden(evt);
+            }
+        });
         detailPanel.setLayout(new java.awt.GridBagLayout());
 
         statusLabel.setText("Status:");
@@ -987,6 +992,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         infoTabs.addTab("Details", detailPanel);
 
         historyPanel.setMinimumSize(new java.awt.Dimension(1350, 407));
+        historyPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                historyPanelComponentHidden(evt);
+            }
+        });
         historyPanel.setLayout(new java.awt.BorderLayout());
 
         historySplit.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -1873,6 +1883,84 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {//GEN-HEADEREND:event_otherTwoBoxKeyTyped
         histChange = true;
     }//GEN-LAST:event_otherTwoBoxKeyTyped
+
+    private void detailPanelComponentHidden(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_detailPanelComponentHidden
+    {//GEN-HEADEREND:event_detailPanelComponentHidden
+        if(detailChange)
+        {
+            int action = JOptionPane.showConfirmDialog(jopDialog, "Do you wish to save the changes to this instrument?", "Unsaved Data Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                switch(action)
+                {
+                    case JOptionPane.YES_OPTION:
+                    {
+                        Instrument instru = instruments.get(lastSelect);
+                        if(instru != null)
+                        {
+                            instru.addHistory("Instrument saved.");
+                            saveDetails(instru);
+                            return;
+                        }
+                    }
+                    case JOptionPane.CLOSED_OPTION:
+                    {
+                        detailPanel.requestFocus();
+                        return;
+                    }
+                    case JOptionPane.CANCEL_OPTION:
+                    {
+                        detailPanel.requestFocus();
+                        return;
+                    }
+                    case JOptionPane.NO_OPTION:
+                    {
+                        displayInstrument();
+                        lastSelect = getSelectedIndex();
+                        detailChange = false;
+                        histChange = false;
+                        return;
+                    }
+            }
+        }
+    }//GEN-LAST:event_detailPanelComponentHidden
+
+    private void historyPanelComponentHidden(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_historyPanelComponentHidden
+    {//GEN-HEADEREND:event_historyPanelComponentHidden
+        if(histChange)
+        {
+            int action = JOptionPane.showConfirmDialog(jopDialog, "Do you wish to save the changes to this instrument?", "Unsaved Data Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                switch(action)
+                {
+                    case JOptionPane.YES_OPTION:
+                    {
+                        Instrument instru = instruments.get(lastSelect);
+                        if(instru != null)
+                        {
+                            instru.addHistory("Instrument saved.");
+                            saveDetails(instru);
+                            return;
+                        }
+                    }
+                    case JOptionPane.CLOSED_OPTION:
+                    {
+                        historyPanel.requestFocus();
+                        return;
+                    }
+                    case JOptionPane.CANCEL_OPTION:
+                    {
+                        historyPanel.requestFocus();
+                        return;
+                    }
+                    case JOptionPane.NO_OPTION:
+                    {
+                        displayInstrument();
+                        lastSelect = getSelectedIndex();
+                        detailChange = false;
+                        histChange = false;
+                        return;
+                    }
+            }
+        }
+    }//GEN-LAST:event_historyPanelComponentHidden
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
