@@ -20,7 +20,7 @@ public class InstrumentChangeListener implements InstrumentStoreListener
         String name = event.instrument.get("Instrument");
         String brand = event.instrument.get("Brand");
         String serial = event.instrument.get("Serial");
-        
+
         try {
             if (list.get(name, brand, serial) == null) {
                 list.addLocal(event.instrument);
@@ -42,6 +42,7 @@ public class InstrumentChangeListener implements InstrumentStoreListener
             Instrument existing = list.get(name, brand, serial);
             list.deleteLocal(existing);
             System.out.println("[Realtime] Deleted: " + event.instrument);
+
         }
         catch (Exception ex) {}
     }

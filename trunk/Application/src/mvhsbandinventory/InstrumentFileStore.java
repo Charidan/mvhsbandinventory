@@ -166,7 +166,8 @@ public class InstrumentFileStore extends InstrumentStore
      */
     public boolean exists(Instrument instrument)
     {
-        return getFile(instrument).exists();
+        File stored = getFile(instrument);
+        return stored.exists() && read(stored).isValid();
     }
 
     /**
@@ -230,6 +231,26 @@ public class InstrumentFileStore extends InstrumentStore
 
         File file = getFile(instrument);
         file.delete();
+
+        if (!exists(instrument))
+        {
+            FileWriter empty = new FileWriter(file);
+
+            try
+            {
+                
+                empty.write("");
+            } 
+            catch (IOException e) {}
+            finally
+            {
+                try
+                {
+                    empty.close();
+                }
+                catch (IOException e) {}
+            }
+        }
     }
 
     /**
