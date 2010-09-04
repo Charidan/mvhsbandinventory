@@ -176,23 +176,66 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         try
         {
-            instru.set("Type", (String) typeCombo.getSelectedItem());
-            instru.set("Rank", rankBox.getText());
-            instru.set("Value", valueBox.getText());
-            instru.set("Status", (String) statusCombo.getSelectedItem());
-            instru.set("Ligature", (String) ligCombo.getSelectedItem());
-            instru.set("Mouthpiece", (String) mpieceCombo.getSelectedItem());
-            instru.set("MouthpieceModel", (String) mpmodelBox.getText());
-            instru.set("MouthpieceCap", (String) capCombo.getSelectedItem());
-            instru.set("Bow", (String) bowCombo.getSelectedItem());
-            instru.set("NeckStrap", (String) strapCombo.getSelectedItem());
-            instru.set("Notes", notesTPane.getText());
-            instruments.update(instru);
+            String name = (String) instruBox.getText();
+            String brand = (String) brandBox.getText();
+            String serial = (String) serialBox.getText();
+
+            Instrument editable = null;
+            boolean renaming = false;
+
+            if(instru.isRenamed(name, brand, serial))
+            {
+                if (!Instrument.isValid(name, brand, serial))
+                {
+                    return;
+                }
+
+                if (!Instrument.isSaveable(name, brand, serial))
+                {
+                    return;
+                }
+
+                editable = new Instrument();
+                editable.set("Instrument", name);
+                editable.set("Brand", brand);
+                editable.set("Serial", serial);
+
+                renaming = true;
+            }
+            else
+            {
+                editable = instru;
+            }
+
+            editable.set("Type", (String) typeCombo.getSelectedItem());
+            editable.set("Rank", rankBox.getText());
+            editable.set("Value", valueBox.getText());
+            editable.set("Status", (String) statusCombo.getSelectedItem());
+            editable.set("Ligature", (String) ligCombo.getSelectedItem());
+            editable.set("Mouthpiece", (String) mpieceCombo.getSelectedItem());
+            editable.set("MouthpieceModel", (String) mpmodelBox.getText());
+            editable.set("MouthpieceCap", (String) capCombo.getSelectedItem());
+            editable.set("Bow", (String) bowCombo.getSelectedItem());
+            editable.set("NeckStrap", (String) strapCombo.getSelectedItem());
+            editable.set("Notes", notesTPane.getText());
+
+            if (renaming)
+            {
+                instruments.add(editable);
+                
+                instruments.deleteLocal(instru);
+                instruments.delete(instru);
+            }
+            else
+            {
+                instruments.update(editable);
+            }
+
             detailChange = false;
         } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
-                    "An Error has occurred while saving the instrument:\n"+ex.getMessage(),
+                    "An error has occurred while saving the instrument:\n"+ex.getMessage(),
                     "Save Failed",
                     JOptionPane.ERROR_MESSAGE);
         }

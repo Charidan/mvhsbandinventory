@@ -131,4 +131,14 @@ public class Instrument
         return valid.matcher(name).matches() && valid.matcher(brand).matches() &&
                 valid.matcher(serial).matches();
     }
+    
+    public boolean isRenamed(String name, String brand, String serial)
+    {
+        String existingName = properties.get("Instrument");
+        String existingBrand = properties.get("Brand");
+        String existingSerial = properties.get("Serial");
+
+        return existingName.equals(name) || existingBrand.equals(brand) ||
+                existingSerial.equals(serial);
+    }
 }
