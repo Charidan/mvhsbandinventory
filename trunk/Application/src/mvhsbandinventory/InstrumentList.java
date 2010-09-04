@@ -31,7 +31,8 @@ public class InstrumentList extends AbstractTableModel
         "Instrument", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
         "Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
         "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
-        "Contract", "Type", "MouthpieceModel"
+        "Contract", "RenterTwo", "SchoolYearTwo", "DateOutTwo", "FeeTwo",
+        "PeriodTwo", "OtherTwo", "ContractTwo", "Type", "MouthpieceModel"
     };
 
     /**

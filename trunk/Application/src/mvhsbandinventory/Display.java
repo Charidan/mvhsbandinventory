@@ -51,6 +51,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // If there are instruments in the list, sort them appropriately
         sort();
         setSelectedIndex(0);
+
+        renterTwoPanel.setVisible(false);
     }
 
     public Instrument getSelectedInstrument()
@@ -294,6 +296,34 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         otherBox.setText((String) instru.get("Other"));
 
+        renterTwoBox.setText((String) instru.get("RenterTwo"));
+        schoolyearTwoBox.setText((String) instru.get("SchoolYearTwo"));
+        dateoutTwoBox.setText((String) instru.get("DateOutTwo"));
+
+        if(instru.get("FeeTwo").equals(""))
+        {
+            feeTwoCombo.setSelectedIndex(1);
+        } else
+        {
+            feeTwoCombo.setSelectedItem((String) instru.get("FeeTwo"));
+        }
+        if(instru.get("PeriodTwo").equals(""))
+        {
+            periodTwoCombo.setSelectedIndex(0);
+        } else
+        {
+            periodTwoCombo.setSelectedItem((String) instru.get("PeriodTwo"));
+        }
+        if(instru.get("ContractTwo").equals(""))
+        {
+            contractTwoCombo.setSelectedIndex(0);
+        } else
+        {
+            contractTwoCombo.setSelectedItem((String) instru.get("ContractTwo"));
+        }
+
+        otherTwoBox.setText((String) instru.get("OtherTwo"));
+
         //set the History table
         histModel.fireTableChanged(null);
     }
@@ -314,7 +344,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             instru.set("Fee", (String) feeCombo.getSelectedItem());
             instru.set("Period", (String) periodCombo.getSelectedItem());
             instru.set("Other", otherBox.getText());
-            instru.set("Status", (String) statusCombo.getSelectedItem());
+            
+            instru.set("RenterTwo", renterTwoBox.getText());
+            instru.set("SchoolYearTwo", schoolyearTwoBox.getText());
+            instru.set("DateOutTwo", dateoutTwoBox.getText());
+            instru.set("FeeTwo", (String) feeTwoCombo.getSelectedItem());
+            instru.set("PeriodTwo", (String) periodTwoCombo.getSelectedItem());
+            instru.set("OtherTwo", otherTwoBox.getText());
+            
             instruments.update(instru);
             histChange = false;
         } catch(Exception ex)
@@ -424,6 +461,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         historyTablePanel = new javax.swing.JScrollPane();
         historyTable = new javax.swing.JTable();
         checkoutPanel = new javax.swing.JPanel();
+        rentersPanel = new javax.swing.JPanel();
+        renterPanel = new javax.swing.JPanel();
         renterLabel = new javax.swing.JLabel();
         renterBox = new javax.swing.JTextField();
         schoolyearLabel = new javax.swing.JLabel();
@@ -438,11 +477,27 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         contractCombo = new javax.swing.JComboBox();
         otherLabel = new javax.swing.JLabel();
         otherBox = new javax.swing.JTextField();
+        renterTwoPanel = new javax.swing.JPanel();
+        renterTwoLabel = new javax.swing.JLabel();
+        renterTwoBox = new javax.swing.JTextField();
+        schoolyearTwoLabel = new javax.swing.JLabel();
+        schoolyearTwoBox = new javax.swing.JTextField();
+        dateoutTwoLabel = new javax.swing.JLabel();
+        dateoutTwoBox = new javax.swing.JTextField();
+        periodTwoLabel = new javax.swing.JLabel();
+        periodTwoCombo = new javax.swing.JComboBox();
+        feeTwoLabel = new javax.swing.JLabel();
+        feeTwoCombo = new javax.swing.JComboBox();
+        contractTwoLabel = new javax.swing.JLabel();
+        contractTwoCombo = new javax.swing.JComboBox();
+        otherTwoLabel = new javax.swing.JLabel();
+        otherTwoBox = new javax.swing.JTextField();
         checkoutButtonPanel = new javax.swing.JPanel();
         formButton = new javax.swing.JButton();
         checkoutButton = new javax.swing.JButton();
         checkinButton = new javax.swing.JButton();
         lostButton = new javax.swing.JButton();
+        renterTwoToggle = new javax.swing.JToggleButton();
         rightsplitButtonPanel = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -643,7 +698,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         overlord.setLeftComponent(leftsplitPanel);
 
-        rightsplitPanel.setMinimumSize(new java.awt.Dimension(450, 308));
+        rightsplitPanel.setMinimumSize(new java.awt.Dimension(540, 308));
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
         infoTabs.setMinimumSize(new java.awt.Dimension(1086, 350));
@@ -931,9 +986,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         infoTabs.addTab("Details", detailPanel);
 
+        historyPanel.setMinimumSize(new java.awt.Dimension(1350, 407));
         historyPanel.setLayout(new java.awt.BorderLayout());
 
         historySplit.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        historySplit.setMinimumSize(new java.awt.Dimension(850, 407));
 
         historyTablePanel.setMinimumSize(new java.awt.Dimension(100, 200));
 
@@ -943,12 +1000,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         historySplit.setTopComponent(historyTablePanel);
 
+        checkoutPanel.setMinimumSize(new java.awt.Dimension(650, 200));
         checkoutPanel.setLayout(new java.awt.GridBagLayout());
+
+        renterPanel.setLayout(new java.awt.GridBagLayout());
 
         renterLabel.setText("Renter:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(renterLabel, gridBagConstraints);
+        renterPanel.add(renterLabel, gridBagConstraints);
 
         renterBox.setColumns(25);
         renterBox.setAutoscrolls(false);
@@ -967,13 +1027,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(renterBox, gridBagConstraints);
+        renterPanel.add(renterBox, gridBagConstraints);
 
         schoolyearLabel.setText("School Year:");
         schoolyearLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(schoolyearLabel, gridBagConstraints);
+        renterPanel.add(schoolyearLabel, gridBagConstraints);
 
         schoolyearBox.setColumns(25);
         schoolyearBox.setAutoscrolls(false);
@@ -987,13 +1047,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(schoolyearBox, gridBagConstraints);
+        renterPanel.add(schoolyearBox, gridBagConstraints);
 
         dateoutLabel.setText("Date Out:");
         dateoutLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(dateoutLabel, gridBagConstraints);
+        renterPanel.add(dateoutLabel, gridBagConstraints);
 
         dateoutBox.setColumns(25);
         dateoutBox.setAutoscrolls(false);
@@ -1007,13 +1067,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(dateoutBox, gridBagConstraints);
+        renterPanel.add(dateoutBox, gridBagConstraints);
 
         periodLabel.setText("For Use In:");
         periodLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(periodLabel, gridBagConstraints);
+        renterPanel.add(periodLabel, gridBagConstraints);
 
         periodCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
         periodCombo.setPreferredSize(null);
@@ -1035,13 +1095,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(periodCombo, gridBagConstraints);
+        renterPanel.add(periodCombo, gridBagConstraints);
 
         feeLabel.setText("Fee Paid:");
         feeLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(feeLabel, gridBagConstraints);
+        renterPanel.add(feeLabel, gridBagConstraints);
 
         feeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived" }));
         feeCombo.setSelectedIndex(1);
@@ -1059,12 +1119,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(feeCombo, gridBagConstraints);
+        renterPanel.add(feeCombo, gridBagConstraints);
 
         contractLabel.setText("Contract:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(contractLabel, gridBagConstraints);
+        renterPanel.add(contractLabel, gridBagConstraints);
 
         contractCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Uncreated", "Created", "Signed" }));
         contractCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -1080,13 +1140,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(contractCombo, gridBagConstraints);
+        renterPanel.add(contractCombo, gridBagConstraints);
 
         otherLabel.setText("Other:");
         otherLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        checkoutPanel.add(otherLabel, gridBagConstraints);
+        renterPanel.add(otherLabel, gridBagConstraints);
 
         otherBox.setPreferredSize(null);
         otherBox.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1100,7 +1160,175 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.ipadx = 300;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        checkoutPanel.add(otherBox, gridBagConstraints);
+        renterPanel.add(otherBox, gridBagConstraints);
+
+        rentersPanel.add(renterPanel);
+
+        renterTwoPanel.setLayout(new java.awt.GridBagLayout());
+
+        renterTwoLabel.setText("Renter Two:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renterTwoPanel.add(renterTwoLabel, gridBagConstraints);
+
+        renterTwoBox.setColumns(25);
+        renterTwoBox.setAutoscrolls(false);
+        renterTwoBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        renterTwoBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                renterTwoBoxActionPerformed(evt);
+            }
+        });
+        renterTwoBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                renterTwoBoxKeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        renterTwoPanel.add(renterTwoBox, gridBagConstraints);
+
+        schoolyearTwoLabel.setText("School Year:");
+        schoolyearTwoLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renterTwoPanel.add(schoolyearTwoLabel, gridBagConstraints);
+
+        schoolyearTwoBox.setColumns(25);
+        schoolyearTwoBox.setAutoscrolls(false);
+        schoolyearTwoBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        schoolyearTwoBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                schoolyearTwoBoxKeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        renterTwoPanel.add(schoolyearTwoBox, gridBagConstraints);
+
+        dateoutTwoLabel.setText("Date Out:");
+        dateoutTwoLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renterTwoPanel.add(dateoutTwoLabel, gridBagConstraints);
+
+        dateoutTwoBox.setColumns(25);
+        dateoutTwoBox.setAutoscrolls(false);
+        dateoutTwoBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        dateoutTwoBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dateoutTwoBoxKeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        renterTwoPanel.add(dateoutTwoBox, gridBagConstraints);
+
+        periodTwoLabel.setText("For Use In:");
+        periodTwoLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renterTwoPanel.add(periodTwoLabel, gridBagConstraints);
+
+        periodTwoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
+        periodTwoCombo.setPreferredSize(null);
+        periodTwoCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                periodTwoComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        periodTwoCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                periodTwoComboActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        renterTwoPanel.add(periodTwoCombo, gridBagConstraints);
+
+        feeTwoLabel.setText("Fee Paid:");
+        feeTwoLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renterTwoPanel.add(feeTwoLabel, gridBagConstraints);
+
+        feeTwoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paid", "Unpaid", "Waived" }));
+        feeTwoCombo.setSelectedIndex(1);
+        feeTwoCombo.setPreferredSize(null);
+        feeTwoCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                feeTwoComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        renterTwoPanel.add(feeTwoCombo, gridBagConstraints);
+
+        contractTwoLabel.setText("Contract:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renterTwoPanel.add(contractTwoLabel, gridBagConstraints);
+
+        contractTwoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Uncreated", "Created", "Signed" }));
+        contractTwoCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                contractTwoComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        renterTwoPanel.add(contractTwoCombo, gridBagConstraints);
+
+        otherTwoLabel.setText("Other:");
+        otherTwoLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renterTwoPanel.add(otherTwoLabel, gridBagConstraints);
+
+        otherTwoBox.setPreferredSize(null);
+        otherTwoBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                otherTwoBoxKeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        renterTwoPanel.add(otherTwoBox, gridBagConstraints);
+
+        rentersPanel.add(renterTwoPanel);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        checkoutPanel.add(rentersPanel, gridBagConstraints);
 
         checkoutButtonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -1139,6 +1367,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         });
         checkoutButtonPanel.add(lostButton);
+
+        renterTwoToggle.setText("Toggle 2nd Renter");
+        renterTwoToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                renterTwoToggleActionPerformed(evt);
+            }
+        });
+        checkoutButtonPanel.add(renterTwoToggle);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -1452,9 +1688,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {//GEN-HEADEREND:event_formButtonActionPerformed
 
         Instrument i = getSelectedInstrument();
-        saveHistory(getSelectedInstrument());
         i.addHistory("Contract Generated for "+i.get("Renter")+".");
-        conGen.generateContract(i);
+        saveButtonActionPerformed(evt);
+        Object[] strings = new Object[2];
+        strings[0]= "1";
+        strings[1]= "2";
+        Object obj = JOptionPane.showInputDialog(jopDialog, "Which renter's information should be used?", "Pick a Renter", JOptionPane.INFORMATION_MESSAGE, null, strings, 1);
+        if(obj.equals("1")) conGen.generateContract(i);
+        else if((obj.equals("2"))) conGen.generateContract(i);
+        
         displayInstrument();
     }//GEN-LAST:event_formButtonActionPerformed
 
@@ -1564,6 +1806,74 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         histChange = true;
     }//GEN-LAST:event_otherBoxKeyTyped
 
+    private void renterTwoToggleActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renterTwoToggleActionPerformed
+    {//GEN-HEADEREND:event_renterTwoToggleActionPerformed
+        if(renterTwoToggle.isSelected())
+        {
+            renterTwoPanel.setVisible(true);
+
+            Dimension d = Main.window.getSize();
+            Main.window.setSize(d.width+300, d.height);
+            d = Main.window.getMinimumSize();
+            d = new Dimension(d.width+300, d.height);
+            Main.window.setMinimumSize(d);
+        } else
+        {
+            renterTwoPanel.setVisible(false);
+
+            Dimension d = Main.window.getMinimumSize();
+            d = new Dimension(d.width-300, d.height);
+            Main.window.setMinimumSize(d);
+            d = Main.window.getSize();
+            Main.window.setSize(d.width-300, d.height);
+        }
+    }//GEN-LAST:event_renterTwoToggleActionPerformed
+
+    private void renterTwoBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renterTwoBoxActionPerformed
+    {//GEN-HEADEREND:event_renterTwoBoxActionPerformed
+        
+    }//GEN-LAST:event_renterTwoBoxActionPerformed
+
+    private void renterTwoBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_renterTwoBoxKeyTyped
+    {//GEN-HEADEREND:event_renterTwoBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_renterTwoBoxKeyTyped
+
+    private void schoolyearTwoBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_schoolyearTwoBoxKeyTyped
+    {//GEN-HEADEREND:event_schoolyearTwoBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_schoolyearTwoBoxKeyTyped
+
+    private void dateoutTwoBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_dateoutTwoBoxKeyTyped
+    {//GEN-HEADEREND:event_dateoutTwoBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_dateoutTwoBoxKeyTyped
+
+    private void periodTwoComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_periodTwoComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_periodTwoComboPopupMenuWillBecomeInvisible
+        histChange = true;
+    }//GEN-LAST:event_periodTwoComboPopupMenuWillBecomeInvisible
+
+    private void periodTwoComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_periodTwoComboActionPerformed
+    {//GEN-HEADEREND:event_periodTwoComboActionPerformed
+        histChange = true;
+    }//GEN-LAST:event_periodTwoComboActionPerformed
+
+    private void feeTwoComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_feeTwoComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_feeTwoComboPopupMenuWillBecomeInvisible
+        histChange = true;
+    }//GEN-LAST:event_feeTwoComboPopupMenuWillBecomeInvisible
+
+    private void contractTwoComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_contractTwoComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_contractTwoComboPopupMenuWillBecomeInvisible
+        histChange = true;
+    }//GEN-LAST:event_contractTwoComboPopupMenuWillBecomeInvisible
+
+    private void otherTwoBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_otherTwoBoxKeyTyped
+    {//GEN-HEADEREND:event_otherTwoBoxKeyTyped
+        histChange = true;
+    }//GEN-LAST:event_otherTwoBoxKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
     private javax.swing.JTextField addBrandBox;
@@ -1598,14 +1908,20 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JPanel checkoutPanel;
     private javax.swing.JComboBox contractCombo;
     private javax.swing.JLabel contractLabel;
+    private javax.swing.JComboBox contractTwoCombo;
+    private javax.swing.JLabel contractTwoLabel;
     private javax.swing.JTextField dateoutBox;
     private javax.swing.JLabel dateoutLabel;
+    private javax.swing.JTextField dateoutTwoBox;
+    private javax.swing.JLabel dateoutTwoLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JScrollPane detailNotePanel;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JButton excelButton;
     private javax.swing.JComboBox feeCombo;
     private javax.swing.JLabel feeLabel;
+    private javax.swing.JComboBox feeTwoCombo;
+    private javax.swing.JLabel feeTwoLabel;
     private javax.swing.JButton formButton;
     private javax.swing.JPanel historyPanel;
     private javax.swing.JSplitPane historySplit;
@@ -1634,18 +1950,30 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField otherBox;
     private javax.swing.JLabel otherLabel;
+    private javax.swing.JTextField otherTwoBox;
+    private javax.swing.JLabel otherTwoLabel;
     private javax.swing.JSplitPane overlord;
     private javax.swing.JComboBox periodCombo;
     private javax.swing.JLabel periodLabel;
+    private javax.swing.JComboBox periodTwoCombo;
+    private javax.swing.JLabel periodTwoLabel;
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JTextField renterBox;
     private javax.swing.JLabel renterLabel;
+    private javax.swing.JPanel renterPanel;
+    private javax.swing.JTextField renterTwoBox;
+    private javax.swing.JLabel renterTwoLabel;
+    private javax.swing.JPanel renterTwoPanel;
+    private javax.swing.JToggleButton renterTwoToggle;
+    private javax.swing.JPanel rentersPanel;
     private javax.swing.JPanel rightsplitButtonPanel;
     private javax.swing.JPanel rightsplitPanel;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField schoolyearBox;
     private javax.swing.JLabel schoolyearLabel;
+    private javax.swing.JTextField schoolyearTwoBox;
+    private javax.swing.JLabel schoolyearTwoLabel;
     private javax.swing.JTextField serialBox;
     private javax.swing.JLabel serialLabel;
     private javax.swing.JButton showallButton;
