@@ -1707,7 +1707,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         strings[1]= "2";
         Object obj = JOptionPane.showInputDialog(jopDialog, "Which renter's information should be used?", "Pick a Renter", JOptionPane.INFORMATION_MESSAGE, null, strings, 1);
         if(obj.equals("1")) conGen.generateContract(i);
-        else if((obj.equals("2"))) conGen.generateContract(i);
+        else if((obj.equals("2"))) conGen.generateContractTwo(i);
         
         displayInstrument();
     }//GEN-LAST:event_formButtonActionPerformed
