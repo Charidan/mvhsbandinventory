@@ -19,12 +19,21 @@ public class InstrumentFileStoreListener implements JNotifyListener
 
     public void fileCreated (int wd, String root, String name)
     {
-        sendEvent(InstrumentStoreEvent.ADDED, root, name);
+        File changed = new File(root, name);
+        Instrument instrument = store.read(changed);
+
+        if (instrument.isValid())
+        {
+            store.fireEvent(InstrumentStoreEvent.ADDED, instrument);
+        }
     }
+
 
     public void fileDeleted (int wd, String root, String name)
     {
-        if (new File(root, name).exists())
+        File removed = new File(root, name);
+
+        if (removed.exists() && store.read(removed).isValid())
             return;
 
         Pattern splitter = Pattern.compile("_");
@@ -58,23 +67,20 @@ public class InstrumentFileStoreListener implements JNotifyListener
 
     public void fileModified (int wd, String root, String name)
     {
-        sendEvent(InstrumentStoreEvent.MODIFIED, root, name);
+        File modified = new File(root, name);
+        Instrument instrument = store.read(modified);
+
+        if (instrument.isValid())
+        {
+            store.fireEvent(InstrumentStoreEvent.MODIFIED, instrument);
+        }
+        else
+        {
+            fileDeleted(wd, root, name);
+        }
     }
 
     public void fileRenamed (int wd, String root, String oldName, String newName)
     {
-        throw new UnsupportedOperationException("Not supported; users aren't " +
-                "allowed to change the name, brand, or serial of instruments.");
     }
-
-    private void sendEvent (int type, String root, String name) {
-        File changed = new File(root, name);
-        Instrument instrument = store.read(changed);
-
-        if (instrument.isValid())
-        {
-            store.fireEvent(type, instrument);
-        }
-    }
-
 }
