@@ -539,7 +539,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         advsearchDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         advsearchDialog.setTitle("Advanced Search");
-        advsearchDialog.setMinimumSize(new java.awt.Dimension(470, 150));
         advsearchDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         advsearchPanel.setLayout(new java.awt.GridBagLayout());
@@ -547,7 +546,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         addDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addDialog.setTitle("ADD NEW INSTRUMENT");
-        addDialog.setMinimumSize(new java.awt.Dimension(310, 200));
         addDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         addTextLabel.setText("Enter Instrument Characteristics");
@@ -789,6 +787,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel.add(typeLabel, gridBagConstraints);
 
         typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Woodwind", "Brass", "Strings", "Percussion", "Electronic", "Other" }));
+        typeCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                typeComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -844,12 +851,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         strapCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         strapCombo.setPreferredSize(null);
         strapCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 strapComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -867,12 +874,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         ligCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         ligCombo.setPreferredSize(null);
         ligCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 ligComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         ligCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -895,12 +902,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         mpieceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         mpieceCombo.setPreferredSize(null);
         mpieceCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 mpieceComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -911,6 +918,11 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel.add(mpmodelLabel, new java.awt.GridBagConstraints());
 
         mpmodelBox.setColumns(15);
+        mpmodelBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                mpmodelBoxKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -925,12 +937,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         capCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         capCombo.setPreferredSize(null);
         capCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 capComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -948,12 +960,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         bowCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Yes", "No", "n/a" }));
         bowCombo.setPreferredSize(null);
         bowCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 bowComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1088,12 +1100,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         periodCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
         periodCombo.setPreferredSize(null);
         periodCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 periodComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         periodCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -1117,12 +1129,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         feeCombo.setSelectedIndex(1);
         feeCombo.setPreferredSize(null);
         feeCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 feeComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1138,12 +1150,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         contractCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Uncreated", "Created", "Signed" }));
         contractCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 contractComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1184,11 +1196,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         renterTwoBox.setColumns(25);
         renterTwoBox.setAutoscrolls(false);
         renterTwoBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        renterTwoBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                renterTwoBoxActionPerformed(evt);
-            }
-        });
         renterTwoBox.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 renterTwoBoxKeyTyped(evt);
@@ -1249,17 +1256,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         periodTwoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" }));
         periodTwoCombo.setPreferredSize(null);
         periodTwoCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 periodTwoComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-            }
-        });
-        periodTwoCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                periodTwoComboActionPerformed(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1278,12 +1280,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         feeTwoCombo.setSelectedIndex(1);
         feeTwoCombo.setPreferredSize(null);
         feeTwoCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 feeTwoComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1299,12 +1301,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         contractTwoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Uncreated", "Created", "Signed" }));
         contractTwoCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 contractTwoComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1839,11 +1841,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         }
     }//GEN-LAST:event_renterTwoToggleActionPerformed
 
-    private void renterTwoBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renterTwoBoxActionPerformed
-    {//GEN-HEADEREND:event_renterTwoBoxActionPerformed
-        
-    }//GEN-LAST:event_renterTwoBoxActionPerformed
-
     private void renterTwoBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_renterTwoBoxKeyTyped
     {//GEN-HEADEREND:event_renterTwoBoxKeyTyped
         histChange = true;
@@ -1863,11 +1860,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     {//GEN-HEADEREND:event_periodTwoComboPopupMenuWillBecomeInvisible
         histChange = true;
     }//GEN-LAST:event_periodTwoComboPopupMenuWillBecomeInvisible
-
-    private void periodTwoComboActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_periodTwoComboActionPerformed
-    {//GEN-HEADEREND:event_periodTwoComboActionPerformed
-        histChange = true;
-    }//GEN-LAST:event_periodTwoComboActionPerformed
 
     private void feeTwoComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_feeTwoComboPopupMenuWillBecomeInvisible
     {//GEN-HEADEREND:event_feeTwoComboPopupMenuWillBecomeInvisible
@@ -1961,6 +1953,16 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         }
     }//GEN-LAST:event_historyPanelComponentHidden
+
+    private void mpmodelBoxKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_mpmodelBoxKeyTyped
+    {//GEN-HEADEREND:event_mpmodelBoxKeyTyped
+        detailChange = true;
+    }//GEN-LAST:event_mpmodelBoxKeyTyped
+
+    private void typeComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)//GEN-FIRST:event_typeComboPopupMenuWillBecomeInvisible
+    {//GEN-HEADEREND:event_typeComboPopupMenuWillBecomeInvisible
+        detailChange = true;
+    }//GEN-LAST:event_typeComboPopupMenuWillBecomeInvisible
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
