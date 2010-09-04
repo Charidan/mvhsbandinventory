@@ -237,24 +237,14 @@ public class InstrumentList extends AbstractTableModel
         }
 
         CSVWriter writer = null;
+        String path = System.getProperty("java.io.tmpdir") +
+                    File.pathSeparator + "export.csv";
 
+            File file = new File(path);
         try
         {
-            String path = System.getProperty("java.io.tmpdir") +
-                    File.pathSeparator + "export.csv";
-            File file = new File(path);
             writer = new CSVWriter(new FileWriter(file));
             writer.writeAll(table);
-
-            if (Desktop.isDesktopSupported())
-            {
-                Desktop desktop = Desktop.getDesktop();
-
-                if (desktop.isSupported(Desktop.Action.OPEN))
-                {
-                    desktop.open(file);
-                }
-            }
         }
         catch (IOException e) {}
         finally
@@ -266,10 +256,24 @@ public class InstrumentList extends AbstractTableModel
             catch (IOException e) {}
             catch (NullPointerException e) {}
         }
+        
+        try
+        {
+            if (Desktop.isDesktopSupported())
+            {
+                Desktop desktop = Desktop.getDesktop();
+
+                if (desktop.isSupported(Desktop.Action.OPEN))
+                {
+                    desktop.open(file);
+                }
+            }
+        }
+        catch (IOException e) {}
     }
 
     /**
-     * A convience overload of the exportToExcel function that exports the
+     * A convenience overload of the exportToExcel function that exports the
      * fields of the instrument object specified in the
      * InstrumentList.singles static array.
      * @param instruments - a list of the instrument objects to be exported
