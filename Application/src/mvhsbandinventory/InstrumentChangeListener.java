@@ -17,17 +17,9 @@ public class InstrumentChangeListener implements InstrumentStoreListener
 
     public void instrumentAdded (InstrumentStoreEvent event)
     {
-        String name = event.instrument.get("Instrument");
-        String brand = event.instrument.get("Brand");
-        String serial = event.instrument.get("Serial");
-
-        try {
-            if (list.get(name, brand, serial) == null) {
-                list.addLocal(event.instrument);
-                System.out.println("[Realtime] Added: " + event.instrument);
-            }
-        } catch (Exception ex) {
-            System.out.println("Instrument Added FAILED:" +ex);
+        if (list.isUnique(event.instrument)) {
+            list.addLocal(event.instrument);
+            System.out.println("[Realtime] Added: " + event.instrument);
         }
     }
 
