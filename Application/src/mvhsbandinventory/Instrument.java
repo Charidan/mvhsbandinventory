@@ -21,11 +21,11 @@ public class Instrument
 
     public static final String[] attributes =
     {
-        "Instrument", "Brand", "Serial", "Rank", "Value", "Status", "Notes",
+        "Instrument", "Brand", "Serial", "Type",  "Rank", "Value", "Status",
         "Ligature", "Mouthpiece", "MouthpieceCap", "Bow", "NeckStrap",
         "Renter", "SchoolYear", "DateOut", "Fee", "Period", "Other",
         "Contract", "RenterTwo", "SchoolYearTwo", "DateOutTwo", "FeeTwo",
-        "PeriodTwo", "OtherTwo", "ContractTwo", "Type", "MouthpieceModel"
+        "PeriodTwo", "OtherTwo", "ContractTwo", "MouthpieceModel", "Notes"
     };
 
 
