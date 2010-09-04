@@ -6,8 +6,6 @@ package mvhsbandinventory;
 
 import java.awt.Dimension;
 import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -50,7 +48,7 @@ public class Main
             window.add(panel);
             window.setTitle("MVHS - Instrument Inventory");
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            window.setMinimumSize(new Dimension(810, 450));
+            window.setMinimumSize(new Dimension(905, 515));
             window.setVisible(true);
             panel.repaint();
         } 
