@@ -25,6 +25,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private boolean detailChange;
     private boolean histChange;
     private int lastSelect = 0;
+    private static final int TOGGLE_WIDTH = 340;
     
     /** Creates new customizer DispTest */
     public Display(InstrumentList instruments)
@@ -446,6 +447,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         instrumentLabel = new javax.swing.JLabel();
         brandLabel = new javax.swing.JLabel();
         serialLabel = new javax.swing.JLabel();
+        nameGutsPanel = new javax.swing.JPanel();
         nameBoxPanel = new javax.swing.JPanel();
         brandBox = new javax.swing.JTextField();
         instruBox = new javax.swing.JTextField();
@@ -563,6 +565,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         addDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addDialog.setTitle("ADD NEW INSTRUMENT");
+        addDialog.setMinimumSize(new java.awt.Dimension(350, 200));
         addDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         addTextLabel.setText("Enter Instrument Characteristics");
@@ -637,6 +640,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         renameDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         renameDialog.setTitle("RENAME INSTRUMENT");
+        renameDialog.setMinimumSize(new java.awt.Dimension(350, 200));
         renameDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         renameTextLabel.setText("Enter New Instrument Characteristics");
@@ -797,7 +801,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         overlord.setLeftComponent(leftsplitPanel);
 
-        rightsplitPanel.setMinimumSize(new java.awt.Dimension(540, 308));
+        rightsplitPanel.setMinimumSize(new java.awt.Dimension(600, 308));
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
         infoTabs.setMinimumSize(new java.awt.Dimension(1086, 350));
@@ -852,6 +856,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         detailPanel.add(nameLabelPanel, gridBagConstraints);
 
+        nameGutsPanel.setLayout(new java.awt.GridBagLayout());
+
         nameBoxPanel.setLayout(new java.awt.GridBagLayout());
 
         brandBox.setBackground(new java.awt.Color(240, 240, 240));
@@ -888,14 +894,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         serialBox.setAutoscrolls(false);
         serialBox.setMinimumSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         nameBoxPanel.add(serialBox, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        detailPanel.add(nameBoxPanel, gridBagConstraints);
+        nameGutsPanel.add(nameBoxPanel, new java.awt.GridBagConstraints());
 
         reameButton.setText("Rename");
         reameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -907,7 +911,12 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipady = 37;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        detailPanel.add(reameButton, gridBagConstraints);
+        nameGutsPanel.add(reameButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        detailPanel.add(nameGutsPanel, gridBagConstraints);
 
         typeLabel.setText("Type:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1043,7 +1052,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel.add(mpieceCombo, gridBagConstraints);
 
         mpmodelLabel.setText("Make/Model:");
-        detailPanel.add(mpmodelLabel, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        detailPanel.add(mpmodelLabel, gridBagConstraints);
 
         mpmodelBox.setColumns(15);
         mpmodelBox.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1150,7 +1161,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         historySplit.setTopComponent(historyTablePanel);
 
-        checkoutPanel.setMinimumSize(new java.awt.Dimension(650, 200));
+        checkoutPanel.setMinimumSize(new java.awt.Dimension(650, 230));
         checkoutPanel.setLayout(new java.awt.GridBagLayout());
 
         renterPanel.setLayout(new java.awt.GridBagLayout());
@@ -1645,6 +1656,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addTypeBox.setText("");
         addBrandBox.setText("");
         addSerialBox.setText("");
+        addValueBox.setText("");
 
         addDialog.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
@@ -1965,19 +1977,19 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             renterTwoPanel.setVisible(true);
 
             Dimension d = Main.window.getSize();
-            Main.window.setSize(d.width+300, d.height);
+            Main.window.setSize(d.width+TOGGLE_WIDTH, d.height);
             d = Main.window.getMinimumSize();
-            d = new Dimension(d.width+300, d.height);
+            d = new Dimension(d.width+TOGGLE_WIDTH, d.height);
             Main.window.setMinimumSize(d);
         } else
         {
             renterTwoPanel.setVisible(false);
 
             Dimension d = Main.window.getMinimumSize();
-            d = new Dimension(d.width-300, d.height);
+            d = new Dimension(d.width-TOGGLE_WIDTH, d.height);
             Main.window.setMinimumSize(d);
             d = Main.window.getSize();
-            Main.window.setSize(d.width-300, d.height);
+            Main.window.setSize(d.width-TOGGLE_WIDTH, d.height);
         }
     }//GEN-LAST:event_renterTwoToggleActionPerformed
 
@@ -2207,6 +2219,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         // Add the instrument to the instrument list
         instruments.add(newInstru);
+        instruments.delete(oldInstru);
         sort();
         setSelectedInstrument(newInstru);
 
@@ -2235,7 +2248,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void renameCancelButtonActionPerformed1(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renameCancelButtonActionPerformed1
     {//GEN-HEADEREND:event_renameCancelButtonActionPerformed1
-        // TODO add your handling code here:
+        renameDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
     }//GEN-LAST:event_renameCancelButtonActionPerformed1
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2314,6 +2329,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JTextField mpmodelBox;
     private javax.swing.JLabel mpmodelLabel;
     private javax.swing.JPanel nameBoxPanel;
+    private javax.swing.JPanel nameGutsPanel;
     private javax.swing.JPanel nameLabelPanel;
     private javax.swing.JLabel noteLabel;
     private javax.swing.JTextPane notesTPane;
