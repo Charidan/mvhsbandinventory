@@ -404,9 +404,22 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addBrandBox = new javax.swing.JTextField();
         addSerialLabel = new javax.swing.JLabel();
         addSerialBox = new javax.swing.JTextField();
+        addValueLabel = new javax.swing.JLabel();
+        addValueBox = new javax.swing.JTextField();
         addButtonPanel = new javax.swing.JPanel();
         addAcceptButton = new javax.swing.JButton();
         addCancelButton = new javax.swing.JButton();
+        renameDialog = new javax.swing.JDialog();
+        renameTextLabel = new javax.swing.JLabel();
+        renameTypeLabel = new javax.swing.JLabel();
+        renameTypeBox = new javax.swing.JTextField();
+        renameBrandLabel = new javax.swing.JLabel();
+        renameBrandBox = new javax.swing.JTextField();
+        renameSerialLabel = new javax.swing.JLabel();
+        renameSerialBox = new javax.swing.JTextField();
+        renameButtonPanel = new javax.swing.JPanel();
+        renameAcceptButton = new javax.swing.JButton();
+        renameCancelButton = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         leftsplitPanel = new javax.swing.JPanel();
         leftsplitFilterButtonPanel = new javax.swing.JPanel();
@@ -429,12 +442,15 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         detailPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
         statusCombo = new javax.swing.JComboBox();
+        nameLabelPanel = new javax.swing.JPanel();
         instrumentLabel = new javax.swing.JLabel();
-        instruBox = new javax.swing.JTextField();
         brandLabel = new javax.swing.JLabel();
-        brandBox = new javax.swing.JTextField();
         serialLabel = new javax.swing.JLabel();
+        nameBoxPanel = new javax.swing.JPanel();
+        brandBox = new javax.swing.JTextField();
+        instruBox = new javax.swing.JTextField();
         serialBox = new javax.swing.JTextField();
+        reameButton = new javax.swing.JButton();
         typeLabel = new javax.swing.JLabel();
         typeCombo = new javax.swing.JComboBox();
         rankLabel = new javax.swing.JLabel();
@@ -556,28 +572,48 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         addDialog.getContentPane().add(addTextLabel, gridBagConstraints);
 
         addTypeLabel.setText("Instrument:");
-        addDialog.getContentPane().add(addTypeLabel, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        addDialog.getContentPane().add(addTypeLabel, gridBagConstraints);
 
         addTypeBox.setColumns(20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         addDialog.getContentPane().add(addTypeBox, gridBagConstraints);
 
         addBrandLabel.setText("Brand:");
-        addDialog.getContentPane().add(addBrandLabel, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        addDialog.getContentPane().add(addBrandLabel, gridBagConstraints);
 
         addBrandBox.setColumns(20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         addDialog.getContentPane().add(addBrandBox, gridBagConstraints);
 
         addSerialLabel.setText("Serial #:");
-        addDialog.getContentPane().add(addSerialLabel, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        addDialog.getContentPane().add(addSerialLabel, gridBagConstraints);
 
         addSerialBox.setColumns(20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         addDialog.getContentPane().add(addSerialBox, gridBagConstraints);
+
+        addValueLabel.setText("Value:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        addDialog.getContentPane().add(addValueLabel, gridBagConstraints);
+
+        addValueBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        addDialog.getContentPane().add(addValueBox, gridBagConstraints);
 
         addAcceptButton.setText("CREATE");
         addAcceptButton.addActionListener(new java.awt.event.ActionListener() {
@@ -598,6 +634,70 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         addDialog.getContentPane().add(addButtonPanel, gridBagConstraints);
+
+        renameDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        renameDialog.setTitle("RENAME INSTRUMENT");
+        renameDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        renameTextLabel.setText("Enter New Instrument Characteristics");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipady = 5;
+        renameDialog.getContentPane().add(renameTextLabel, gridBagConstraints);
+
+        renameTypeLabel.setText("Instrument:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renameDialog.getContentPane().add(renameTypeLabel, gridBagConstraints);
+
+        renameTypeBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        renameDialog.getContentPane().add(renameTypeBox, gridBagConstraints);
+
+        renameBrandLabel.setText("Brand:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renameDialog.getContentPane().add(renameBrandLabel, gridBagConstraints);
+
+        renameBrandBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        renameDialog.getContentPane().add(renameBrandBox, gridBagConstraints);
+
+        renameSerialLabel.setText("Serial #:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        renameDialog.getContentPane().add(renameSerialLabel, gridBagConstraints);
+
+        renameSerialBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        renameDialog.getContentPane().add(renameSerialBox, gridBagConstraints);
+
+        renameAcceptButton.setText("SAVE CHANGES");
+        renameAcceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                renameAcceptButtonActionPerformed(evt);
+            }
+        });
+        renameButtonPanel.add(renameAcceptButton);
+
+        renameCancelButton.setText("CANCEL");
+        renameCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                renameCancelButtonActionPerformed1(evt);
+            }
+        });
+        renameButtonPanel.add(renameCancelButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        renameDialog.getContentPane().add(renameButtonPanel, gridBagConstraints);
 
         setLayout(new java.awt.BorderLayout());
 
@@ -725,11 +825,45 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.weightx = 1.0;
         detailPanel.add(statusCombo, gridBagConstraints);
 
+        nameLabelPanel.setLayout(new java.awt.GridBagLayout());
+
         instrumentLabel.setText("Instrument:");
         instrumentLabel.setPreferredSize(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        detailPanel.add(instrumentLabel, gridBagConstraints);
+        nameLabelPanel.add(instrumentLabel, gridBagConstraints);
+
+        brandLabel.setText("Brand:");
+        brandLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        nameLabelPanel.add(brandLabel, gridBagConstraints);
+
+        serialLabel.setText("Serial Number:");
+        serialLabel.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        nameLabelPanel.add(serialLabel, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        detailPanel.add(nameLabelPanel, gridBagConstraints);
+
+        nameBoxPanel.setLayout(new java.awt.GridBagLayout());
+
+        brandBox.setBackground(new java.awt.Color(240, 240, 240));
+        brandBox.setColumns(20);
+        brandBox.setEditable(false);
+        brandBox.setAutoscrolls(false);
+        brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        nameBoxPanel.add(brandBox, gridBagConstraints);
 
         instruBox.setBackground(new java.awt.Color(240, 240, 240));
         instruBox.setColumns(20);
@@ -746,30 +880,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        detailPanel.add(instruBox, gridBagConstraints);
-
-        brandLabel.setText("Brand:");
-        brandLabel.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        detailPanel.add(brandLabel, gridBagConstraints);
-
-        brandBox.setBackground(new java.awt.Color(240, 240, 240));
-        brandBox.setColumns(20);
-        brandBox.setEditable(false);
-        brandBox.setAutoscrolls(false);
-        brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        detailPanel.add(brandBox, gridBagConstraints);
-
-        serialLabel.setText("Serial Number:");
-        serialLabel.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        detailPanel.add(serialLabel, gridBagConstraints);
+        nameBoxPanel.add(instruBox, gridBagConstraints);
 
         serialBox.setBackground(new java.awt.Color(240, 240, 240));
         serialBox.setColumns(20);
@@ -780,7 +891,23 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        detailPanel.add(serialBox, gridBagConstraints);
+        nameBoxPanel.add(serialBox, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        detailPanel.add(nameBoxPanel, gridBagConstraints);
+
+        reameButton.setText("Rename");
+        reameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reameButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipady = 37;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        detailPanel.add(reameButton, gridBagConstraints);
 
         typeLabel.setText("Type:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1584,12 +1711,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void addAcceptButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addAcceptButtonActionPerformed
     {//GEN-HEADEREND:event_addAcceptButtonActionPerformed
-        String name = addTypeBox.getText();
+        String instrument = addTypeBox.getText();
         String brand = addBrandBox.getText();
         String serial = addSerialBox.getText();
+        String value = addValueBox.getText();
         
         // Check to make sure that all of the fields were properly filled in
-        if(!Instrument.isValid(name, brand, serial))
+        if(!Instrument.isValid(instrument, brand, serial))
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "All of the three fields on the \"Add Instrument\" form \n"
@@ -1601,7 +1729,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         // Check to make sure that there isn't already an instrument by the same
         // name as this one
-        if(!instruments.isUnique(name, brand, serial))
+        if(!instruments.isUnique(instrument, brand, serial))
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "There is already an instrument in the database that has \n"
@@ -1610,8 +1738,9 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if (!Instrument.isSaveable(name, brand, serial))
+
+        //Check to make certain only legal characters were used
+        if (!Instrument.isSaveable(instrument, brand, serial))
         {
             JOptionPane.showMessageDialog(jopDialog,
                     "Currently, the only characters allowed for use in any of \n"
@@ -1630,9 +1759,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         try
         {
             // Adding core fields from the "Add Instrument" window
-            instru.set("Instrument", addTypeBox.getText());
-            instru.set("Brand", addBrandBox.getText());
-            instru.set("Serial", addSerialBox.getText());
+            instru.set("Instrument", instrument);
+            instru.set("Brand", brand);
+            instru.set("Serial", serial);
+            instru.set("Value", value);
 
             // Adding default values for new instruments
             // TODO: Move these into some sort of configuration system
@@ -1984,6 +2114,130 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         displayInstrument();
     }//GEN-LAST:event_formTwoButtonActionPerformed
 
+    private void renameAcceptButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renameAcceptButtonActionPerformed
+    {//GEN-HEADEREND:event_renameAcceptButtonActionPerformed
+        Instrument oldInstru = getSelectedInstrument();
+        saveDetails(oldInstru);
+        
+        String instrument = renameTypeBox.getText();
+        String brand = renameBrandBox.getText();
+        String serial = renameSerialBox.getText();
+        
+        // Check to make sure that all of the fields were properly filled in
+        if(!Instrument.isValid(instrument, brand, serial))
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "All of the three fields on the \"Add Instrument\" form \n"
+                    + "are required to be filled in. One of them was left blank.",
+                    "Data Entry Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Check to make sure that there isn't already an instrument by the same
+        // name as this one
+        if(!instruments.isUnique(instrument, brand, serial))
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "There is already an instrument in the database that has \n"
+                    + "the same name, brand, and serial as this one.",
+                    "Data Entry Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Check to make sure only legal characterswere used.
+        if (!Instrument.isSaveable(instrument, brand, serial))
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "Currently, the only characters allowed for use in any of \n"
+                    + "the \"Add Instrument\" window fields are A - Z (both \n"
+                    + "upper case and lower case) 0 - 9, dash, space, and \n" 
+                    + "parenthesis.  The text that you entered in one of \n"
+                    + "those fields contains a character that is not allowed.",
+                    "Data Entry Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Creating a new instrument
+        Instrument newInstru = new Instrument(oldInstru.getHistory());
+
+        try
+        {
+            // Adding core fields from the "Add Instrument" window
+            newInstru.set("Instrument", instrument);
+            newInstru.set("Brand", brand);
+            newInstru.set("Serial", serial);
+
+            // Adding default values for new instruments
+            newInstru.set("Type", oldInstru.get("Type"));
+            newInstru.set("Rank", oldInstru.get("Rank"));
+            newInstru.set("Value", oldInstru.get("Value"));
+            newInstru.set("Status", oldInstru.get("Status"));
+            newInstru.set("Ligature", oldInstru.get("Ligature"));
+            newInstru.set("Mouthpiece", oldInstru.get("Mouthpiece"));
+            newInstru.set("MouthpieceModel", oldInstru.get("MouthpieceModel"));
+            newInstru.set("MouthpieceCap", oldInstru.get("MouthpieceCap"));
+            newInstru.set("Bow", oldInstru.get("Bow"));
+            newInstru.set("NeckStrap", oldInstru.get("NeckStrap"));
+            newInstru.set("Notes", oldInstru.get("Notes"));
+
+            newInstru.set("Renter", oldInstru.get("Renter"));
+            newInstru.set("SchoolYear", oldInstru.get("SchoolYear"));
+            newInstru.set("DateOut", oldInstru.get("DateOut"));
+            newInstru.set("Fee", oldInstru.get("Fee"));
+            newInstru.set("Period", oldInstru.get("Period"));
+            newInstru.set("Other", oldInstru.get("Other"));
+
+            newInstru.set("Renter", oldInstru.get("RenterTwo"));
+            newInstru.set("SchoolYear", oldInstru.get("SchoolYearTwo"));
+            newInstru.set("DateOut", oldInstru.get("DateOutTwo"));
+            newInstru.set("Fee", oldInstru.get("FeeTwo"));
+            newInstru.set("Period", oldInstru.get("PeriodTwo"));
+            newInstru.set("Other", oldInstru.get("OtherTwo"));
+        } catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(jopDialog,
+                    "An internal error has occurred while creating the "
+                    +"instrument:\n"+ex.getMessage(),
+                    "Instrument Creation Failed",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Add the instrument to the instrument list
+        instruments.add(newInstru);
+        sort();
+        setSelectedInstrument(newInstru);
+
+        addDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
+    }//GEN-LAST:event_renameAcceptButtonActionPerformed
+
+    private void addCancelButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addCancelButton1ActionPerformed
+    {//GEN-HEADEREND:event_addCancelButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addCancelButton1ActionPerformed
+
+    private void reameButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_reameButtonActionPerformed
+    {//GEN-HEADEREND:event_reameButtonActionPerformed
+        Main.window.setEnabled(false);
+
+        Instrument i = getSelectedInstrument();
+        
+        renameTypeBox.setText(i.get("Instrument"));
+        renameBrandBox.setText(i.get("Brand"));
+        renameSerialBox.setText(i.get("Serial"));
+
+        renameDialog.setVisible(true);
+    }//GEN-LAST:event_reameButtonActionPerformed
+
+    private void renameCancelButtonActionPerformed1(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renameCancelButtonActionPerformed1
+    {//GEN-HEADEREND:event_renameCancelButtonActionPerformed1
+        // TODO add your handling code here:
+    }//GEN-LAST:event_renameCancelButtonActionPerformed1
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
     private javax.swing.JTextField addBrandBox;
@@ -1997,6 +2251,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel addTextLabel;
     private javax.swing.JTextField addTypeBox;
     private javax.swing.JLabel addTypeLabel;
+    private javax.swing.JTextField addValueBox;
+    private javax.swing.JLabel addValueLabel;
     private javax.swing.JButton advSearchButton;
     private javax.swing.JButton advsearchAddFieldButton;
     private javax.swing.JPanel advsearchButtonPanel;
@@ -2057,6 +2313,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel mpieceLabel;
     private javax.swing.JTextField mpmodelBox;
     private javax.swing.JLabel mpmodelLabel;
+    private javax.swing.JPanel nameBoxPanel;
+    private javax.swing.JPanel nameLabelPanel;
     private javax.swing.JLabel noteLabel;
     private javax.swing.JTextPane notesTPane;
     private javax.swing.JTextField otherBox;
@@ -2070,6 +2328,18 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel periodTwoLabel;
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
+    private javax.swing.JButton reameButton;
+    private javax.swing.JButton renameAcceptButton;
+    private javax.swing.JTextField renameBrandBox;
+    private javax.swing.JLabel renameBrandLabel;
+    private javax.swing.JPanel renameButtonPanel;
+    private javax.swing.JButton renameCancelButton;
+    private javax.swing.JDialog renameDialog;
+    private javax.swing.JTextField renameSerialBox;
+    private javax.swing.JLabel renameSerialLabel;
+    private javax.swing.JLabel renameTextLabel;
+    private javax.swing.JTextField renameTypeBox;
+    private javax.swing.JLabel renameTypeLabel;
     private javax.swing.JTextField renterBox;
     private javax.swing.JLabel renterLabel;
     private javax.swing.JPanel renterPanel;

@@ -46,6 +46,18 @@ public class Instrument
     }
 
     /**
+     * Constructor for an instrument with preexisting History.
+     */
+    public Instrument (List<String> history)
+    {
+        for (String s : attributeList)
+        {
+           properties.put(s, "");
+        }
+        this.history = history;
+    }
+
+    /**
      * An accessor that sets the property named by the attribute argument to
      * the value passed in via the value argument.  The attribute must be
      * contained in the Instruments.attributes array.  If it is not, an
