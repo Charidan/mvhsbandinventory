@@ -48,7 +48,7 @@ public class Main
             window.add(panel);
             window.setTitle("MVHS - Instrument Inventory");
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            window.setMinimumSize(new Dimension(905, 515));
+            window.setMinimumSize(new Dimension(840, 550));
             window.setVisible(true);
             panel.repaint();
         } 
