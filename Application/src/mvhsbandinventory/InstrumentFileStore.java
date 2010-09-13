@@ -232,15 +232,15 @@ public class InstrumentFileStore extends InstrumentStore
         File file = getFile(instrument);
         file.delete();
 
-        if (!exists(instrument))
+        if (exists(instrument))
         {
             FileWriter empty = new FileWriter(file);
 
             try
             {
-                
+
                 empty.write("");
-            } 
+            }
             catch (IOException e) {}
             finally
             {
