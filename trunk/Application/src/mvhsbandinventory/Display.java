@@ -449,10 +449,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         serialLabel = new javax.swing.JLabel();
         nameGutsPanel = new javax.swing.JPanel();
         nameBoxPanel = new javax.swing.JPanel();
-        brandBox = new javax.swing.JTextField();
         instruBox = new javax.swing.JTextField();
+        brandBox = new javax.swing.JTextField();
         serialBox = new javax.swing.JTextField();
-        reameButton = new javax.swing.JButton();
+        renameButton = new javax.swing.JButton();
         typeLabel = new javax.swing.JLabel();
         typeCombo = new javax.swing.JComboBox();
         rankLabel = new javax.swing.JLabel();
@@ -860,17 +860,6 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         nameBoxPanel.setLayout(new java.awt.GridBagLayout());
 
-        brandBox.setBackground(new java.awt.Color(240, 240, 240));
-        brandBox.setColumns(20);
-        brandBox.setEditable(false);
-        brandBox.setAutoscrolls(false);
-        brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        nameBoxPanel.add(brandBox, gridBagConstraints);
-
         instruBox.setBackground(new java.awt.Color(240, 240, 240));
         instruBox.setColumns(20);
         instruBox.setEditable(false);
@@ -888,6 +877,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.weightx = 1.0;
         nameBoxPanel.add(instruBox, gridBagConstraints);
 
+        brandBox.setBackground(new java.awt.Color(240, 240, 240));
+        brandBox.setColumns(20);
+        brandBox.setEditable(false);
+        brandBox.setAutoscrolls(false);
+        brandBox.setMinimumSize(new java.awt.Dimension(200, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        nameBoxPanel.add(brandBox, gridBagConstraints);
+
         serialBox.setBackground(new java.awt.Color(240, 240, 240));
         serialBox.setColumns(20);
         serialBox.setEditable(false);
@@ -901,17 +901,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         nameGutsPanel.add(nameBoxPanel, new java.awt.GridBagConstraints());
 
-        reameButton.setText("Rename");
-        reameButton.addActionListener(new java.awt.event.ActionListener() {
+        renameButton.setText("Rename");
+        renameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reameButtonActionPerformed(evt);
+                renameButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipady = 37;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        nameGutsPanel.add(reameButton, gridBagConstraints);
+        nameGutsPanel.add(renameButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -2233,8 +2233,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         // TODO add your handling code here:
     }//GEN-LAST:event_addCancelButton1ActionPerformed
 
-    private void reameButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_reameButtonActionPerformed
-    {//GEN-HEADEREND:event_reameButtonActionPerformed
+    private void renameButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renameButtonActionPerformed
+    {//GEN-HEADEREND:event_renameButtonActionPerformed
         Main.window.setEnabled(false);
 
         Instrument i = getSelectedInstrument();
@@ -2244,7 +2244,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         renameSerialBox.setText(i.get("Serial"));
 
         renameDialog.setVisible(true);
-    }//GEN-LAST:event_reameButtonActionPerformed
+    }//GEN-LAST:event_renameButtonActionPerformed
 
     private void renameCancelButtonActionPerformed1(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renameCancelButtonActionPerformed1
     {//GEN-HEADEREND:event_renameCancelButtonActionPerformed1
@@ -2344,10 +2344,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel periodTwoLabel;
     private javax.swing.JTextField rankBox;
     private javax.swing.JLabel rankLabel;
-    private javax.swing.JButton reameButton;
     private javax.swing.JButton renameAcceptButton;
     private javax.swing.JTextField renameBrandBox;
     private javax.swing.JLabel renameBrandLabel;
+    private javax.swing.JButton renameButton;
     private javax.swing.JPanel renameButtonPanel;
     private javax.swing.JButton renameCancelButton;
     private javax.swing.JDialog renameDialog;
