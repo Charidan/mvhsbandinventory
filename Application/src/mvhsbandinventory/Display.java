@@ -643,7 +643,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         renameDialog.setMinimumSize(new java.awt.Dimension(350, 200));
         renameDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        renameTextLabel.setText("Enter New Instrument Characteristics");
+        renameTextLabel.setText("Edit Instrument Characteristics Below");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipady = 5;
@@ -2177,37 +2177,17 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         try
         {
-            // Adding core fields from the "Add Instrument" window
+            // Adding core fields from the "Rename Instrument" window
             newInstru.set("Instrument", instrument);
             newInstru.set("Brand", brand);
             newInstru.set("Serial", serial);
 
-            // Adding default values for new instruments
-            newInstru.set("Type", oldInstru.get("Type"));
-            newInstru.set("Rank", oldInstru.get("Rank"));
-            newInstru.set("Value", oldInstru.get("Value"));
-            newInstru.set("Status", oldInstru.get("Status"));
-            newInstru.set("Ligature", oldInstru.get("Ligature"));
-            newInstru.set("Mouthpiece", oldInstru.get("Mouthpiece"));
-            newInstru.set("MouthpieceModel", oldInstru.get("MouthpieceModel"));
-            newInstru.set("MouthpieceCap", oldInstru.get("MouthpieceCap"));
-            newInstru.set("Bow", oldInstru.get("Bow"));
-            newInstru.set("NeckStrap", oldInstru.get("NeckStrap"));
-            newInstru.set("Notes", oldInstru.get("Notes"));
-
-            newInstru.set("Renter", oldInstru.get("Renter"));
-            newInstru.set("SchoolYear", oldInstru.get("SchoolYear"));
-            newInstru.set("DateOut", oldInstru.get("DateOut"));
-            newInstru.set("Fee", oldInstru.get("Fee"));
-            newInstru.set("Period", oldInstru.get("Period"));
-            newInstru.set("Other", oldInstru.get("Other"));
-
-            newInstru.set("Renter", oldInstru.get("RenterTwo"));
-            newInstru.set("SchoolYear", oldInstru.get("SchoolYearTwo"));
-            newInstru.set("DateOut", oldInstru.get("DateOutTwo"));
-            newInstru.set("Fee", oldInstru.get("FeeTwo"));
-            newInstru.set("Period", oldInstru.get("PeriodTwo"));
-            newInstru.set("Other", oldInstru.get("OtherTwo"));
+            // Copying values from old instrument
+            for(int i = 3; i<Instrument.attributesLength; i++)
+            {
+                newInstru.set(Instrument.attributes[i], oldInstru.get(Instrument.attributes[i]));
+            }
+            
         } catch(Exception ex)
         {
             JOptionPane.showMessageDialog(jopDialog,
@@ -2223,7 +2203,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         sort();
         setSelectedInstrument(newInstru);
 
-        addDialog.setVisible(false);
+        renameDialog.setVisible(false);
         Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_renameAcceptButtonActionPerformed
