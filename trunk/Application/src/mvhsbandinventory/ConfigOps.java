@@ -83,7 +83,6 @@ class ConfigOps
         {
             for(String row : rows)
             {
-                System.out.println("Row: "+row);
                 String[] cells = parser.parseLine(row);
                 if(cells[0].equals(DEF_RENT_PRICE))
                 {
@@ -108,7 +107,6 @@ class ConfigOps
             List<String[]> configProps = new ArrayList<String[]>();
             configProps.add(new String[]{"defRentPrice", value});
             writer.writeAll(configProps);
-            System.out.println("written");
             writer.close();
         } catch(IOException ex) {}
         finally
