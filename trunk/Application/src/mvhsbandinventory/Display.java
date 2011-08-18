@@ -712,6 +712,8 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         renameDialog.getContentPane().add(renameButtonPanel, gridBagConstraints);
 
+        defEditDialog.setMinimumSize(new java.awt.Dimension(570, 130));
+        defEditDialog.setResizable(false);
         defEditDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         defEditDesc.setText("These are the system default values that globally effect either all intruments or the UI itself.");
@@ -2306,14 +2308,13 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         try
         {
             defRentBox.setText(Main.config.getDefaultRentalPrice());
-            defRentBox.setVisible(true);
         } catch(FileNotFoundException ex)
         {
             JOptionPane.showMessageDialog(null, "Value for default renatal price not found.", "Default Rental Price not Found", JOptionPane.ERROR_MESSAGE, null);
         }
         finally
         {
-            defRentBox.setVisible(true);
+            defEditDialog.setVisible(true);
         }
     }//GEN-LAST:event_defEditButtonActionPerformed
 
