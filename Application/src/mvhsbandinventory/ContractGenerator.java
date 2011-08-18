@@ -107,7 +107,7 @@ public class ContractGenerator
                     "SIGNING!");
             s.setFont(hbo, 16);
             s.moveTextPositionByAmount(12, 224);
-            s.drawString("NOTE: $50 cleaning fee per year or season is required.");
+            s.drawString("NOTE: $" +Main.config.getDefaultRentalPrice() +" cleaning fee per year or season is required.");
             s.moveTextPositionByAmount(209, 244);
             s.setFont(hb, 12);
             s.drawString("ON LOAN TO:   " +i.get("Renter"));
@@ -275,7 +275,7 @@ public class ContractGenerator
                     "SIGNING!");
             s.setFont(hbo, 16);
             s.moveTextPositionByAmount(12, 224);
-            s.drawString("NOTE: $50 cleaning fee per year or season is required.");
+            s.drawString("NOTE: $" +Main.config.getDefaultRentalPrice() +" cleaning fee per year or season is required.");
             s.moveTextPositionByAmount(209, 244);
             s.setFont(hb, 12);
             s.drawString("ON LOAN TO:   " +i.get("RenterTwo"));
