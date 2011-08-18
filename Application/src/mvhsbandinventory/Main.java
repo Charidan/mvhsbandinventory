@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,6 +29,7 @@ public class Main
 
     public static File dataDir = new File(getBasePath(), "data");
     public static File configDir = new File(getBasePath(), "config");
+    public static File configFile = new File(configDir, "config.csv");
 
     /**
      * @param args the command line arguments
@@ -48,15 +51,22 @@ public class Main
                 if (!configDir.mkdir()) {
                     throw new Exception("Unable to create config directory in" +
                             getBasePath().getAbsolutePath() + ".");
-                } else if(!new File(configDir.getAbsolutePath(), "config.csv").createNewFile())
+                }
+            }
+            
+            if(!configFile.exists())
+            {
+                if(!configFile.createNewFile())
                 {
-                    throw new Exception("Unable to create config file in" +
-                            configDir.getAbsolutePath() + ".");
+                    throw new Exception("Unable to create config file in"
+                            +configDir.getAbsolutePath()+".");
                 } else
                 {
-                    CSVWriter writer = new CSVWriter(new FileWriter(configDir.getAbsolutePath()+"config.csv"));
-                    String[] defRentPrice = { "defRentPrice", "75" };
-                    writer.writeNext(defRentPrice);
+                    CSVWriter writer = new CSVWriter(new FileWriter(configDir.getAbsolutePath()+"/config.csv"));
+                    List<String[]> configProps = new ArrayList<String[]>();
+                    configProps.add(new String[] {ConfigOps.DEF_RENT_PRICE, "75" });
+                    writer.writeAll(configProps);
+                    writer.close();
                 }
             }
 
