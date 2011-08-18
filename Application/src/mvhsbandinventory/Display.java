@@ -3,6 +3,7 @@ package mvhsbandinventory;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.io.FileNotFoundException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -421,12 +422,20 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         renameButtonPanel = new javax.swing.JPanel();
         renameAcceptButton = new javax.swing.JButton();
         renameCancelButton = new javax.swing.JButton();
+        defEditDialog = new javax.swing.JDialog();
+        defEditDesc = new javax.swing.JLabel();
+        defRentLabel = new javax.swing.JLabel();
+        defRentBox = new javax.swing.JTextField();
+        defEditButtonPanel = new javax.swing.JPanel();
+        defEditSaveButton = new javax.swing.JButton();
+        defEditCancelButton = new javax.swing.JButton();
         overlord = new javax.swing.JSplitPane();
         leftsplitPanel = new javax.swing.JPanel();
         leftsplitFilterButtonPanel = new javax.swing.JPanel();
         advSearchButton = new javax.swing.JButton();
         showallButton = new javax.swing.JButton();
         excelButton = new javax.swing.JButton();
+        defEditButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         leftsplitSortButtonPanel = new javax.swing.JPanel();
         sortLabel = new javax.swing.JLabel();
@@ -703,13 +712,54 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         renameDialog.getContentPane().add(renameButtonPanel, gridBagConstraints);
 
+        defEditDialog.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        defEditDesc.setText("These are the system default values that globally effect either all intruments or the UI itself.");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        defEditDialog.getContentPane().add(defEditDesc, gridBagConstraints);
+
+        defRentLabel.setText("Default Rental Price:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        defEditDialog.getContentPane().add(defRentLabel, gridBagConstraints);
+
+        defRentBox.setColumns(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        defEditDialog.getContentPane().add(defRentBox, gridBagConstraints);
+
+        defEditSaveButton.setText("SAVE");
+        defEditSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defEditSaveButtonActionPerformed(evt);
+            }
+        });
+        defEditButtonPanel.add(defEditSaveButton);
+
+        defEditCancelButton.setText("CANCEL");
+        defEditCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defEditCancelButtonActionPerformed(evt);
+            }
+        });
+        defEditButtonPanel.add(defEditCancelButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        defEditDialog.getContentPane().add(defEditButtonPanel, gridBagConstraints);
+
         setLayout(new java.awt.BorderLayout());
 
         overlord.setAutoscrolls(true);
         overlord.setContinuousLayout(true);
         overlord.setName(""); // NOI18N
 
-        leftsplitPanel.setMinimumSize(new java.awt.Dimension(350, 79));
+        leftsplitPanel.setMinimumSize(new java.awt.Dimension(410, 79));
         leftsplitPanel.setLayout(new java.awt.GridBagLayout());
 
         advSearchButton.setText("Search");
@@ -735,6 +785,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             }
         });
         leftsplitFilterButtonPanel.add(excelButton);
+
+        defEditButton.setText("Edit Defaults");
+        defEditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defEditButtonActionPerformed(evt);
+            }
+        });
+        leftsplitFilterButtonPanel.add(defEditButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -801,7 +859,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
         overlord.setLeftComponent(leftsplitPanel);
 
-        rightsplitPanel.setMinimumSize(new java.awt.Dimension(600, 308));
+        rightsplitPanel.setMinimumSize(new java.awt.Dimension(430, 308));
         rightsplitPanel.setLayout(new java.awt.BorderLayout());
 
         infoTabs.setMinimumSize(new java.awt.Dimension(1086, 350));
@@ -1981,6 +2039,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             d = Main.window.getMinimumSize();
             d = new Dimension(d.width+TOGGLE_WIDTH, d.height);
             Main.window.setMinimumSize(d);
+
+            d = rightsplitPanel.getMinimumSize();
+            d = new Dimension(d.width+TOGGLE_WIDTH, d.height);
+            rightsplitPanel.setMinimumSize(d);
         } else
         {
             renterTwoPanel.setVisible(false);
@@ -1990,6 +2052,10 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
             Main.window.setMinimumSize(d);
             d = Main.window.getSize();
             Main.window.setSize(d.width-TOGGLE_WIDTH, d.height);
+
+            d = rightsplitPanel.getMinimumSize();
+            d = new Dimension(d.width-TOGGLE_WIDTH, d.height);
+            rightsplitPanel.setMinimumSize(d);
         }
     }//GEN-LAST:event_renterTwoToggleActionPerformed
 
@@ -2210,7 +2276,7 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
 
     private void addCancelButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addCancelButton1ActionPerformed
     {//GEN-HEADEREND:event_addCancelButton1ActionPerformed
-        // TODO add your handling code here:
+        // this button should not exist, but i can't find it so i can't delete it.
     }//GEN-LAST:event_addCancelButton1ActionPerformed
 
     private void renameButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_renameButtonActionPerformed
@@ -2232,6 +2298,45 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
         Main.window.setEnabled(true);
         Main.window.requestFocus();
     }//GEN-LAST:event_renameCancelButtonActionPerformed1
+
+    private void defEditButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_defEditButtonActionPerformed
+    {//GEN-HEADEREND:event_defEditButtonActionPerformed
+        //Main.window.setEnabled(false);
+
+        try
+        {
+            defRentBox.setText(Main.config.getDefaultRentalPrice());
+            defRentBox.setVisible(true);
+        } catch(FileNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Value for default renatal price not found.", "Default Rental Price not Found", JOptionPane.ERROR_MESSAGE, null);
+        }
+        finally
+        {
+            defRentBox.setVisible(true);
+        }
+    }//GEN-LAST:event_defEditButtonActionPerformed
+
+    private void defEditSaveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_defEditSaveButtonActionPerformed
+    {//GEN-HEADEREND:event_defEditSaveButtonActionPerformed
+        try
+        {
+            Main.config.setDefaultRentalPrice(defRentBox.getText());
+        } catch(FileNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Config file could not be found for save operation.", "Save Failure", JOptionPane.ERROR_MESSAGE, null);
+        }
+        defEditDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
+    }//GEN-LAST:event_defEditSaveButtonActionPerformed
+
+    private void defEditCancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_defEditCancelButtonActionPerformed
+    {//GEN-HEADEREND:event_defEditCancelButtonActionPerformed
+        defEditDialog.setVisible(false);
+        Main.window.setEnabled(true);
+        Main.window.requestFocus();
+    }//GEN-LAST:event_defEditCancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAcceptButton;
@@ -2275,6 +2380,14 @@ public class Display extends javax.swing.JPanel implements java.beans.Customizer
     private javax.swing.JLabel dateoutLabel;
     private javax.swing.JTextField dateoutTwoBox;
     private javax.swing.JLabel dateoutTwoLabel;
+    private javax.swing.JButton defEditButton;
+    private javax.swing.JPanel defEditButtonPanel;
+    private javax.swing.JButton defEditCancelButton;
+    private javax.swing.JLabel defEditDesc;
+    private javax.swing.JDialog defEditDialog;
+    private javax.swing.JButton defEditSaveButton;
+    private javax.swing.JTextField defRentBox;
+    private javax.swing.JLabel defRentLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JScrollPane detailNotePanel;
     private javax.swing.JPanel detailPanel;

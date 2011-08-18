@@ -4,11 +4,13 @@
  */
 package mvhsbandinventory;
 
+import au.com.bytecode.opencsv.CSVWriter;
 import java.awt.Dimension;
 import java.net.URISyntaxException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.File;
+import java.io.FileWriter;
 
 /**
  *
@@ -21,8 +23,10 @@ public class Main
     public static Display panel;
     public static InstrumentFileStore store;
     public static InstrumentList list;
+    public static ConfigOps config;
 
     public static File dataDir = new File(getBasePath(), "data");
+    public static File configDir = new File(getBasePath(), "config");
 
     /**
      * @param args the command line arguments
@@ -39,6 +43,25 @@ public class Main
                 }
             }
 
+            if (!configDir.exists())
+            {
+                if (!configDir.mkdir()) {
+                    throw new Exception("Unable to create config directory in" +
+                            getBasePath().getAbsolutePath() + ".");
+                } else if(!new File(configDir.getAbsolutePath(), "config.csv").createNewFile())
+                {
+                    throw new Exception("Unable to create config file in" +
+                            configDir.getAbsolutePath() + ".");
+                } else
+                {
+                    CSVWriter writer = new CSVWriter(new FileWriter(configDir.getAbsolutePath()+"config.csv"));
+                    String[] defRentPrice = { "defRentPrice", "75" };
+                    writer.writeNext(defRentPrice);
+                }
+            }
+
+            config = new ConfigOps(configDir.getAbsolutePath());
+
             store = new InstrumentFileStore(dataDir.getAbsolutePath());
             list = new InstrumentList(store);
 
@@ -48,7 +71,7 @@ public class Main
             window.add(panel);
             window.setTitle("MVHS - Instrument Inventory");
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            window.setMinimumSize(new Dimension(840, 550));
+            window.setMinimumSize(new Dimension(900, 550));
             window.setVisible(true);
             panel.repaint();
         } 
