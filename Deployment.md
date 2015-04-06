@@ -1,0 +1,19 @@
+# Introduction #
+
+Currently, the application needs a shortcut to run the JAR file with the appropriate file information.  Since a shortcut on Windows can do much of the same things that a BAT file can, it makes sense to use this as a user-friendly (and less likely to be flagged as malware accidentally) alternative to a BAT file.
+
+# Details #
+
+Set up a network drive (or network share) that links to the location on the remote synchronization server where the master copy of the file store will be saved.  Unzip the contents of the latest version of the application (found in the Downloads section of the site) in the location on the network drive where the synchronized copy of the file store will be stored.
+
+The next configuration step is to create a shortcut on the user's machine that links to the JAR file.  Creating the shortcut will vary based on the target operating system.  Jump down to the appropriate section for the target operating system.
+
+## Windows Vista & Windows 7 ##
+
+Right click the desktop.  In the context menu, click "New" -> "Shortcut".  In the shortcut path, put the following path:
+
+```
+java -Djava.library.path=./lib -jar MVHSBandInventory.jar
+```
+
+Replace the `MVHSBandInventory.jar` part with the full path to the JAR file on the network drive where the JAR is stored.

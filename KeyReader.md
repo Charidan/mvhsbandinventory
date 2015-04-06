@@ -1,0 +1,7 @@
+# Introduction #
+
+This class is used to accept input from the user via the keyboard.
+
+# Details #
+
+Implementing KeyListener, this class is responsible for keeping track of what is being typed, and passing this information appropriately along. Currently text boxes implemented in display make this class fairly irrelevant, however for things such as shortcut keys this class is fairly meaningful.
